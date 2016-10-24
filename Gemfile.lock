@@ -1,0 +1,50 @@
+PATH
+  remote: .
+  specs:
+    misty (0.2.0)
+      json (~> 2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
+    byebug (9.0.6)
+    coderay (1.1.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    hashdiff (0.3.2)
+    json (2.0.3)
+    method_source (0.8.2)
+    minitest (5.10.1)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.2)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    public_suffix (2.0.5)
+    rake (10.5.0)
+    safe_yaml (1.0.4)
+    slop (3.6.0)
+    vcr (3.0.3)
+    webmock (1.24.6)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.10)
+  minitest (~> 5.10)
+  misty!
+  pry-byebug (~> 3.4)
+  rake (~> 10.0)
+  vcr (~> 3.0)
+  webmock (~> 1.24)
+
+BUNDLED WITH
+   1.12.5

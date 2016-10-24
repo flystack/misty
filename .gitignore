@@ -1,4 +1,4 @@
 *.gem
-Gemfile.lock
-tools/generated
+.bundle/
 .byebug_history
+misty.log

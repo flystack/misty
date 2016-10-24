@@ -1,3 +1,3 @@
-module Misty 
-  VERSION = "0.0.1"
+module Misty
+  VERSION = "0.3.0"
 end

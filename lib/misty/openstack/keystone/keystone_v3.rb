@@ -1,0 +1,147 @@
+module Misty::Openstack::KeystoneV3
+  def v3
+{"/v3/auth/tokens"=>
+  {:POST=>
+    [:password_authentication_with_unscoped_authorization,
+     :password_authentication_with_scoped_authorization,
+     :password_authentication_with_explicit_unscoped_authorization,
+     :token_authentication_with_unscoped_authorization,
+     :token_authentication_with_scoped_authorization],
+   :GET=>[:validate_and_show_information_for_token],
+   :HEAD=>[:check_token],
+   :DELETE=>[:revoke_token]},
+ "/v3/auth/catalog"=>{:GET=>[:get_service_catalog]},
+ "/v3/auth/projects"=>{:GET=>[:get_available_project_scopes]},
+ "/v3/auth/domains"=>{:GET=>[:get_available_domain_scopes]},
+ "/v3/credentials"=>{:POST=>[:create_credential], :GET=>[:list_credentials]},
+ "/v3/credentials/{credential_id}"=>
+  {:GET=>[:show_credential_details],
+   :PATCH=>[:update_credential],
+   :DELETE=>[:delete_credential]},
+ "/v3/domains"=>{:GET=>[:list_domains], :POST=>[:create_domain]},
+ "/v3/domains/{domain_id}"=>
+  {:GET=>[:show_domain_details],
+   :PATCH=>[:update_domain],
+   :DELETE=>[:delete_domain]},
+ "/v3/domains/config/default"=>{:GET=>[:show_default_configuration_settings]},
+ "/v3/domains/config/{group}/default"=>
+  {:GET=>[:show_default_configuration_for_a_group]},
+ "/v3/domains/config/{group}/{option}/default"=>
+  {:GET=>[:show_default_option_for_a_group]},
+ "/v3/domains/{domain_id}/config/{group}/{option}"=>
+  {:GET=>[:show_domain_group_option_configuration],
+   :PATCH=>[:update_domain_group_option_configuration],
+   :DELETE=>[:delete_domain_group_option_configuration]},
+ "/v3/domains/{domain_id}/config/{group}"=>
+  {:GET=>[:show_domain_group_configuration],
+   :PATCH=>[:update_domain_group_configuration],
+   :DELETE=>[:delete_domain_group_configuration]},
+ "/v3/domains/{domain_id}/config"=>
+  {:PUT=>[:create_domain_configuration],
+   :GET=>[:show_domain_configuration],
+   :PATCH=>[:update_domain_configuration],
+   :DELETE=>[:delete_domain_configuration]},
+ "/v3/groups"=>{:GET=>[:list_groups], :POST=>[:create_group]},
+ "/v3/groups/{group_id}"=>
+  {:GET=>[:show_group_details],
+   :PATCH=>[:update_group],
+   :DELETE=>[:delete_group]},
+ "/v3/groups/{group_id}/users"=>{:GET=>[:list_users_in_group]},
+ "/v3/groups/{group_id}/users/{user_id}"=>
+  {:PUT=>[:add_user_to_group],
+   :HEAD=>[:check_whether_user_belongs_to_group],
+   :DELETE=>[:remove_user_from_group]},
+ "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"=>
+  {:PUT=>[:assign_role_to_user_on_projects_owned_by_domain],
+   :HEAD=>[:check_if_user_has_an_inherited_project_role_on_domain],
+   :DELETE=>[:revoke_an_inherited_project_role_from_user_on_domain]},
+ "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"=>
+  {:PUT=>[:assign_role_to_group_on_projects_owned_by_a_domain],
+   :HEAD=>[:check_if_group_has_an_inherited_project_role_on_domain],
+   :DELETE=>[:revoke_an_inherited_project_role_from_group_on_domain]},
+ "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/inherited_to_projects"=>
+  {:GET=>[:list_user_s_inherited_project_roles_on_a_domain]},
+ "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/inherited_to_projects"=>
+  {:GET=>[:list_group_s_inherited_project_roles_on_domain]},
+ "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"=>
+  {:PUT=>[:assign_role_to_user_on_projects_in_a_subtree],
+   :HEAD=>[:check_if_user_has_an_inherited_project_role_on_project],
+   :DELETE=>[:revoke_an_inherited_project_role_from_user_on_project]},
+ "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"=>
+  {:PUT=>[:assign_role_to_group_on_projects_in_a_subtree],
+   :HEAD=>[:check_if_group_has_an_inherited_project_role_on_project],
+   :DELETE=>[:revoke_an_inherited_project_role_from_group_on_project]},
+ "/v3/role_assignments"=>{:GET=>[:list_role_assignments]},
+ "/v3/auth/tokens/OS-PKI/revoked"=>{:GET=>[:list_revoked_tokens]},
+ "/v3/policies"=>{:POST=>[:create_policy], :GET=>[:list_policies]},
+ "/v3/policies/{policy_id}"=>
+  {:GET=>[:show_policy_details],
+   :PATCH=>[:update_policy],
+   :DELETE=>[:delete_policy]},
+ "/v3/projects"=>{:GET=>[:list_projects], :POST=>[:create_project]},
+ "/v3/projects/{project_id}"=>
+  {:GET=>[:show_project_details],
+   :PATCH=>[:update_project],
+   :DELETE=>[:delete_project]},
+ "/v3/regions/{region_id}"=>
+  {:GET=>[:show_region_details],
+   :PATCH=>[:update_region],
+   :DELETE=>[:delete_region]},
+ "/v3/regions"=>{:GET=>[:list_regions], :POST=>[:create_region]},
+ "/v3/roles"=>{:GET=>[:list_roles], :POST=>[:create_role]},
+ "/v3/roles/{role_id}"=>
+  {:GET=>[:show_role_details],
+   :PATCH=>[:update_role],
+   :DELETE=>[:delete_role]},
+ "/v3/domains/{domain_id}/groups/{group_id}/roles"=>
+  {:GET=>[:list_role_assignments_for_group_on_domain]},
+ "/v3/domains/{domain_id}/groups/{group_id}/roles/{role_id}"=>
+  {:PUT=>[:assign_role_to_group_on_domain],
+   :HEAD=>[:check_whether_group_has_role_assignment_on_domain],
+   :DELETE=>[:unassign_role_from_group_on_domain]},
+ "/v3/domains/{domain_id}/users/{user_id}/roles"=>
+  {:GET=>[:list_role_assignments_for_user_on_domain]},
+ "/v3/domains/{domain_id}/users/{user_id}/roles/{role_id}"=>
+  {:PUT=>[:assign_role_to_user_on_domain],
+   :HEAD=>[:check_whether_user_has_role_assignment_on_domain],
+   :DELETE=>[:unassigns_role_from_user_on_domain]},
+ "/v3/projects/{project_id}/groups/{group_id}/roles"=>
+  {:GET=>[:list_role_assignments_for_group_on_project]},
+ "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"=>
+  {:PUT=>[:assign_role_to_group_on_project],
+   :HEAD=>[:check_whether_group_has_role_assignment_on_project],
+   :DELETE=>[:unassign_role_from_group_on_project]},
+ "/v3/projects/{project_id}/users/{user_id}/roles"=>
+  {:GET=>[:list_role_assignments_for_user_on_project]},
+ "/v3/projects/{project_id}/users/{user_id}/roles/{role_id}"=>
+  {:PUT=>[:assign_role_to_user_on_project],
+   :HEAD=>[:check_whether_user_has_role_assignment_on_project],
+   :DELETE=>[:unassign_role_from_user_on_project]},
+ "/v3/roles/{prior_role_id}/implies"=>
+  {:GET=>[:list_implied_inference_roles_for_role]},
+ "/v3/roles/{prior_role_id}/implies/{implies_role_id}"=>
+  {:PUT=>[:create_role_inference_rule],
+   :GET=>[:get_role_inference_rule],
+   :HEAD=>[:confirm_role_inference_rule],
+   :DELETE=>[:delete_role_inference_rule]},
+ "/v3/role_inferences"=>{:GET=>[:list_all_role_inference_rules]},
+ "/v3/services"=>{:GET=>[:list_services], :POST=>[:create_service]},
+ "/v3/services/{service_id}"=>
+  {:GET=>[:show_service_details],
+   :PATCH=>[:update_service],
+   :DELETE=>[:delete_service]},
+ "/v3/endpoints"=>{:GET=>[:list_endpoints], :POST=>[:create_endpoint]},
+ "/v3/endpoints/{endpoint_id}"=>
+  {:GET=>[:show_endpoint_details],
+   :PATCH=>[:update_endpoint],
+   :DELETE=>[:delete_endpoint]},
+ "/v3/users"=>{:GET=>[:list_users], :POST=>[:create_user]},
+ "/v3/users/{user_id}"=>
+  {:GET=>[:show_user_details],
+   :PATCH=>[:update_user],
+   :DELETE=>[:delete_user]},
+ "/v3/users/{user_id}/groups"=>{:GET=>[:list_groups_to_which_a_user_belongs]},
+ "/v3/users/{user_id}/projects"=>{:GET=>[:list_projects_for_user]},
+ "/v3/users/{user_id}/password"=>{:POST=>[:change_password_for_user]}}
+  end
+end
