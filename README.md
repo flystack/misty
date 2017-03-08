@@ -211,7 +211,6 @@ openstack.network.post("/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp
 * Ruby 2.4.0
 * Ruby 2.3.3
 * Ruby 2.3.0
-* Ruby 2.2.0
 
 # Contributing
 Contributors are welcome and must adhere to the [Contributor covenant code of conduct](http://contributor-covenant.org/).

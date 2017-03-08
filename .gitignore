@@ -2,3 +2,4 @@
 .bundle/
 .byebug_history
 misty.log
+Gemfile.lock
