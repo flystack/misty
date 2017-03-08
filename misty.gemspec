@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Gilles Dubreuil"]
   spec.email         = ["gilles@redhat.com"]
 
-  spec.summary       = %q{Misty is a dedicated HTTP client for OpenStack APIs.}
-  spec.description   = %q{Misty is a dedicated HTTP client for OpenStack APIs. Its aims is to provide a fast, flexible \
-    and exhaustive APIs experience}
+  spec.summary       = %q{Misty is a dedicated HTTP client for OpenStack providing dynamic APIs requests management.}
+  spec.description   = %q{Misty is a dedicated HTTP client for OpenStack providing dynamic APIs requests management.}
   spec.homepage      = "https://github.com/flystack/misty"
   spec.license       = "GPL-3.0"
 
