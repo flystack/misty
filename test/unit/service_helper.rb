@@ -15,7 +15,7 @@ def service(content_type = :ruby)
     "token_id"
   end
 
-  setup = Misty::Cloud::Setup.new(auth, content_type, Logger.new('/dev/null'))
+  setup = Misty::Cloud::Setup.new(auth, content_type, Logger.new('/dev/null'), Misty::REGION_ID)
 
   stub_request(:get, "http://localhost/").
     with(:headers => request_header).
