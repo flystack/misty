@@ -2,7 +2,7 @@ module Misty
   module HTTP
     module Request
       def decode?(response)
-        if @cloud.content_type != :json && response.code =~ /2??/  && !response.is_a?(Net::HTTPNoContent) \
+        if @setup.content_type != :json && response.code =~ /2??/  && !response.is_a?(Net::HTTPNoContent) \
           && !response.is_a?(Net::HTTPResetContent) && response.header["content-type"] \
           && response.header["content-type"].include?("application/json")
           true
@@ -16,51 +16,51 @@ module Misty
       end
 
       def http_delete(path, headers)
-        @cloud.log.info(http_to_s(path, headers))
+        @setup.log.info(http_to_s(path, headers))
         request = Net::HTTP::Delete.new(path, headers)
         http(request)
       end
 
       def http_copy(path, headers)
-        @cloud.log.info(http_to_s(path, headers))
+        @setup.log.info(http_to_s(path, headers))
         request = Net::HTTP::Copy.new(path, headers)
         http(request)
       end
 
       def http_get(path, headers)
-        @cloud.log.info(http_to_s(path, headers))
+        @setup.log.info(http_to_s(path, headers))
         request = Net::HTTP::Get.new(path, headers)
         http(request)
       end
 
       def http_head(path, headers)
-        @cloud.log.info(http_to_s(path, headers))
+        @setup.log.info(http_to_s(path, headers))
         request = Net::HTTP::Head.new(path, headers)
         http(request)
       end
 
       def http_options(path, headers)
-        @cloud.log.info(http_to_s(path, headers))
+        @setup.log.info(http_to_s(path, headers))
         request = Net::HTTP::Options.new(path, headers)
         http(request)
       end
 
       def http_patch(path, headers, data)
-        @cloud.log.info(http_to_s(path, headers, data))
+        @setup.log.info(http_to_s(path, headers, data))
         request = Net::HTTP::Patch.new(path, headers)
         request.body = Misty.to_json(data)
         http(request)
       end
 
       def http_post(path, headers, data)
-        @cloud.log.info(http_to_s(path, headers, data))
+        @setup.log.info(http_to_s(path, headers, data))
         request = Net::HTTP::Post.new(path, headers)
         request.body = Misty.to_json(data)
         http(request)
       end
 
       def http_put(path, headers, data)
-        @cloud.log.info(http_to_s(path, headers, data))
+        @setup.log.info(http_to_s(path, headers, data))
         request = Net::HTTP::Put.new(path, headers)
         request.body = Misty.to_json(data)
         http(request)

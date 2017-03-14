@@ -3,7 +3,7 @@ require 'misty/auth/auth_v3'
 
 module Misty
   class Cloud
-    Setup   = Struct.new(:auth, :content_type, :log)
+    Setup   = Struct.new(:auth, :content_type, :log, :region_id)
 
     Options = Struct.new(:alarming, :baremetal, :block_storage, :clustering, :compute, :container, :data_processing,
       :database, :data_protection, :dns, :identity, :image, :messaging, :metering, :network, :object_storage,
@@ -12,11 +12,12 @@ module Misty
     attr_reader :services
 
     def initialize(options = {:auth => {}})
-      @cloud = Setup.new
-      @cloud.auth = Misty::Auth.factory(options[:auth])
-      @cloud.content_type = options[:content_type] ? options[:content_type] : nil
-      @cloud.log = Logger.new(options[:log_file] ? options[:log_file] : Misty::LOG_FILE)
-      @cloud.log.level = options[:log_level] ? options[:log_level] : Misty::LOG_LEVEL
+      @setup = Setup.new
+      @setup.auth = Misty::Auth.factory(options[:auth])
+      @setup.content_type = options[:content_type] ? options[:content_type] : nil
+      @setup.log = Logger.new(options[:log_file] ? options[:log_file] : Misty::LOG_FILE)
+      @setup.log.level = options[:log_level] ? options[:log_level] : Misty::LOG_LEVEL
+      @setup.region_id = options[:region_id] ? options[:region_id] : Misty::REGION_ID
 
       @options = Options.new
       Misty.services.each do |service|
@@ -45,7 +46,7 @@ module Misty
       version = @services[service_name].fetch(project)
       version = self.class.dot_to_underscore(version)
       klass = Object.const_get("Misty::Openstack::#{project.capitalize}::#{version.capitalize}")
-      klass.new(@cloud, @options[service_name])
+      klass.new(@setup, @options[service_name])
     end
 
     def self.dot_to_underscore(val)

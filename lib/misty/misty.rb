@@ -9,6 +9,8 @@ module Misty
   # Default log level. Use :log_level option to override
   LOG_LEVEL = Logger::INFO
 
+  REGION_ID = "regionOne"
+
   Service = Struct.new(:name, :project, :versions) do
     def to_s
       "#{name}: #{project} => #{versions}"
