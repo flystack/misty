@@ -31,13 +31,13 @@ describe Misty::HTTP::Microversion do
       "token_id"
     end
 
-    cloud = Misty::Cloud::Setup.new(auth, :ruby, Logger.new('/dev/null'))
+    setup = Misty::Cloud::Setup.new(auth, :ruby, Logger.new('/dev/null'), Misty::INTERFACE, Misty::REGION_ID, Misty::SSL_VERIFY_MODE)
 
     stub_request(:get, "http://localhost/").
       with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
       to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
 
-    Misty::Openstack::Nova::V2_1.new(cloud, {})
+    Misty::Openstack::Nova::V2_1.new(setup, {})
   end
 
   describe "#version_get" do

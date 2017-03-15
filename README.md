@@ -119,7 +119,7 @@ openstack.compute.requests
 
 ## Setup
 
-### Authentication
+### Authentication information parameter
 The URL and credentials details are necessary to authenticate with the identity server (Keystone).
 
 To provide a Keystone V3, which is the default recommended version:
@@ -142,14 +142,7 @@ auth = {
   :tenant   => "admin",
 }
 ```
-
-### Global options
-Besides the authentication details, the following options which apply for the whole cloud
-
-* :content_type  
-  Format of the body of the successful HTTP responses to be JSON or Ruby structures.  
-  Value is symbol. Allowed value is `:json`.  
-  By default response body are converted to Ruby structures.
+### Logging parameters
 * :log_file  
   File name and path for log file.  
   Value is file path or IO object - Default is `./misty.log`.  
@@ -161,8 +154,28 @@ Besides the authentication details, the following options which apply for the wh
 openstack = Misty::Cloud.new(:auth => auth, :content_type => :ruby, :log_file => STDOUT)
 ```
 
+#### Global parameters
+The following options are applied to each service unless specifically provided for a service.
+
+* :region_id  
+  Type: String  
+  Default: "regionOne"  
+* :interface  
+  Type: String  
+  Allowed values: "public", "internal", "admin"  
+  Default: "public"  
+* :ssl_verify_mode  
+  When using SSL mode (defined by URI scheme => "https://")  
+  Type: Boolean  
+  Default: `true`  
+* :content_type  
+  Format of the body of the successful HTTP responses to be JSON or Ruby structures.  
+  Type: Symbol  
+  Allowed values: `:json`, `:ruby`  
+  Default: `:ruby`
+
 ### Services Options
-Each service can get options specifically:
+Each service can get parameters to be specified.
 
 ```ruby
 openstack = Misty::Cloud.new(:auth => auth, :identity => {}, :compute => {})
@@ -170,30 +183,33 @@ openstack = Misty::Cloud.new(:auth => auth, :identity => {}, :compute => {})
 
 The following options are available:
 * :api_version  
-  The latest supported version is used by default. See Misty.services to use another version.  
-  Value is a STRING  
+  Type: String  
+  Default: The latest supported version - See Misty.services for other versions.  
 * :base_path  
   Allows to force the base path for every URL requests.  
-  Value is a STRING
+  Type: String  
 * :base_url  
   Allows to force the base URL for every requests.  
-  Value is a STRING
+  Type: String  
 * :interface  
   Allows to provide an alternate interface. Allowed values are "public", "internal" or "admin"  
-  Value is a STRING - Default = "public"
+  Type: String  
+  Default: Determined from global value  
 * :region_id  
-  Value is a STRING  
-  Default "regionOne"
+  Type: String  
+  Default: Determined from global value  
 * :service_names  
-  Value is a STRING - Default is defined by Misty.services  
-  Allows to use a difference name for the service. For instance "identity3" for the identity service.
+  Allows to use a difference name for the service. For instance "identity3" for the identity service.  
+  Type: String  
+  Default: Determined from Misty.services  
 * :ssl_verify_mode  
-  Used in SSL mode (detected from the URI)  
-  Value is a BOOLEAN - Default is `true`
+  Type: Boolean  
+  Default: Determined from global value  
 * :version  
   Version to be used when microversion is supported by the service.  
-  Value is a STRING - Default is `"CURRENT"`  
-  Allowed values are "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
+  Type: String  
+  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"  
+  Default: `"CURRENT"`  
 
 Example:
 ```ruby
