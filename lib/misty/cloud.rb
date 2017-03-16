@@ -3,7 +3,7 @@ require 'misty/auth/auth_v3'
 
 module Misty
   class Cloud
-    Setup   = Struct.new(:auth, :content_type, :log, :region_id)
+    Setup   = Struct.new(:auth, :content_type, :log, :interface, :region_id, :ssl_verify_mode)
 
     Options = Struct.new(:alarming, :baremetal, :block_storage, :clustering, :compute, :container, :data_processing,
       :database, :data_protection, :dns, :identity, :image, :messaging, :metering, :network, :object_storage,
@@ -11,28 +11,32 @@ module Misty
 
     attr_reader :services
 
-    def initialize(options = {:auth => {}})
-      @setup = Setup.new
-      @setup.auth = Misty::Auth.factory(options[:auth])
-      @setup.content_type = options[:content_type] ? options[:content_type] : nil
-      @setup.log = Logger.new(options[:log_file] ? options[:log_file] : Misty::LOG_FILE)
-      @setup.log.level = options[:log_level] ? options[:log_level] : Misty::LOG_LEVEL
-      @setup.region_id = options[:region_id] ? options[:region_id] : Misty::REGION_ID
-
+    def initialize(params = {:auth => {}})
+      @setup = self.class.setup(params)
       @options = Options.new
-      Misty.services.each do |service|
-        @options.send("#{service.name}=".to_sym, options[service.name] ? options[service.name] : {})
-      end
-
-      @services = setup_services(@options)
+      @services = setup_services(params)
     end
 
-    def setup_services(options)
+    def self.setup(params)
+      setup = Setup.new
+      setup.auth = Misty::Auth.factory(params[:auth])
+      setup.content_type = params[:content_type] ? params[:content_type] : Misty::CONTENT_TYPE
+      setup.interface = params[:interface] ? params[:interface] : Misty::INTERFACE
+      setup.log = Logger.new(params[:log_file] ? params[:log_file] : Misty::LOG_FILE)
+      setup.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
+      setup.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
+      setup.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
+      setup
+    end
+
+    def setup_services(params)
       services = {}
       Misty.services.each do |service|
-        if options[service.name] && options[service.name][:api_version] \
-          && service.versions.include?(options[service.name][:api_version])
-          services.merge!(service.name => {service.project => options[service.name][:api_version]})
+        @options.send("#{service.name}=".to_sym, params[service.name] ? params[service.name] : {})
+
+        if params[service.name] && params[service.name][:api_version] \
+          && service.versions.include?(params[service.name][:api_version])
+          services.merge!(service.name => {service.project => params[service.name][:api_version]})
         else
           # Highest version is used by default!
           services.merge!(service.name => {service.project => service.versions.sort[-1]})

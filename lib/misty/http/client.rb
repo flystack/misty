@@ -95,10 +95,10 @@ module Misty
         options = Options.new()
         options.base_path       = params[:base_path]       ? params[:base_path] : nil
         options.base_url        = params[:base_url]        ? params[:base_url] : nil
-        options.interface       = params[:interface]       ? params[:interface] : "public"
+        options.interface       = params[:interface]       ? params[:interface] : @setup.interface
         options.region_id       = params[:region_id]       ? params[:region_id] : @setup.region_id
         options.service_names   = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
-        options.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : true
+        options.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @setup.ssl_verify_mode
         options.version         = params[:version]         ? params[:version] : "CURRENT"
 
         unless INTERFACES.include?(options.interface)

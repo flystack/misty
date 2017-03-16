@@ -9,7 +9,19 @@ module Misty
   # Default log level. Use :log_level option to override
   LOG_LEVEL = Logger::INFO
 
+  # Default content type for REST responses
+  # JSON format: :json
+  # Ruby structures: :ruby
+  CONTENT_TYPE = :ruby
+
+  # Default Interface
+  INTERFACE = "public"
+
+  # Default Region ID
   REGION_ID = "regionOne"
+
+  # Default mode when SSL is used (uri.scheme == "https")
+  SSL_VERIFY_MODE = true
 
   Service = Struct.new(:name, :project, :versions) do
     def to_s

@@ -51,6 +51,20 @@ describe Misty::Cloud do
     end
   end
 
+  describe "#setup" do
+    it "sets up default values" do
+      Misty::Auth.stub :factory, nil do
+        setup = Misty::Cloud.setup({})
+        setup.must_be_kind_of Struct
+        setup.content_type.must_equal Misty::CONTENT_TYPE
+        setup.log.must_be_kind_of Logger
+        setup.interface.must_equal Misty::INTERFACE
+        setup.region_id.must_equal Misty::REGION_ID
+        setup.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
+      end
+    end
+  end
+
   describe "#new" do
     describe "fails" do
       it "when no credentials" do
