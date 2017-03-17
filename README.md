@@ -125,14 +125,19 @@ The URL and credentials details are necessary to authenticate with the identity 
 To provide a Keystone V3, which is the default recommended version:
 ```ruby
 auth = {
-  :url      => "http://localhost:5000",
-  :user     => "admin",
-  :password => "secret",
-  :project  => "admin",
-  :domain   => "default"
+  :url         => "http://localhost:5000",
+  :user        => "admin",
+  :user_domain => "default",
+  :password    => "secret",
+  :project     => "admin",
+  :domain      => "default"
   }
 }
 ```
+
+- `:user_domain` is optional, if you omit the parameter: it falls back to the value of `:domain`
+- `:domain` is optional, if you omit the parameter: it falls back to 'default'
+
 Alternatively, for Keystone V2, just provide the tenant details, Misty will detect it's using Keystone V2:
 ```ruby
 auth = {
