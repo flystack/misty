@@ -28,7 +28,7 @@ describe Misty::Auth do
           to_return(:status => 200, :body => "{\"token\":{\"catalog\":[]}}", :headers => {"x-subject-token"=>"token_data"})
 
         proc do
-          Misty::AuthV3.new({})
+          Misty::AuthV3.new({}, false, Logger.new('/dev/null'))
         end.must_raise Misty::Auth::CredentialsError
       end
 
@@ -36,7 +36,7 @@ describe Misty::Auth do
         stub_request(:post, "http://localhost:5000/v3/auth/tokens").
           to_return(:status => 200, :body => "{\"token\":{\"catalog\":[\"catalog_data\"]}}", :headers => {"x-subject-token"=>"token_data"})
 
-        auth = Misty::AuthV3.new(authv3_creds)
+        auth = Misty::AuthV3.new(authv3_creds, false, Logger.new('/dev/null'))
         auth.stub :expired?, false do
           auth.get_token.must_equal "token_data"
         end
@@ -46,7 +46,7 @@ describe Misty::Auth do
         stub_request(:post, "http://localhost:5000/v3/auth/tokens").
           to_return(:status => 200, :body => "{\"token\":{\"catalog\":[\"catalog_data\"]}}", :headers => {"x-subject-token"=>"token_data"})
 
-        auth = Misty::AuthV3.new(authv3_creds)
+        auth = Misty::AuthV3.new(authv3_creds, false, Logger.new('/dev/null'))
         auth.catalog.must_equal ["catalog_data"]
       end
 
@@ -54,7 +54,7 @@ describe Misty::Auth do
         stub_request(:post, "http://localhost:5000/v3/auth/tokens").
           to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {"x-subject-token"=>"token_data"})
 
-        auth = Misty::AuthV3.new(authv3_creds)
+        auth = Misty::AuthV3.new(authv3_creds, false, Logger.new('/dev/null'))
         auth.get_endpoint(%w{identity}, "regionOne", "public").must_equal "http://localhost"
       end
     end
@@ -65,7 +65,7 @@ describe Misty::Auth do
           to_return(:status => 200, :body => "{\"access\":{\"token\":{\"id\":\"token_data\"}}}", :headers => {})
 
         proc do
-          Misty::AuthV2.new({})
+          Misty::AuthV2.new({}, false, Logger.new('/dev/null'))
         end.must_raise Misty::Auth::CredentialsError
       end
 
@@ -73,7 +73,7 @@ describe Misty::Auth do
         stub_request(:post, "http://localhost:5000/v2.0/tokens").
           to_return(:status => 200, :body => "{\"access\":{\"token\":{\"id\":\"token_data\"},\"serviceCatalog\":[\"catalog_data\"]}}", :headers => {})
 
-        auth = Misty::AuthV2.new(authv2_creds)
+        auth = Misty::AuthV2.new(authv2_creds, false, Logger.new('/dev/null'))
         auth.stub :expired?, false do
           auth.get_token.must_equal "token_data"
         end
@@ -83,7 +83,7 @@ describe Misty::Auth do
         stub_request(:post, "http://localhost:5000/v2.0/tokens").
           to_return(:status => 200, :body => "{\"access\":{\"token\":{\"id\":\"token_data\"},\"serviceCatalog\":[\"catalog_data\"]}}", :headers => {})
 
-        auth = Misty::AuthV2.new(authv2_creds)
+        auth = Misty::AuthV2.new(authv2_creds, false, Logger.new('/dev/null'))
         auth.catalog.must_equal ["catalog_data"]
       end
 
@@ -91,7 +91,7 @@ describe Misty::Auth do
         stub_request(:post, "http://localhost:5000/v2.0/tokens").
           to_return(:status => 200, :body => JSON.dump(auth_response_v2("identity", "keystone")), :headers => {"x-subject-token"=>"token_data"})
 
-        auth = Misty::AuthV2.new(authv2_creds)
+        auth = Misty::AuthV2.new(authv2_creds, false, Logger.new('/dev/null'))
         auth.get_endpoint(%w{identity}, "regionOne", "public").must_equal "http://localhost"
       end
     end
