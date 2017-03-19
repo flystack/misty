@@ -1,3 +1,4 @@
+require 'misty/http/net_http'
 require 'misty/http/method_builder'
 require 'misty/http/request'
 require 'misty/http/direct'
@@ -7,6 +8,7 @@ module Misty
     class Client
       class InvalidDataError < StandardError; end
 
+      include Misty::HTTP::NetHTTP
       include Misty::HTTP::MethodBuilder
       include Misty::HTTP::Request
       include Misty::HTTP::Direct
@@ -49,7 +51,7 @@ module Misty
         @uri = URI.parse(@setup.auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
         @base_path = @base_path.chomp("/")
-        @http = net_http(@uri)
+        @http = net_http(@uri, @options[:ssl_verify_mode], @setup.log)
         @version = nil
         @microversion = false
       end
@@ -79,16 +81,6 @@ module Misty
 
       def baseclass
         self.class.to_s.split('::')[-1]
-      end
-
-      def net_http(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.set_debug_output($stdout) if @setup.log.level == Logger::DEBUG
-        if uri.scheme == "https"
-          http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE unless @options[:ssl_verify_mode]
-        end
-        http
       end
 
       def setup(params)

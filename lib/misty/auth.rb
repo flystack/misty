@@ -1,3 +1,5 @@
+require 'misty/http/net_http'
+
 module Misty
   class Auth
     class AuthenticationError < StandardError; end
@@ -9,11 +11,13 @@ module Misty
     class InitError        < RuntimeError; end
     class URLError         < RuntimeError; end
 
-    def self.factory(options = {})
+    include Misty::HTTP::NetHTTP
+
+    def self.factory(options, *args)
       if options[:project]
-        return Misty::AuthV3.new(options)
+        return Misty::AuthV3.new(options, *args)
       elsif options[:tenant]
-        return Misty::AuthV2.new(options)
+        return Misty::AuthV2.new(options, *args)
       else
         raise CredentialsError, "Cannot identify version from credentials"
       end
@@ -21,7 +25,8 @@ module Misty
 
     attr_reader :catalog
 
-    def initialize(options)
+    def initialize(options, ssl_verify_mode, log)
+      @ssl_verify_mode, @log =  ssl_verify_mode, log
       raise CredentialsError unless credentials_valid?(options)
       @credentials = scoped_credentials(options)
       raise URLError, "No URL provided" unless options[:url] && !options[:url].empty?
@@ -32,7 +37,7 @@ module Misty
     end
 
     def authenticate
-      http = Net::HTTP.new(@uri.host, @uri.port)
+      http = net_http(@uri, @ssl_verify_mode, @log)
       response = http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
       raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
       response
