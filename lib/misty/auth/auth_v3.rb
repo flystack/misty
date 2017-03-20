@@ -33,6 +33,7 @@ module Misty
 
     def scoped_credentials(creds)
       creds[:domain] ||= "default"
+      creds[:user_domain] ||= creds[:domain]
       {
         "auth": {
           "identity": {
@@ -40,7 +41,7 @@ module Misty
             "password": {
               "user": {
                 "name": creds[:user],
-                "domain": { "id": "default" },
+                "domain": { "id": creds[:user_domain] },
                 "password": creds[:password]
               }
             }
