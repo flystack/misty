@@ -122,23 +122,66 @@ openstack.compute.requests
 ### Authentication information parameter
 The URL and credentials details are necessary to authenticate with the identity server (Keystone).
 
-To provide a Keystone V3, which is the default recommended version:
+The credentials are a combination of "id" and "name" used to uniquely identify projects, users and their domains.
+When using only the name, a domain must be specified to guarantee a unique record from the Identity service.
+
+The following parameters can be used:  
+* `:domain_id`  
+  Domain id used for authentication scope  
+  Default: `"default"`  
+* `:domain`  
+  Domain name used for authentication scope  
+  Default: `"Default"`  
+* `:project_id`  
+  Project id  
+* `:project`  
+  Project name  
+* `:project_domain_id`  
+  Project domain id
+* `:project_domain`  
+  Project domain name  
+* `:tenant_id`  
+  Tenant id, used only for Keystone v2.0  
+* `:tenant`  
+  Tenant name, used only for Keystone v2.0  
+* `:user_id`  
+  User id  
+* `:user`  
+  User name  
+* `:user_domain_id`  
+  User domain id
+* `:user_domain`  
+  User domain name  
+
+#### Keystone v3
+Keystone v3 is default recommended version:
+
 ```ruby
 auth = {
-  :url         => "http://localhost:5000",
-  :user        => "admin",
-  :user_domain => "default",
-  :password    => "secret",
-  :project     => "admin",
-  :domain      => "default"
+  :url            => "http://localhost:5000",
+  :user           => "admin",
+  :user_domain    => "default",
+  :password       => "secret",
+  :project        => "admin",
+  :project_domain => "default"
   }
 }
 ```
 
-- `:user_domain` is optional, if you omit the parameter: it falls back to the value of `:domain`
-- `:domain` is optional, if you omit the parameter: it falls back to 'default'
+Alternatively, using IDs:
 
-Alternatively, for Keystone V2, just provide the tenant details, Misty will detect it's using Keystone V2:
+```ruby
+auth = {
+  :url         => "http://localhost:5000",
+  :user_id    => "48985e6b8da145699d411f12a3459fca",
+  :password   => "secret",
+  :project_id => "8e1e232f6cbb4116bbef715d8a0afe6e",
+  }
+}
+```
+#### Keystone v2.0
+Provide the tenant details, Misty will detect it's using v2.0 for authentication:
+
 ```ruby
 auth = {
   :url      => "http://localhost:5000",

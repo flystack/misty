@@ -1,4 +1,5 @@
 require 'misty/http/net_http'
+require 'misty/auth/name'
 
 module Misty
   class Auth
@@ -14,9 +15,9 @@ module Misty
     include Misty::HTTP::NetHTTP
 
     def self.factory(options, *args)
-      if options[:project]
+      if options[:project_id] || options[:project]
         return Misty::AuthV3.new(options, *args)
-      elsif options[:tenant]
+      elsif options[:tenant_id] || options[:tenant]
         return Misty::AuthV2.new(options, *args)
       else
         raise CredentialsError, "Cannot identify version from credentials"
@@ -27,8 +28,8 @@ module Misty
 
     def initialize(options, ssl_verify_mode, log)
       @ssl_verify_mode, @log =  ssl_verify_mode, log
-      raise CredentialsError unless credentials_valid?(options)
-      @credentials = scoped_credentials(options)
+      @credentials = scoped_authentication
+
       raise URLError, "No URL provided" unless options[:url] && !options[:url].empty?
       @uri = URI.parse(options[:url])
       @token = nil
