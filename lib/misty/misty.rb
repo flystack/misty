@@ -14,6 +14,9 @@ module Misty
   # Ruby structures: :ruby
   CONTENT_TYPE = :ruby
 
+  # Defaults Domain ID
+  DOMAIN_ID = "default"
+
   # Default Interface
   INTERFACE = "public"
 

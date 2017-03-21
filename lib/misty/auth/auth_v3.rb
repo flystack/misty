@@ -2,6 +2,23 @@ require 'misty/auth'
 
 module Misty
   class AuthV3 < Misty::Auth
+    def initialize(options, *args)
+      domain_id = options[:domain_id] ? options[:domain_id] : Misty::DOMAIN_ID
+      project_domain_id = options[:project_domain_id] ? options[:project_domain_id] : Misty::DOMAIN_ID
+      user_domain_id = options[:user_domain_id] ? options[:user_domain_id] : Misty::DOMAIN_ID
+
+      @domain = Misty::Auth::Name.new(domain_id, options[:domain])
+
+      @user =  Misty::Auth::User.new(options[:user_id], options[:user])
+      @user.password = options[:password]
+      @user.domain = Misty::Auth::Name.new(user_domain_id, options[:user_domain])
+
+      @project = Misty::Auth::Project.new(options[:project_id], options[:project])
+      @project.domain = Misty::Auth::Name.new(project_domain_id, options[:user_domain])
+
+      super(options, *args)
+    end
+
     def self.path
       "/v3/auth/tokens"
     end
@@ -14,14 +31,28 @@ module Misty
       end
     end
 
-    def credentials_valid?(creds)
-      true if creds[:user] && creds[:password] && creds[:project]
-    end
-
     def get_endpoint_url(endpoints, region, interface)
       endpoint = endpoints.select { |ep| ep["region_id"] == region && ep["interface"] == interface }
       raise CatalogError, "No endpoint available for region '#{region}' and interface '#{interface}'" unless endpoint
       endpoint[0]["url"]
+    end
+
+    def scoped_authentication
+      {
+        "auth": {
+          "identity": {
+            "methods": ["password"],
+            "password":  @user.identity
+          },
+          "scope": scope
+        }
+      }
+    end
+
+    def scope
+      return @project.identity if @project
+      return @domain.identity if @domain
+      raise Misty::Auth::CredentialsError, "#{self.class}: No scope available"
     end
 
     def setup(response)
@@ -29,31 +60,6 @@ module Misty
       @token = response["x-subject-token"]
       @catalog = payload["token"]["catalog"]
       @expires = payload["token"]["expires_at"]
-    end
-
-    def scoped_credentials(creds)
-      creds[:domain] ||= "default"
-      creds[:user_domain] ||= creds[:domain]
-      {
-        "auth": {
-          "identity": {
-            "methods": ["password"],
-            "password": {
-              "user": {
-                "name": creds[:user],
-                "domain": { "id": creds[:user_domain] },
-                "password": creds[:password]
-              }
-            }
-          },
-          "scope": {
-            "project": {
-              "name": creds[:project],
-              "domain": { "id": creds[:domain] }
-            }
-          }
-        }
-      }
     end
   end
 end
