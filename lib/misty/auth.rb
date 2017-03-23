@@ -15,12 +15,10 @@ module Misty
     include Misty::HTTP::NetHTTP
 
     def self.factory(options, *args)
-      if options[:project_id] || options[:project]
-        return Misty::AuthV3.new(options, *args)
-      elsif options[:tenant_id] || options[:tenant]
+      if options[:tenant_id] || options[:tenant]
         return Misty::AuthV2.new(options, *args)
       else
-        raise CredentialsError, "Cannot identify version from credentials"
+        return Misty::AuthV3.new(options, *args)
       end
     end
 
