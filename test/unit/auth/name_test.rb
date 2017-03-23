@@ -83,28 +83,28 @@ describe Misty::Auth::User do
   end
 end
 
-describe Misty::Auth::Project do
+describe Misty::Auth::ProjectScope do
   describe "#identity" do
     it "when id is provided it doesn't require domain" do
-      project = Misty::Auth::Project.new("project_id", "Project")
+      project = Misty::Auth::ProjectScope.new("project_id", "Project")
       project.identity.must_equal ({:project=>{:id=>"project_id"}})
     end
 
     it "when id is nul and name is provided it uses domain id" do
-      project = Misty::Auth::Project.new(nil, "Project")
+      project = Misty::Auth::ProjectScope.new(nil, "Project")
       project.domain = Misty::Auth::Name.new("default", nil)
       project.identity.must_equal ({:project=>{:name=>"Project", :domain=>{:id=>"default"}}})
     end
 
     it "when id is nul and name is provided it uses domain name" do
-      project = Misty::Auth::Project.new(nil, "Project")
+      project = Misty::Auth::ProjectScope.new(nil, "Project")
       project.domain = Misty::Auth::Name.new(nil, "Default")
       project.identity.must_equal ({:project=>{:name=>"Project", :domain=>{:name=>"Default"}}})
     end
 
     it "raises an error with no project id and no domain are provided" do
       proc do
-        project = Misty::Auth::Project.new(nil, "Project")
+        project = Misty::Auth::ProjectScope.new(nil, "Project")
         project.identity
       end.must_raise Misty::Auth::CredentialsError
     end

@@ -22,7 +22,6 @@ describe Misty::Cloud do
         :user     => "admin",
         :password => "secret",
         :project  => "admin",
-        :domain   => "default"
       }
     end
 
@@ -89,8 +88,7 @@ describe Misty::Cloud do
         authv3_data = {
           :user     => "admin",
           :password => "secret",
-          :project  => "admin",
-          :domain   => "default"
+          :project  => "admin"
         }
 
         proc do
@@ -103,8 +101,7 @@ describe Misty::Cloud do
           :url      => "",
           :user     => "admin",
           :password => "secret",
-          :project  => "admin",
-          :domain   => "default"
+          :project  => "admin"
         }
 
         proc do
@@ -140,8 +137,7 @@ describe Misty::Cloud do
             :url      => "http://localhost:5000",
             :user     => "admin",
             :password => "secret",
-            :project  => "admin",
-            :domain   => "default"
+            :project  => "admin"
           }
         end
 

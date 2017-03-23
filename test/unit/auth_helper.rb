@@ -3,7 +3,7 @@ def auth_response_v3(type, name)
     { 'methods' => ['password'],
       'roles' => [{ 'id' => 'id_roles', 'name' => 'admin' }],
       'expires_at' => '2016-11-29T07:45:29.908554Z',
-      'project' => { 'domain' => { 'id' => 'default', 'name' => 'Default' }, 'id' => 'id_project', 'name' => 'admin' },
+      'project' => { 'domain' => { 'id' => 'default', 'name' => 'Default' }, 'id' => 'project_id', 'name' => 'admin' },
       'catalog' =>
       [{ 'endpoints' =>
         [{ 'region_id' => 'regionOne',
