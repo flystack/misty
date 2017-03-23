@@ -24,7 +24,7 @@ module Misty
       setup.log = Logger.new(params[:log_file] ? params[:log_file] : Misty::LOG_FILE)
       setup.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
       setup.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
-      setup.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
+      setup.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
       setup.auth = Misty::Auth.factory(params[:auth], setup.ssl_verify_mode, setup.log)
       setup
     end
