@@ -3,18 +3,21 @@ require 'misty/auth'
 module Misty
   class AuthV3 < Misty::Auth
     def initialize(options, *args)
-      domain_id = options[:domain_id] ? options[:domain_id] : Misty::DOMAIN_ID
-      project_domain_id = options[:project_domain_id] ? options[:project_domain_id] : Misty::DOMAIN_ID
+      if options[:project_id] || options[:project]
+        # scope: project
+        project_domain_id = options[:project_domain_id] ? options[:project_domain_id] : Misty::DOMAIN_ID
+        @project = Misty::Auth::ProjectScope.new(options[:project_id], options[:project])
+        @project.domain = Misty::Auth::Name.new(project_domain_id, options[:user_domain])
+      else
+        # scope: domain
+        domain_id = options[:domain_id] ? options[:domain_id] : Misty::DOMAIN_ID
+        @domain = Misty::Auth::DomainScope.new(domain_id, options[:domain]) if domain_id || options[:domain]
+      end
+
       user_domain_id = options[:user_domain_id] ? options[:user_domain_id] : Misty::DOMAIN_ID
-
-      @domain = Misty::Auth::Name.new(domain_id, options[:domain])
-
       @user =  Misty::Auth::User.new(options[:user_id], options[:user])
       @user.password = options[:password]
       @user.domain = Misty::Auth::Name.new(user_domain_id, options[:user_domain])
-
-      @project = Misty::Auth::Project.new(options[:project_id], options[:project])
-      @project.domain = Misty::Auth::Name.new(project_domain_id, options[:user_domain])
 
       super(options, *args)
     end

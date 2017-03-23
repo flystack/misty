@@ -29,7 +29,13 @@ module Misty
       end
     end
 
-    class Project < Name
+    class DomainScope < Name
+      def identity
+        { :domain => super }
+      end
+    end
+
+    class ProjectScope < Name
       include Misty::Auth::Domain
 
       def identity
