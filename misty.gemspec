@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Misty is a dedicated HTTP client for OpenStack providing dynamic APIs requests management.}
   spec.description   = %q{Misty is a dedicated HTTP client for OpenStack providing dynamic APIs requests management.}
   spec.homepage      = "https://github.com/flystack/misty"
-  spec.license       = "GPL-3.0"
+  spec.license       = "Apache License Version 2.0"
 
   all_files          = `git ls-files -z`.split("\x0")
   spec.files         = all_files.grep(%r{^(exe|lib|test)/|^.rubocop.yml$})

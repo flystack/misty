@@ -282,4 +282,4 @@ Contributors are welcome and must adhere to the [Contributor covenant code of co
 Please submit issues/bugs and patches on the [Misty repository](https://github.com/flystack/misty).
 
 # Copyright
-Copyright © 2007 Free Software Foundation, Inc. See [LICENSE](LICENSE.md) for details.
+Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ - See [LICENSE](LICENSE.md) for details.
