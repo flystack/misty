@@ -54,10 +54,12 @@ describe Misty::Cloud do
     it "sets up default values" do
       Misty::Auth.stub :factory, nil do
         setup = Misty::Cloud.setup({})
-        setup.must_be_kind_of Struct
+        setup.must_be_kind_of Misty::Cloud::Setup
         setup.content_type.must_equal Misty::CONTENT_TYPE
         setup.log.must_be_kind_of Logger
         setup.interface.must_equal Misty::INTERFACE
+        setup.proxy.must_be_kind_of URI
+        setup.proxy.host.must_be_nil
         setup.region_id.must_equal Misty::REGION_ID
         setup.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
       end

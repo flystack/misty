@@ -51,7 +51,7 @@ module Misty
         @uri = URI.parse(@setup.auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
         @base_path = @base_path.chomp("/")
-        @http = net_http(@uri, @options[:ssl_verify_mode], @setup.log)
+        @http = net_http(@uri, @setup.proxy, @options[:ssl_verify_mode], @setup.log)
         @version = nil
         @microversion = false
       end

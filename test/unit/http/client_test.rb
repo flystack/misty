@@ -41,8 +41,9 @@ describe Misty::HTTP::Client do
 
   describe "#net_http" do
     it "returns a Net/http instance" do
-      uri = URI.parse("http://localhost")
-      service.send(:net_http, uri, false, Logger.new("/dev/null")).must_be_instance_of Net::HTTP
+      endpoint = URI.parse("http://localhost")
+      proxy = URI.parse("")
+      service.send(:net_http, endpoint, proxy, false, Logger.new("/dev/null")).must_be_instance_of Net::HTTP
     end
   end
 

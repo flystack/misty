@@ -3,7 +3,9 @@ require 'misty/auth/auth_v3'
 
 module Misty
   class Cloud
-    Setup   = Struct.new(:auth, :content_type, :log, :interface, :region_id, :ssl_verify_mode)
+    class Setup
+      attr_accessor :auth, :content_type, :log, :interface, :proxy, :region_id, :ssl_verify_mode
+    end
 
     Options = Struct.new(:alarming, :baremetal, :block_storage, :clustering, :compute, :container, :data_processing,
       :database, :data_protection, :dns, :identity, :image, :messaging, :metering, :network, :object_storage,
@@ -25,7 +27,9 @@ module Misty
       setup.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
       setup.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
       setup.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
-      setup.auth = Misty::Auth.factory(params[:auth], setup.ssl_verify_mode, setup.log)
+      http_proxy = params[:http_proxy] ? params[:http_proxy] : ""
+      setup.proxy = URI.parse(http_proxy)
+      setup.auth = Misty::Auth.factory(params[:auth], setup.proxy, setup.ssl_verify_mode, setup.log)
       setup
     end
 

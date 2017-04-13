@@ -24,19 +24,20 @@ module Misty
 
     attr_reader :catalog
 
-    def initialize(options, ssl_verify_mode, log)
+    def initialize(options, proxy, ssl_verify_mode, log)
       @ssl_verify_mode, @log =  ssl_verify_mode, log
       @credentials = scoped_authentication
 
       raise URLError, "No URL provided" unless options[:url] && !options[:url].empty?
       @uri = URI.parse(options[:url])
+      @proxy = proxy
       @token = nil
       setup(authenticate)
       raise CatalogError, "No catalog provided during authentication" if @catalog.empty?
     end
 
     def authenticate
-      http = net_http(@uri, @ssl_verify_mode, @log)
+      http = net_http(@uri, @proxy, @ssl_verify_mode, @log)
       response = http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
       raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
       response
