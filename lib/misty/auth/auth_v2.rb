@@ -6,13 +6,6 @@ module Misty
       "/v2.0/tokens"
     end
 
-    def initialize(options, *args)
-      @user = Misty::Auth::User.new(options[:user_id], options[:user])
-      @user.password = options[:password]
-      @tenant = Misty::Auth::Name.new(options[:tenant_id], options[:tenant])
-      super(options, *args)
-    end
-
     def catalog_endpoints(endpoints, region, interface)
       endpoints.each do |endpoint|
         if endpoint["region"] == region && endpoint["#{interface}URL"]
@@ -21,50 +14,58 @@ module Misty
       end
     end
 
+    def credentials
+      raise Misty::Auth::CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
+      raise Misty::Auth::CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
+      return creds_by_id if @tenant.id
+      return creds_by_name if @tenant.name
+      raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
+    end
+
+    def credentials_data
+      {
+        "username": @user.name,
+        "password": @user.password
+      }
+    end
+
+    def creds_by_name
+      {
+        "auth": {
+          "passwordCredentials": credentials_data,
+          "tenantName": @tenant.name
+        }
+      }
+    end
+
+    def creds_by_id
+      {
+        "auth": {
+          "passwordCredentials": credentials_data,
+          "tenantId": @tenant.id
+        }
+      }
+    end
+
     def get_endpoint_url(endpoints, region, interface)
       endpoint = endpoints.select { |ep| !ep[interface].empty? }
       raise CatalogError, "No endpoint available for region '#{region}' and interface '#{interface}'" unless endpoint
       endpoint[0][interface]
     end
 
-    def setup(response)
+    def set(response)
       payload = JSON.load(response.body)
-      @token   = payload["access"]["token"]["id"]
-      @catalog = payload["access"]["serviceCatalog"]
-      @expires = payload["access"]["token"]["expires"]
+      token   = payload["access"]["token"]["id"]
+      catalog = payload["access"]["serviceCatalog"]
+      expires = payload["access"]["token"]["expires"]
+      [token, catalog, expires]
     end
 
-    def scoped_authentication
-      raise Misty::Auth::CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
-      raise Misty::Auth::CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
-      return auth_by_id if @tenant.id
-      return auth_by_name if @tenant.name
-      raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
-    end
-
-    def auth_by_name
-      {
-        "auth": {
-          "passwordCredentials": credentials,
-          "tenantName": @tenant.name
-        }
-      }
-    end
-
-    def auth_by_id
-      {
-        "auth": {
-          "passwordCredentials": credentials,
-          "tenantId": @tenant.id
-        }
-      }
-    end
-
-    def credentials
-      {
-        "username": @user.name,
-        "password": @user.password
-      }
+    def set_credentials(auth)
+      @user = Misty::Auth::User.new(auth[:user_id], auth[:user])
+      @user.password = auth[:password]
+      @tenant = Misty::Auth::Name.new(auth[:tenant_id], auth[:tenant])
+      credentials
     end
   end
 end

@@ -32,7 +32,6 @@ describe Misty::HTTP::Microversion do
     end
 
     setup = Misty::Cloud::Config.new
-    setup.auth = auth
     setup.content_type = :ruby
     setup.log = Logger.new('/dev/null')
     setup.interface = Misty::INTERFACE
@@ -44,7 +43,7 @@ describe Misty::HTTP::Microversion do
       with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
       to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
 
-    Misty::Openstack::Nova::V2_1.new(setup, {})
+    Misty::Openstack::Nova::V2_1.new(auth, setup, {})
   end
 
   describe "#version_get" do
