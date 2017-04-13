@@ -1,15 +1,10 @@
 module Misty
   module HTTP
     module NetHTTP
-      def net_http(uri, ssl_verify_mode, log)
-        if ENV['http_proxy']
-          proxy_uri = URI.parse(ENV['http_proxy']) 
-          http = Net::HTTP.new(uri.host, uri.port, proxy_uri.host, proxy_uri.port)
-        else
-          http = Net::HTTP.new(uri.host, uri.port)
-        end
+      def net_http(endpoint, proxy, ssl_verify_mode, log)
+        http = Net::HTTP.new(endpoint.host, endpoint.port, proxy.host, proxy.port, proxy.user, proxy.password)
         http.set_debug_output(log) if log.level == Logger::DEBUG
-        if uri.scheme == "https"
+        if endpoint.scheme == "https"
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE unless ssl_verify_mode
         end

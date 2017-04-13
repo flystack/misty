@@ -31,7 +31,14 @@ describe Misty::HTTP::Microversion do
       "token_id"
     end
 
-    setup = Misty::Cloud::Setup.new(auth, :ruby, Logger.new('/dev/null'), Misty::INTERFACE, Misty::REGION_ID, Misty::SSL_VERIFY_MODE)
+    setup = Misty::Cloud::Setup.new
+    setup.auth = auth
+    setup.content_type = :ruby
+    setup.log = Logger.new('/dev/null')
+    setup.interface = Misty::INTERFACE
+    setup.proxy = URI.parse('')
+    setup.region_id = Misty::REGION_ID
+    setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
 
     stub_request(:get, "http://localhost/").
       with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
