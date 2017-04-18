@@ -45,13 +45,13 @@ module Misty
       #     :ssl_verify_mode => true
       #   (micro)version: Can be numbered (3.1) or by state (CURRENT, LATEST or SUPPORTED)
       #     :version => "CURRENT"
-      def initialize(setup, options)
-        @setup = setup
+      def initialize(config, options)
+        @config = config
         @options = setup(options)
-        @uri = URI.parse(@setup.auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
+        @uri = URI.parse(@config.auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
         @base_path = @base_path.chomp("/")
-        @http = net_http(@uri, @setup.proxy, @options[:ssl_verify_mode], @setup.log)
+        @http = net_http(@uri, @config.proxy, @options[:ssl_verify_mode], @config.log)
         @version = nil
         @microversion = false
       end
@@ -72,7 +72,7 @@ module Misty
       end
 
       def headers
-        h = headers_default.merge("X-Auth-Token" => "#{@setup.auth.get_token}")
+        h = headers_default.merge("X-Auth-Token" => "#{@config.auth.get_token}")
         h.merge!(microversion_header) if microversion
         h
       end
@@ -87,10 +87,10 @@ module Misty
         options = Options.new()
         options.base_path       = params[:base_path]       ? params[:base_path] : nil
         options.base_url        = params[:base_url]        ? params[:base_url] : nil
-        options.interface       = params[:interface]       ? params[:interface] : @setup.interface
-        options.region_id       = params[:region_id]       ? params[:region_id] : @setup.region_id
+        options.interface       = params[:interface]       ? params[:interface] : @config.interface
+        options.region_id       = params[:region_id]       ? params[:region_id] : @config.region_id
         options.service_names   = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
-        options.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @setup.ssl_verify_mode
+        options.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
         options.version         = params[:version]         ? params[:version] : "CURRENT"
 
         unless INTERFACES.include?(options.interface)

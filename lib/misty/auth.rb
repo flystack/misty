@@ -14,30 +14,29 @@ module Misty
 
     include Misty::HTTP::NetHTTP
 
-    def self.factory(options, *args)
-      if options[:tenant_id] || options[:tenant]
-        return Misty::AuthV2.new(options, *args)
+    def self.factory(auth, *args)
+      if auth[:tenant_id] || auth[:tenant]
+        return Misty::AuthV2.new(auth, *args)
       else
-        return Misty::AuthV3.new(options, *args)
+        return Misty::AuthV3.new(auth, *args)
       end
     end
 
     attr_reader :catalog
 
-    def initialize(options, proxy, ssl_verify_mode, log)
-      @ssl_verify_mode, @log =  ssl_verify_mode, log
+    def initialize(auth, config)
+      @config = config
       @credentials = scoped_authentication
 
-      raise URLError, "No URL provided" unless options[:url] && !options[:url].empty?
-      @uri = URI.parse(options[:url])
-      @proxy = proxy
+      raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
+      @uri = URI.parse(auth[:url])
       @token = nil
       setup(authenticate)
       raise CatalogError, "No catalog provided during authentication" if @catalog.empty?
     end
 
     def authenticate
-      http = net_http(@uri, @proxy, @ssl_verify_mode, @log)
+      http = net_http(@uri, @config.proxy, @config.ssl_verify_mode, @config.log)
       response = http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
       raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
       response

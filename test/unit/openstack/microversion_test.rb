@@ -31,7 +31,7 @@ describe Misty::HTTP::Microversion do
       "token_id"
     end
 
-    setup = Misty::Cloud::Setup.new
+    setup = Misty::Cloud::Config.new
     setup.auth = auth
     setup.content_type = :ruby
     setup.log = Logger.new('/dev/null')

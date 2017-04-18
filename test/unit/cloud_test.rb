@@ -54,7 +54,7 @@ describe Misty::Cloud do
     it "sets up default values" do
       Misty::Auth.stub :factory, nil do
         setup = Misty::Cloud.setup({})
-        setup.must_be_kind_of Misty::Cloud::Setup
+        setup.must_be_kind_of Misty::Cloud::Config
         setup.content_type.must_equal Misty::CONTENT_TYPE
         setup.log.must_be_kind_of Logger
         setup.interface.must_equal Misty::INTERFACE
