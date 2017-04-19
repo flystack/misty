@@ -3,7 +3,7 @@ require 'misty/auth/auth_v3'
 
 module Misty
   class Cloud
-    class Setup
+    class Config
       attr_accessor :auth, :content_type, :log, :interface, :proxy, :region_id, :ssl_verify_mode
     end
 
@@ -14,23 +14,24 @@ module Misty
     attr_reader :services
 
     def initialize(params = {:auth => {}})
-      @setup = self.class.setup(params)
+      @config = self.class.setup(params)
       @options = Options.new
       @services = setup_services(params)
     end
 
     def self.setup(params)
-      setup = Setup.new
-      setup.content_type = params[:content_type] ? params[:content_type] : Misty::CONTENT_TYPE
-      setup.interface = params[:interface] ? params[:interface] : Misty::INTERFACE
-      setup.log = Logger.new(params[:log_file] ? params[:log_file] : Misty::LOG_FILE)
-      setup.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
-      setup.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
-      setup.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
+      config = Config.new
+      config.content_type = params[:content_type] ? params[:content_type] : Misty::CONTENT_TYPE
+      config.interface = params[:interface] ? params[:interface] : Misty::INTERFACE
+      config.log = Logger.new(params[:log_file] ? params[:log_file] : Misty::LOG_FILE)
+      config.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
+      config.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
+      config.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
       http_proxy = params[:http_proxy] ? params[:http_proxy] : ""
-      setup.proxy = URI.parse(http_proxy)
-      setup.auth = Misty::Auth.factory(params[:auth], setup.proxy, setup.ssl_verify_mode, setup.log)
-      setup
+      config.proxy = URI.parse(http_proxy)
+      # config.auth = Misty::Auth.factory(params[:auth], config.proxy, config.ssl_verify_mode, config.log)
+      config.auth = Misty::Auth.factory(params[:auth], config)
+      config
     end
 
     def setup_services(params)
@@ -54,7 +55,7 @@ module Misty
       version = @services[service_name].fetch(project)
       version = self.class.dot_to_underscore(version)
       klass = Object.const_get("Misty::Openstack::#{project.capitalize}::#{version.capitalize}")
-      klass.new(@setup, @options[service_name])
+      klass.new(@config, @options[service_name])
     end
 
     def self.dot_to_underscore(val)

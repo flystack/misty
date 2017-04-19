@@ -15,7 +15,7 @@ def service(content_type = :ruby)
     "token_id"
   end
 
-  setup = Misty::Cloud::Setup.new
+  setup = Misty::Cloud::Config.new
   setup.auth = auth
   setup.content_type = content_type
   setup.log = Logger.new('/dev/null')
