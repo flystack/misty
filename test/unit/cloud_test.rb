@@ -27,17 +27,17 @@ describe Misty::Cloud do
 
     it "uses default version" do
       cloud = Misty::Cloud.new(:auth => auth)
-      cloud.services[:identity].must_equal ({:keystone => "v3"})
-    end
-
-    it "uses provided version" do
-      cloud = Misty::Cloud.new(:auth => auth, :identity => {:api_version => "v2.0"})
-      cloud.services[:identity].must_equal ({:keystone => "v2.0"})
+      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
     end
 
     it "uses default version when provided version is out of range" do
       cloud = Misty::Cloud.new(:auth => auth, :identity => {:api_version => "v1"})
-      cloud.services[:identity].must_equal ({:keystone => "v3"})
+      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
+    end
+
+    it "uses provided version" do
+      cloud = Misty::Cloud.new(:auth => auth, :identity => {:api_version => "v2.0"})
+      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V2_0
     end
   end
 
@@ -50,18 +50,18 @@ describe Misty::Cloud do
     end
   end
 
-  describe "#setup" do
+  describe "#config" do
     it "sets up default values" do
       Misty::Auth.stub :factory, nil do
-        setup = Misty::Cloud.setup({})
-        setup.must_be_kind_of Misty::Cloud::Config
-        setup.content_type.must_equal Misty::CONTENT_TYPE
-        setup.log.must_be_kind_of Logger
-        setup.interface.must_equal Misty::INTERFACE
-        setup.proxy.must_be_kind_of URI
-        setup.proxy.host.must_be_nil
-        setup.region_id.must_equal Misty::REGION_ID
-        setup.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
+        config = Misty::Cloud.set_configuration({})
+        config.must_be_kind_of Misty::Cloud::Config
+        config.content_type.must_equal Misty::CONTENT_TYPE
+        config.log.must_be_kind_of Logger
+        config.interface.must_equal Misty::INTERFACE
+        config.proxy.must_be_kind_of URI
+        config.proxy.host.must_be_nil
+        config.region_id.must_equal Misty::REGION_ID
+        config.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
       end
     end
   end

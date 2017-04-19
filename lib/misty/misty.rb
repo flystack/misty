@@ -29,10 +29,6 @@ module Misty
   SSL_VERIFY_MODE = true
 
   def self.services
-    @@services ||= set_services
-  end
-
-  def self.set_services
     services = Misty::Services.new
     services.add(:alarming,            :aodh,         ["v2"])
     services.add(:baremetal,           :ironic,       ["v1"])

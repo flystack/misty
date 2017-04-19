@@ -1,12 +1,26 @@
 module Misty
   class Services
     class Service
-      attr_reader :name, :project, :versions
+      attr_reader :name, :options, :project, :versions, :version
 
       def initialize(name, project, versions)
         @name = name
         @project = project
         @versions = versions
+        @options = {}
+      end
+
+      def options=(val)
+        @options = val
+      end
+
+      def version=(val)
+        if @versions.include?(val)
+          @version = val
+        else
+          # Use highest version
+          @version = versions.sort[-1]
+        end
       end
 
       def to_s
