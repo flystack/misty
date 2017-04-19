@@ -7,19 +7,17 @@ module Misty
       attr_accessor :auth, :content_type, :log, :interface, :proxy, :region_id, :ssl_verify_mode
     end
 
-    Options = Struct.new(:alarming, :baremetal, :block_storage, :clustering, :compute, :container, :data_processing,
-      :database, :data_protection, :dns, :identity, :image, :messaging, :metering, :network, :object_storage,
-      :orchestration, :search, :shared_file_systems)
-
-    attr_reader :services
-
-    def initialize(params = {:auth => {}})
-      @config = self.class.setup(params)
-      @options = Options.new
-      @services = setup_services(params)
+    def self.dot_to_underscore(val)
+      val.gsub(/\./,'_')
     end
 
-    def self.setup(params)
+    def initialize(params = {:auth => {}})
+      @params = params
+      @config = self.class.set_configuration(params)
+      @services = Misty.services
+    end
+
+    def self.set_configuration(params)
       config = Config.new
       config.content_type = params[:content_type] ? params[:content_type] : Misty::CONTENT_TYPE
       config.interface = params[:interface] ? params[:interface] : Misty::INTERFACE
@@ -29,37 +27,17 @@ module Misty
       config.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
       http_proxy = params[:http_proxy] ? params[:http_proxy] : ""
       config.proxy = URI.parse(http_proxy)
-      # config.auth = Misty::Auth.factory(params[:auth], config.proxy, config.ssl_verify_mode, config.log)
       config.auth = Misty::Auth.factory(params[:auth], config)
       config
     end
 
-    def setup_services(params)
-      services = {}
-      Misty.services.each do |service|
-        @options.send("#{service.name}=".to_sym, params[service.name] ? params[service.name] : {})
-
-        if params[service.name] && params[service.name][:api_version] \
-          && service.versions.include?(params[service.name][:api_version])
-          services.merge!(service.name => {service.project => params[service.name][:api_version]})
-        else
-          # Highest version is used by default!
-          services.merge!(service.name => {service.project => service.versions.sort[-1]})
-        end
-      end
-      services
-    end
-
     def build_service(service_name)
-      project = @services[service_name].keys[0]
-      version = @services[service_name].fetch(project)
-      version = self.class.dot_to_underscore(version)
-      klass = Object.const_get("Misty::Openstack::#{project.capitalize}::#{version.capitalize}")
-      klass.new(@config, @options[service_name])
-    end
-
-    def self.dot_to_underscore(val)
-      val.gsub(/\./,'_')
+      service = @services.find {|service| service.name == service_name}
+      service.options = @params[service.name] if @params[service.name]
+      service.version = service.options[:api_version]
+      version = self.class.dot_to_underscore(service.version)
+      klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
+      klass.new(@config, service.options)
     end
 
     def alarming
