@@ -68,16 +68,16 @@ describe Misty::Cloud do
 
   describe "#new" do
     describe "fails" do
-      it "when no credentials" do
+      it "when no parameters" do
         proc do
           Misty::Cloud.new
-        end.must_raise Misty::Auth::CredentialsError
+        end.must_raise ArgumentError
       end
 
       it "with empty credentials" do
         proc do
           Misty::Cloud.new(:auth => {})
-        end.must_raise Misty::Auth::CredentialsError
+        end.must_raise Misty::Auth::URLError
       end
 
       it "with incomplete credentials" do

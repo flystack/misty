@@ -4,17 +4,18 @@ require 'misty/auth/auth_v3'
 module Misty
   class Cloud
     class Config
-      attr_accessor :auth, :content_type, :log, :interface, :proxy, :region_id, :ssl_verify_mode
+      attr_accessor :auth, :content_type, :interface, :log, :proxy, :region_id, :ssl_verify_mode
     end
 
     def self.dot_to_underscore(val)
       val.gsub(/\./,'_')
     end
 
-    def initialize(params = {:auth => {}})
+    def initialize(params)# = {:auth => {}})
       @params = params
       @config = self.class.set_configuration(params)
       @services = Misty.services
+      @auth = Misty::Auth.factory(params[:auth], @config)
     end
 
     def self.set_configuration(params)
@@ -27,7 +28,6 @@ module Misty
       config.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
       http_proxy = params[:http_proxy] ? params[:http_proxy] : ""
       config.proxy = URI.parse(http_proxy)
-      config.auth = Misty::Auth.factory(params[:auth], config)
       config
     end
 
@@ -37,7 +37,7 @@ module Misty
       service.version = service.options[:api_version]
       version = self.class.dot_to_underscore(service.version)
       klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
-      klass.new(@config, service.options)
+      klass.new(@auth, @config, service.options)
     end
 
     def alarming

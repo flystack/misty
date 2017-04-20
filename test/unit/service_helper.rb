@@ -16,7 +16,6 @@ def service(content_type = :ruby)
   end
 
   setup = Misty::Cloud::Config.new
-  setup.auth = auth
   setup.content_type = content_type
   setup.log = Logger.new('/dev/null')
   setup.interface = Misty::INTERFACE
@@ -28,5 +27,5 @@ def service(content_type = :ruby)
     with(:headers => request_header).
     to_return(:status => 200, :body => "", :headers => {})
 
-  Misty::Openstack::Neutron::V2_0.new(setup, {})
+  Misty::Openstack::Neutron::V2_0.new(auth, setup, {})
 end

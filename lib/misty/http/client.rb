@@ -45,10 +45,11 @@ module Misty
       #     :ssl_verify_mode => true
       #   (micro)version: Can be numbered (3.1) or by state (CURRENT, LATEST or SUPPORTED)
       #     :version => "CURRENT"
-      def initialize(config, options)
+      def initialize(auth, config, options)
+        @auth = auth
         @config = config
         @options = setup(options)
-        @uri = URI.parse(@config.auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
+        @uri = URI.parse(@auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
         @base_path = @base_path.chomp("/")
         @http = net_http(@uri, @config.proxy, @options[:ssl_verify_mode], @config.log)
@@ -72,7 +73,7 @@ module Misty
       end
 
       def headers
-        h = headers_default.merge("X-Auth-Token" => "#{@config.auth.get_token}")
+        h = headers_default.merge("X-Auth-Token" => "#{@auth.get_token}")
         h.merge!(microversion_header) if microversion
         h
       end

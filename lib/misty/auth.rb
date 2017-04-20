@@ -14,30 +14,27 @@ module Misty
 
     include Misty::HTTP::NetHTTP
 
-    def self.factory(auth, *args)
+    attr_reader :catalog
+
+    def self.factory(auth, config)
       if auth[:tenant_id] || auth[:tenant]
-        return Misty::AuthV2.new(auth, *args)
+        return Misty::AuthV2.new(auth, config)
       else
-        return Misty::AuthV3.new(auth, *args)
+        return Misty::AuthV3.new(auth, config)
       end
     end
 
-    attr_reader :catalog
-
     def initialize(auth, config)
-      @config = config
-      @credentials = scoped_authentication
-
       raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
-      @uri = URI.parse(auth[:url])
+      @credentials = set_credentials(auth)
+      @http = net_http(URI.parse(auth[:url]), config.proxy, config.ssl_verify_mode, config.log)
       @token = nil
-      setup(authenticate)
+      @token, @catalog, @expires = set(authenticate)
       raise CatalogError, "No catalog provided during authentication" if @catalog.empty?
     end
 
     def authenticate
-      http = net_http(@uri, @config.proxy, @config.ssl_verify_mode, @config.log)
-      response = http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
+      response = @http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
       raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
       response
     end
@@ -57,7 +54,7 @@ module Misty
     end
 
     def get_token
-      authenticate if expired?
+      @token, @catalog, @expires = set(authenticate) if expired?
       @token
     end
   end

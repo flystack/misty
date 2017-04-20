@@ -60,7 +60,7 @@ describe Misty::Auth do
 
         proc do
           Misty::AuthV3.new({}, config)
-        end.must_raise Misty::Auth::CredentialsError
+        end.must_raise Misty::Auth::URLError
       end
 
       it "#get_token" do
@@ -99,7 +99,7 @@ describe Misty::Auth do
 
         proc do
           Misty::AuthV2.new({}, config)
-        end.must_raise Misty::Auth::CredentialsError
+        end.must_raise Misty::Auth::URLError
       end
     end
 

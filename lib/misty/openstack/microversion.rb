@@ -6,7 +6,7 @@ module Misty
 
       VERSION_STATES = %w{CURRENT LATEST SUPPORTED}
 
-      def initialize(cloud, options)
+      def initialize(auth, cloud, options)
         super
         @microversion = true
         @version = version_get(@options.version)
