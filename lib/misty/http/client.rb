@@ -6,6 +6,10 @@ require 'misty/http/direct'
 module Misty
   module HTTP
     class Client
+      class Options
+        attr_accessor :base_path, :base_url, :interface, :region_id, :service_names, :ssl_verify_mode, :version
+      end
+
       class InvalidDataError < StandardError; end
 
       include Misty::HTTP::NetHTTP
@@ -16,8 +20,6 @@ module Misty
       INTERFACES = %w{admin public internal}
 
       attr_reader :microversion
-
-      Options = Struct.new(:base_path, :base_url, :interface, :region_id, :service_names, :ssl_verify_mode, :version)
 
       def requests
         list = []
@@ -52,7 +54,7 @@ module Misty
         @uri = URI.parse(@auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
         @base_path = @base_path.chomp("/")
-        @http = net_http(@uri, @config.proxy, @options[:ssl_verify_mode], @config.log)
+        @http = net_http(@uri, @config.proxy, @options.ssl_verify_mode, @config.log)
         @version = nil
         @microversion = false
       end
