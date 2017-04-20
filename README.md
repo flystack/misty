@@ -276,8 +276,12 @@ openstack.network.post("/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp
 # Requirements
 
 ## Ruby versions tested
+* Ruby 2.4.1
 * Ruby 2.4.0
+* Ruby 2.3.4
 * Ruby 2.3.3
+* Ruby 2.3.2
+* Ruby 2.3.1
 * Ruby 2.3.0
 
 # Contributing
