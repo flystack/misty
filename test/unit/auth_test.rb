@@ -12,7 +12,7 @@ describe Misty::Auth do
 
   describe Misty::AuthV3 do
     describe "#new" do
-      it "authenticates using project scoped authorization" do
+      it "authenticates with password using project scoped authorization" do
         auth = {
           :url        => "http://localhost:5000",
           :user_id    => "user_id",
@@ -28,7 +28,7 @@ describe Misty::Auth do
         Misty::AuthV3.new(auth, config)
       end
 
-      it "authenticates using domain scoped authorization" do
+      it "authenticates with password using domain scoped authorization" do
         auth = {
           :url      => "http://localhost:5000",
           :user_id  => "user_id",
@@ -37,6 +37,35 @@ describe Misty::Auth do
 
         stub_request(:post, "http://localhost:5000/v3/auth/tokens").
           with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"domain\":{\"id\":\"default\"}}}}",
+            :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
+          to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {"x-subject-token"=>"token_data"})
+
+        Misty::AuthV3.new(auth, config)
+      end
+
+      it "authenticates with token using project scoped authorization" do
+        auth = {
+          :url        => "http://localhost:5000",
+          :token      => "exampletoken",
+          :project_id => "project_id"
+        }
+
+        stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+          with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"exampletoken\"}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}",
+            :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
+          to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {"x-subject-token"=>"token_data"})
+
+        Misty::AuthV3.new(auth, config)
+      end
+
+      it "authenticates with token using domain scoped authorization" do
+        auth = {
+          :url      => "http://localhost:5000",
+          :token    => "exampletoken",
+        }
+
+        stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+          with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"exampletoken\"}},\"scope\":{\"domain\":{\"id\":\"default\"}}}}",
             :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
           to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {"x-subject-token"=>"token_data"})
 

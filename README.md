@@ -152,6 +152,10 @@ The following parameters can be used:
   User domain id
 * `:user_domain`  
   User domain name  
+* `:password`
+  Password for user. Cannot be used together with `:token`.
+* `:token`
+  Previous Keystone v3 token for user. Can only be used with Keystone v3. Overrides all user and password parameters.
 
 #### Keystone v3
 Keystone v3 is default recommended version:

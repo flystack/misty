@@ -15,12 +15,20 @@ module Misty
     end
 
     def credentials
+      if @token
+        identity = {
+          "methods": ["token"],
+          "token": { "id": @token }
+        }
+      else
+        identity = {
+          "methods": ["password"],
+          "password": @user.identity
+        }
+      end
       {
         "auth": {
-          "identity": {
-            "methods": ["password"],
-            "password":  @user.identity
-          },
+          "identity": identity,
           "scope": scope
         }
       }
@@ -58,10 +66,15 @@ module Misty
         @domain = Misty::Auth::DomainScope.new(domain_id, auth[:domain]) if domain_id || auth[:domain]
       end
 
-      user_domain_id = auth[:user_domain_id] ? auth[:user_domain_id] : Misty::DOMAIN_ID
-      @user = Misty::Auth::User.new(auth[:user_id], auth[:user])
-      @user.password = auth[:password]
-      @user.domain = Misty::Auth::Name.new(user_domain_id, auth[:user_domain])
+      if auth[:token]
+        @token = auth[:token]
+      else
+        user_domain_id = auth[:user_domain_id] ? auth[:user_domain_id] : Misty::DOMAIN_ID
+        @user = Misty::Auth::User.new(auth[:user_id], auth[:user])
+        @user.password = auth[:password]
+        @user.domain = Misty::Auth::Name.new(user_domain_id, auth[:user_domain])
+      end
+
       credentials
     end
   end
