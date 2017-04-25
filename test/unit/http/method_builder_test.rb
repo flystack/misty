@@ -122,12 +122,23 @@ describe Misty::HTTP::MethodBuilder do
       service.send(:query_param, "name=foobar").must_equal "?name=foobar"
     end
 
-    it "returns nil when passing an empty String" do
-      service.send(:query_param, "").must_be_nil
+    it "returns empty string when passing an empty String" do
+      service.send(:query_param, "").must_equal ""
     end
 
-    it "returns nil unless passing a String" do
-      service.send(:query_param, "name" => "foobar").must_be_nil
+    it "returns a query string when passing in a Hash" do
+      service.send(:query_param, {}).must_equal ''
+
+      service.send(:query_param, {:foo  => 'bar'}).must_equal '?foo=bar'
+      service.send(:query_param, {'foo' => 'bar'}).must_equal '?foo=bar'
+
+      service.send(:query_param, {:foo => ['bar', 'baz'], :value => 42, :flag => nil }).must_equal '?foo=bar&foo=baz&value=42&flag'
+
+      service.send(:query_param, {'===' => 'Ëncøding is hárd!'}).must_equal '?%3D%3D%3D=%C3%8Bnc%C3%B8ding+is+h%C3%A1rd%21'
+    end
+
+    it "returns nil unless passing a String or Hash" do
+      service.send(:query_param, 42).must_be_nil
     end
   end
 end

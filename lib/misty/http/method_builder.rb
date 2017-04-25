@@ -86,10 +86,16 @@ module Misty
 
       def query_param(data)
         if data.is_a? String
+          return '' if data == ''
           str = '?'
           str.force_encoding('ASCII-8BIT')
-          str << data unless data.empty?
+          str << data
+          return str
+        elsif data.is_a? Hash
+          return '' if data.empty?
+          return '?' + URI.encode_www_form(data)
         end
+        return nil
       end
     end
   end
