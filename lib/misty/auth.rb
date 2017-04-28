@@ -27,7 +27,7 @@ module Misty
     def initialize(auth, config)
       raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
       @credentials = set_credentials(auth)
-      @http = net_http(URI.parse(auth[:url]), config.proxy, config.ssl_verify_mode, config.log)
+      @http = net_http(URI.parse(auth[:url]), config.ssl_verify_mode, config.log)
       @token = nil
       @token, @catalog, @expires = set(authenticate)
       raise CatalogError, "No catalog provided during authentication" if @catalog.empty?

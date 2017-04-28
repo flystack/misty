@@ -58,8 +58,6 @@ describe Misty::Cloud do
         config.content_type.must_equal Misty::CONTENT_TYPE
         config.log.must_be_kind_of Logger
         config.interface.must_equal Misty::INTERFACE
-        config.proxy.must_be_kind_of URI
-        config.proxy.host.must_be_nil
         config.region_id.must_equal Misty::REGION_ID
         config.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
       end
