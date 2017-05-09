@@ -35,7 +35,6 @@ describe Misty::HTTP::Microversion do
     setup.content_type = :ruby
     setup.log = Logger.new('/dev/null')
     setup.interface = Misty::INTERFACE
-    setup.proxy = URI.parse('')
     setup.region_id = Misty::REGION_ID
     setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
 

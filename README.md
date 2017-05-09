@@ -216,10 +216,6 @@ The following options are applied to each service unless specifically provided f
   Type: String  
   Allowed values: "public", "internal", "admin"  
   Default: "public"  
-* :http_proxy  
-  For example: `"http://userid:password@somewhere.com:8080/"` or `ENV["http_proxy"]`  
-  Type: String  
-  Default: `""`  
 * :ssl_verify_mode  
   When using SSL mode (defined by URI scheme => "https://")  
   Type: Boolean  

@@ -5,7 +5,6 @@ describe Misty::Auth do
   let(:config) do
     config = Misty::Cloud::Config.new
     config.log = Logger.new('/dev/null')
-    config.proxy = URI.parse("")
     config.ssl_verify_mode = false
     config
   end
