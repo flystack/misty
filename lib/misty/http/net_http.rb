@@ -1,7 +1,7 @@
 module Misty
   module HTTP
     module NetHTTP
-      def net_http(endpoint, ssl_verify_mode, log)
+      def self.net_http(endpoint, ssl_verify_mode, log)
         http = Net::HTTP.new(endpoint.host, endpoint.port)
         http.set_debug_output(log) if log.level == Logger::DEBUG
         if endpoint.scheme == "https"
