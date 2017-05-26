@@ -17,20 +17,20 @@ module Misty
     attr_reader :catalog
 
     def self.factory(auth, config)
+      raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
+      http = Misty::HTTP::NetHTTP.net_http(URI.parse(auth[:url]), config.ssl_verify_mode, config.log)
+
       if auth[:tenant_id] || auth[:tenant]
-        return Misty::AuthV2.new(auth, config)
+        return Misty::AuthV2.new(auth, http)
       else
-        return Misty::AuthV3.new(auth, config)
+        return Misty::AuthV3.new(auth, http)
       end
     end
 
-    def initialize(auth, config)
-      raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
+    def initialize(auth, http)
+      @http = http
       @credentials = set_credentials(auth)
-      @http = net_http(URI.parse(auth[:url]), config.ssl_verify_mode, config.log)
-      @token = nil
       @token, @catalog, @expires = set(authenticate)
-      raise CatalogError, "No catalog provided during authentication" if @catalog.empty?
     end
 
     def authenticate
