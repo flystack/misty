@@ -62,8 +62,12 @@ module Misty
         @project.domain = Misty::Auth::Name.new(project_domain_id, auth[:user_domain])
       else
         # scope: domain
-        domain_id = auth[:domain_id] ? auth[:domain_id] : Misty::DOMAIN_ID
-        @domain = Misty::Auth::DomainScope.new(domain_id, auth[:domain]) if domain_id || auth[:domain]
+        if auth[:domain_id] || auth[:domain]
+          @domain = Misty::Auth::DomainScope.new(auth[:domain_id], auth[:domain])
+        else
+          # Use default Domain
+          @domain = Misty::Auth::DomainScope.new(Misty::DOMAIN_ID, nil)
+        end
       end
 
       if auth[:token]
