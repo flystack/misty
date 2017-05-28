@@ -15,35 +15,29 @@ module Misty
     end
 
     def credentials
-      raise Misty::Auth::CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
-      raise Misty::Auth::CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
-      return creds_by_id if @tenant.id
-      return creds_by_name if @tenant.name
-      raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
+      if @token
+        identity = { "token": { "id": @token } }
+      else
+        raise Misty::Auth::CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
+        raise Misty::Auth::CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
+        identity = { "passwordCredentials": user_credentials }
+      end
+
+      if @tenant.id
+        identity.merge!("tenantId": @tenant.id)
+      elsif @tenant.name
+        identity.merge!("tenantName": @tenant.name)
+      else
+        raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
+      end
+
+      { "auth": identity }
     end
 
-    def credentials_data
+    def user_credentials
       {
         "username": @user.name,
         "password": @user.password
-      }
-    end
-
-    def creds_by_name
-      {
-        "auth": {
-          "passwordCredentials": credentials_data,
-          "tenantName": @tenant.name
-        }
-      }
-    end
-
-    def creds_by_id
-      {
-        "auth": {
-          "passwordCredentials": credentials_data,
-          "tenantId": @tenant.id
-        }
       }
     end
 
@@ -62,8 +56,13 @@ module Misty
     end
 
     def set_credentials(auth)
-      @user = Misty::Auth::User.new(auth[:user_id], auth[:user])
-      @user.password = auth[:password]
+      if auth[:token]
+        @token = auth[:token]
+      else
+        @user = Misty::Auth::User.new(auth[:user_id], auth[:user])
+        @user.password = auth[:password]
+      end
+
       @tenant = Misty::Auth::Name.new(auth[:tenant_id], auth[:tenant])
       credentials
     end
