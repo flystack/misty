@@ -127,6 +127,68 @@ describe Misty::Auth do
           Misty::AuthV2.new({}, http)
         end.must_raise Misty::Auth::CredentialsError
       end
+
+      describe "using the password method" do
+        it "authenticates using the tenant name" do
+          auth = {
+            :url      => "http://localhost:5000",
+            :user     => "user",
+            :password => "secret",
+            :tenant   => "tenant",
+          }
+
+          stub_request(:post, "http://localhost:5000/v2.0/tokens").
+            with(:body => "{\"auth\":{\"passwordCredentials\":{\"username\":\"user\",\"password\":\"secret\"},\"tenantName\":\"tenant\"}}").
+            to_return(:status => 200, :body => JSON.dump(auth_response_v2("identity", "keystone")), :headers => {})
+
+          Misty::AuthV2.new(auth, http)
+        end
+
+        it "authenticates using the tenant id" do
+          auth = {
+            :url       => "http://localhost:5000",
+            :user      => "user",
+            :password  => "secret",
+            :tenant_id => "tenant_id",
+          }
+
+          stub_request(:post, "http://localhost:5000/v2.0/tokens").
+            with(:body => "{\"auth\":{\"passwordCredentials\":{\"username\":\"user\",\"password\":\"secret\"},\"tenantId\":\"tenant_id\"}}").
+            to_return(:status => 200, :body => JSON.dump(auth_response_v2("identity", "keystone")), :headers => {})
+
+          Misty::AuthV2.new(auth, http)
+        end
+      end
+
+      describe "using the token method" do
+        it "authenticates using the tenant name" do
+          auth = {
+            :url    => "http://localhost:5000",
+            :token  => "token_id",
+            :tenant => "tenant",
+          }
+
+          stub_request(:post, "http://localhost:5000/v2.0/tokens").
+            with(:body => "{\"auth\":{\"token\":{\"id\":\"token_id\"},\"tenantName\":\"tenant\"}}").
+            to_return(:status => 200, :body => JSON.dump(auth_response_v2("identity", "keystone")), :headers => {})
+
+          Misty::AuthV2.new(auth, http)
+        end
+
+        it "authenticates using the tenant id" do
+          auth = {
+            :url       => "http://localhost:5000",
+            :token     => "token_id",
+            :tenant_id => "tenant_id",
+          }
+
+          stub_request(:post, "http://localhost:5000/v2.0/tokens").
+            with(:body => "{\"auth\":{\"token\":{\"id\":\"token_id\"},\"tenantId\":\"tenant_id\"}}").
+            to_return(:status => 200, :body => JSON.dump(auth_response_v2("identity", "keystone")), :headers => {})
+
+          Misty::AuthV2.new(auth, http)
+        end
+      end
     end
 
     describe "with credentials" do
