@@ -14,6 +14,10 @@ module Misty
         @options = val
       end
 
+      def to_s
+        "#{name}: #{project}: #{versions}"
+      end
+
       def version=(val)
         if @versions.include?(val)
           @version = val
@@ -21,10 +25,6 @@ module Misty
           # Use highest version
           @version = versions.sort[-1]
         end
-      end
-
-      def to_s
-        "#{name}: #{project} => #{versions}"
       end
     end
 
@@ -44,6 +44,14 @@ module Misty
       @services.each do |service|
         yield service
       end
+    end
+
+    def to_s
+      list = ""
+      @services.each do |service|
+        list << service.to_s + "\n"
+      end
+      list
     end
   end
 end
