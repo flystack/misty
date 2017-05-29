@@ -1,3 +1,12 @@
+# 0.6.1 - 29 May 2017
+
+## authentication
+* Keystone V2.0: Support authentication with token (tenant scope)
+* Keystone V3: Domain name scope fix
+
+## services
+MISTY.services.to_s created to replace missing feature to list all services
+
 # 0.6.0 - 15 May 2017
 
 # HTTP client
