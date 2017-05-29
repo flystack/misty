@@ -11,6 +11,7 @@ describe "Services" do
       service.name.must_equal :name
       service.project.must_equal :project
       service.versions.must_include "v1"
+      services.to_s.must_equal %Q{name: project: ["v1", "v2.0"]\n}
     end
   end
 end
