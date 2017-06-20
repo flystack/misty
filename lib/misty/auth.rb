@@ -17,9 +17,8 @@ module Misty
     attr_reader :catalog
 
     def self.factory(auth, config)
-
       http = nil
-      if auth[:url]
+      unless auth[:context]
         raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
         http = Misty::HTTP::NetHTTP.net_http(URI.parse(auth[:url]), config.ssl_verify_mode, config.log)
       end
@@ -31,14 +30,14 @@ module Misty
       end
     end
 
-    def initialize(auth, http = nil)
-      @http = http
+    def initialize(auth, http)
       if auth[:context]
         # bypass the authentication by given token catalog and expire date
         @token   = auth[:context][:token]
         @catalog = auth[:context][:catalog]
         @expires = auth[:context][:expires_at]
       else
+        @http = http
         # autheticate
         @credentials = set_credentials(auth)
         @token, @catalog, @expires = set(authenticate)
