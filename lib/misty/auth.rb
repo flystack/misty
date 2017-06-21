@@ -35,7 +35,7 @@ module Misty
         # bypass the authentication by given token catalog and expire date
         @token   = auth[:context][:token]
         @catalog = auth[:context][:catalog]
-        @expires = auth[:context][:expires_at]
+        @expires = auth[:context][:expires]
       else
         @http = http
         # autheticate
