@@ -18,7 +18,7 @@ APIs experience.
 For REST transactions, Misty relies on Net/HTTP, from the Standard Library, therefore no other gem is required
 besides 'json'.  
 
-The choice to not use the help of a more complex HTTP framework helps with less dependencies.
+The choice to not use the help of a more complex HTTP framework reduces dependencies.
 Effectively, once taken care of, the authentication process provides a Service Catalog which allow to serve all
 available APIs.
 
@@ -156,7 +156,7 @@ The following parameters can be used:
 * `:password`
   Password for user. Cannot be used together with `:token`.
 * `:token`
-  Previous Keystone v3 token for user. Can only be used with Keystone v3. Overrides all user and password parameters.
+  User provided token, overrides all user and password parameters.
 
 #### Keystone v3
 Keystone v3 is default recommended version:
