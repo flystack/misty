@@ -16,17 +16,17 @@ APIs experience.
 
 ## A solid KISS
 For REST transactions, Misty uses only Net/HTTP from the Ruby Standard Library.  So besides 'json', no other gem are
-required.
+required.  
 Because OpenStack authentication and Service Catalog management are very specific and shared by all the APIs, once taken
-care of, there is no need for a complex HTTP framework.
+care of, there is no need for a complex HTTP framework.  
 This offers a solid foundation with reduced dependencies.
 
 ## APIs Definitions
-The rich variety of OpenStack projects requires lots of Application Program Interfaces to handle.
-Maintaining and extending those APIs is a structural complexity challenge.
-Therefore the more automated the process, the better.
-Thanks to the help of Phoenix project, the OpenStack API-ref [1] provides standardization of the OpenStack APIs.
-The APIs can be processed almost automatically from the API-ref reference manuals (misty-builder).
+The rich variety of OpenStack projects requires lots of Application Program Interfaces to handle.  
+Maintaining and extending those APIs is a structural complexity challenge.  
+Therefore the more automated the process, the better.  
+Thanks to the help of Phoenix project, the OpenStack API-ref [1] provides standardization of the OpenStack APIs.  
+The APIs can be processed almost automatically from the API-ref reference manuals (misty-builder).  
 This allows:
 * More consistent APIs using automated control
 * More recent APIs definitions
@@ -85,7 +85,7 @@ require 'misty'
 puts Misty.services
 ```
 
-Which produces the equivalent of the following:
+Which produces the equivalent of the following:  
 
 name | project | versions
 --- | --- | ---
@@ -109,7 +109,7 @@ orchestration | heat | ["v1"]
 search | searchlight | ["v1"]
 shared_file_systems | manila | ["v2"]
 
-* Notes
+* Notes  
   When an Openstack service requires a different service name, the :service_names option can be used (see below).
 
 The #requests method provides the available requests for a service, for example:
@@ -125,38 +125,38 @@ The URL and credentials details are necessary to authenticate with the identity 
 The credentials are a combination of "id" and "name" used to uniquely identify projects, users and their domains.
 When using only the name, a domain must be specified to guarantee a unique record from the Identity service.
 
-The following parameters can be used:
-* `:domain_id`
-  Domain id used for authentication scope
-  Default: `"default"`
-* `:domain`
-  Domain name used for authentication scope
-  Default: `"Default"`
-* `:project_id`
-  Project id
-* `:project`
-  Project name
-* `:project_domain_id`
+The following parameters can be used:  
+* `:domain_id`  
+  Domain id used for authentication scope  
+  Default: `"default"`  
+* `:domain`  
+  Domain name used for authentication scope  
+  Default: `"Default"`  
+* `:project_id`  
+  Project id  
+* `:project`  
+  Project name  
+* `:project_domain_id`  
   Project domain id
-* `:project_domain`
-  Project domain name
-* `:tenant_id`
-  Tenant id, used only for Keystone v2.0
-* `:tenant`
-  Tenant name, used only for Keystone v2.0
-* `:user_id`
-  User id
-* `:user`
-  User name
-* `:user_domain_id`
+* `:project_domain`  
+  Project domain name  
+* `:tenant_id`  
+  Tenant id, used only for Keystone v2.0  
+* `:tenant`  
+  Tenant name, used only for Keystone v2.0  
+* `:user_id`  
+  User id  
+* `:user`  
+  User name  
+* `:user_domain_id`  
   User domain id
-* `:user_domain`
-  User domain name
-* `:password`
+* `:user_domain`  
+  User domain name  
+* `:password`  
   Password for user. Cannot be used together with `:token`.
-* `:token`
+* `:token`  
   Previous Keystone v3 token for user. Can only be used with Keystone v3. Overrides all user and password parameters.
-* `:context`
+* `:context`  
   I you have a proper context with `token id`, `service catalog` and `expire date` you can bypass the authentication to save the api call
   Overrides all user and password parameters
   Example: ``{:context => { :token => token_id, :catalog => service_catalog, :expires => expire_date }}``
@@ -199,11 +199,11 @@ auth = {
 }
 ```
 ### Logging parameters
-* :log_file
-  File name and path for log file.
-  Value is file path or IO object - Default is `./misty.log`.
+* :log_file  
+  File name and path for log file.  
+  Value is file path or IO object - Default is `./misty.log`.  
   For example: use STDOUT for terminal output or alternatively use '/dev/null' to avoid the logs entirely.
-* :log_level
+* :log_level  
   Value is Fixnum - Default is 1 (Logger::INFO) - See Logger from Ruby standard Library
 
 ```ruby
@@ -213,21 +213,21 @@ openstack = Misty::Cloud.new(:auth => auth, :content_type => :ruby, :log_file =>
 #### Global parameters
 The following options are applied to each service unless specifically provided for a service.
 
-* :region_id
-  Type: String
-  Default: "regionOne"
-* :interface
-  Type: String
-  Allowed values: "public", "internal", "admin"
-  Default: "public"
-* :ssl_verify_mode
-  When using SSL mode (defined by URI scheme => "https://")
-  Type: Boolean
-  Default: `true`
-* :content_type
-  Format of the body of the successful HTTP responses to be JSON or Ruby structures.
-  Type: Symbol
-  Allowed values: `:json`, `:ruby`
+* :region_id  
+  Type: String  
+  Default: "regionOne"  
+* :interface  
+  Type: String  
+  Allowed values: "public", "internal", "admin"  
+  Default: "public"  
+* :ssl_verify_mode  
+  When using SSL mode (defined by URI scheme => "https://")  
+  Type: Boolean  
+  Default: `true`  
+* :content_type  
+  Format of the body of the successful HTTP responses to be JSON or Ruby structures.  
+  Type: Symbol  
+  Allowed values: `:json`, `:ruby`  
   Default: `:ruby`
 
 ### Services Options
@@ -238,34 +238,34 @@ openstack = Misty::Cloud.new(:auth => auth, :identity => {}, :compute => {})
 ```
 
 The following options are available:
-* :api_version
-  Type: String
-  Default: The latest supported version - See Misty.services for other versions.
-* :base_path
-  Allows to force the base path for every URL requests.
-  Type: String
-* :base_url
-  Allows to force the base URL for every requests.
-  Type: String
-* :interface
-  Allows to provide an alternate interface. Allowed values are "public", "internal" or "admin"
-  Type: String
-  Default: Determined from global value
-* :region_id
-  Type: String
-  Default: Determined from global value
-* :service_names
-  Allows to use a difference name for the service. For instance "identity3" for the identity service.
-  Type: String
-  Default: Determined from Misty.services
-* :ssl_verify_mode
-  Type: Boolean
-  Default: Determined from global value
-* :version
-  Version to be used when microversion is supported by the service.
-  Type: String
-  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
-  Default: `"CURRENT"`
+* :api_version  
+  Type: String  
+  Default: The latest supported version - See Misty.services for other versions.  
+* :base_path  
+  Allows to force the base path for every URL requests.  
+  Type: String  
+* :base_url  
+  Allows to force the base URL for every requests.  
+  Type: String  
+* :interface  
+  Allows to provide an alternate interface. Allowed values are "public", "internal" or "admin"  
+  Type: String  
+  Default: Determined from global value  
+* :region_id  
+  Type: String  
+  Default: Determined from global value  
+* :service_names  
+  Allows to use a difference name for the service. For instance "identity3" for the identity service.  
+  Type: String  
+  Default: Determined from Misty.services  
+* :ssl_verify_mode  
+  Type: Boolean  
+  Default: Determined from global value  
+* :version  
+  Version to be used when microversion is supported by the service.  
+  Type: String  
+  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"  
+  Default: `"CURRENT"`  
 
 Example:
 ```ruby
