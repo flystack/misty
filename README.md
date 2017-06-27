@@ -153,10 +153,14 @@ The following parameters can be used:
   User domain id
 * `:user_domain`  
   User domain name  
-* `:password`
+* `:password`  
   Password for user. Cannot be used together with `:token`.
-* `:token`
+* `:token`  
   User provided token, overrides all user and password parameters.
+* `:context`  
+  I you have a proper context with `token id`, `service catalog` and `expire date` you can bypass the authentication to save the api call
+  Overrides all user and password parameters
+  Example: ``{:context => { :token => token_id, :catalog => service_catalog, :expires => expire_date }}``
 
 #### Keystone v3
 Keystone v3 is default recommended version:
