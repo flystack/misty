@@ -15,11 +15,12 @@ APIs experience.
 * Direct HTTP Methods for custom needs
 
 ## A solid KISS
-For REST transactions, Misty uses only Net/HTTP from the Ruby Standard Library.  So besides 'json', no other gem are
-required.  
-Because OpenStack authentication and Service Catalog management are very specific and shared by all the APIs, once taken
-care of, there is no need for a complex HTTP framework.  
-This offers a solid foundation with reduced dependencies.
+For REST transactions, Misty relies on Net/HTTP, from the Standard Library, therefore no other gem is required
+besides 'json'.  
+
+The choice to not use the help of a more complex HTTP framework reduces dependencies.
+Effectively, once taken care of, the authentication process provides a Service Catalog which allow to serve all
+available APIs.
 
 ## APIs Definitions
 The rich variety of OpenStack projects requires lots of Application Program Interfaces to handle.  
@@ -155,7 +156,7 @@ The following parameters can be used:
 * `:password`  
   Password for user. Cannot be used together with `:token`.
 * `:token`  
-  Previous Keystone v3 token for user. Can only be used with Keystone v3. Overrides all user and password parameters.
+  User provided token, overrides all user and password parameters.
 * `:context`  
   I you have a proper context with `token id`, `service catalog` and `expire date` you can bypass the authentication to save the api call
   Overrides all user and password parameters
