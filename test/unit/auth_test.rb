@@ -152,10 +152,11 @@ describe Misty::Auth do
     describe "when authenticated" do
       let(:authv3_creds) do
         {
-          :url      => "http://localhost:5000",
-          :user     => "admin",
-          :password => "secret",
-          :project  => "admin"
+          :url              => "http://localhost:5000",
+          :user             => "admin",
+          :password         => "secret",
+          :project          => "admin",
+          :project_domain_id=> 'default'
         }
       end
 

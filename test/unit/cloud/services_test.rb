@@ -7,7 +7,8 @@ describe "Misty::Cloud" do
       :url               => "http://localhost:5000",
       :user              => "admin",
       :password          => "secret",
-      :project           => "admin"
+      :project           => "admin",
+      :project_domain_id => "default"
     }
 
     Misty::Cloud.new(:auth => auth)

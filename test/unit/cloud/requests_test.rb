@@ -4,11 +4,12 @@ require 'auth_helper'
 describe Misty::Cloud do
   let(:cloud) do
     auth = {
-      :url      => "http://localhost:5000",
-      :user     => "admin",
-      :password => "secret",
-      :project  => "admin",
-      :domain   => "default"
+      :url                => "http://localhost:5000",
+      :user               => "admin",
+      :password           => "secret",
+      :project            => "admin",
+      :project_domain_id  => 'default',
+      :domain             => "default"
     }
 
     Misty::Cloud.new(:auth => auth)

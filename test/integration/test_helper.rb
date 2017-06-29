@@ -10,10 +10,11 @@ end
 
 def auth
   {
-    :url      => "http://192.0.2.21:5000",
-    :user     => "admin",
-    :password => "CJk9hb2ZFR96Ypu74KFFGWuhv",
-    :project  => "admin",
-    :domain   => "default"
+    :url                => "http://192.0.2.21:5000",
+    :user               => "admin",
+    :password           => "CJk9hb2ZFR96Ypu74KFFGWuhv",
+    :project            => "admin",
+    :project_domain_id  => 'default',
+    :domain             => "default"
   }
 end
