@@ -3,35 +3,34 @@ Misty is a HTTP client for OpenStack APIs, aiming to be fast and to provide a fl
 APIs experience.
 
 ## Features
-* Exhaustive and latest Openstack APIs
-* Multiple Service versions
-* Microversions
-* Based upon Net/HTTP
-* Minimalistic gem dependencies - Only json is required
-* Dynamic services by autoloading only required service's version
-* Token automatically refreshed when expired
-* Raw JSON or Ruby format for queries and responses
+* Flexible Openstack APIs integration
+* Standardized Openstack APIs: [Based upon API-ref](https://developer.openstack.org/api-guide/quick-start/)
+* Multiple Service versions and Microversions
+* On demand services - Auto loads required versions
+* Low  dependency - Use standard Net/HTTP and JSON gem only
+* I/O format choice: JSON or Ruby structures for queries and responses
 * Persistent HTTP connections (default since HTTP 1.1 anyway) but for the authentication bootstrapping
 * Direct HTTP Methods for custom needs
 
 ## A solid KISS
-For REST transactions, Misty relies on Net/HTTP, from the Standard Library, therefore no other gem is required
-besides 'json'.  
+For REST transactions Misty relies on standard Net/HTTP library.  
+No other gems are required besides 'json'.  
 
-The choice to not use the help of a more complex HTTP framework reduces dependencies.
-Effectively, once taken care of, the authentication process provides a Service Catalog which allow to serve all
-available APIs.
+Not having to use the help of a more complex HTTP framework is a choice that reduces dependencies.  
+Meanwhile a better reason would be because Openstack offers a common modus operandi across all APIs.  
+The authentication process provides a Service Catalog serving all available APIs entry points.
 
 ## APIs Definitions
 The rich variety of OpenStack projects requires lots of Application Program Interfaces to handle.  
-Maintaining and extending those APIs is a structural complexity challenge.  
+Maintaining and extending those APIs implies a structural complexity challenge.  
 Therefore the more automated the process, the better.  
-Thanks to the help of Phoenix project, the OpenStack API-ref [1] provides standardization of the OpenStack APIs.  
-The APIs can be processed almost automatically from the API-ref reference manuals (misty-builder).  
-This allows:
-* More consistent APIs using automated control
+Thanks to the help of Phoenix project [OpenStack API-ref](https://developer.openstack.org/api-guide/quick-start/)
+providing the latest standard of OpenStack APIs.  
+The APIs interface definitions are generated automatically from the API-ref reference manuals (misty-builder) which
+allows:
+* More consistent APIs
 * More recent APIs definitions
-* Easier to add APIs
+* Easier addition of a new service's API
 
 [1] https://developer.openstack.org/api-guide/quick-start/
 
@@ -48,10 +47,11 @@ require 'misty'
 
 auth_v3 = {
   :url      => "http://localhost:5000",
-  :user     => "admin",
-  :password => "secret",
-  :project  => "admin",
-  :domain   => "default"
+  :user               => "admin",
+  :password           => "secret",
+  :domain             => "default",
+  :project            => "admin",
+  :project_domain_id  => 'default'
 }
 
 openstack = Misty::Cloud.new(:auth => auth_v3)
@@ -67,11 +67,10 @@ puts network.body
 ## Services
 Once the Misty::Cloud object is created, the Openstack services can be used.
 
-The Cloud object authenticates against the identity server (bootstrap process) and obtains the service catalog.
-When an OpenStack API service is used, its endpoint is determined from the catalog and the service is dynamically called
-by Misty so only the services used are loaded.
+The Cloud object is authenticated by the identity server (bootstrap) and is provided with a service catalog.
+When an OpenStack API service is required, the catalog entry's endpoint is used and the service is dynamically called.
 
-The service generic name, such as `compute`, is used to submit requests with an OpenStack service API.
+Each service name (i.e. `compute`) is the object handling API requests.
 
  ```ruby
 openstack = Misty::Cloud.new(:auth => { ... })
@@ -158,8 +157,8 @@ The following parameters can be used:
 * `:token`  
   User provided token, overrides all user and password parameters.
 * `:context`  
-  I you have a proper context with `token id`, `service catalog` and `expire date` you can bypass the authentication to save the api call
-  Overrides all user and password parameters
+  I you have a proper context with `token id`, `service catalog` and `expire date` you can bypass the authentication  
+  Overrides all user and password parameters  
   Example: ``{:context => { :token => token_id, :catalog => service_catalog, :expires => expire_date }}``
 
 #### Keystone v3
