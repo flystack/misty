@@ -30,6 +30,7 @@ module Misty
 
   def self.services
     services = Misty::Services.new
+    services.add(:application_catalog, :murano,       ["v1"])
     services.add(:alarming,            :aodh,         ["v2"])
     services.add(:baremetal,           :ironic,       ["v1"])
     services.add(:block_storage,       :cinder,       ["v3", "v1"])
@@ -44,7 +45,7 @@ module Misty
     services.add(:image,               :glance,       ["v2", "v1"])
     services.add(:messaging,           :zaqar,        ["v2"])
     services.add(:metering,            :ceilometer,   ["v2"])
-    services.add(:network,             :neutron,      ["v2.0"])
+    services.add(:networking,          :neutron,      ["v2.0"])
     services.add(:object_storage,      :swift,        ["v1"])
     services.add(:orchestration,       :heat,         ["v1"])
     services.add(:search,              :searchlight,  ["v1"])
