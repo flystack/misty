@@ -89,7 +89,9 @@ Which produces the equivalent of the following:
 
 name | project | versions
 --- | --- | ---
+application_catalog | murano | ["v1"]
 alarming | aodh | ["v2"]
+backup | freezer | ["v1"]
 baremetal | ironic | ["v1"]
 block_storage | cinder | ["v3", "v1"]
 clustering | senlin | ["v1"]
@@ -101,9 +103,11 @@ database | trove | ["v1.0"]
 dns | designate | ["v2"]
 identity | keystone | ["v3", "v2.0"]
 image | glance | ["v2", "v1"]
+load_balancer | octavia | ["v2.0"]
 messaging | zaqar | ["v2"]
 metering | ceilometer | ["v2"]
-network | neutron | ["v2.0"]
+networking | neutron | ["v2.0"]
+nfv_orchestration | tacker | ["v1.0"]
 object_storage | swift | ["v1"]
 orchestration | heat | ["v1"]
 search | searchlight | ["v1"]

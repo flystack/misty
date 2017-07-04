@@ -46,6 +46,10 @@ module Misty
       @alarming ||= build_service(:alarming)
     end
 
+    def backup
+      @backup ||= build_service(:backup)
+    end
+
     def baremetal
       @baremetal ||= build_service(:baremetal)
     end
@@ -90,6 +94,10 @@ module Misty
       @image ||= build_service(:image)
     end
 
+    def load_balancer
+      @load_balancer ||= build_service(:load_balancer)
+    end
+
     def messaging
       @messaging ||= build_service(:messaging)
     end
@@ -100,6 +108,10 @@ module Misty
 
     def networking
       @networking ||= build_service(:networking)
+    end
+
+    def nfv_orchestration
+      @nfv_orchestration ||= build_service(:nfv_orchestration)
     end
 
     def object_storage
