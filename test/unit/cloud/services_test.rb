@@ -69,6 +69,14 @@ describe "Misty::Cloud" do
     end.must_raise NoMethodError
   end
 
+  it "#backup" do
+    stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+      with(:body => JSON.dump(auth_body), :headers => auth_headers).
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3("backup", "freezer")), :headers => token_header)
+
+    cloud.backup.must_be_kind_of Misty::Openstack::Freezer::V1
+  end
+
   it "#baremetal" do
     stub_request(:post, "http://localhost:5000/v3/auth/tokens").
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
@@ -125,12 +133,28 @@ describe "Misty::Cloud" do
     cloud.image.must_be_kind_of Misty::Openstack::Glance::V2
   end
 
+  it "#load_balancer" do
+    stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+      with(:body => JSON.dump(auth_body), :headers => auth_headers).
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3("load-balancer", "octavia")), :headers => token_header)
+
+    cloud.load_balancer.must_be_kind_of Misty::Openstack::Octavia::V2_0
+  end
+
   it "#network" do
     stub_request(:post, "http://localhost:5000/v3/auth/tokens").
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3("network", "neutron")), :headers => token_header)
 
     cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
+  end
+
+  it "#nfv_orchestration" do
+    stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+      with(:body => JSON.dump(auth_body), :headers => auth_headers).
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3("nfv-orchestration", "tacker")), :headers => token_header)
+
+    cloud.nfv_orchestration.must_be_kind_of Misty::Openstack::Tacker::V1_0
   end
 
   it "#objectStorage" do
