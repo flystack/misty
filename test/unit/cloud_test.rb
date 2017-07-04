@@ -18,10 +18,11 @@ describe Misty::Cloud do
         to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {"x-subject-token"=>"token_data"})
 
       auth = {
-        :url      => "http://localhost:5000",
-        :user     => "admin",
-        :password => "secret",
-        :project  => "admin",
+        :url                => "http://localhost:5000",
+        :user               => "admin",
+        :password           => "secret",
+        :project            => "admin",
+        :project_domain_id  => 'default'
       }
     end
 

@@ -57,9 +57,13 @@ module Misty
     def set_credentials(auth)
       if auth[:project_id] || auth[:project]
         # scope: project
-        project_domain_id = auth[:project_domain_id] ? auth[:project_domain_id] : Misty::DOMAIN_ID
+        project_domain_id = auth[:project_domain_id]
+        if project_domain_id.nil? && auth[:project_domain].nil?
+          project_domain_id = Misty::DOMAIN_ID
+        end
+
         @project = Misty::Auth::ProjectScope.new(auth[:project_id], auth[:project])
-        @project.domain = Misty::Auth::Name.new(project_domain_id, auth[:user_domain])
+        @project.domain = Misty::Auth::Name.new(project_domain_id, auth[:project_domain])
       else
         # scope: domain
         if auth[:domain_id] || auth[:domain]
