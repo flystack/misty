@@ -1,3 +1,9 @@
+# 0.6.2 - 04 July 2017
+
+## authentication
+* Keystone V3: project_domain enables to use the domain name of the project's instead of domain id.
+* Allow predefined authentication (needs token, catalog)
+
 # 0.6.1 - 29 May 2017
 
 ## authentication
