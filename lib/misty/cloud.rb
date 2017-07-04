@@ -38,6 +38,10 @@ module Misty
       klass.new(@auth, @config, service.options)
     end
 
+    def application_catalog
+      @application_catalog ||= build_service(:application_catalog)
+    end
+
     def alarming
       @alarming ||= build_service(:alarming)
     end
@@ -49,8 +53,6 @@ module Misty
     def block_storage
       @block_storage ||= build_service(:block_storage)
     end
-
-    alias volume block_storage
 
     def clustering
       @clustering ||= build_service(:clustering)
@@ -96,8 +98,8 @@ module Misty
       @metering ||= build_service(:metering)
     end
 
-    def network
-      @network ||= build_service(:network)
+    def networking
+      @networking ||= build_service(:networking)
     end
 
     def object_storage
@@ -115,5 +117,8 @@ module Misty
     def shared_file_systems
       @shared_file_systems ||= build_service(:shared_file_systems)
     end
+
+    alias network networking
+    alias volume block_storage
   end
 end

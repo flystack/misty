@@ -47,6 +47,10 @@ module Misty
       autoload :V2, "misty/openstack/manila/v2"
     end
 
+    module Murano
+      autoload :V1, "misty/openstack/murano/v1"
+    end
+
     module Neutron
       autoload :V2_0, "misty/openstack/neutron/v2_0"
     end

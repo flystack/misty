@@ -82,8 +82,8 @@ describe Misty do
       validate(service)
     end
 
-    it "has network service" do
-      service = Misty::services.find { |s| s.name == :network}
+    it "has networking service" do
+      service = Misty::services.find { |s| s.name == :networking}
       validate(service)
     end
 
