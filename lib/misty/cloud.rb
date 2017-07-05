@@ -7,6 +7,8 @@ module Misty
       attr_accessor :auth, :content_type, :interface, :log, :region_id, :ssl_verify_mode
     end
 
+    delegate :catalog, :token, to: :@auth
+
     def self.dot_to_underscore(val)
       val.gsub(/\./,'_')
     end

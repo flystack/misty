@@ -14,7 +14,7 @@ module Misty
 
     include Misty::HTTP::NetHTTP
 
-    attr_reader :catalog
+    attr_reader :catalog, :token
 
     def self.factory(auth, config)
       http = nil
