@@ -28,7 +28,7 @@ module Misty::Openstack::KeystoneV3
    :PATCH=>[:update_consumer]},
  "/v3/OS-OAUTH1/request_token"=>{:POST=>[:create_request_token]},
  "/v3/OS-OAUTH1/authorize/{request_token_id}"=>
-  {:POST=>[:authorize_request_token]},
+  {:PUT=>[:authorize_request_token]},
  "/v3/OS-OAUTH1/access_token"=>{:POST=>[:create_access_token]},
  "/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}"=>
   {:GET=>[:get_access_token], :DELETE=>[:revoke_access_token]},

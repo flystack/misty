@@ -47,6 +47,8 @@ module Misty::Openstack::SenlinV1
  "/v1/clusters/{cluster_id}/policies/{policy_id}"=>
   {:GET=>[:show_cluster_policy_details]},
  "/v1/nodes"=>{:GET=>[:list_nodes], :POST=>[:create_node]},
+ "/v1/nodes/adopt"=>{:POST=>[:adopt_node]},
+ "/v1/nodes/adopt-preview"=>{:POST=>[:adopt_node_preview]},
  "/v1/nodes/{node_id}"=>
   {:GET=>[:show_node_details],
    :PATCH=>[:update_node],
@@ -56,11 +58,14 @@ module Misty::Openstack::SenlinV1
  "/v1/nodes/{node_id}/ops"=>{:POST=>[:perform_an_operation_on_a_node]},
  "/v1/receivers"=>{:GET=>[:list_receivers], :POST=>[:create_receiver]},
  "/v1/receivers/{receiver_id}"=>
-  {:GET=>[:show_receiver_details], :DELETE=>[:delete_receiver]},
+  {:GET=>[:show_receiver_details],
+   :PATCH=>[:update_receiver],
+   :DELETE=>[:delete_receiver]},
  "/v1/events"=>{:GET=>[:list_events]},
  "/v1/events/{event_id}"=>{:GET=>[:shows_event_details]},
  "/v1/webhooks/{webhook_id}/trigger"=>{:POST=>[:trigger_webhook_action]},
  "/v1/actions"=>{:GET=>[:list_actions]},
- "/v1/actions/{action_id}"=>{:GET=>[:show_action_details]}}
+ "/v1/actions/{action_id}"=>{:GET=>[:show_action_details]},
+ "/v1/services"=>{:GET=>[:list_services]}}
   end
 end
