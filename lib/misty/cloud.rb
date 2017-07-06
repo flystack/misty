@@ -132,7 +132,24 @@ module Misty
       @shared_file_systems ||= build_service(:shared_file_systems)
     end
 
-    alias network networking
     alias volume block_storage
+
+    private
+
+    def method_missing(method_name)
+      services_avail = []
+      @services.names.each do |service_name|
+        services_avail << service_name if /#{method_name}/.match(service_name)
+      end
+
+      if services_avail.size == 1
+        self.send(services_avail[0])
+        return self.instance_variable_get("@#{services_avail[0]}")
+      elsif services_avail.size > 1
+        raise NoMethodError, "Ambiguous Cloud Service: #{method_name}"
+      else
+        raise NoMethodError, "No such Cloud Service: #{method_name}"
+      end
+    end
   end
 end
