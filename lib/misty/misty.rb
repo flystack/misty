@@ -34,7 +34,7 @@ module Misty
     services.add(:alarming,            :aodh,         ["v2"])
     services.add(:backup,              :freezer,      ["v1"])
     services.add(:baremetal,           :ironic,       ["v1"])
-    services.add(:block_storage,       :cinder,       ["v3", "v1"])
+    services.add(:block_storage,       :cinder,       ["v3", "v2", "v1"])
     services.add(:clustering,          :senlin,       ["v1"])
     services.add(:compute,             :nova,         ["v2.1"])
     services.add(:container,           :magnum,       ["v1"])

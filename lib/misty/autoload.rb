@@ -10,6 +10,7 @@ module Misty
 
     module Cinder
       autoload :V1, "misty/openstack/cinder/v1"
+      autoload :V2, "misty/openstack/cinder/v2"
       autoload :V3, "misty/openstack/cinder/v3"
     end
 
