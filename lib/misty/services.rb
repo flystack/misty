@@ -46,6 +46,14 @@ module Misty
       end
     end
 
+    def names
+      service_names = []
+      @services.each do |service|
+        service_names << service.name
+      end
+      service_names
+    end
+
     def to_s
       list = ""
       @services.each do |service|

@@ -141,12 +141,12 @@ describe "Misty::Cloud" do
     cloud.load_balancer.must_be_kind_of Misty::Openstack::Octavia::V2_0
   end
 
-  it "#network" do
+  it "#networking" do
     stub_request(:post, "http://localhost:5000/v3/auth/tokens").
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(auth_response_v3("network", "neutron")), :headers => token_header)
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3("networking", "neutron")), :headers => token_header)
 
-    cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
+    cloud.networking.must_be_kind_of Misty::Openstack::Neutron::V2_0
   end
 
   it "#nfv_orchestration" do
@@ -191,5 +191,24 @@ describe "Misty::Cloud" do
       to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
 
     cloud.shared_file_systems.must_be_kind_of Misty::Openstack::Manila::V2
+  end
+
+  describe "prefixed service name" do
+    it "#network match networking" do
+      stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+        with(:body => JSON.dump(auth_body), :headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3("networking", "neutron")), :headers => token_header)
+
+      cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
+    end
+
+    it "#data is ambiguous" do
+      stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+        with(:body => JSON.dump(auth_body), :headers => auth_headers)
+
+      proc do
+        cloud.data
+      end.must_raise NoMethodError
+    end
   end
 end
