@@ -115,8 +115,9 @@ shared_file_systems | manila | ["v2"]
 
 * Notes  
   When an Openstack service requires a different service name, the :service_names option can be used (see below).
-  `volume` is an alias for `block_storage`.
-  Unique prefixed service names can be used: For instance `network` (or even `net`) instead of `networking`
+  `volume` is an alias for `block_storage`.  
+  Unique prefixed service names can be used: For instance `network` (or even `net`) instead of `networking`. Meanwhile
+  `data` doesn't work because it's ambiguous between `data_processing` and `data_protection`
 
 The #requests method provides the available requests for a service, for example:
 ```ruby
