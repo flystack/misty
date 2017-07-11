@@ -11,16 +11,17 @@ module Misty::Openstack::NovaV2_1
    :DELETE=>[:delete_server]},
  "/servers/{server_id}/action"=>
   {:POST=>
-    [:add_associate_floating_ip_addfloatingip_action,
+    [:add_associate_floating_ip_addfloatingip_action_deprecated,
      :add_security_group_to_a_server_addsecuritygroup_action,
      :change_administrative_password_changepassword_action,
      :confirm_resized_server_confirmresize_action,
+     :create_server_back_up_createbackup_action,
      :create_image_createimage_action,
      :lock_server_lock_action,
      :pause_server_pause_action,
      :reboot_server_reboot_action,
      :rebuild_server_rebuild_action,
-     :remove_disassociate_floating_ip_removefloatingip_action,
+     :remove_disassociate_floating_ip_removefloatingip_action_deprecated,
      :remove_security_group_from_a_server_removesecuritygroup_action,
      :rescue_server_rescue_action,
      :resize_server_resize_action,
@@ -32,26 +33,26 @@ module Misty::Openstack::NovaV2_1
      :unlock_server_unlock_action,
      :unpause_server_unpause_action,
      :unrescue_server_unrescue_action,
-     :add_associate_fixed_ip_addfixedip_action,
-     :remove_disassociate_fixed_ip_removefixedip_action,
+     :add_associate_fixed_ip_addfixedip_action_deprecated,
+     :remove_disassociate_fixed_ip_removefixedip_action_deprecated,
      :evacuate_server_evacuate_action,
      :force_delete_server_forcedelete_action,
      :restore_soft_deleted_instance_restore_action,
      :show_console_output_os_getconsoleoutput_action,
-     :get_rdp_console_os_getrdpconsole_action,
-     :get_serial_console_os_getserialconsole_action,
-     :get_spice_console_os_getspiceconsole_action,
-     :get_vnc_console_os_getvncconsole_action,
      :shelve_server_shelve_action,
      :shelf_offload_remove_server_shelveoffload_action,
      :unshelve_restore_shelved_server_unshelve_action,
      :trigger_crash_dump_in_server,
-     :create_server_back_up_createbackup_action,
+     :get_rdp_console_os_getrdpconsole_action_deprecated,
+     :get_serial_console_os_getserialconsole_action_deprecated,
+     :get_spice_console_os_getspiceconsole_action_deprecated,
+     :get_vnc_console_os_getvncconsole_action_deprecated,
      :inject_network_information_injectnetworkinfo_action,
      :migrate_server_migrate_action,
      :live_migrate_server_os_migratelive_action,
      :reset_networking_on_a_server_resetnetwork_action,
      :reset_server_state_os_resetstate_action]},
+ "/servers/{server_id}/remote-consoles"=>{:POST=>[:create_remote_console]},
  "/servers/{server_id}/os-security-groups"=>
   {:GET=>[:list_security_groups_by_server]},
  "/servers/{server_id}/diagnostics"=>{:GET=>[:show_server_diagnostics]},
@@ -59,8 +60,8 @@ module Misty::Openstack::NovaV2_1
  "/servers/{server_id}/ips/{network_label}"=>{:GET=>[:show_ip_details]},
  "/servers/{server_id}/metadata"=>
   {:GET=>[:list_all_metadata],
-   :POST=>[:update_metadata_items],
-   :PUT=>[:create_or_replace_metadata_items]},
+   :POST=>[:create_or_update_metadata_items],
+   :PUT=>[:replace_metadata_items]},
  "/servers/{server_id}/metadata/{key}"=>
   {:GET=>[:show_metadata_item_details],
    :PUT=>[:create_or_update_metadata_item],
@@ -75,8 +76,6 @@ module Misty::Openstack::NovaV2_1
   {:GET=>[:show_port_interface_details], :DELETE=>[:detach_interface]},
  "/servers/{server_id}/os-server-password"=>
   {:GET=>[:show_server_password], :DELETE=>[:clear_admin_password]},
- "/servers/{server_id}/os-virtual-interfaces"=>
-  {:GET=>[:list_virtual_interfaces]},
  "/servers/{server_id}/os-volume_attachments"=>
   {:GET=>[:list_volume_attachments_for_an_instance],
    :POST=>[:attach_a_volume_to_an_instance]},
@@ -134,12 +133,6 @@ module Misty::Openstack::NovaV2_1
   {:GET=>[:show_console_details], :DELETE=>[:delete_console]},
  "/os-console-auth-tokens/{console_token}"=>
   {:GET=>[:show_console_connection_information]},
- "/os-hosts"=>{:GET=>[:list_hosts]},
- "/os-hosts/{host_name}"=>
-  {:GET=>[:show_host_details], :PUT=>[:update_host_status]},
- "/os-hosts/{host_name}/reboot"=>{:GET=>[:reboot_host]},
- "/os-hosts/{host_name}/shutdown"=>{:GET=>[:shut_down_host]},
- "/os-hosts/{host_name}/startup"=>{:GET=>[:start_host]},
  "/os-hypervisors"=>{:GET=>[:list_hypervisors]},
  "/os-hypervisors/detail"=>{:GET=>[:list_hypervisors_details]},
  "/os-hypervisors/statistics"=>{:GET=>[:show_hypervisor_statistics]},
@@ -152,6 +145,7 @@ module Misty::Openstack::NovaV2_1
  "/os-instance_usage_audit_log"=>{:GET=>[:list_server_usage_audits]},
  "/os-instance_usage_audit_log/{before_timestamp}"=>
   {:GET=>[:list_usage_audits_before_specified_time]},
+ "/os-migrations"=>{:GET=>[:list_migrations]},
  "/servers/{server_id}/migrations"=>{:GET=>[:list_migrations]},
  "/servers/{server_id}/migrations/{migration_id}"=>
   {:GET=>[:show_migration_details], :DELETE=>[:delete_abort_migration]},
@@ -186,12 +180,8 @@ module Misty::Openstack::NovaV2_1
  "/os-simple-tenant-usage/{tenant_id}"=>
   {:GET=>[:show_usage_statistics_for_tenant]},
  "/os-server-external-events"=>{:POST=>[:run_events]},
- "/os-cloudpipe"=>{:GET=>[:list_cloudpipes], :POST=>[:create_cloudpipe]},
- "/os-cloudpipe/configure-project"=>{:PUT=>[:update_cloudpipe]},
  "/extensions"=>{:GET=>[:list_extensions]},
  "/extensions/{alias}"=>{:GET=>[:show_extension_details]},
- "/os-certificates"=>{:POST=>[:create_root_certificate]},
- "/os-certificates/root"=>{:GET=>[:show_root_certificate_details]},
  "/os-networks"=>{:GET=>[:list_networks], :POST=>[:create_network]},
  "/os-networks/add"=>{:POST=>[:add_network]},
  "/os-networks/{network_id}"=>
@@ -264,6 +254,18 @@ module Misty::Openstack::NovaV2_1
    :DELETE=>[:delete_default_security_group_rule]},
  "/os-security-group-rules"=>{:POST=>[:create_security_group_rule]},
  "/os-security-group-rules/{security_group_rule_id}"=>
-  {:DELETE=>[:delete_security_group_rule]}}
+  {:DELETE=>[:delete_security_group_rule]},
+ "/os-hosts"=>{:GET=>[:list_hosts]},
+ "/os-hosts/{host_name}"=>
+  {:GET=>[:show_host_details], :PUT=>[:update_host_status]},
+ "/os-hosts/{host_name}/reboot"=>{:GET=>[:reboot_host]},
+ "/os-hosts/{host_name}/shutdown"=>{:GET=>[:shut_down_host]},
+ "/os-hosts/{host_name}/startup"=>{:GET=>[:start_host]},
+ "/servers/{server_id}/os-virtual-interfaces"=>
+  {:GET=>[:list_virtual_interfaces]},
+ "/os-certificates"=>{:POST=>[:create_root_certificate]},
+ "/os-certificates/root"=>{:GET=>[:show_root_certificate_details]},
+ "/os-cloudpipe"=>{:GET=>[:list_cloudpipes], :POST=>[:create_cloudpipe]},
+ "/os-cloudpipe/configure-project"=>{:PUT=>[:update_cloudpipe]}}
   end
 end

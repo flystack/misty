@@ -61,6 +61,7 @@ module Misty::Openstack::DesignateV2
  "/v2/quotas/{project_id}"=>
   {:GET=>[:view_quotas], :PATCH=>[:set_quotas], :DELETE=>[:reset_quotas]},
  "/v2/quotas/"=>{:GET=>[:view_current_project_s_quotas]},
+ "/v2/service_status"=>{:GET=>[:list_statuses]},
  "/v2/reverse/floatingips/{region}:{floatingip_id}"=>
   {:PATCH=>[:set_floatingip_s_ptr_record, :unset_floatingip_s_ptr_record],
    :GET=>[:show_floatingip_s_ptr_record]},

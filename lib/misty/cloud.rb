@@ -7,6 +7,8 @@ module Misty
       attr_accessor :auth, :content_type, :interface, :log, :region_id, :ssl_verify_mode
     end
 
+    attr_reader :auth
+
     def self.dot_to_underscore(val)
       val.gsub(/\./,'_')
     end
@@ -44,6 +46,10 @@ module Misty
 
     def alarming
       @alarming ||= build_service(:alarming)
+    end
+
+    def backup
+      @backup ||= build_service(:backup)
     end
 
     def baremetal
@@ -90,6 +96,10 @@ module Misty
       @image ||= build_service(:image)
     end
 
+    def load_balancer
+      @load_balancer ||= build_service(:load_balancer)
+    end
+
     def messaging
       @messaging ||= build_service(:messaging)
     end
@@ -100,6 +110,10 @@ module Misty
 
     def networking
       @networking ||= build_service(:networking)
+    end
+
+    def nfv_orchestration
+      @nfv_orchestration ||= build_service(:nfv_orchestration)
     end
 
     def object_storage
@@ -118,7 +132,24 @@ module Misty
       @shared_file_systems ||= build_service(:shared_file_systems)
     end
 
-    alias network networking
     alias volume block_storage
+
+    private
+
+    def method_missing(method_name)
+      services_avail = []
+      @services.names.each do |service_name|
+        services_avail << service_name if /#{method_name}/.match(service_name)
+      end
+
+      if services_avail.size == 1
+        self.send(services_avail[0])
+        return self.instance_variable_get("@#{services_avail[0]}")
+      elsif services_avail.size > 1
+        raise NoMethodError, "Ambiguous Cloud Service: #{method_name}"
+      else
+        raise NoMethodError, "No such Cloud Service: #{method_name}"
+      end
+    end
   end
 end

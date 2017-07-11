@@ -10,11 +10,16 @@ module Misty
 
     module Cinder
       autoload :V1, "misty/openstack/cinder/v1"
+      autoload :V2, "misty/openstack/cinder/v2"
       autoload :V3, "misty/openstack/cinder/v3"
     end
 
     module Designate
       autoload :V2, "misty/openstack/designate/v2"
+    end
+
+    module Freezer
+      autoload :V1, "misty/openstack/freezer/v1"
     end
 
     module Glance
@@ -59,6 +64,10 @@ module Misty
       autoload :V2_1, "misty/openstack/nova/v2_1"
     end
 
+    module Octavia
+      autoload :V2_0, "misty/openstack/octavia/v2_0"
+    end
+
     module Sahara
       autoload :V1_1, "misty/openstack/sahara/v1_1"
     end
@@ -73,6 +82,10 @@ module Misty
 
     module Swift
       autoload :V1, "misty/openstack/swift/v1"
+    end
+
+    module Tacker
+      autoload :V1_0, "misty/openstack/tacker/v1_0"
     end
 
     module Trove
