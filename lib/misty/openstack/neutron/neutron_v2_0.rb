@@ -82,16 +82,16 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_firewall_group_details],
    :PUT=>[:update_firewall_group],
    :DELETE=>[:delete_firewall_group]},
- "/v2.0/fwaas/firewall_policies"=>{:GET=>[:id250], :POST=>[:id258]},
+ "/v2.0/fwaas/firewall_policies"=>{:GET=>[:list_firewall_policies], :POST=>[:create_firewall_policy]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}"=>
-  {:GET=>[:id254], :PUT=>[:id263], :DELETE=>[:id268]},
- "/v2.0/fwaas/firewall_rules"=>{:GET=>[:id271], :POST=>[:id279]},
+  {:GET=>[:show_firewall_policy_details], :PUT=>[:update_firewall_policy], :DELETE=>[:delete_firewall_policy]},
+ "/v2.0/fwaas/firewall_rules"=>{:GET=>[:list_firewall_rules], :POST=>[:create_firewall_rule]},
  "/v2.0/fwaas/firewall_rules/{firewall_rule_id}"=>
-  {:GET=>[:id275], :PUT=>[:id284], :DELETE=>[:id289]},
+  {:GET=>[:show_firewall_rule_details], :PUT=>[:update_firewall_rule], :DELETE=>[:delete_firewall_rule]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}/insert_rule"=>
-  {:PUT=>[:id291]},
+  {:PUT=>[:insert_rule_into_a_firewall_policy]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}/remove_rule"=>
-  {:PUT=>[:id296]},
+  {:PUT=>[:remove_rule_from_firewall_policy]},
  "/v2.0/rbac-policies/{rbac_policy_id}"=>
   {:GET=>[:show_rbac_policy_details],
    :PUT=>[:update_rbac_policy],
@@ -238,16 +238,16 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_listener_details],
    :PUT=>[:update_listener],
    :DELETE=>[:remove_listener]},
- "/v2.0/lbaas/pools"=>{:GET=>[:id686], :POST=>[:create_pool]},
+ "/v2.0/lbaas/pools"=>{:GET=>[:list_pools], :POST=>[:create_pool]},
  "/v2.0/lbaas/pools/{pool_id}"=>
-  {:GET=>[:id694], :PUT=>[:id698], :DELETE=>[:remove_pool]},
+  {:GET=>[:show_pool_details], :PUT=>[:update_pool], :DELETE=>[:remove_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members"=>
   {:GET=>[:list_pool_members], :POST=>[:add_member_to_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members/{member_id}"=>
   {:GET=>[:show_pool_member_details],
    :PUT=>[:update_pool_member],
    :DELETE=>[:remove_member_from_pool]},
- "/v2.0/lbaas/healthmonitors"=>{:GET=>[:id721]},
+ "/v2.0/lbaas/healthmonitors"=>{:GET=>[:list_health_monitors]},
  "/v2.0/lbaas/health_monitors"=>{:POST=>[:create_health_monitor]},
  "/v2.0/lbaas/health_monitors/{health_monitor_id}"=>
   {:GET=>[:id729], :PUT=>[:id733], :DELETE=>[:remove_health_monitor]},
