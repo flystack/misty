@@ -250,7 +250,7 @@ module Misty::Openstack::NeutronV2_0
  "/v2.0/lbaas/healthmonitors"=>{:GET=>[:list_health_monitors]},
  "/v2.0/lbaas/health_monitors"=>{:POST=>[:create_health_monitor]},
  "/v2.0/lbaas/health_monitors/{health_monitor_id}"=>
-  {:GET=>[:id729], :PUT=>[:id733], :DELETE=>[:remove_health_monitor]},
+  {:GET=>[:show_health_monitor_details], :PUT=>[:update_health_monitor], :DELETE=>[:remove_health_monitor]},
  "/v2.0/logging/logging_resources"=>
   {:GET=>[:list_logging_resources], :POST=>[:create_logging_resource]},
  "/v2.0/logging/logging_resources/{logging_resource_id}"=>
