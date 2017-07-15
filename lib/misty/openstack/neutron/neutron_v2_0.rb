@@ -75,6 +75,12 @@ module Misty::Openstack::NeutronV2_0
   {:PUT=>[:insert_rule_into_a_firewall_policy]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}/remove_rule"=>
   {:PUT=>[:remove_rule_from_firewall_policy]},
+ "/v2.0/rbac-policies/{rbac_policy_id}"=>
+  {:GET=>[:show_rbac_policy_details],
+   :PUT=>[:update_rbac_policy],
+   :DELETE=>[:delete_rbac_policy]},
+ "/v2.0/rbac-policies"=>
+  {:GET=>[:list_rbac_policies], :POST=>[:create_rbac_policy]},
  "/v2.0/security-group-rules"=>
   {:GET=>[:list_security_group_rules], :POST=>[:create_security_group_rule]},
  "/v2.0/security-group-rules/{security_group_rule_id}"=>
