@@ -7,7 +7,7 @@ module Misty
       attr_accessor :auth, :content_type, :interface, :log, :region_id, :ssl_verify_mode
     end
 
-    attr_reader :auth, :services
+    attr_reader :auth
 
     def self.dot_to_underscore(val)
       val.gsub(/\./,'_')
@@ -16,7 +16,6 @@ module Misty
     def initialize(params)# = {:auth => {}})
       @params = params
       @config = self.class.set_configuration(params)
-      @services = []
       @auth = Misty::Auth.factory(params[:auth], @config)
     end
 
@@ -37,7 +36,6 @@ module Misty
       service.version = service.options[:api_version]
       version = self.class.dot_to_underscore(service.version)
       klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
-      @services << service_name
       klass.new(@auth, @config, service.options)
     end
 
