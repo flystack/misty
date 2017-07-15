@@ -16,7 +16,6 @@ module Misty
     def initialize(params)# = {:auth => {}})
       @params = params
       @config = self.class.set_configuration(params)
-      @services = Misty.services
       @auth = Misty::Auth.factory(params[:auth], @config)
     end
 
@@ -32,7 +31,7 @@ module Misty
     end
 
     def build_service(service_name)
-      service = @services.find {|service| service.name == service_name}
+      service = Misty.services.find {|service| service.name == service_name}
       service.options = @params[service.name] if @params[service.name]
       service.version = service.options[:api_version]
       version = self.class.dot_to_underscore(service.version)
@@ -138,7 +137,7 @@ module Misty
 
     def method_missing(method_name)
       services_avail = []
-      @services.names.each do |service_name|
+      Misty.services.names.each do |service_name|
         services_avail << service_name if /#{method_name}/.match(service_name)
       end
 
