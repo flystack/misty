@@ -1,3 +1,11 @@
+# 0.7.1 - 18 July 2017
+## APIs
+### Neutron v2.0
+* Adds RBAC
+
+## Cloud class
+* Removed unused `@Services`
+
 # 0.7.0 - 06 July 2017
 ## Authentication
  Catalog and Token are accessible method for Auth object.
