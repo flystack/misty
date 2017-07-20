@@ -122,6 +122,30 @@ shared_file_systems | manila | ["v2"]
 The #requests method provides the available requests for a service, for example:
 ```ruby
 openstack.compute.requests
+
+=> [:add_a_single_tag,
+ :add_associate_fixed_ip_addfixedip_action_deprecated,
+ :add_associate_floating_ip_addfloatingip_action_deprecated,
+ :add_flavor_access_to_tenant_addtenantaccess_action,
+ :add_host,
+ :add_network,
+ :add_security_group_to_a_server_addsecuritygroup_action,
+ :associate_host_deprecated,
+ :attach_a_volume_to_an_instance,
+ :bulk_delete_floating_ips,
+ :capacities,
+ :change_administrative_password_changepassword_action,
+ :check_tag_existence,
+ :clear_admin_password,
+ :confirm_resized_server_confirmresize_action,
+ :create_agent_build,
+ :create_aggregate,
+ :create_allocate_floating_ip_address,
+ :create_assisted_volume_snapshots,
+ :create_cell,
+ :create_cloudpipe,
+ :create_console,
+.../...
 ```
 
 ## Setup
@@ -164,7 +188,7 @@ The following parameters can be used:
 * `:token`  
   User provided token, overrides all user and password parameters.
 * `:context`  
-  I you have a proper context with `token id`, `service catalog` and `expire date` you can bypass the authentication  
+  Bypass the authentication by providing a proper context with `token id`, `service catalog` and `expire date`.
   Overrides all user and password parameters  
   Example: ``{:context => { :token => token_id, :catalog => service_catalog, :expires => expire_date }}``
 
@@ -287,13 +311,13 @@ openstack.network.post("/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp
 # Requirements
 
 ## Ruby versions tested
-* Ruby 2.4.1
-* Ruby 2.4.0
-* Ruby 2.3.4
-* Ruby 2.3.3
-* Ruby 2.3.2
-* Ruby 2.3.1
-* Ruby 2.3.0
+* Ruby MRI 2.4.1
+* Ruby MRI 2.4.0
+* Ruby MRI 2.3.4
+* Ruby MRI 2.3.3
+* Ruby MRI 2.3.2
+* Ruby MRI 2.3.1
+* Ruby MRI 2.3.0
 
 # Contributing
 Contributors are welcome and must adhere to the [Contributor covenant code of conduct](http://contributor-covenant.org/).
