@@ -1,3 +1,10 @@
+# 0.7.2 - 20 July 2017
+## APIs
+* Better message if API method doesn't exist
+
+## Documentation
+* README adjustments
+
 # 0.7.1 - 18 July 2017
 ## APIs
 ### Neutron v2.0
