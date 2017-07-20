@@ -5,7 +5,7 @@ module Misty
         if method = get_method(method_name)
           method_call(method, *args)
         else
-          raise NoMethodError, "API #{baseclass.downcase}: method #{method_name} not implemented!"
+          raise NoMethodError, "#{self.class}: #{method_name}"
         end
       end
 
