@@ -9,7 +9,7 @@ module Misty
       class Options
         attr_accessor :base_path, :base_url, :interface, :region_id,
                       :service_names, :ssl_verify_mode, :version,
-                      :keep_alive_timeout
+                      :keep_alive_timeout, :headers
       end
 
       class InvalidDataError < StandardError; end
@@ -83,6 +83,7 @@ module Misty
       def headers
         h = headers_default.merge("X-Auth-Token" => "#{@auth.get_token}")
         h.merge!(microversion_header) if microversion
+        h.merge!(@options.headers) if @options.headers
         h
       end
 
@@ -101,6 +102,7 @@ module Misty
         options.service_names       = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
         options.ssl_verify_mode     = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
         options.keep_alive_timeout  = params[:keep_alive_timeout] ? params[:keep_alive_timeout] : @config.keep_alive_timeout
+        options.headers             = params[:headers] ? params[:headers] : @config.headers
         options.version             = params[:version]         ? params[:version] : "CURRENT"
 
         unless INTERFACES.include?(options.interface)
