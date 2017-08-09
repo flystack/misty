@@ -55,6 +55,27 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_subnet_details],
    :PUT=>[:update_subnet],
    :DELETE=>[:delete_subnet]},
+ "/v2.0/fw/firewall_policies"=>
+  {:GET=>[:list_firewall_policies], :POST=>[:create_firewall_policy]},
+ "/v2.0/fw/firewall_policies/{firewall_policy_id}"=>
+  {:GET=>[:show_firewall_policy_details],
+   :PUT=>[:update_firewall_policy],
+   :DELETE=>[:delete_firewall_policy]},
+ "/v2.0/fw/firewall_policies/{firewall_policy_id}/insert_rule"=>
+  {:PUT=>[:insert_rule_into_a_firewall_policy]},
+ "/v2.0/fw/firewall_policies/{firewall_policy_id}/remove_rule"=>
+  {:PUT=>[:remove_rule_from_firewall_policy]},
+ "/v2.0/fw/firewall_rules"=>
+  {:GET=>[:list_firewall_rules], :POST=>[:create_firewall_rule]},
+ "/v2.0/fw/firewall_rules/{firewall_rule_id}"=>
+  {:GET=>[:show_firewall_rule_details],
+   :PUT=>[:update_firewall_rule],
+   :DELETE=>[:delete_firewall_rule]},
+ "/v2.0/fw/firewalls"=>{:GET=>[:list_firewalls], :POST=>[:create_firewall]},
+ "/v2.0/fw/firewalls/{firewall_id}"=>
+  {:GET=>[:show_firewall_details],
+   :PUT=>[:update_firewall],
+   :DELETE=>[:delete_firewall]},
  "/v2.0/fwaas/firewall_groups"=>
   {:GET=>[:list_firewall_groups], :POST=>[:create_firewall_group]},
  "/v2.0/fwaas/firewall_groups/{firewall_group_id}"=>
@@ -63,14 +84,10 @@ module Misty::Openstack::NeutronV2_0
    :DELETE=>[:delete_firewall_group]},
  "/v2.0/fwaas/firewall_policies"=>{:GET=>[:list_firewall_policies], :POST=>[:create_firewall_policy]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}"=>
-  {:GET=>[:show_firewall_policy_details],
-   :PUT=>[:update_firewall_policy],
-   :DELETE=>[:delete_firewall_policy]},
+  {:GET=>[:show_firewall_policy_details], :PUT=>[:update_firewall_policy], :DELETE=>[:delete_firewall_policy]},
  "/v2.0/fwaas/firewall_rules"=>{:GET=>[:list_firewall_rules], :POST=>[:create_firewall_rule]},
  "/v2.0/fwaas/firewall_rules/{firewall_rule_id}"=>
-  {:GET=>[:show_firewall_rule_details],
-   :PUT=>[:update_firewall_rule],
-   :DELETE=>[:delete_firewall_rule]},
+  {:GET=>[:show_firewall_rule_details], :PUT=>[:update_firewall_rule], :DELETE=>[:delete_firewall_rule]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}/insert_rule"=>
   {:PUT=>[:insert_rule_into_a_firewall_policy]},
  "/v2.0/fwaas/firewall_policies/{firewall_policy_id}/remove_rule"=>
@@ -184,6 +201,30 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_dscp_marking_rule_details],
    :PUT=>[:update_dscp_marking_rule],
    :DELETE=>[:delete_dscp_marking_rule]},
+ "/v2.0/lb/pools"=>
+  {:GET=>[:list_pools], :POST=>[:create_a_load_balancer_pool]},
+ "/v2.0/lb/pools/{pool_id}"=>
+  {:GET=>[:show_pool_details], :PUT=>[:update_pool], :DELETE=>[:delete_pool]},
+ "/v2.0/lb/vips"=>{:GET=>[:list_vips], :POST=>[:create_a_load_balancer_vip]},
+ "/v2.0/lb/vips/{vip_id}"=>
+  {:GET=>[:show_vip_details], :PUT=>[:update_vip], :DELETE=>[:delete_vip]},
+ "/v2.0/lb/members"=>
+  {:GET=>[:list_members], :POST=>[:create_a_load_balancer_member]},
+ "/v2.0/lb/members/{member_id}"=>
+  {:GET=>[:show_member_details],
+   :PUT=>[:update_member],
+   :DELETE=>[:delete_member]},
+ "/v2.0/lb/health_monitors"=>
+  {:GET=>[:list_health_monitors],
+   :POST=>[:create_a_load_balancer_health_monitor]},
+ "/v2.0/lb/health_monitors/{health_monitor_id}"=>
+  {:GET=>[:show_health_monitor_details],
+   :PUT=>[:update_health_monitor],
+   :DELETE=>[:delete_health_monitor]},
+ "/v2.0/lb/pools/{pool_id}/health_monitors"=>
+  {:POST=>[:associate_health_monitor_with_pool]},
+ "/v2.0/lb/pools/{pool_id}/health_monitors/{health_monitor_id}"=>
+  {:DELETE=>[:disassociate_health_monitor_from_pool]},
  "/v2.0/lbaas/loadbalancers"=>
   {:GET=>[:list_load_balancers], :POST=>[:create_a_load_balancer]},
  "/v2.0/lbaas/loadbalancers/{loadbalancer_id}"=>
@@ -197,13 +238,9 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_listener_details],
    :PUT=>[:update_listener],
    :DELETE=>[:remove_listener]},
- "/v2.0/lbaas/pools"=>
-  {:GET=>[:list_pools],
-   :POST=>[:create_pool]},
+ "/v2.0/lbaas/pools"=>{:GET=>[:list_pools], :POST=>[:create_pool]},
  "/v2.0/lbaas/pools/{pool_id}"=>
-  {:GET=>[:show_pool_details],
-   :PUT=>[:update_pool],
-   :DELETE=>[:remove_pool]},
+  {:GET=>[:show_pool_details], :PUT=>[:update_pool], :DELETE=>[:remove_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members"=>
   {:GET=>[:list_pool_members], :POST=>[:add_member_to_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members/{member_id}"=>
@@ -213,9 +250,7 @@ module Misty::Openstack::NeutronV2_0
  "/v2.0/lbaas/healthmonitors"=>{:GET=>[:list_health_monitors]},
  "/v2.0/lbaas/health_monitors"=>{:POST=>[:create_health_monitor]},
  "/v2.0/lbaas/health_monitors/{health_monitor_id}"=>
-  {:GET=>[:show_health_monitor_details],
-   :PUT=>[:update_health_monitor],
-   :DELETE=>[:remove_health_monitor]},
+  {:GET=>[:show_health_monitor_details], :PUT=>[:update_health_monitor], :DELETE=>[:remove_health_monitor]},
  "/v2.0/logging/logging_resources"=>
   {:GET=>[:list_logging_resources], :POST=>[:create_logging_resource]},
  "/v2.0/logging/logging_resources/{logging_resource_id}"=>
