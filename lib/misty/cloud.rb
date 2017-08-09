@@ -4,7 +4,8 @@ require 'misty/auth/auth_v3'
 module Misty
   class Cloud
     class Config
-      attr_accessor :auth, :content_type, :interface, :log, :region_id, :ssl_verify_mode
+      attr_accessor :auth, :content_type, :interface, :log, :region_id,
+                    :ssl_verify_mode, :keep_alive_timeout
     end
 
     def self.dot_to_underscore(val)
@@ -26,6 +27,7 @@ module Misty
       config.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
       config.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
       config.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
+      config.keep_alive_timeout = params[:keep_alive_timeout]
       config
     end
 
