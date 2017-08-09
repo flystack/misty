@@ -20,7 +20,11 @@ module Misty
       http = nil
       unless auth[:context]
         raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
-        http = Misty::HTTP::NetHTTP.net_http(URI.parse(auth[:url]), config.ssl_verify_mode, config.log)
+        connection_options = {
+          ssl_verify_mode: config.ssl_verify_mode,
+          keep_alive_timeout: config.keep_alive_timeout
+        }
+        http = Misty::HTTP::NetHTTP.net_http(URI.parse(auth[:url]), connection_options, config.log)
       end
 
       if auth[:tenant_id] || auth[:tenant]
