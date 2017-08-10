@@ -15,9 +15,6 @@ module Misty
           response.body = JSON.load(response.body) if decode?(response)
           response
         end
-        # response = @http.request(request)
-        # response.body = JSON.load(response.body) if decode?(response)
-        # response
       end
 
       def http_delete(path, headers)
