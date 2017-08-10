@@ -49,9 +49,14 @@ module Misty
     end
 
     def authenticate
-      response = @http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
-      raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
-      response
+      @http.start do |connection|
+        response = connection.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
+        raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
+        response
+      end
+      # response = @http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
+      # raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
+      # response
     end
 
     def expired?

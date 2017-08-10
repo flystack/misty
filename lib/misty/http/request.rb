@@ -10,9 +10,14 @@ module Misty
       end
 
       def http(request)
-        response = @http.request(request)
-        response.body = JSON.load(response.body) if decode?(response)
-        response
+        @http.start do |connection|
+          response = connection.request(request)
+          response.body = JSON.load(response.body) if decode?(response)
+          response
+        end
+        # response = @http.request(request)
+        # response.body = JSON.load(response.body) if decode?(response)
+        # response
       end
 
       def http_delete(path, headers)
