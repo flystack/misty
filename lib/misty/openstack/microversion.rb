@@ -50,10 +50,10 @@ module Misty
       end
 
       def versions_fetch
-        request = Net::HTTP::Get.new("/", headers_default)
-        response = @http.request request
+        response = http_get('/', headers_default)
         raise VersionError, "Code: #{response.code}, Message: #{response.msg}" unless response.code =~ /2??/
-        list = JSON.load(response.body)["versions"]
+        data = response.body.is_a?(Hash) ? response.body : JSON.parse(response.body)
+        list = data['versions']
         raise VersionError, "Missing version data" unless list
         list
       end

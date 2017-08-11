@@ -8,8 +8,7 @@ module Misty
     class Client
       class Options
         attr_accessor :base_path, :base_url, :interface, :region_id,
-                      :service_names, :ssl_verify_mode, :version,
-                      :keep_alive_timeout, :headers
+                      :service_names, :ssl_verify_mode, :version, :headers
       end
 
       class InvalidDataError < StandardError; end
@@ -55,12 +54,7 @@ module Misty
         @options = setup(options)
         @uri = URI.parse(@auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
-        @base_path = @base_path.chomp("/")
-        connection_options = {
-          ssl_verify_mode: @options.ssl_verify_mode,
-          keep_alive_timeout: @options.keep_alive_timeout
-        }
-        @http = Misty::HTTP::NetHTTP.net_http(@uri, connection_options, @config.log)
+        @base_path = @base_path.chomp('/')
         @version = nil
         @microversion = false
       end
@@ -73,7 +67,7 @@ module Misty
       # and Service API has "/v1/{tenant_id}/stacks"
       # then the path prefix is ignored and path is only "/stacks"
       def self.prefix_path_to_ignore
-        ""
+        ''
       end
 
       def headers_default
@@ -81,7 +75,7 @@ module Misty
       end
 
       def headers
-        h = headers_default.merge("X-Auth-Token" => "#{@auth.get_token}")
+        h = headers_default.merge('X-Auth-Token' => @auth.get_token.to_s)
         h.merge!(microversion_header) if microversion
         h.merge!(@options.headers) if @options.headers
         h
@@ -101,7 +95,6 @@ module Misty
         options.region_id           = params[:region_id]       ? params[:region_id] : @config.region_id
         options.service_names       = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
         options.ssl_verify_mode     = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
-        options.keep_alive_timeout  = params[:keep_alive_timeout] ? params[:keep_alive_timeout] : @config.keep_alive_timeout
         options.headers             = params[:headers] ? params[:headers] : @config.headers
         options.version             = params[:version]         ? params[:version] : "CURRENT"
 
