@@ -6,8 +6,9 @@ module Misty
         if @config.content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
           && !response.is_a?(Net::HTTPResetContent) && response.header['content-type'] \
           && response.header['content-type'].include?('application/json')
-          true
+          return true
         end
+        false
       end
 
       def http(request)
