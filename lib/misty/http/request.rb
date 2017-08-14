@@ -2,6 +2,7 @@ module Misty
   module HTTP
     module Request
       def decode?(response)
+        return false if response.body.nil? || response.body.empty?
         if @config.content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
           && !response.is_a?(Net::HTTPResetContent) && response.header['content-type'] \
           && response.header['content-type'].include?('application/json')
