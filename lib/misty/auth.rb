@@ -55,15 +55,15 @@ module Misty
 
     def expired?
       if @expires.nil? || @expires.empty?
-        raise ExpiryError, 'Missing token expiration data'
+        raise ExpiryError, "Missing token expiration data"
       end
       Time.parse(@expires) < Time.now.utc
     end
 
     def get_endpoint(service_names, region, interface)
       @catalog.each do |catalog|
-        if service_names.include? catalog['type']
-          return catalog_endpoints(catalog['endpoints'], region, interface)
+        if service_names.include? catalog["type"]
+          return catalog_endpoints(catalog["endpoints"], region, interface)
         end
       end
       raise CatalogError, "No service found with either #{service_names} name, region #{region}, interface #{interface}"

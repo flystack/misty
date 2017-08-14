@@ -67,7 +67,7 @@ module Misty
       # and Service API has "/v1/{tenant_id}/stacks"
       # then the path prefix is ignored and path is only "/stacks"
       def self.prefix_path_to_ignore
-        ''
+        ""
       end
 
       def headers_default

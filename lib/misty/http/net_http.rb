@@ -3,16 +3,15 @@ module Misty
     # This class implements the http request routine.
     module NetHTTP
       def self.http_request(uri, options = {})
-        verify_mode = if options[:ssl_verify_mode]
-                        OpenSSL::SSL::VERIFY_PEER
-                      else
-                        OpenSSL::SSL::VERIFY_NONE
-                      end
-        Net::HTTP.start(
-          uri.host, uri.port,
-          use_ssl: (uri.scheme == 'https'),
-          verify_mode: verify_mode
-        ) do |connection|
+        http_options = {}
+        if uri.scheme == "https"
+          http_options[:use_ssl] = true
+          if options[:ssl_verify_mode] && options[:ssl_verify_mode] == false
+            http_options[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
+          end
+        end
+
+        Net::HTTP.start(uri.host, uri.port, http_options) do |connection|
           yield(connection)
         end
       end
