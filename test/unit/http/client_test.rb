@@ -39,13 +39,6 @@ describe Misty::HTTP::Client do
     end
   end
 
-  describe "#net_http" do
-    it "returns a Net/http instance" do
-      endpoint = URI.parse("http://localhost")
-      Misty::HTTP::NetHTTP.net_http(endpoint, false, Logger.new("/dev/null")).must_be_instance_of Net::HTTP
-    end
-  end
-
   describe "#setup" do
     it "sets default options" do
       options = service.send(:setup, {})

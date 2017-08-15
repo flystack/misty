@@ -2,17 +2,23 @@ module Misty
   module HTTP
     module Request
       def decode?(response)
-        if @config.content_type != :json && response.code =~ /2??/  && !response.is_a?(Net::HTTPNoContent) \
-          && !response.is_a?(Net::HTTPResetContent) && response.header["content-type"] \
-          && response.header["content-type"].include?("application/json")
-          true
+        return false if response.body.nil? || response.body.empty?
+        if @config.content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
+          && !response.is_a?(Net::HTTPResetContent) && response.header['content-type'] \
+          && response.header['content-type'].include?('application/json')
+          return true
         end
+        false
       end
 
       def http(request)
-        response = @http.request(request)
-        response.body = JSON.load(response.body) if decode?(response)
-        response
+        Misty::HTTP::NetHTTP.http_request(
+          @uri, ssl_verify_mode: @options.ssl_verify_mode, log: @config.log
+        ) do |connection|
+          response = connection.request(request)
+          response.body = JSON.parse(response.body) if decode?(response)
+          response
+        end
       end
 
       def http_delete(path, headers)

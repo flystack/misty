@@ -17,41 +17,46 @@ module Misty
     attr_reader :catalog, :token
 
     def self.factory(auth, config)
-      http = nil
-      unless auth[:context]
-        raise URLError, "No URL provided" unless auth[:url] && !auth[:url].empty?
-        http = Misty::HTTP::NetHTTP.net_http(URI.parse(auth[:url]), config.ssl_verify_mode, config.log)
-      end
-
-      if auth[:tenant_id] || auth[:tenant]
-        return Misty::AuthV2.new(auth, http)
-      else
-        return Misty::AuthV3.new(auth, http)
-      end
+      version = auth[:tenant_id] || auth[:tenant] ? 'V2' : 'V3'
+      klass = Object.const_get("Misty::Auth#{version}")
+      klass.new(auth, config)
     end
 
-    def initialize(auth, http)
+    def initialize(auth, config)
       if auth[:context]
         # bypass the authentication by given token catalog and expire date
         @token   = auth[:context][:token]
         @catalog = auth[:context][:catalog]
         @expires = auth[:context][:expires]
       else
-        @http = http
+        raise URLError, 'No URL provided' if auth[:url].nil? || auth[:url].empty?
+        @uri = URI.parse(auth[:url])
+        @config = config
         # autheticate
         @credentials = set_credentials(auth)
         @token, @catalog, @expires = set(authenticate)
       end
+      #byebug unless config.is_a?(Misty::Cloud::Config)
     end
 
     def authenticate
-      response = @http.post(self.class.path, @credentials.to_json, Misty::HEADER_JSON)
-      raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}" unless response.code =~ /200|201/
-      response
+      Misty::HTTP::NetHTTP.http_request(
+        @uri, ssl_verify_mode: @config.ssl_verify_mode, log: @config.log
+      ) do |connection|
+        response = connection.post(self.class.path, @credentials.to_json,
+                                   Misty::HEADER_JSON)
+        unless response.code =~ /200|201/
+          raise AuthenticationError,
+                "Response code=#{response.code}, Msg=#{response.msg}"
+        end
+        response
+      end
     end
 
     def expired?
-      raise ExpiryError, "Missing token expiration data" if @expires.nil? || @expires.empty?
+      if @expires.nil? || @expires.empty?
+        raise ExpiryError, "Missing token expiration data"
+      end
       Time.parse(@expires) < Time.now.utc
     end
 

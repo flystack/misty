@@ -26,7 +26,7 @@ describe Misty::HTTP::Request do
         with(:headers => {'Accept' => '*/*'}).
         to_return(:status => 204, :body => nil, :headers => {'Content-Type' => 'application/json'})
 
-      service.decode?(response).must_be_nil
+      service.decode?(response).must_equal false
     end
 
     it "false when content_type is JSON" do
@@ -34,7 +34,7 @@ describe Misty::HTTP::Request do
         with(:headers => request_header).
         to_return(:status => 200, :body => "{\"blah\": \"bla\"}")
 
-      service(:json).decode?(response).must_be_nil
+      service(:json).decode?(response).must_equal false
     end
   end
 

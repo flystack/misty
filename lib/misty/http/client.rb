@@ -7,7 +7,8 @@ module Misty
   module HTTP
     class Client
       class Options
-        attr_accessor :base_path, :base_url, :interface, :region_id, :service_names, :ssl_verify_mode, :version
+        attr_accessor :base_path, :base_url, :interface, :region_id,
+                      :service_names, :ssl_verify_mode, :version, :headers
       end
 
       class InvalidDataError < StandardError; end
@@ -53,8 +54,7 @@ module Misty
         @options = setup(options)
         @uri = URI.parse(@auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
-        @base_path = @base_path.chomp("/")
-        @http = Misty::HTTP::NetHTTP.net_http(@uri, @options.ssl_verify_mode, @config.log)
+        @base_path = @base_path.chomp('/')
         @version = nil
         @microversion = false
       end
@@ -75,8 +75,9 @@ module Misty
       end
 
       def headers
-        h = headers_default.merge("X-Auth-Token" => "#{@auth.get_token}")
+        h = headers_default.merge('X-Auth-Token' => @auth.get_token.to_s)
         h.merge!(microversion_header) if microversion
+        h.merge!(@options.headers) if @options.headers
         h
       end
 
@@ -88,13 +89,14 @@ module Misty
 
       def setup(params)
         options = Options.new()
-        options.base_path       = params[:base_path]       ? params[:base_path] : nil
-        options.base_url        = params[:base_url]        ? params[:base_url] : nil
-        options.interface       = params[:interface]       ? params[:interface] : @config.interface
-        options.region_id       = params[:region_id]       ? params[:region_id] : @config.region_id
-        options.service_names   = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
-        options.ssl_verify_mode = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
-        options.version         = params[:version]         ? params[:version] : "CURRENT"
+        options.base_path           = params[:base_path]       ? params[:base_path] : nil
+        options.base_url            = params[:base_url]        ? params[:base_url] : nil
+        options.interface           = params[:interface]       ? params[:interface] : @config.interface
+        options.region_id           = params[:region_id]       ? params[:region_id] : @config.region_id
+        options.service_names       = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
+        options.ssl_verify_mode     = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
+        options.headers             = params[:headers] ? params[:headers] : @config.headers
+        options.version             = params[:version]         ? params[:version] : "CURRENT"
 
         unless INTERFACES.include?(options.interface)
           raise InvalidDataError, "Options ':interface' must be one of #{INTERFACES}"
