@@ -34,10 +34,10 @@ heat_template = {
   "timeout_mins": 60
 }
 
-cloud = Misty::Cloud.new(:auth => auth_v3, :identity => {:base_path => ""})
+cloud = Misty::Cloud.new(:auth => auth_v3)
 
 response = cloud.orchestration.create_stack(heat_template)
-id = response.body["stack"]["id"]
+id = response.body['stack']['id']
 
-stack = cloud.orchestration.show_stack_details("test_stack", id)
+stack = cloud.orchestration.show_stack_details('test_stack', id)
 pp stack.body
