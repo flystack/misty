@@ -46,11 +46,11 @@ gem install misty
 require 'misty'
 
 auth_v3 = {
-  :url      => "http://localhost:5000",
-  :user               => "admin",
-  :password           => "secret",
-  :domain             => "default",
-  :project            => "admin",
+  :url      => 'http://localhost:5000',
+  :user               => 'admin',
+  :password           => 'secret',
+  :domain             => 'default',
+  :project            => 'admin',
   :project_domain_id  => 'default'
 }
 
@@ -59,7 +59,7 @@ openstack = Misty::Cloud.new(:auth => auth_v3)
 puts openstack.compute.list_servers.body
 puts openstack.compute.list_flavors.body
 networks = openstack.network.list_networks
-network_id = networks.body["networks"][0]['id']
+network_id = networks.body['networks'][0]['id']
 network = openstack.network.show_network_details(network_id)
 puts network.body
 ```
@@ -76,7 +76,7 @@ Each service name (i.e. `compute`) is the object handling API requests.
 openstack = Misty::Cloud.new(:auth => { ... })
 openstack.compute.list_servers
 openstack.network.list_networks
-openstack.network.create_network("network": {"name": "my-network"})
+openstack.network.create_network('network': {'name': 'my-network'})
 ```
 
 To obtain the list of supported services:
@@ -197,12 +197,12 @@ Keystone v3 is default recommended version:
 
 ```ruby
 auth = {
-  :url            => "http://localhost:5000",
-  :user           => "admin",
-  :user_domain    => "default",
-  :password       => "secret",
-  :project        => "admin",
-  :project_domain => "default"
+  :url            => 'http://localhost:5000',
+  :user           => 'admin',
+  :user_domain    => 'default',
+  :password       => 'secret',
+  :project        => 'admin',
+  :project_domain => 'default'
   }
 }
 ```
@@ -211,10 +211,10 @@ Alternatively, using IDs:
 
 ```ruby
 auth = {
-  :url         => "http://localhost:5000",
-  :user_id    => "48985e6b8da145699d411f12a3459fca",
-  :password   => "secret",
-  :project_id => "8e1e232f6cbb4116bbef715d8a0afe6e",
+  :url         => 'http://localhost:5000',
+  :user_id    => '48985e6b8da145699d411f12a3459fca',
+  :password   => 'secret',
+  :project_id => '8e1e232f6cbb4116bbef715d8a0afe6e',
   }
 }
 ```
@@ -223,10 +223,10 @@ Provide the tenant details, Misty will detect it's using v2.0 for authentication
 
 ```ruby
 auth = {
-  :url      => "http://localhost:5000",
-  :user     => "admin",
-  :password => "secret",
-  :tenant   => "admin",
+  :url      => 'http://localhost:5000',
+  :user     => 'admin',
+  :password => 'secret',
+  :tenant   => 'admin',
 }
 ```
 ### Logging parameters
@@ -300,13 +300,13 @@ The following options are available:
 
 Example:
 ```ruby
-openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => "regionTwo"}, :compute => {:version => "2.27", :interface => "admin"})
+openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => 'regionTwo'}, :compute => {:version => '2.27', :interface => 'admin'})
 ```
 
 ## Direct REST HTTP Methods
 To send requests directly use the 'get', 'delete', 'post' and 'put' methods directly:
 ```ruby
-openstack.network.post("/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp_marking_rules", data)
+openstack.network.post('/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp_marking_rules', data)
 ```
 # Requirements
 
