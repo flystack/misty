@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/designate/designate_v2"
+require 'misty/openstack/designate/designate_v2'
 
 module Misty
   module Openstack

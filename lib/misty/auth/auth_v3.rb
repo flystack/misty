@@ -3,13 +3,13 @@ require 'misty/auth'
 module Misty
   class AuthV3 < Misty::Auth
     def self.path
-      "/v3/auth/tokens"
+      '/v3/auth/tokens'
     end
 
     def catalog_endpoints(endpoints, region, interface)
       endpoints.each do |endpoint|
-        if endpoint["region_id"] == region && endpoint["interface"] == interface
-          return endpoint["url"]
+        if endpoint['region_id'] == region && endpoint['interface'] == interface
+          return endpoint['url']
         end
       end
     end
@@ -17,25 +17,25 @@ module Misty
     def credentials
       if @token
         identity = {
-          "methods": ["token"],
-          "token": { "id": @token }
+          'methods': ['token'],
+          'token': { 'id': @token }
         }
       else
         identity = {
-          "methods": ["password"],
-          "password": @user.identity
+          'methods': ['password'],
+          'password': @user.identity
         }
       end
       {
-        "auth": {
-          "identity": identity,
-          "scope": scope
+        'auth': {
+          'identity': identity,
+          'scope': scope
         }
       }
     end
 
     def get_endpoint_url(endpoints, region, interface)
-      endpoint = endpoints.select { |ep| ep["region_id"] == region && ep["interface"] == interface }
+      endpoint = endpoints.select { |ep| ep['region_id'] == region && ep['interface'] == interface }
       raise CatalogError, "No endpoint available for region '#{region}' and interface '#{interface}'" unless endpoint
       endpoint[0]["url"]
     end
@@ -48,9 +48,9 @@ module Misty
 
     def set(response)
       payload = JSON.load(response.body)
-      token = response["x-subject-token"]
-      catalog = payload["token"]["catalog"]
-      expires = payload["token"]["expires_at"]
+      token = response['x-subject-token']
+      catalog = payload['token']['catalog']
+      expires = payload['token']['expires_at']
       [token, catalog, expires]
     end
 

@@ -1,10 +1,10 @@
 require 'test_helper'
 
-describe "Services" do
-  describe "#add" do
-    it "Adds a service" do
+describe 'Services' do
+  describe '#add' do
+    it 'Adds a service' do
       services = Misty::Services.new
-      services.add(:name, :project, ["v1", "v2.0"])
+      services.add(:name, :project, ['v1', 'v2.0'])
       services.services.size.must_equal 1
       service = services.services[0]
       service.must_be_kind_of Misty::Services::Service

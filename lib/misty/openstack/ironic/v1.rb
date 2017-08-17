@@ -1,6 +1,6 @@
 require 'misty/http/client'
 require 'misty/openstack/microversion'
-require "misty/openstack/ironic/ironic_v1"
+require 'misty/openstack/ironic/ironic_v1'
 
 module Misty
   module Openstack
@@ -18,7 +18,7 @@ module Misty
         end
 
         def microversion_header
-          { "X-Openstack-Ironic-API-Version" => "#{@version}" }
+          { 'X-Openstack-Ironic-API-Version' => "#{@version}" }
         end
       end
     end

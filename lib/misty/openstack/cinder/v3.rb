@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/cinder/cinder_v3"
+require 'misty/openstack/cinder/cinder_v3'
 
 module Misty
   module Openstack
@@ -12,7 +12,7 @@ module Misty
         end
 
         def self.prefix_path_to_ignore
-          "/v3/{tenant_id}"
+          '/v3/{tenant_id}'
         end
 
         def self.service_names

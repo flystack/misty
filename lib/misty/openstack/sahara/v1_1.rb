@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/sahara/sahara_v1_1"
+require 'misty/openstack/sahara/sahara_v1_1'
 
 module Misty
   module Openstack

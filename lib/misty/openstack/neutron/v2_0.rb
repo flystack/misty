@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/neutron/neutron_v2_0"
+require 'misty/openstack/neutron/neutron_v2_0'
 
 module Misty
   module Openstack

@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'webmock/minitest'
-require "misty"
+require 'misty'
 require 'pry-byebug'
 
 module Misty

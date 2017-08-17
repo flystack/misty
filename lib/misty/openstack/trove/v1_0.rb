@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/trove/trove_v1_0"
+require 'misty/openstack/trove/trove_v1_0'
 
 module Misty
   module Openstack

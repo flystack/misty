@@ -5,32 +5,32 @@ require 'misty/http/request'
 describe Misty::HTTP::Request do
   let(:request_header) { {'Accept' => '*/*'} }
 
-  describe "#decode?" do
+  describe '#decode?' do
     let(:response) do
-      uri = URI.parse("http://localhost/")
+      uri = URI.parse('http://localhost/')
       http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Get.new("/resource", {})
+      request = Net::HTTP::Get.new('/resource', {})
       http.request(request)
     end
 
-    it "true when response has a body" do
-      stub_request(:get, "http://localhost/resource").
+    it 'true when response has a body' do
+      stub_request(:get, 'http://localhost/resource').
         with(:headers => {'Accept' => '*/*'}).
         to_return(:status => 200, :body => "{\"key\": \"value\"}", :headers => {'Content-Type' => 'application/json'})
 
       service.decode?(response).must_equal true
     end
 
-    it "false when response has no content" do
-      stub_request(:get, "http://localhost/resource").
+    it 'false when response has no content' do
+      stub_request(:get, 'http://localhost/resource').
         with(:headers => {'Accept' => '*/*'}).
         to_return(:status => 204, :body => nil, :headers => {'Content-Type' => 'application/json'})
 
       service.decode?(response).must_equal false
     end
 
-    it "false when content_type is JSON" do
-      stub_request(:get, "http://localhost/resource").
+    it 'false when content_type is JSON' do
+      stub_request(:get, 'http://localhost/resource').
         with(:headers => request_header).
         to_return(:status => 200, :body => "{\"blah\": \"bla\"}")
 
@@ -38,9 +38,9 @@ describe Misty::HTTP::Request do
     end
   end
 
-  describe "http requests" do
-    it "#http_copy" do
-      stub_request(:copy, "http://localhost/resource").
+  describe 'http requests' do
+    it '#http_copy' do
+      stub_request(:copy, 'http://localhost/resource').
         with(:headers => request_header).
         to_return(:status => 202, :body => "{\"key\": \"value\"}")
 
@@ -49,8 +49,8 @@ describe Misty::HTTP::Request do
       response.body.wont_be_nil
     end
 
-    it "#http_delete" do
-      stub_request(:delete, "http://localhost/resource").
+    it '#http_delete' do
+      stub_request(:delete, 'http://localhost/resource').
         with(:headers => request_header).
         to_return(:status => 204, :body => '')
 
@@ -59,8 +59,8 @@ describe Misty::HTTP::Request do
       response.body.must_be_nil
     end
 
-    it "#http_get" do
-      stub_request(:get, "http://localhost/resource").
+    it '#http_get' do
+      stub_request(:get, 'http://localhost/resource').
         with(:headers => request_header).
         to_return(:status => 200, :body => "{\"key\": \"value\"}")
 
@@ -69,8 +69,8 @@ describe Misty::HTTP::Request do
       response.body.wont_be_empty
     end
 
-    it "#http_head" do
-      stub_request(:head, "http://localhost/resource").
+    it '#http_head' do
+      stub_request(:head, 'http://localhost/resource').
       with(:headers => request_header).
       to_return(:status => '200')
 
@@ -79,8 +79,8 @@ describe Misty::HTTP::Request do
       response.body.must_be_nil
     end
 
-    it "#http_options" do
-      stub_request(:options, "http://localhost/resource").
+    it '#http_options' do
+      stub_request(:options, 'http://localhost/resource').
       with(:headers => request_header).
       to_return(:status => '200')
 
@@ -88,36 +88,36 @@ describe Misty::HTTP::Request do
       response.must_be_kind_of Net::HTTPSuccess
     end
 
-    it "#http_patch" do
-      stub_request(:patch, "http://localhost/resource").
+    it '#http_patch' do
+      stub_request(:patch, 'http://localhost/resource').
         with(:headers => request_header).
         to_return(:status => 202, :body => "{\"key\": \"value\"}")
 
-      response = service.http_patch('/resource', {},  "data" => "value")
+      response = service.http_patch('/resource', {},  'data' => 'value')
       response.must_be_kind_of Net::HTTPAccepted
       response.body.wont_be_nil
     end
 
-    it "#http_post" do
-      stub_request(:post, "http://localhost/resource").
+    it '#http_post' do
+      stub_request(:post, 'http://localhost/resource').
         with(:headers => request_header).
         to_return(:status => 201)
 
-      response = service.http_post('/resource', {},  "data" => "value")
+      response = service.http_post('/resource', {},  'data' => 'value')
       response.must_be_kind_of Net::HTTPCreated
     end
 
-    it "#http_put" do
-      stub_request(:put, "http://localhost/resource").
+    it '#http_put' do
+      stub_request(:put, 'http://localhost/resource').
       with(:headers => request_header).
       to_return(:status => 200)
 
-      response = service.http_put('/resource', {},  "data" => "value")
+      response = service.http_put('/resource', {},  'data' => 'value')
       response.must_be_kind_of Net::HTTPOK
     end
 
-    it "#http_to_s" do
-      service.http_to_s('/resource', "headers",  "data"  => "value").must_equal "base_url='localhost:80', path='/resource', header=headers, data='{\"data\"=>\"value\"}'"
+    it '#http_to_s' do
+      service.http_to_s('/resource', 'headers',  'data'  => 'value').must_equal "base_url='localhost:80', path='/resource', header=headers, data='{\"data\"=>\"value\"}'"
     end
   end
 end

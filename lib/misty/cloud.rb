@@ -4,8 +4,7 @@ require 'misty/auth/auth_v3'
 module Misty
   class Cloud
     class Config
-      attr_accessor :auth, :content_type, :interface, :log,
-                    :region_id, :ssl_verify_mode, :headers
+      attr_accessor :auth, :content_type, :interface, :log, :region_id, :ssl_verify_mode, :headers
     end
 
     attr_reader :auth

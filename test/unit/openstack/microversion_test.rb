@@ -24,11 +24,11 @@ describe Misty::HTTP::Microversion do
     auth = Minitest::Mock.new
 
     def auth.get_endpoint(*args)
-      "http://localhost"
+      'http://localhost'
     end
 
     def auth.get_token
-      "token_id"
+      'token_id'
     end
 
     setup = Misty::Cloud::Config.new
@@ -38,37 +38,37 @@ describe Misty::HTTP::Microversion do
     setup.region_id = Misty::REGION_ID
     setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
 
-    stub_request(:get, "http://localhost/").
+    stub_request(:get, 'http://localhost/').
       with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
       to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
 
     Misty::Openstack::Nova::V2_1.new(auth, setup, {})
   end
 
-  describe "#version_get" do
-    it "returns the version number" do
-      microversion_service.version_get("2.12").must_equal "2.12"
+  describe '#version_get' do
+    it 'returns the version number' do
+      microversion_service.version_get('2.12').must_equal '2.12'
     end
 
-    it "returns the version number" do
-      microversion_service.version_get("CURRENT").must_equal "2.25"
+    it 'returns the version number' do
+      microversion_service.version_get('CURRENT').must_equal '2.25'
     end
 
-    it "fails when version is not within supporterd interval" do
+    it 'fails when version is not within supporterd interval' do
       proc do
-        microversion_service.version_get("2.0")
+        microversion_service.version_get('2.0')
       end.must_raise Misty::HTTP::Microversion::VersionError
     end
 
-    it "fails when LATEST version is not available" do
+    it 'fails when LATEST version is not available' do
       proc do
-        microversion_service.version_get("LATEST")
+        microversion_service.version_get('LATEST')
       end.must_raise Misty::HTTP::Microversion::VersionError
     end
 
-    it "fails when using an invalid version State" do
+    it 'fails when using an invalid version State' do
       proc do
-        microversion_service.version_get("OTHER")
+        microversion_service.version_get('OTHER')
       end.must_raise Misty::HTTP::Microversion::VersionError
     end
   end
