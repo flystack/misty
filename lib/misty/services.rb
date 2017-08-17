@@ -55,7 +55,7 @@ module Misty
     end
 
     def to_s
-      list = ""
+      list = ''
       @services.each do |service|
         list << service.to_s + "\n"
       end

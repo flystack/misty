@@ -63,11 +63,11 @@ module Misty
       # When a catalog provides a base path and the Service API definition containts the generic equivalent as prefix
       # then the preifx is redundant and must be removed from the path.
       # For example:
-      # Catalog provides "http://192.0.2.21:8004/v1/48985e6b8da145699d411f12a3459fca"
-      # and Service API has "/v1/{tenant_id}/stacks"
-      # then the path prefix is ignored and path is only "/stacks"
+      # Catalog provides 'http://192.0.2.21:8004/v1/48985e6b8da145699d411f12a3459fca'
+      # and Service API has '/v1/{tenant_id}/stacks'
+      # then the path prefix is ignored and path is only '/stacks'
       def self.prefix_path_to_ignore
-        ""
+        ''
       end
 
       def headers_default
@@ -96,7 +96,7 @@ module Misty
         options.service_names       = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
         options.ssl_verify_mode     = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
         options.headers             = params[:headers] ? params[:headers] : @config.headers
-        options.version             = params[:version]         ? params[:version] : "CURRENT"
+        options.version             = params[:version]         ? params[:version] : 'CURRENT'
 
         unless INTERFACES.include?(options.interface)
           raise InvalidDataError, "Options ':interface' must be one of #{INTERFACES}"

@@ -75,7 +75,7 @@ describe Misty::Cloud do
         stub_request(:post, 'http://localhost/stacks/id1/id2/snapshots').
         to_return(:status => 201, :body => 'snapshots', :headers => {})
 
-        cloud.orchestration.snapshot_a_stack("id1", "id2", "{\"key\": \"value\"}").response.must_be_kind_of Net::HTTPCreated
+        cloud.orchestration.snapshot_a_stack('id1', 'id2', "{\"key\": \"value\"}").response.must_be_kind_of Net::HTTPCreated
     end
 
     it 'fails when not enough arguments' do

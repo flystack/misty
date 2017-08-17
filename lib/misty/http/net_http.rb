@@ -4,7 +4,7 @@ module Misty
     module NetHTTP
       def self.http_request(uri, options = {})
         http_options = {}
-        if uri.scheme == "https"
+        if uri.scheme == 'https'
           http_options[:use_ssl] = true
           if options[:ssl_verify_mode] && options[:ssl_verify_mode] == false
             http_options[:verify_mode] = OpenSSL::SSL::VERIFY_NONE

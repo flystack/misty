@@ -81,7 +81,7 @@ describe Misty::Cloud do
 
       it 'with incomplete credentials' do
         proc do
-          Misty::Cloud.new(:auth => {:user => 'user', :url => "http://localhost" })
+          Misty::Cloud.new(:auth => {:user => 'user', :url => 'http://localhost' })
         end.must_raise Misty::Auth::CredentialsError
       end
 
@@ -115,7 +115,7 @@ describe Misty::Cloud do
       describe 'with v2 credentials' do
         let(:authv2_data) do
           {
-            :url      => "http://localhost:5000",
+            :url      => 'http://localhost:5000',
             :user     => 'admin',
             :password => 'secret',
             :tenant   => 'admin'
@@ -135,7 +135,7 @@ describe Misty::Cloud do
       describe 'with v3 credentials' do
         let(:authv3_data) do
           {
-            :url      => "http://localhost:5000",
+            :url      => 'http://localhost:5000',
             :user     => 'admin',
             :password => 'secret',
             :project  => 'admin'

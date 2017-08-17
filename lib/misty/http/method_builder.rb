@@ -69,7 +69,7 @@ module Misty
         subpath = /(.*)(\{.*\})(.*)/.match(str)
         return str unless subpath
         arg = args.pop
-        raise ArgumentError, "Not enough arguments" unless arg
+        raise ArgumentError, 'Not enough arguments' unless arg
         return inject_elements(subpath[1], args) + arg + subpath[3]
       end
 

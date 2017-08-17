@@ -95,7 +95,7 @@ describe Misty::HTTP::Direct do
         with(:body => "{\"data\":\"value\"}", :headers => request_header).
         to_return(:status => 200, :body => '', :headers => {})
 
-      response = service.put('/resource/test', {"data" => 'value'}, '/another-base')
+      response = service.put('/resource/test', {'data' => 'value'}, '/another-base')
       response.must_be_kind_of Net::HTTPOK
       response.body.must_be_nil
     end
