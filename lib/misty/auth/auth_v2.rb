@@ -3,12 +3,12 @@ require 'misty/auth'
 module Misty
   class AuthV2 < Misty::Auth
     def self.path
-      "/v2.0/tokens"
+      '/v2.0/tokens'
     end
 
     def catalog_endpoints(endpoints, region, interface)
       endpoints.each do |endpoint|
-        if endpoint["region"] == region && endpoint["#{interface}URL"]
+        if endpoint['region'] == region && endpoint["#{interface}URL"]
           return endpoint["#{interface}URL"]
         end
       end
@@ -16,17 +16,17 @@ module Misty
 
     def credentials
       if @token
-        identity = { "token": { "id": @token } }
+        identity = { 'token': { 'id': @token } }
       else
         raise Misty::Auth::CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
         raise Misty::Auth::CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
-        identity = { "passwordCredentials": user_credentials }
+        identity = { 'passwordCredentials': user_credentials }
       end
 
       if @tenant.id
-        identity.merge!("tenantId": @tenant.id)
+        identity.merge!('tenantId': @tenant.id)
       elsif @tenant.name
-        identity.merge!("tenantName": @tenant.name)
+        identity.merge!('tenantName': @tenant.name)
       else
         raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
       end
@@ -49,9 +49,9 @@ module Misty
 
     def set(response)
       payload = JSON.load(response.body)
-      token   = payload["access"]["token"]["id"]
-      catalog = payload["access"]["serviceCatalog"]
-      expires = payload["access"]["token"]["expires"]
+      token   = payload['access']['token']['id']
+      catalog = payload['access']['serviceCatalog']
+      expires = payload['access']['token']['expires']
       [token, catalog, expires]
     end
 

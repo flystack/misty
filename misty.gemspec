@@ -1,22 +1,22 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 require 'misty/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "misty"
+  spec.name          = 'misty'
   spec.version       = Misty::VERSION
-  spec.authors       = ["Gilles Dubreuil"]
-  spec.email         = ["gilles@redhat.com"]
+  spec.authors       = ['Gilles Dubreuil']
+  spec.email         = ['gilles@redhat.com']
 
   spec.summary       = %q{Misty is an OpenStack API client}
   spec.description   = %q{Misty is a dedicated HTTP client for OpenStack providing dynamic APIs requests management.}
-  spec.homepage      = "https://github.com/flystack/misty"
-  spec.license       = "Apache-2.0"
+  spec.homepage      = 'https://github.com/flystack/misty'
+  spec.license       = 'Apache-2.0'
 
   all_files          = `git ls-files -z`.split("\x0")
   spec.files         = all_files.grep(%r{^(exe|lib|test)/|^.rubocop.yml$})
   spec.executables   = all_files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.require_paths = ['lib']
 
   spec.rdoc_options = ['--charset=UTF-8']

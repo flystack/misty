@@ -1,6 +1,6 @@
 require 'misty/http/client'
 require 'misty/openstack/microversion'
-require "misty/openstack/nova/nova_v2_1"
+require 'misty/openstack/nova/nova_v2_1'
 
 module Misty
   module Openstack
@@ -15,7 +15,7 @@ module Misty
 
         # Overrides API because the definitions don't specify prefix
         def self.list_all_major_versions
-          http_get("/", headers)
+          http_get('/', headers)
         end
 
         def self.show_details_of_specific_api_version(version)
@@ -29,9 +29,9 @@ module Misty
         def microversion_header
           {
             # Remove once depcrecated
-            "X-Openstack-Nova-API-Version" => "#{@version}",
+            'X-Openstack-Nova-API-Version' => "#{@version}",
             # From version 2.27 the OpenStack-API-Version is used
-            "X-Openstack-API-Version" => "#{baseclass.downcase} #{@version}"
+            'X-Openstack-API-Version' => "#{baseclass.downcase} #{@version}"
           }
         end
       end

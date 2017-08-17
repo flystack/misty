@@ -1,3 +1,3 @@
 module Misty
-  VERSION = "0.7.2"
+  VERSION = '0.7.2'
 end

@@ -1,6 +1,6 @@
 require 'misty/http/client'
-require "misty/openstack/keystone/keystone_v2_0"
-require "misty/openstack/keystone/keystone_v2_0_ext"
+require 'misty/openstack/keystone/keystone_v2_0'
+require 'misty/openstack/keystone/keystone_v2_0_ext'
 
 module Misty
   module Openstack

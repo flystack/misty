@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/searchlight/searchlight_v1"
+require 'misty/openstack/searchlight/searchlight_v1'
 
 module Misty
   module Openstack

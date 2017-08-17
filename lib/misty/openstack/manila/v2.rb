@@ -1,6 +1,6 @@
 require 'misty/http/client'
 require 'misty/openstack/microversion'
-require "misty/openstack/manila/manila_v2"
+require 'misty/openstack/manila/manila_v2'
 
 module Misty
   module Openstack
@@ -18,7 +18,7 @@ module Misty
         end
 
         def microversion_header
-          { "X-Openstack-Manila-API-Version" => "#{@version}" }
+          { 'X-Openstack-Manila-API-Version' => "#{@version}" }
         end
       end
     end

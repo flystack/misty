@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/heat/heat_v1"
+require 'misty/openstack/heat/heat_v1'
 
 module Misty
   module Openstack
@@ -12,7 +12,7 @@ module Misty
         end
 
         def self.prefix_path_to_ignore
-          "/v1/{tenant_id}"
+          '/v1/{tenant_id}'
         end
 
         def self.service_names

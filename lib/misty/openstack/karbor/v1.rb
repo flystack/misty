@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require "misty/openstack/karbor/karbor_v1"
+require 'misty/openstack/karbor/karbor_v1'
 
 module Misty
   module Openstack

@@ -22,12 +22,12 @@ def api_valid?(api_entry)
 end
 
 # For each OpenStack project version, generates an equivalent of the following example:
-# it "Nova v2.1 loads a valid api structure" do
-#   require "misty/openstack/nova/v2_1"
+# it 'Nova v2.1 loads a valid api structure' do
+#   require 'misty/openstack/nova/v2_1'
 #   api = Misty::Openstack::Nova::V2_1.api
 #   api_valid?(api)
 # end
-describe "Openstack API" do
+describe 'Openstack API' do
   Misty.services.each do |service|
     service.versions.each do |version|
       it "#{service.project} #{version} loads a valid api structure" do

@@ -8,11 +8,11 @@ def service(content_type = :ruby)
   auth = Minitest::Mock.new
 
   def auth.get_endpoint(*args)
-    "http://localhost"
+    'http://localhost'
   end
 
   def auth.get_token
-    "token_id"
+    'token_id'
   end
 
   setup = Misty::Cloud::Config.new
@@ -22,9 +22,9 @@ def service(content_type = :ruby)
   setup.region_id = Misty::REGION_ID
   setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
 
-  stub_request(:get, "http://localhost/").
+  stub_request(:get, 'http://localhost/').
     with(:headers => request_header).
-    to_return(:status => 200, :body => "", :headers => {})
+    to_return(:status => 200, :body => '', :headers => {})
 
   Misty::Openstack::Neutron::V2_0.new(auth, setup, {})
 end
