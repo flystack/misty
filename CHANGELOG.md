@@ -1,3 +1,13 @@
+# 0.80 - 17 August 2017
+## APIs
+HTTP request thread friendly
+
+## Test
+* Webmock version 2.3
+
+## Miscellaneous
+Consistent use of single quotes unless extrapolation needed
+
 # 0.7.2 - 20 July 2017
 ## APIs
 * Better message if API method doesn't exist
