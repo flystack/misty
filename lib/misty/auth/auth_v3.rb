@@ -37,7 +37,7 @@ module Misty
     def get_endpoint_url(endpoints, region, interface)
       endpoint = endpoints.select { |ep| ep['region_id'] == region && ep['interface'] == interface }
       raise CatalogError, "No endpoint available for region '#{region}' and interface '#{interface}'" unless endpoint
-      endpoint[0]["url"]
+      endpoint[0]['url']
     end
 
     def scope

@@ -31,13 +31,13 @@ module Misty
         raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
       end
 
-      { "auth": identity }
+      { 'auth': identity }
     end
 
     def user_credentials
       {
-        "username": @user.name,
-        "password": @user.password
+        'username': @user.name,
+        'password': @user.password
       }
     end
 
