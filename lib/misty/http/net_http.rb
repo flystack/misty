@@ -11,7 +11,7 @@ module Misty
           end
         end
 
-        Net::HTTP.start(uri.host, uri.port, http_options) do |connection|
+        Net::HTTP.start(uri.host, uri.port, :ENV, http_options) do |connection|
           yield(connection)
         end
       end
