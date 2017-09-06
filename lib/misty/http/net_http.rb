@@ -6,7 +6,7 @@ module Misty
         http_options = {}
         if uri.scheme == 'https'
           http_options[:use_ssl] = true
-          if options[:ssl_verify_mode] && options[:ssl_verify_mode] == false
+          if options.fetch(:ssl_verify_mode, true) == false
             http_options[:verify_mode] = OpenSSL::SSL::VERIFY_NONE
           end
         end
