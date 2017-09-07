@@ -1,58 +1,63 @@
 require 'misty/services'
 
 module Misty
+  SERVICES = [
+    { name: :application_catalog,                 project: :murano,      versions: ['v1']},
+    { name: :alarming,                            project: :aodh,        versions: ['v2']},
+    { name: :backup,                              project: :freezer,     versions: ['v1']},
+    { name: :baremetal,                           project: :ironic,      versions: nil,          microversion: 'v1'},
+    { name: :block_storage,                       project: :cinder,      versions: ['v2', 'v1'], microversion: 'v3'},
+    { name: :clustering,                          project: :senlin,      versions: ['v1']},
+    { name: :compute,                             project: :nova,        versions: nil,          microversion: 'v2.1'},
+    { name: :container_infrastructure_management, project: :magnum,      versions: nil,          microversion: 'v1'},
+    { name: :data_processing,                     project: :sahara,      versions: ['v1.1']},
+    { name: :data_protection_orchestration,       project: :karbor,      versions: ['v1']},
+    { name: :database,                            project: :trove,       versions: ['v1.0']},
+    { name: :domain_name_server,                  project: :designate,   versions: ['v2']},
+    { name: :identity,                            project: :keystone,    versions: ['v3', 'v2.0']},
+    { name: :image,                               project: :glance,      versions: ['v2', 'v1']},
+    { name: :load_balancer,                       project: :octavia,     versions: ['v2.0']},
+    { name: :messaging,                           project: :zaqar,       versions: ['v2']},
+    { name: :metering,                            project: :ceilometer,  versions: ['v2']},
+    { name: :networking,                          project: :neutron,     versions: ['v2.0']},
+    { name: :nfv_orchestration,                   project: :tacker,      versions: ['v1.0']},
+    { name: :object_storage,                      project: :swift,       versions: ['v1']},
+    { name: :orchestration,                       project: :heat,        versions: ['v1']},
+    { name: :search,                              project: :searchlight, versions: ['v1']},
+    { name: :shared_file_systems,                 project: :manila,      versions: nil,          microversion: 'v2'}
+  ]
+
   HEADER_JSON = {
     'Content-Type' => 'application/json',
     'Accept'       => 'application/json'
   }
 
-  # Default log file. Use :log_file option to override
-  LOG_FILE = 'misty.log'
-  # Default log level. Use :log_level option to override
-  LOG_LEVEL = Logger::INFO
-
-  # Default content type for REST responses
-  # JSON format: :json
-  # Ruby structures: :ruby
+  # Default REST content type. Use :json or :ruby
   CONTENT_TYPE = :ruby
 
-  # Defaults Domain ID
+  # Default Domain ID
   DOMAIN_ID = 'default'
 
   # Default Interface
   INTERFACE = 'public'
 
+  # Default log file. Use :log_file option to override
+  LOG_FILE = 'misty.log'
+
+  # Default log level. Use :log_level option to override
+  LOG_LEVEL = Logger::INFO
+
   # Default Region ID
   REGION_ID = 'regionOne'
 
-  # Default mode when SSL is used (uri.scheme == 'https')
+  # Default when uri.scheme is https
   SSL_VERIFY_MODE = true
 
   def self.services
     services = Misty::Services.new
-    services.add(:application_catalog, :murano,       ['v1'])
-    services.add(:alarming,            :aodh,         ['v2'])
-    services.add(:backup,              :freezer,      ['v1'])
-    services.add(:baremetal,           :ironic,       ['v1'])
-    services.add(:block_storage,       :cinder,       ['v3', 'v2', 'v1'])
-    services.add(:clustering,          :senlin,       ['v1'])
-    services.add(:compute,             :nova,         ['v2.1'])
-    services.add(:container,           :magnum,       ['v1'])
-    services.add(:data_processing,     :sahara,       ['v1.1'])
-    services.add(:data_protection,     :karbor,       ['v1'])
-    services.add(:database,            :trove,        ['v1.0'])
-    services.add(:dns,                 :designate,    ['v2'])
-    services.add(:identity,            :keystone,     ['v3', 'v2.0'])
-    services.add(:image,               :glance,       ['v2', 'v1'])
-    services.add(:load_balancer,       :octavia,      ['v2.0'])
-    services.add(:messaging,           :zaqar,        ['v2'])
-    services.add(:metering,            :ceilometer,   ['v2'])
-    services.add(:networking,          :neutron,      ['v2.0'])
-    services.add(:nfv_orchestration,   :tacker,       ['v1.0'])
-    services.add(:object_storage,      :swift,        ['v1'])
-    services.add(:orchestration,       :heat,         ['v1'])
-    services.add(:search,              :searchlight,  ['v1'])
-    services.add(:shared_file_systems, :manila,       ['v2'])
+    SERVICES.each do |service|
+      services.add(service)
+    end
     services
   end
 
