@@ -1,4 +1,18 @@
-# 0.80 - 17 August 2017
+# 0.9.0 - 7 Septembre 2017
+## Services
+Service Class is explicitly using microversion parameter
+
+Following services renamed:
+`container` is now `container_infrastructure_management`
+`data_protection` is now `data_protection_orchestration`
+`dns` is now `domain_name_server`
+
+Aliases added for `container`, `data_protection`, `dns`
+
+## HTTP client
+Makes proxy environment variable work again
+
+# 0.8.0 - 17 August 2017
 ## APIs
 HTTP request thread friendly
 
