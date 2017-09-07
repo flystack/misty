@@ -29,12 +29,12 @@ end
 # end
 describe 'Openstack API' do
   Misty.services.each do |service|
-    service.versions.each do |version|
-      it "#{service.project} #{version} loads a valid api structure" do
-        require "misty/openstack/#{service.project}/#{Misty::Cloud.dot_to_underscore(version)}"
-        api = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{Misty::Cloud.dot_to_underscore(version).capitalize}").api
-        api_valid?(api)
-      end
-    end
+    #service.versions.each do |version|
+    #  it "#{service.project} #{version} loads a valid api structure" do
+    #    require "misty/openstack/#{service.project}/#{Misty::Cloud.dot_to_underscore(version)}"
+    #    api = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{Misty::Cloud.dot_to_underscore(version).capitalize}").api
+    #    api_valid?(api)
+    #  end
+    #end
   end
 end

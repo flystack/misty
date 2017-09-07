@@ -33,11 +33,10 @@ module Misty
 
     def build_service(service_name)
       service = Misty.services.find {|service| service.name == service_name}
-      service.options = @params[service.name] if @params[service.name]
-      service.version = service.options[:api_version]
-      version = self.class.dot_to_underscore(service.version)
+      options = @params[service.name] ? @params[service.name] : {}
+      version = self.class.dot_to_underscore(service.version(options[:api_version]))
       klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
-      klass.new(@auth, @config, service.options)
+      klass.new(@auth, @config, options)
     end
 
     def application_catalog
@@ -68,24 +67,24 @@ module Misty
       @compute ||= build_service(:compute)
     end
 
-    def container
-      @container ||= build_service(:container)
+    def container_infrastructure_management
+      @container_infrastructure_management ||= build_service(:container_infrastructure_management)
     end
 
     def data_processing
       @data_processing ||= build_service(:data_processing)
     end
 
-    def data_protection
-      @data_protection ||= build_service(:data_protection)
+    def data_protection_orchestration
+      @data_protection_orchestration ||= build_service(:data_protection_orchestration)
     end
 
     def database
       @database ||= build_service(:database)
     end
 
-    def dns
-      @dns ||= build_service(:dns)
+    def domain_name_server
+      @domain_name_server ||= build_service(:domain_name_server)
     end
 
     def identity
@@ -132,6 +131,9 @@ module Misty
       @shared_file_systems ||= build_service(:shared_file_systems)
     end
 
+    alias container container_infrastructure_management
+    alias data_protection data_protection_orchestration
+    alias dns domain_name_server
     alias volume block_storage
 
     private
