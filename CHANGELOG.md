@@ -1,4 +1,8 @@
-# 0.9.0 - 7 Septembre 2017
+# 0.9.1 - 8 Septembre 2017
+## Services
+Removed redundant aliases `container` and `data_protection` as this is covered by prefixes.
+
+# 0.9.0 - 7 September 2017
 ## Services
 Service Class is explicitly using microversion parameter
 
