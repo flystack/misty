@@ -81,44 +81,46 @@ openstack.network.create_network('network': {'name': 'my-network'})
 
 To obtain the list of supported services:
 ```ruby
-require 'misty'
-puts Misty.services
+> require 'misty'
+> puts Misty.services
+application_catalog: murano, versions: ["v1"]
+alarming: aodh, versions: ["v2"]
+backup: freezer, versions: ["v1"]
+baremetal: ironic, microversion: v1
+block_storage: cinder, versions: ["v2", "v1"], microversion: v3
+clustering: senlin, versions: ["v1"]
+compute: nova, microversion: v2.1
+container_infrastructure_management: magnum, microversion: v1
+data_processing: sahara, versions: ["v1.1"]
+data_protection_orchestration: karbor, versions: ["v1"]
+database: trove, versions: ["v1.0"]
+domain_name_server: designate, versions: ["v2"]
+identity: keystone, versions: ["v3", "v2.0"]
+image: glance, versions: ["v2", "v1"]
+load_balancer: octavia, versions: ["v2.0"]
+messaging: zaqar, versions: ["v2"]
+metering: ceilometer, versions: ["v2"]
+networking: neutron, versions: ["v2.0"]
+nfv_orchestration: tacker, versions: ["v1.0"]
+object_storage: swift, versions: ["v1"]
+orchestration: heat, versions: ["v1"]
+search: searchlight, versions: ["v1"]
+shared_file_systems: manila, microversion: v2
 ```
 
-Which produces the equivalent of the following:  
+### Prefixes
+A shorter name can be used to call a service only if it's unique among all services.
+For instance `net` or `network` can be used instead of `networking`.
+Meanwhile `data` doesn't work because it's ambiguous between `data_processing` and `data_protection_orchestration`
 
-name | project | versions
---- | --- | ---
-application_catalog | murano | ["v1"]
-alarming | aodh | ["v2"]
-backup | freezer | ["v1"]
-baremetal | ironic | ["v1"]
-block_storage | cinder | ["v3", "v2", "v1"]
-clustering | senlin | ["v1"]
-compute | nova | ["v2.1"]
-container | magnum | ["v1"]
-data_processing | sahara | ["v1.1"]
-data_protection | karbor | ["v1"]
-database | trove | ["v1.0"]
-dns | designate | ["v2"]
-identity | keystone | ["v3", "v2.0"]
-image | glance | ["v2", "v1"]
-load_balancer | octavia | ["v2.0"]
-messaging | zaqar | ["v2"]
-metering | ceilometer | ["v2"]
-networking | neutron | ["v2.0"]
-nfv_orchestration | tacker | ["v1.0"]
-object_storage | swift | ["v1"]
-orchestration | heat | ["v1"]
-search | searchlight | ["v1"]
-shared_file_systems | manila | ["v2"]
+### Aliases  
+* `dns` is an alias for `domain_name_server`  
+* `volume` is an alias for `block_storage`  
 
-* Notes  
-  When an Openstack service requires a different service name, the :service_names option can be used (see below).
-  `volume` is an alias for `block_storage`.  
-  Unique prefixed service names can be used: For instance `network` (or even `net`) instead of `networking`. Meanwhile
-  `data` doesn't work because it's ambiguous between `data_processing` and `data_protection`
+## Openstack service name
+Different service names can be used for a specific Openstack Service by using the :service_names option (see below).
 
+## Requests
 The #requests method provides the available requests for a service, for example:
 ```ruby
 openstack.compute.requests

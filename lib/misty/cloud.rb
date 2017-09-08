@@ -131,8 +131,6 @@ module Misty
       @shared_file_systems ||= build_service(:shared_file_systems)
     end
 
-    alias container container_infrastructure_management
-    alias data_protection data_protection_orchestration
     alias dns domain_name_server
     alias volume block_storage
 
