@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require 'misty/openstack/microversion'
+require 'misty/microversion'
 require 'misty/openstack/nova/nova_v2_1'
 
 module Misty
@@ -7,7 +7,7 @@ module Misty
     module Nova
       class V2_1 < Misty::HTTP::Client
         extend Misty::Openstack::NovaV2_1
-        include Misty::HTTP::Microversion
+        include Misty::Microversion
 
         def self.api
           v2_1
@@ -27,12 +27,11 @@ module Misty
         end
 
         def microversion_header
-          {
-            # Remove once depcrecated
-            'X-Openstack-Nova-API-Version' => "#{@version}",
-            # From version 2.27 the OpenStack-API-Version is used
-            'X-Openstack-API-Version' => "#{baseclass.downcase} #{@version}"
-          }
+          # Versions 2.27+ use default OpenStack-API-Version
+          header = super
+          # For prior vesions then remove once depcrecated
+          header.merge!('X-Openstack-Nova-API-Version' => "#{@version}",)
+          header
         end
       end
     end
