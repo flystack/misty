@@ -94,6 +94,10 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('volume', 'cinder')), :headers => token_header)
 
+    stub_request(:get, 'http://localhost/').
+      with(:headers => auth_headers).
+      to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
+
     cloud.block_storage.must_be_kind_of Misty::Openstack::Cinder::V3
   end
 
