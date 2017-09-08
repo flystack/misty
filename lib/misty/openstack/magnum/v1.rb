@@ -16,10 +16,6 @@ module Misty
         def self.service_names
           %w{container}
         end
-
-        def microversion_header
-          {'X-Openstack-API-Version' => "#{baseclass.downcase} #{@version}" }
-        end
       end
     end
   end

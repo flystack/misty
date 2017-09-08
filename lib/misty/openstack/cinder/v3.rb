@@ -1,5 +1,5 @@
 require 'misty/http/client'
-require 'misty/openstack/microversion'
+require 'misty/microversion'
 require 'misty/openstack/cinder/cinder_v3'
 
 module Misty
@@ -7,7 +7,7 @@ module Misty
     module Cinder
       class V3 < Misty::HTTP::Client
         extend Misty::Openstack::CinderV3
-        include Misty::HTTP::Microversion
+        include Misty::Microversion
 
         def self.api
           v3
@@ -19,10 +19,6 @@ module Misty
 
         def self.service_names
           %w{block-storage, block-store, volume}
-        end
-
-        def microversion_header
-          {'X-Openstack-API-Version' => "#{baseclass.downcase} #{@version}" }
         end
       end
     end

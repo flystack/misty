@@ -1,9 +1,9 @@
 require 'test_helper'
 require 'auth_helper'
 require 'misty/http/client'
-require 'misty/openstack/microversion'
+require 'misty/microversion'
 
-describe Misty::HTTP::Microversion do
+describe Misty::Microversion do
   let(:versions_data) do
     { 'versions' =>
       [{ 'status' => 'SUPPORTED',
@@ -57,19 +57,19 @@ describe Misty::HTTP::Microversion do
     it 'fails when version is not within supporterd interval' do
       proc do
         microversion_service.version_get('2.0')
-      end.must_raise Misty::HTTP::Microversion::VersionError
+      end.must_raise Misty::Microversion::VersionError
     end
 
     it 'fails when LATEST version is not available' do
       proc do
         microversion_service.version_get('LATEST')
-      end.must_raise Misty::HTTP::Microversion::VersionError
+      end.must_raise Misty::Microversion::VersionError
     end
 
     it 'fails when using an invalid version State' do
       proc do
         microversion_service.version_get('OTHER')
-      end.must_raise Misty::HTTP::Microversion::VersionError
+      end.must_raise Misty::Microversion::VersionError
     end
   end
 end
