@@ -13,6 +13,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/flystack/misty'
   spec.license       = 'Apache-2.0'
 
+  spec.required_ruby_version = '>= 2.3'
+
   all_files          = `git ls-files -z`.split("\x0")
   spec.files         = all_files.grep(%r{^(exe|lib|test)/|^.rubocop.yml$})
   spec.executables   = all_files.grep(%r{^exe/}) { |f| File.basename(f) }
