@@ -1,3 +1,5 @@
+$VERBOSE = nil
+
 require 'misty'
 require 'minitest/autorun'
 require 'vcr'
