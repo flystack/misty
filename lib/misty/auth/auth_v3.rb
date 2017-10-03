@@ -6,12 +6,8 @@ module Misty
       '/v3/auth/tokens'
     end
 
-    def catalog_endpoints(endpoints, region, interface)
-      endpoints.each do |endpoint|
-        if endpoint['region_id'] == region && endpoint['interface'] == interface
-          return endpoint['url']
-        end
-      end
+    def self.get_url(endpoint, region_id, interface)
+      return endpoint['url'] if endpoint['region_id'] == region_id && endpoint['interface'] == interface
     end
 
     def credentials
@@ -32,12 +28,6 @@ module Misty
           'scope': scope
         }
       }
-    end
-
-    def get_endpoint_url(endpoints, region, interface)
-      endpoint = endpoints.select { |ep| ep['region_id'] == region && ep['interface'] == interface }
-      raise CatalogError, "No endpoint available for region '#{region}' and interface '#{interface}'" unless endpoint
-      endpoint[0]['url']
     end
 
     def scope

@@ -7,7 +7,7 @@ end
 def service(content_type = :ruby)
   auth = Minitest::Mock.new
 
-  def auth.get_endpoint(*args)
+  def auth.get_url(*args)
     'http://localhost'
   end
 

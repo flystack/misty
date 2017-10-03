@@ -23,7 +23,7 @@ describe Misty::Microversion do
   let(:microversion_service) do
     auth = Minitest::Mock.new
 
-    def auth.get_endpoint(*args)
+    def auth.get_url(*args)
       'http://localhost'
     end
 

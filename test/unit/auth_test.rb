@@ -177,12 +177,12 @@ describe Misty::Auth do
         auth.catalog.must_equal ['catalog_data']
       end
 
-      it '#get_endpoint' do
+      it '#get_url' do
         stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
         to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {'x-subject-token'=>'token_data'})
 
         auth = Misty::AuthV3.new(authv3_creds, config)
-        auth.get_endpoint(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
+        auth.get_url(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
       end
     end
   end
@@ -289,12 +289,12 @@ describe Misty::Auth do
         auth.catalog.must_equal ['catalog_data']
       end
 
-      it '#get_endpoint' do
+      it '#get_url' do
         stub_request(:post, 'http://localhost:5000/v2.0/tokens').
           to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
         auth = Misty::AuthV2.new(authv2_creds, config)
-        auth.get_endpoint(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
+        auth.get_url(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
       end
     end
   end

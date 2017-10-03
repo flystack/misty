@@ -32,11 +32,9 @@ module Misty
         raise URLError, 'No URL provided' if auth[:url].nil? || auth[:url].empty?
         @uri = URI.parse(auth[:url])
         @config = config
-        # autheticate
         @credentials = set_credentials(auth)
         @token, @catalog, @expires = set(authenticate)
       end
-      #byebug unless config.is_a?(Misty::Cloud::Config)
     end
 
     def authenticate
@@ -60,18 +58,32 @@ module Misty
       Time.parse(@expires) < Time.now.utc
     end
 
-    def get_endpoint(service_names, region, interface)
-      @catalog.each do |catalog|
-        if service_names.include? catalog['type']
-          return catalog_endpoints(catalog['endpoints'], region, interface)
-        end
+    def get_url(service_names, region_id, interface)
+      find_url(get_service(service_names), region_id, interface)
+    end
+
+    def get_service(service_names)
+      @catalog.each do |service|
+        return service if service_names.include?(service['type'])
       end
-      raise CatalogError, "No service found with either #{service_names} name, region #{region}, interface #{interface}"
+      raise CatalogError, "No service '#{service_names}' found."
     end
 
     def get_token
       @token, @catalog, @expires = set(authenticate) if expired?
       @token
+    end
+
+    def find_url(service, region_id, interface)
+      if service['endpoints']
+        service['endpoints'].each do |endpoint|
+          if (url = self.class.get_url(endpoint, region_id, interface))
+            return url
+          end
+        end
+      end
+      message = "No endpoint found: service '#{service['type']}', region '#{region_id}', interface '#{interface}'"
+      raise CatalogError, message
     end
   end
 end
