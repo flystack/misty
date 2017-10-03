@@ -11,6 +11,10 @@ module Misty
           v1
         end
 
+        def self.prefix_path_to_ignore
+          '/v1/{account}'
+        end
+
         def self.service_names
           %w{object-storage object-store}
         end
