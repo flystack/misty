@@ -52,7 +52,7 @@ module Misty
         @auth = auth
         @config = config
         @options = setup(options)
-        @uri = URI.parse(@auth.get_endpoint(@options.service_names, @options.region_id, @options.interface))
+        @uri = URI.parse(@auth.get_url(@options.service_names, @options.region_id, @options.interface))
         @base_path = @options.base_path ? @options.base_path : @uri.path
         @base_path = @base_path.chomp('/')
         @version = nil
