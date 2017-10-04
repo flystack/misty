@@ -1,7 +1,7 @@
 require 'misty/http/client'
 
 def request_header
-  {'Accept'=>'application/json', 'Content-Type'=>'application/json'}
+  {'Accept' => 'application/json'}
 end
 
 def service(content_type = :ruby)

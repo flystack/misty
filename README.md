@@ -264,7 +264,7 @@ The following options are applied to each service unless specifically provided f
   Default: `:ruby`
 
 ### Services Options
-Each service can get parameters to be specified.
+Each service can have specific parameters.
 
 ```ruby
 openstack = Misty::Cloud.new(:auth => auth, :identity => {}, :compute => {})
@@ -279,7 +279,10 @@ The following options are available:
   Type: String  
 * :base_url  
   Allows to force the base URL for every requests.  
-  Type: String  
+  Type: String        
+* :headers
+  Optional headers
+  Type: Hash
 * :interface  
   Allows to provide an alternate interface. Allowed values are "public", "internal" or "admin"  
   Type: String  

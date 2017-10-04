@@ -39,7 +39,7 @@ describe Misty::Microversion do
     setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
 
     stub_request(:get, 'http://localhost/').
-      with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
+      with(:headers => {'Accept'=>'application/json'}).
       to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
 
     Misty::Openstack::Nova::V2_1.new(auth, setup, {})

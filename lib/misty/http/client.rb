@@ -37,15 +37,17 @@ module Misty
       #    :base_path => nil
       #   URL can be forced (Helps when setup is broken)
       #    :base_url => nil
+      #   Optional headers
+      #    :headers => {}
       #   Endpoint type (admin, public or internal)
-      #     :interface => "public"
+      #    :interface => "public"
       #   Region ID
       #    :region_id => "regionOne"
       #   Service name
       #    The Service names are pre defined but more can be added using this option.
       #    :service_name
       #   SSL Verify Mode
-      #     :ssl_verify_mode => true
+      #    :ssl_verify_mode => true
       #   (micro)version: Can be numbered (3.1) or by state (CURRENT, LATEST or SUPPORTED)
       #     :version => "CURRENT"
       def initialize(auth, config, options)
@@ -70,15 +72,14 @@ module Misty
         ''
       end
 
-      def headers_default
-        Misty::HEADER_JSON
-      end
-
       def headers
-        h = headers_default.merge('X-Auth-Token' => @auth.get_token.to_s)
-        h.merge!(microversion_header) if microversion
-        h.merge!(@options.headers) if @options.headers
-        h
+        header = {}
+        header.merge!({'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+        header.merge!('X-Auth-Token' => @auth.get_token.to_s)
+        header.merge!(@config.headers) if @config.headers
+        header.merge!(@options.headers) if @options.headers
+        header.merge!(microversion_header) if microversion
+        header
       end
 
       private
@@ -95,7 +96,7 @@ module Misty
         options.region_id           = params[:region_id]       ? params[:region_id] : @config.region_id
         options.service_names       = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
         options.ssl_verify_mode     = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
-        options.headers             = params[:headers] ? params[:headers] : @config.headers
+        options.headers             = params[:headers]         ? params[:headers] : {}
         options.version             = params[:version]         ? params[:version] : 'CURRENT'
 
         unless INTERFACES.include?(options.interface)

@@ -27,11 +27,6 @@ module Misty
     { name: :shared_file_systems,                 project: :manila,      microversion: 'v2'}
   ]
 
-  HEADER_JSON = {
-    'Content-Type' => 'application/json',
-    'Accept'       => 'application/json'
-  }
-
   # Default REST content type. Use :json or :ruby
   CONTENT_TYPE = :ruby
 
