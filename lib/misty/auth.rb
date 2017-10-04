@@ -42,10 +42,9 @@ module Misty
         @uri, ssl_verify_mode: @config.ssl_verify_mode, log: @config.log
       ) do |connection|
         response = connection.post(self.class.path, @credentials.to_json,
-                                   Misty::HEADER_JSON)
+          { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })
         unless response.code =~ /200|201/
-          raise AuthenticationError,
-                "Response code=#{response.code}, Msg=#{response.msg}"
+          raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}"
         end
         response
       end

@@ -52,7 +52,7 @@ module Misty
     end
 
     def versions_fetch
-      response = http_get('/', headers_default)
+      response = http_get('/', {'Accept'=> 'application/json'})
       raise VersionError, "Code: #{response.code}, Message: #{response.msg}" unless response.code =~ /2??/
       data = response.body.is_a?(Hash) ? response.body : JSON.parse(response.body)
       list = data['versions']

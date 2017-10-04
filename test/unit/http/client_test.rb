@@ -21,12 +21,6 @@ describe Misty::HTTP::Client do
     end
   end
 
-  describe '#headers_default' do
-    it 'returns hash' do
-      service.headers_default.must_be_kind_of Hash
-    end
-  end
-
   describe '#headers' do
     it 'returns hash' do
       service.headers.must_be_kind_of Hash
