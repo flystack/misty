@@ -1,4 +1,21 @@
-# 0.9.1 - 8 Septembre 2017
+# 0.9.2 - 4 October 2017
+## Gem
+Minimum Ruby version added
+
+## HTTP
+Header re-factored and added to documentation
+
+## Services
+Re-factored Endpoint/URL with better Error management
+Re-factored Microversion
+Swift:
+* Missed path prefix filter added
+* Microversion added
+
+## Tests
+Suppressed Ruby warnings
+
+# 0.9.1 - 8 September 2017
 ## Services
 Removed redundant aliases `container` and `data_protection` as this is covered by prefixes.
 
