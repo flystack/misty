@@ -319,6 +319,7 @@ openstack.network.post('/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp
 # Requirements
 
 ## Ruby versions tested
+* Ruby MRI 2.4.2
 * Ruby MRI 2.4.1
 * Ruby MRI 2.4.0
 * Ruby MRI 2.3.4
