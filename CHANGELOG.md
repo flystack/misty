@@ -1,3 +1,10 @@
+# 1.0.0 - 10 October 2017
+## HTTP Requests
+Transplarent hanlding of data for POST, PUT and PATCH requests leaving the server to handle the formats.
+
+## Ruby
+Support for MRI 2.4.2
+
 # 0.9.2 - 4 October 2017
 ## Gem
 Minimum Ruby version added
