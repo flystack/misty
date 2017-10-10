@@ -20,4 +20,5 @@ first_network_id = nets.body['networks'][0]['id']
 first_network = cloud.network.show_network_details(first_network_id)
 pp first_network
 
-pp cloud.network.create_network(:network => {:name => 'misty-example'})
+network = Misty.to_json(:network => {:name => 'misty-example'})
+pp cloud.network.create_network(network)

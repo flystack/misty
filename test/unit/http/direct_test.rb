@@ -61,19 +61,19 @@ describe Misty::HTTP::Direct do
   describe '#post' do
     it 'successful without providing a base url' do
       stub_request(:post, 'http://localhost/resource/test').
-        with(:body => "{\"data\":\"value\"}", :headers => request_header).
+        with(:body => 'data', :headers => request_header).
         to_return(:status => 201, :body => '', :headers => {})
 
-      response = service.post('/resource/test', 'data' => 'value')
+      response = service.post('/resource/test', 'data')
       response.must_be_kind_of Net::HTTPCreated
       response.body.must_be_nil
     end
 
     it 'successful with a base url' do
       stub_request(:post, 'http://localhost/another-base/resource/test').
-        with(:body => "{\"data\":\"value\"}", :headers => request_header).
+        with(:body => 'data', :headers => request_header).
         to_return(:status => 201, :body => '', :headers => {})
-      response = service.post('/resource/test', {'data' => 'value'}, '/another-base')
+      response = service.post('/resource/test', 'data', '/another-base')
       response.must_be_kind_of Net::HTTPCreated
       response.body.must_be_nil
     end
@@ -82,20 +82,20 @@ describe Misty::HTTP::Direct do
   describe '#put' do
     it 'successful without providing a base url' do
       stub_request(:put, 'http://localhost/resource/test').
-        with(:body => "{\"data\":\"value\"}", :headers => request_header).
+        with(:body => 'data', :headers => request_header).
         to_return(:status => 200, :body => '', :headers => {})
 
-      response = service.put('/resource/test', 'data' => 'value')
+      response = service.put('/resource/test', 'data')
       response.must_be_kind_of Net::HTTPOK
       response.body.must_be_nil
     end
 
     it 'successful with a base url' do
       stub_request(:put, 'http://localhost/another-base/resource/test').
-        with(:body => "{\"data\":\"value\"}", :headers => request_header).
+        with(:body => 'data', :headers => request_header).
         to_return(:status => 200, :body => '', :headers => {})
 
-      response = service.put('/resource/test', {'data' => 'value'}, '/another-base')
+      response = service.put('/resource/test', 'data', '/another-base')
       response.must_be_kind_of Net::HTTPOK
       response.body.must_be_nil
     end
