@@ -74,7 +74,7 @@ module Misty
 
       def headers
         header = {}
-        header.merge!({'Content-Type' => 'application/json', 'Accept' => 'application/json'})
+        header.merge!({'Accept' => 'application/json; q=1.0'})
         header.merge!('X-Auth-Token' => @auth.get_token.to_s)
         header.merge!(@config.headers) if @config.headers
         header.merge!(@options.headers) if @options.headers

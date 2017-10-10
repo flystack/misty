@@ -1,16 +1,18 @@
 # Introduction
-Misty is a HTTP client for OpenStack APIs, aiming to be fast and to provide a flexible and at same time exhaustive
-APIs experience.
+Misty is a HTTP client for OpenStack APIs, aiming to be fast, flexible and exhaustive.
+Misty acts as a conduit to OpenStack APIs by handling requests as transparently as possible.
 
 ## Features
 * Flexible Openstack APIs integration
 * Standardized Openstack APIs: [Based upon API-ref](https://developer.openstack.org/api-guide/quick-start/)
-* Multiple Service versions and Microversions
+* Automatically generated API schemas - Any request can be overridden
+* Versions and Microversions
+* Transparent Request data hanlding
+* Response data format of choice: JSON or raw (Ruby)
+* Custom HTTP Methods for special needs
 * On demand services - Auto loads required versions
-* Low  dependency - Use standard Net/HTTP and JSON gem only
-* I/O format choice: JSON or Ruby structures for queries and responses
-* Persistent HTTP connections (default since HTTP 1.1 anyway) but for the authentication bootstrapping
-* Direct HTTP Methods for custom needs
+* Low dependency - Use standard Net/HTTP and JSON gem only
+* Persistent HTTP connections (default since HTTP 1.1 anyway)
 
 ## A solid KISS
 For REST transactions Misty relies on standard Net/HTTP library.  
@@ -76,7 +78,8 @@ Each service name (i.e. `compute`) is the object handling API requests.
 openstack = Misty::Cloud.new(:auth => { ... })
 openstack.compute.list_servers
 openstack.network.list_networks
-openstack.network.create_network('network': {'name': 'my-network'})
+data = Misty.to_json('network': {'name': 'my-network'})
+openstack.network.create_network(data)
 ```
 
 To obtain the list of supported services:

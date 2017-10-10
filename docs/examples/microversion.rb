@@ -7,7 +7,8 @@ cloud = Misty::Cloud.new(:auth => authv3, :compute => {:version => '2.25'})
 
 pp cloud.compute.versions
 
-admin_keypair = cloud.compute.create_or_import_keypair('keypair': {'name': 'admin-keypair'})
+data_keypair = Misty.to_json('keypair': {'name': 'admin-keypair'})
+admin_keypair = cloud.compute.create_or_import_keypair(data_keypair)
 
 user_id = admin_keypair.body['keypair']['user_id']
 

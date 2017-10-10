@@ -7,7 +7,8 @@ describe 'Compute Service Nova v2.1 features' do
 
       # POST with body data
       server = { 'name': 'test_create_server', 'flavorRef': '1', 'imageRef': 'c091ccf2-a4ae-4fa0-a716-defd6376b5dc', 'networks': [{'uuid': '9c6e43b6-3d1d-4106-ad45-5fc3f5e371ee'}]}
-      response = cloud.compute.create_server('server' => server)
+      data = Misty.to_json('server' => server)
+      response = cloud.compute.create_server(data)
       response.code.must_equal '202'
       id = response.body['server']['id']
       id.wont_be_empty
@@ -24,7 +25,8 @@ describe 'Compute Service Nova v2.1 features' do
 
       # PUT with URI value and body data
       update_server = { 'name': 'test_updated_server' }
-      response = cloud.compute.update_server(id, 'server' => update_server)
+      data = Misty.to_json('server' => update_server)
+      response = cloud.compute.update_server(id, data)
       response.code.must_equal '200'
       response.body['server']['name'].must_equal 'test_updated_server'
 

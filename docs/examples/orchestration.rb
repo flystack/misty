@@ -35,8 +35,8 @@ heat_template = {
 }
 
 cloud = Misty::Cloud.new(:auth => auth_v3)
-
-response = cloud.orchestration.create_stack(heat_template)
+data_heat_template = Misty.to_json(heat_template)
+response = cloud.orchestration.create_stack(data_heat_template)
 id = response.body['stack']['id']
 
 stack = cloud.orchestration.show_stack_details('test_stack', id)

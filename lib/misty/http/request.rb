@@ -54,21 +54,21 @@ module Misty
       def http_patch(path, headers, data)
         @config.log.info(http_to_s(path, headers, data))
         request = Net::HTTP::Patch.new(path, headers)
-        request.body = Misty.to_json(data)
+        request.body = data
         http(request)
       end
 
       def http_post(path, headers, data)
         @config.log.info(http_to_s(path, headers, data))
         request = Net::HTTP::Post.new(path, headers)
-        request.body = Misty.to_json(data)
+        request.body = data
         http(request)
       end
 
       def http_put(path, headers, data)
         @config.log.info(http_to_s(path, headers, data))
         request = Net::HTTP::Put.new(path, headers)
-        request.body = Misty.to_json(data)
+        request.body = data
         http(request)
       end
 

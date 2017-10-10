@@ -53,12 +53,14 @@ describe 'Orchestration Service using Heat v1' do
       cloud = Misty::Cloud.new(:auth => auth, :orchestration => {:api_version => 'v1'})
 
       # POST with body data
-      response = cloud.orchestration.create_stack(heat_template1)
+      data_heat_template1 = Misty.to_json(heat_template1)
+      response = cloud.orchestration.create_stack(data_heat_template1)
       response.code.must_equal '201'
       id1 = response.body['stack']['id']
       id1.wont_be_empty
 
-      response = cloud.orchestration.create_stack(heat_template2)
+      data_heat_template2 = Misty.to_json(heat_template2)
+      response = cloud.orchestration.create_stack(data_heat_template2)
       response.code.must_equal '201'
       id2 = response.body['stack']['id']
       id2.wont_be_empty
@@ -77,11 +79,13 @@ describe 'Orchestration Service using Heat v1' do
       # Updating the network template because it's faster to execute
       # therefore more likely to be in ready state before updating
       heat_template1[:template][:description] = 'Updated test template'
-      response = cloud.orchestration.update_stack('test_stack1', id1, heat_template1)
+      data_heat_template1 = Misty.to_json(heat_template1)
+      response = cloud.orchestration.update_stack('test_stack1', id1, data_heat_template1)
       response.code.must_equal '202'
 
       # PATCH with URI values
-      response = cloud.orchestration.update_stack_patch('test_stack1', id1, 'disable_rollback': false)
+      data = Misty.to_json('disable_rollback': false)
+      response = cloud.orchestration.update_stack_patch('test_stack1', id1, data)
       response.code.must_equal '202'
 
       # DELETE with URI value
