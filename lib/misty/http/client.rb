@@ -2,13 +2,14 @@ require 'misty/http/net_http'
 require 'misty/http/method_builder'
 require 'misty/http/request'
 require 'misty/http/direct'
+require 'misty/http/header'
 
 module Misty
   module HTTP
     class Client
       class Options
-        attr_accessor :base_path, :base_url, :interface, :region_id,
-                      :service_names, :ssl_verify_mode, :version, :headers
+        attr_accessor :base_path, :base_url, :headers, :interface, :region_id,
+                      :service_names, :ssl_verify_mode, :version
       end
 
       class InvalidDataError < StandardError; end
@@ -20,7 +21,7 @@ module Misty
 
       INTERFACES = %w{admin public internal}
 
-      attr_reader :microversion
+      attr_reader :headers, :microversion
 
       def requests
         list = []
@@ -50,7 +51,7 @@ module Misty
       #    :ssl_verify_mode => true
       #   (micro)version: Can be numbered (3.1) or by state (CURRENT, LATEST or SUPPORTED)
       #     :version => "CURRENT"
-      def initialize(auth, config, options)
+      def initialize(auth, config, options = {})
         @auth = auth
         @config = config
         @options = setup(options)
@@ -59,6 +60,10 @@ module Misty
         @base_path = @base_path.chomp('/')
         @version = nil
         @microversion = false
+        @headers = Misty::HTTP::Header.new(@config.headers.get.clone)
+        @headers.add('X-Auth-Token' => @auth.get_token.to_s)
+        @headers.add(microversion_header) if microversion
+        @headers.add(@options.headers) unless @options.headers.empty?
       end
 
       # Sub classes to override
@@ -72,16 +77,6 @@ module Misty
         ''
       end
 
-      def headers
-        header = {}
-        header.merge!({'Accept' => 'application/json; q=1.0'})
-        header.merge!('X-Auth-Token' => @auth.get_token.to_s)
-        header.merge!(@config.headers) if @config.headers
-        header.merge!(@options.headers) if @options.headers
-        header.merge!(microversion_header) if microversion
-        header
-      end
-
       private
 
       def baseclass
@@ -92,11 +87,11 @@ module Misty
         options = Options.new()
         options.base_path           = params[:base_path]       ? params[:base_path] : nil
         options.base_url            = params[:base_url]        ? params[:base_url] : nil
+        options.headers             = params[:headers]         ? params[:headers] : {}
         options.interface           = params[:interface]       ? params[:interface] : @config.interface
         options.region_id           = params[:region_id]       ? params[:region_id] : @config.region_id
         options.service_names       = params[:service_name]    ? self.class.service_names << params[:service_name] : self.class.service_names
-        options.ssl_verify_mode     = params[:ssl_verify_mode] ? params[:ssl_verify_mode] : @config.ssl_verify_mode
-        options.headers             = params[:headers]         ? params[:headers] : {}
+        options.ssl_verify_mode     = params[:ssl_verify_mode].nil? ? @config.ssl_verify_mode : params[:ssl_verify_mode]
         options.version             = params[:version]         ? params[:version] : 'CURRENT'
 
         unless INTERFACES.include?(options.interface)

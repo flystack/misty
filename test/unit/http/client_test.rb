@@ -21,12 +21,6 @@ describe Misty::HTTP::Client do
     end
   end
 
-  describe '#headers' do
-    it 'returns hash' do
-      service.headers.must_be_kind_of Hash
-    end
-  end
-
   describe '#baseclass' do
     it 'returns base class name' do
       service.send(:baseclass).must_equal 'V2_0'
@@ -34,16 +28,35 @@ describe Misty::HTTP::Client do
   end
 
   describe '#setup' do
-    it 'sets default options' do
+    it 'use default options' do
       options = service.send(:setup, {})
       options.must_be_kind_of Misty::HTTP::Client::Options
       options.base_path.must_be_nil
       options.base_url.must_be_nil
+      options.headers.must_equal ({})
       options.interface.must_equal 'public'
       options.region_id.must_equal 'regionOne'
       options.service_names.must_include 'network'
       options.ssl_verify_mode.must_equal true
       options.version.must_equal 'CURRENT'
+    end
+
+    it 'use custom options' do
+      options = service.send(:setup, {
+        :base_path       => '/test_path',
+        :base_url        => 'test_url',
+        :headers         => {'Key 1' => 'Value 1'},
+        :region_id       => 'regionTwo',
+        :interface       => 'internal',
+        :ssl_verify_mode => false,
+        :version         => 'LATEST'})
+      options.base_path.must_equal '/test_path'
+      options.base_url.must_equal 'test_url'
+      options.headers.must_equal ({'Key 1' => 'Value 1'})
+      options.interface.must_equal 'internal'
+      options.region_id.must_equal 'regionTwo'
+      options.ssl_verify_mode.must_equal false
+      options.version.must_equal 'LATEST'
     end
 
     it 'fails with invalid interface' do
@@ -56,6 +69,17 @@ describe Misty::HTTP::Client do
       proc do
         service.send(:setup, {:ssl_verify_mode => 'something'})
       end.must_raise Misty::HTTP::Client::InvalidDataError
+    end
+  end
+
+  describe 'headers' do
+    it 'returns default global along with token' do
+      service.headers.get.must_equal ({"Accept"=>"application/json; q=1.0", "X-Auth-Token"=>"token_id"})
+    end
+
+    it 'inject headers parameter' do
+      service(content_type = :ruby, params = {:headers => {'Oh' => 'my!'}}).
+        headers.get.must_equal ({"Accept"=>"application/json; q=1.0", "X-Auth-Token"=>"token_id", "Oh"=>"my!"})
     end
   end
 end

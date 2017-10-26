@@ -1,5 +1,6 @@
 require 'misty/auth/auth_v2'
 require 'misty/auth/auth_v3'
+require 'misty/http/header'
 
 module Misty
   class Cloud
@@ -13,7 +14,7 @@ module Misty
       val.gsub(/\./,'_')
     end
 
-    def initialize(params)# = {:auth => {}})
+    def initialize(params)
       @params = params
       @config = self.class.set_configuration(params)
       @auth = Misty::Auth.factory(params[:auth], @config)
@@ -27,7 +28,8 @@ module Misty
       config.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
       config.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
       config.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
-      config.headers = params[:headers]
+      config.headers = Misty::HTTP::Header.new('Accept' => 'application/json; q=1.0')
+      config.headers.add(params[:headers]) if params[:headers] && !params[:headers].empty?
       config
     end
 
