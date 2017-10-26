@@ -1,3 +1,11 @@
+# 1.1.0 - 26 October 2017
+## HTTP Requests
+* HEAD request fixed: no need for data
+
+### Headers
+Custom Headers can be injected at request level.
+Global and Service level headers proper propagation  
+
 # 1.0.0 - 10 October 2017
 ## HTTP Requests
 Transplarent hanlding of data for POST, PUT and PATCH requests leaving the server to handle the formats.
