@@ -28,7 +28,7 @@ module Misty
           final_path << query_param(args_left[0]) if args_left && args_left.size == 1
           http_get(final_path, headers)
         when :HEAD
-          http_head(final_path, headers, data)
+          http_head(final_path, headers)
         when :POST
           data = args_left[0] if args_left && args_left.size == 1
           http_post(final_path, headers, data)
