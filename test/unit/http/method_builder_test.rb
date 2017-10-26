@@ -39,13 +39,13 @@ describe Misty::HTTP::MethodBuilder do
   describe '#get_method' do
     class Service
       def self.api
-          {
-              '/' => { GET: [:list_api_versions] },
-              '/v2.0/' => { GET: [:show_api_v2_details] },
-              '/v2.0/extensions' => { GET: [:list_extensions] },
-              '/v2.0/extensions/{alias}' => { GET: [:show_extension_details] },
-              '/v2.0/networks/{network_id}' => { GET: [:show_network_details], PUT: [:update_network], DELETE: [:delete_network] }
-          }
+        {
+          '/' => { GET: [:list_api_versions] },
+          '/v2.0/' => { GET: [:show_api_v2_details] },
+          '/v2.0/extensions' => { GET: [:list_extensions] },
+          '/v2.0/extensions/{alias}' => { GET: [:show_extension_details] },
+          '/v2.0/networks/{network_id}' => { GET: [:show_network_details], PUT: [:update_network], DELETE: [:delete_network] }
+        }
       end
     end
 

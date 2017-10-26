@@ -37,6 +37,7 @@ describe Misty::Microversion do
     setup.interface = Misty::INTERFACE
     setup.region_id = Misty::REGION_ID
     setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
+    setup.headers = Misty::HTTP::Header.new('Accept' => 'application/json; q=1.0')
 
     stub_request(:get, 'http://localhost/').
       with(:headers => {'Accept'=>'application/json'}).

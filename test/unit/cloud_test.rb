@@ -56,9 +56,12 @@ describe Misty::Cloud do
       Misty::Auth.stub :factory, nil do
         config = Misty::Cloud.set_configuration({})
         config.must_be_kind_of Misty::Cloud::Config
+
         config.content_type.must_equal Misty::CONTENT_TYPE
-        config.log.must_be_kind_of Logger
+        config.headers.must_be_kind_of Misty::HTTP::Header
+        config.headers.get.must_equal({"Accept"=>"application/json; q=1.0"})
         config.interface.must_equal Misty::INTERFACE
+        config.log.must_be_kind_of Logger
         config.region_id.must_equal Misty::REGION_ID
         config.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
       end

@@ -46,6 +46,18 @@ describe Misty::Cloud do
       cloud.image.show_image_member_details('id1', 'id2').response.must_be_kind_of Net::HTTPOK
     end
 
+    it 'successful with an extra header parameter' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:get, "http://localhost/v2.0/networks?name=value").
+        with(:headers => {'Test-Header'=>'test header value'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+      header = Misty::HTTP::Header.new('Test-Header' => 'test header value')
+      cloud.network.list_networks('name=value', header).response.must_be_kind_of Net::HTTPOK
+    end
+
     it 'fails when not enough arguments' do
       proc do
         # '/v2/images/{image_id}/members/{member_id}'

@@ -71,8 +71,8 @@ describe Misty::HTTP::Request do
 
     it '#http_head' do
       stub_request(:head, 'http://localhost/resource').
-      with(:headers => request_header).
-      to_return(:status => '200')
+        with(:headers => request_header).
+        to_return(:status => '200')
 
       response = service.http_head('/resource', {})
       response.must_be_kind_of Net::HTTPSuccess
@@ -81,8 +81,8 @@ describe Misty::HTTP::Request do
 
     it '#http_options' do
       stub_request(:options, 'http://localhost/resource').
-      with(:headers => request_header).
-      to_return(:status => '200')
+        with(:headers => request_header).
+        to_return(:status => '200')
 
       response = service.http_options('/resource', {})
       response.must_be_kind_of Net::HTTPSuccess

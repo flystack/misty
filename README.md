@@ -67,7 +67,7 @@ puts network.body
 ```
 
 ## Services
-Once the Misty::Cloud object is created, the Openstack services can be used.
+Once a Misty::Cloud object is created, the Openstack services can be used.
 
 The Cloud object is authenticated by the identity server (bootstrap) and is provided with a service catalog.
 When an OpenStack API service is required, the catalog entry's endpoint is used and the service is dynamically called.
@@ -110,6 +110,15 @@ orchestration: heat, versions: ["v1"]
 search: searchlight, versions: ["v1"]
 shared_file_systems: manila, microversion: v2
 ```
+
+### Headers
+HTTP headers can be defined at 3 different levels:
+* Global headers are applied across all services, see `:headers` in "Global parameters" section.
+* Service level headers are applied on every request of an involved service, see "Services options" section.
+* Request level header are passed on per request basis.
+
+The Headers are cumulative, therefore a request level header will be added on top of the global and Service levels
+headers.
 
 ### Prefixes
 A shorter name can be used to call a service only if it's unique among all services.
@@ -249,6 +258,15 @@ openstack = Misty::Cloud.new(:auth => auth, :content_type => :ruby, :log_file =>
 #### Global parameters
 The following options are applied to each service unless specifically provided for a service.
 
+* :content_type  
+  Format of the body of the successful HTTP responses to be JSON or Ruby structures.  
+  Type: Symbol  
+  Allowed values: `:json`, `:ruby`  
+  Default: `:ruby`
+* :headers  
+  HTTP Headers to be applied to all services
+  Type: Hash  
+  Default: {}
 * :region_id  
   Type: String  
   Default: "regionOne"  
@@ -260,11 +278,6 @@ The following options are applied to each service unless specifically provided f
   When using SSL mode (defined by URI scheme => "https://")  
   Type: Boolean  
   Default: `true`  
-* :content_type  
-  Format of the body of the successful HTTP responses to be JSON or Ruby structures.  
-  Type: Symbol  
-  Allowed values: `:json`, `:ruby`  
-  Default: `:ruby`
 
 ### Services Options
 Each service can have specific parameters.
@@ -309,6 +322,23 @@ The following options are available:
 Example:
 ```ruby
 openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => 'regionTwo'}, :compute => {:version => '2.27', :interface => 'admin'})
+```
+
+### Services Headers
+HTTP headers can be optionally added to any request.
+A Header object must be created and passed as the last parameter of a request.
+
+For example for an already initialized cloud:
+```ruby
+header = Misty::HTTP::Header.new(
+  'x-container-meta-web-listings' => false,
+  'x-container-meta-quota-count'  => "",
+  'x-container-meta-quota-bytes'  => nil,
+  'x-versions-location'           => "",
+  'x-container-meta-web-index'    => ""
+)
+
+openstack.object_storage.create_update_or_delete_container_metadata(container_name, header)
 ```
 
 ## Direct REST HTTP Methods

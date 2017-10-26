@@ -4,7 +4,7 @@ def request_header
   {'Accept' => 'application/json; q=1.0'}
 end
 
-def service(content_type = :ruby)
+def service(content_type = :ruby, params = {})
   auth = Minitest::Mock.new
 
   def auth.get_url(*args)
@@ -21,10 +21,11 @@ def service(content_type = :ruby)
   setup.interface = Misty::INTERFACE
   setup.region_id = Misty::REGION_ID
   setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
+  setup.headers = Misty::HTTP::Header.new('Accept' => 'application/json; q=1.0')
 
   stub_request(:get, 'http://localhost/').
     with(:headers => request_header).
     to_return(:status => 200, :body => '', :headers => {})
 
-  Misty::Openstack::Neutron::V2_0.new(auth, setup, {})
+  Misty::Openstack::Neutron::V2_0.new(auth, setup, params)
 end

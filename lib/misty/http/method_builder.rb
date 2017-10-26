@@ -12,6 +12,9 @@ module Misty
       private
 
       def method_call(method, *args)
+        header = @headers.get.clone
+        header.merge!(args.pop.get) if args[-1].class == Misty::HTTP::Header
+
         base, path = prefixed_path(method[:path])
         size_path_parameters = count_path_params(path)
         path_params = args[0, size_path_parameters]
@@ -21,23 +24,23 @@ module Misty
 
         case method[:request]
         when :COPY
-          http_copy(final_path, headers)
+          http_copy(final_path, header)
         when :DELETE
-          http_delete(final_path, headers)
+          http_delete(final_path, header)
         when :GET
           final_path << query_param(args_left[0]) if args_left && args_left.size == 1
-          http_get(final_path, headers)
+          http_get(final_path, header)
         when :HEAD
-          http_head(final_path, headers)
+          http_head(final_path, header)
         when :POST
           data = args_left[0] if args_left && args_left.size == 1
-          http_post(final_path, headers, data)
+          http_post(final_path, header, data)
         when :PUT
           data = args_left[0] if args_left && args_left.size == 1
-          http_put(final_path, headers, data)
+          http_put(final_path, header, data)
         when :PATCH
           data = args_left[0] if args_left && args_left.size == 1
-          http_patch(final_path, headers, data)
+          http_patch(final_path, header, data)
         else
           raise SyntaxError, "Invalid HTTP request: #{method[:request]}"
         end
