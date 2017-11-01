@@ -18,6 +18,10 @@ module Misty::Openstack::SwiftV1
    :DELETE=>[:delete_object],
    :HEAD=>[:show_object_metadata],
    :POST=>[:create_or_update_object_metadata]},
+ "/v1/{account}/?bulk-delete=1"=>{
+   :POST=>[:bulk_delete]
+ },
  "/v1/endpoints"=>{:GET=>[:list_endpoints]}}
+ 
   end
 end
