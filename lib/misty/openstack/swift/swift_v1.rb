@@ -22,6 +22,5 @@ module Misty::Openstack::SwiftV1
    :POST=>[:bulk_delete]
  },
  "/v1/endpoints"=>{:GET=>[:list_endpoints]}}
- 
   end
 end
