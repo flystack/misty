@@ -88,32 +88,41 @@ describe Misty::HTTP::Request do
       response.must_be_kind_of Net::HTTPSuccess
     end
 
-    it '#http_patch' do
-      stub_request(:patch, 'http://localhost/resource').
-        with(:headers => request_header).
-        to_return(:status => 202, :body => "{\"key\": \"value\"}")
+    describe '#http_patch' do
+      it 'successful with data of type String' do
+        stub_request(:patch, 'http://localhost/resource').
+          with(:body => "{\"data\":\"value\"}").
+          with(:headers => request_header).
+          to_return(:status => 202, :body => "{\"key\": \"value\"}")
 
-      response = service.http_patch('/resource', {},  'data' => 'value')
-      response.must_be_kind_of Net::HTTPAccepted
-      response.body.wont_be_nil
+        response = service.http_patch('/resource', {}, "{\"data\":\"value\"}")
+        response.must_be_kind_of Net::HTTPAccepted
+        response.body.wont_be_nil
+      end
     end
 
-    it '#http_post' do
-      stub_request(:post, 'http://localhost/resource').
-        with(:headers => request_header).
-        to_return(:status => 201)
+    describe '#http_post' do
+      it 'successful with data of type String' do
+        stub_request(:post, 'http://localhost/resource').
+          with(:body => "{\"data\":\"value\"}").
+          with(:headers => request_header).
+          to_return(:status => 201)
 
-      response = service.http_post('/resource', {},  'data' => 'value')
-      response.must_be_kind_of Net::HTTPCreated
+        response = service.http_post('/resource', {}, "{\"data\":\"value\"}")
+        response.must_be_kind_of Net::HTTPCreated
+      end
     end
 
-    it '#http_put' do
-      stub_request(:put, 'http://localhost/resource').
-      with(:headers => request_header).
-      to_return(:status => 200)
+    describe '#http_put' do
+      it 'successful with data of type String' do
+        stub_request(:put, 'http://localhost/resource').
+          with(:body => "{\"data\":\"value\"}").
+          with(:headers => request_header).
+          to_return(:status => 200)
 
-      response = service.http_put('/resource', {},  'data' => 'value')
-      response.must_be_kind_of Net::HTTPOK
+        response = service.http_put('/resource', {}, "{\"data\":\"value\"}")
+        response.must_be_kind_of Net::HTTPOK
+      end
     end
 
     it '#http_to_s' do

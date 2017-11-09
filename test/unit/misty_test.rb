@@ -142,6 +142,24 @@ describe Misty do
     end
   end
 
+  describe '#json_encode?' do
+    it 'true with a Array type' do
+      Misty.json_encode?([]).must_equal true
+    end
+
+    it 'true with a Hash type' do
+      Misty.json_encode?({}).must_equal true
+    end
+
+    it 'true with a JSON String type' do
+      Misty.json_encode?('{"JSON_Key": "JSON_Value"}').must_equal true
+    end
+
+    it 'false with a non JSON String type' do
+      Misty.json_encode?("Just a string").must_equal false
+    end
+  end
+
   describe '#to_json' do
     it 'returns a JSON string when using a Ruby hash' do
       Misty.to_json({'key' => 'val'}).must_be_kind_of String
