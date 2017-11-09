@@ -78,7 +78,7 @@ module Misty
       end
 
       def requests
-        (@@requests_api + @@requests_added).sort
+       @@requests_api + @@requests_added
       end
 
       # Sub classes to override

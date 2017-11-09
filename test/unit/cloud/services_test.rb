@@ -160,12 +160,26 @@ describe 'Misty::Cloud' do
     cloud.nfv_orchestration.must_be_kind_of Misty::Openstack::Tacker::V1_0
   end
 
-  it '#objectStorage' do
-    stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-      with(:body => JSON.dump(auth_body), :headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(auth_response_v3('object-store', 'swift')), :headers => token_header)
+  describe '#objectStorage' do
+    it 'initialize with success' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        with(:body => JSON.dump(auth_body), :headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('object-store', 'swift')), :headers => token_header)
 
-    cloud.object_storage.must_be_kind_of Misty::Openstack::Swift::V1
+      cloud.object_storage.must_be_kind_of Misty::Openstack::Swift::V1
+    end
+
+    it 'execute bulk_delete' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        with(:body => JSON.dump(auth_body), :headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('object-store', 'swift')), :headers => token_header)
+
+      stub_request(:post, "http://localhost/?bulk-delete=1").
+        with(:headers => {'Accept'=>'application/json; q=1.0', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'text/plain', 'User-Agent'=>'Ruby', 'X-Auth-Token'=>'token_data'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+      cloud.object_storage.bulk_delete("container1/object1")
+    end
   end
 
   it '#orchestration' do

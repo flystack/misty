@@ -18,6 +18,15 @@ module Misty
         def self.service_names
           %w{object-storage object-store}
         end
+
+        # Custom requests
+        api_add :bulk_delete
+
+        def bulk_delete(data)
+          param = 'bulk-delete=1'
+          header = Misty::HTTP::Header.new('Content-Type' => 'text/plain')
+          create_update_or_delete_account_metadata(param, data, header)
+        end
       end
     end
   end
