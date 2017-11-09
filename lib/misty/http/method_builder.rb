@@ -12,8 +12,12 @@ module Misty
       private
 
       def method_call(method, *args)
-        header = @headers.get.clone
-        header.merge!(args.pop.get) if args[-1].class == Misty::HTTP::Header
+        if args[-1].class == Misty::HTTP::Header
+          header = Misty::HTTP::Header.new(@headers.get.clone)
+          header.add(args.pop.get)
+        else
+          header = @headers
+        end
 
         base, path = prefixed_path(method[:path])
         size_path_parameters = count_path_params(path)
@@ -24,23 +28,35 @@ module Misty
 
         case method[:request]
         when :COPY
-          http_copy(final_path, header)
+          http_copy(final_path, header.get)
         when :DELETE
-          http_delete(final_path, header)
+          http_delete(final_path, header.get)
         when :GET
           final_path << query_param(args_left[0]) if args_left && args_left.size == 1
-          http_get(final_path, header)
+          http_get(final_path, header.get)
         when :HEAD
-          http_head(final_path, header)
+          http_head(final_path, header.get)
         when :POST
           data = args_left[0] if args_left && args_left.size == 1
-          http_post(final_path, header, data)
+          if Misty.json_encode?(data)
+            data = Misty.to_json(data)
+            header.add('Content-Type' => 'application/json')
+          end
+          http_post(final_path, header.get, data)
         when :PUT
           data = args_left[0] if args_left && args_left.size == 1
-          http_put(final_path, header, data)
+          if Misty.json_encode?(data)
+            data = Misty.to_json(data)
+            header.add('Content-Type' => 'application/json')
+          end
+          http_put(final_path, header.get, data)
         when :PATCH
           data = args_left[0] if args_left && args_left.size == 1
-          http_patch(final_path, header, data)
+          if Misty.json_encode?(data)
+            data = Misty.to_json(data)
+            header.add('Content-Type' => 'application/json')
+          end
+          http_patch(final_path, header.get, data)
         else
           raise SyntaxError, "Invalid HTTP request: #{method[:request]}"
         end

@@ -81,13 +81,49 @@ describe Misty::Cloud do
     end
 
     it 'sucessful whith elements in pathwhith elements in path' do
-        stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-          to_return(:status => 200, :body => JSON.dump(auth_response_v3('orchestration', 'heat')), :headers => {'x-subject-token'=>'token_data'})
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('orchestration', 'heat')), :headers => {'x-subject-token'=>'token_data'})
 
-        stub_request(:post, 'http://localhost/stacks/id1/id2/snapshots').
-        to_return(:status => 201, :body => 'snapshots', :headers => {})
+      stub_request(:post, 'http://localhost/stacks/id1/id2/snapshots').
+      to_return(:status => 201, :body => 'snapshots', :headers => {})
 
-        cloud.orchestration.snapshot_a_stack('id1', 'id2', "{\"key\": \"value\"}").response.must_be_kind_of Net::HTTPCreated
+      cloud.orchestration.snapshot_a_stack('id1', 'id2', "{\"key\": \"value\"}").response.must_be_kind_of Net::HTTPCreated
+    end
+
+    it 'sucessful whith Array type data' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:post, 'http://localhost/v2.0/networks').
+        with(:body => "[\"network\",{\"name\":\"network1\"}]").
+        with(:headers => {'Content-Type'=>'application/json'}).
+        to_return(:status => 201, :body => "", :headers => {})
+
+      cloud.networking.create_network(['network', {'name' => 'network1'}]).response.must_be_kind_of Net::HTTPCreated
+    end
+
+    it 'sucessful with Hash type data' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:post, 'http://localhost/v2.0/networks').
+        with(:body => "{\"network\":{\"name\":\"network1\"}}").
+        with(:headers => {'Content-Type'=>'application/json'}).
+        to_return(:status => 201, :body => "", :headers => {})
+
+      cloud.networking.create_network({'network' => {'name' => 'network1'}}).response.must_be_kind_of Net::HTTPCreated
+    end
+
+    it 'sucessful with JSON String data' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:post, 'http://localhost/v2.0/networks').
+        with(:body => "{\"network\":{\"name\":\"network1\"}}").
+        with(:headers => {'Content-Type'=>'application/json'}).
+        to_return(:status => 201, :body => "", :headers => {})
+
+      cloud.networking.create_network("{\"network\":{\"name\":\"network1\"}}").response.must_be_kind_of Net::HTTPCreated
     end
 
     it 'fails when not enough arguments' do
@@ -121,6 +157,42 @@ describe Misty::Cloud do
         to_return(:status => 200, :body => 'list of group/role for a domain', :headers => {})
 
       cloud.identity.assign_role_to_group_on_domain('domain_id', 'group_id', 'roles_id').response.must_be_kind_of Net::HTTPOK
+    end
+
+    it 'sucessful whith Array type data' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:put, 'http://localhost/v2.0/networks/network_id').
+        with(:body => "[\"network\",{\"name\":\"network2\"}]").
+        with(:headers => {'Content-Type'=>'application/json'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+      cloud.networking.update_network('network_id', ['network', {'name' => 'network2'}]).response.must_be_kind_of Net::HTTPOK
+    end
+
+    it 'sucessful with Hash type data' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:put, 'http://localhost/v2.0/networks/network_id').
+        with(:body => "{\"network\":{\"name\":\"network2\"}}").
+        with(:headers => {'Content-Type'=>'application/json'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+      cloud.networking.update_network('network_id', {'network' => {'name' => 'network2'}}).response.must_be_kind_of Net::HTTPOK
+    end
+
+    it 'sucessful with JSON String data' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
+
+      stub_request(:put, 'http://localhost/v2.0/networks/network_id').
+        with(:body => "{\"network\":{\"name\":\"network2\"}}").
+        with(:headers => {'Content-Type'=>'application/json'}).
+        to_return(:status => 200, :body => "", :headers => {})
+
+      cloud.networking.update_network('network_id', "{\"network\":{\"name\":\"network2\"}}").response.must_be_kind_of Net::HTTPOK
     end
   end
 end

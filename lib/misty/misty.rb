@@ -48,6 +48,20 @@ module Misty
   # Default when uri.scheme is https
   SSL_VERIFY_MODE = true
 
+  def self.json_encode?(data)
+    return true if data.is_a?(Array) || data.is_a?(Hash)
+    if data.is_a?(String)
+      begin
+        JSON.parse(data)
+      rescue JSON::ParserError
+        return false
+      else
+        return true
+      end
+    end
+    return false
+  end
+
   def self.services
     services = Misty::Services.new
     SERVICES.each do |service|
