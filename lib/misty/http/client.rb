@@ -23,14 +23,24 @@ module Misty
 
       attr_reader :headers, :microversion
 
-      def requests
-        list = []
-        self.class.api.each do |_path, verbs|
+      @@requests_added = []
+      @@requests_api = []
+
+      def self.api_add(*args)
+        @@requests_added = []
+        @@requests_added << args
+        return nil
+      end
+
+      def self.init_requests
+        @@requests_api = []
+        api.each do |_path, verbs|
           verbs.each do |_verb, requests|
-            list << requests
+            @@requests_api << requests
           end
         end
-        list.flatten.sort
+        @@requests_api.flatten!
+        return nil
       end
 
       # Options - Values shown are the default
@@ -52,6 +62,7 @@ module Misty
       #   (micro)version: Can be numbered (3.1) or by state (CURRENT, LATEST or SUPPORTED)
       #     :version => "CURRENT"
       def initialize(auth, config, options = {})
+        self.class.init_requests
         @auth = auth
         @config = config
         @options = setup(options)
@@ -64,6 +75,10 @@ module Misty
         @headers.add('X-Auth-Token' => @auth.get_token.to_s)
         @headers.add(microversion_header) if microversion
         @headers.add(@options.headers) unless @options.headers.empty?
+      end
+
+      def requests
+        (@@requests_api + @@requests_added).sort
       end
 
       # Sub classes to override

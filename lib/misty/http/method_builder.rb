@@ -74,10 +74,10 @@ module Misty
       end
 
       def get_method(name)
-        self.class.api.each do |path, requests|
-          requests.each do |request, methods_list|
-            if methods_list.include?(name)
-              return {:path => path, :request => request, :name => name}
+        self.class.api.each do |path, verbs_list|
+          verbs_list.each do |verb, methods|
+            if methods.include?(name)
+              return {:path => path, :request => verb, :name => name}
             end
           end
         end
