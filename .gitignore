@@ -1,6 +1,7 @@
 *.gem
 .bundle/
 .byebug_history
+build/
 misty.log
 Gemfile.lock
 vendor
