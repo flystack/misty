@@ -23,23 +23,33 @@ module Misty
 
       attr_reader :headers, :microversion
 
+      @request_api_add_mutex = Mutex.new
+      @request_api_mutex     = Mutex.new
       @@requests_added = []
-      @@requests_api = []
+      @@requests_api   = []
 
       def self.api_add(*args)
-        @@requests_added = []
-        @@requests_added << args
+        @request_api_add_mutex = Mutex.new if @request_api_add_mutex.nil?
+        # made write access thread safe 
+        @request_api_add_mutex.synchronize do 
+          @@requests_added.push(*args).flatten!
+          @@requests_added.uniq!
+        end
         return nil
       end
 
       def self.init_requests
-        @@requests_api = []
-        api.each do |_path, verbs|
-          verbs.each do |_verb, requests|
-            @@requests_api << requests
+        @request_api_mutex = Mutex.new if @request_api_mutex.nil?
+        # made write access thread safe 
+        @request_api_mutex.synchronize do 
+          api.each do |_path, verbs|
+            verbs.each do |_verb, requests|
+              @@requests_api << requests
+            end
           end
+          @@requests_api.flatten!
+          @@requests_api.uniq!
         end
-        @@requests_api.flatten!
         return nil
       end
 
