@@ -16,7 +16,6 @@ module Misty
           header.add('Content-Type' => 'application/json')
           return Misty.to_json(args[0])
         elsif args.size == 1
-          # fallback for content that cannot be encoded to json
           return args[0]
         end
       end
