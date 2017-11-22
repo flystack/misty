@@ -1,15 +1,27 @@
 require 'test_helper'
 require 'service_helper'
-require 'misty/http/client'
+require 'misty/client'
 
-describe Misty::HTTP::Client do
-  describe '#self.prefix_path_to_ignore' do
+describe Misty::Client do
+  describe '#prefix_path_to_ignore' do
+    let(:client) do
+      client = Object.new
+      client.extend(Misty::Client)
+      client
+    end
+
     it "returns empty String when undefined in API's module" do
-      Misty::Openstack::Neutron::V2_0::prefix_path_to_ignore.must_be_empty
+      client.prefix_path_to_ignore.must_be_empty
     end
 
     it "returns String when defined in API's module" do
-      Misty::Openstack::Cinder::V3.prefix_path_to_ignore.must_equal '/v3/{tenant_id}'
+      class << client
+        def prefix_path_to_ignore
+          '/v3/{tenant_id}'
+        end
+      end
+
+      client.prefix_path_to_ignore.must_equal '/v3/{tenant_id}'
     end
   end
 
@@ -30,7 +42,7 @@ describe Misty::HTTP::Client do
   describe '#setup' do
     it 'use default options' do
       options = service.send(:setup, {})
-      options.must_be_kind_of Misty::HTTP::Client::Options
+      options.must_be_kind_of Misty::Client::Options
       options.base_path.must_be_nil
       options.base_url.must_be_nil
       options.headers.must_equal ({})
@@ -62,13 +74,13 @@ describe Misty::HTTP::Client do
     it 'fails with invalid interface' do
       proc do
         service.send(:setup, {:interface => 'something'})
-      end.must_raise Misty::HTTP::Client::InvalidDataError
+      end.must_raise Misty::Client::InvalidDataError
     end
 
     it 'fails unless ssl_verify_mode is a boolean' do
       proc do
         service.send(:setup, {:ssl_verify_mode => 'something'})
-      end.must_raise Misty::HTTP::Client::InvalidDataError
+      end.must_raise Misty::Client::InvalidDataError
     end
   end
 

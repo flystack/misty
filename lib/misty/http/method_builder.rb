@@ -72,7 +72,7 @@ module Misty
       end
 
       def get_method(name)
-        self.class.api.each do |path, verbs_list|
+        api.each do |path, verbs_list|
           verbs_list.each do |verb, methods|
             if methods.include?(name)
               return {:path => path, :request => verb, :name => name}
@@ -91,9 +91,9 @@ module Misty
       end
 
       def prefixed_path(path)
-        unless self.class.prefix_path_to_ignore.empty?
-          if path =~ %r{#{self.class.prefix_path_to_ignore}}
-            return true, path.gsub(self.class.prefix_path_to_ignore, '')
+        unless prefix_path_to_ignore.empty?
+          if path =~ %r{#{prefix_path_to_ignore}}
+            return true, path.gsub(prefix_path_to_ignore, '')
           else
             return false, path
           end

@@ -1,4 +1,4 @@
-require 'misty/http/client'
+require 'misty/client_pack'
 
 def request_header
   {'Accept' => 'application/json; q=1.0'}

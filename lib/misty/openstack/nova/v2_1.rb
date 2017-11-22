@@ -1,16 +1,17 @@
-require 'misty/http/client'
-require 'misty/microversion'
 require 'misty/openstack/nova/nova_v2_1'
+require 'misty/client_pack'
+require 'misty/microversion'
 
 module Misty
   module Openstack
     module Nova
-      class V2_1 < Misty::HTTP::Client
+      class V2_1
         extend Misty::Openstack::NovaV2_1
+        include Misty::ClientPack
         include Misty::Microversion
 
-        def self.api
-          v2_1
+        def api
+          self.class.v2_1
         end
 
         # Overrides API because the definitions don't specify prefix
@@ -22,7 +23,7 @@ module Misty
           http_get("/#{version}", headers)
         end
 
-        def self.service_names
+        def service_names
             %w{compute}
         end
 

@@ -1,23 +1,24 @@
-require 'misty/http/client'
-require 'misty/microversion'
 require 'misty/openstack/cinder/cinder_v3'
+require 'misty/client_pack'
+require 'misty/microversion'
 
 module Misty
   module Openstack
     module Cinder
-      class V3 < Misty::HTTP::Client
+      class V3
         extend Misty::Openstack::CinderV3
+        include Misty::ClientPack
         include Misty::Microversion
 
-        def self.api
-          v3
+        def api
+          self.class.v3
         end
 
-        def self.prefix_path_to_ignore
+        def prefix_path_to_ignore
           '/v3/{tenant_id}'
         end
 
-        def self.service_names
+        def service_names
           %w{block-storage, block-store, volume}
         end
       end

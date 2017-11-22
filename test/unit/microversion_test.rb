@@ -1,6 +1,6 @@
 require 'test_helper'
 require 'auth_helper'
-require 'misty/http/client'
+require 'misty/client'
 require 'misty/microversion'
 
 describe Misty::Microversion do

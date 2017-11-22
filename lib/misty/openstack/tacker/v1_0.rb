@@ -1,17 +1,18 @@
-require 'misty/http/client'
 require 'misty/openstack/tacker/tacker_v1_0'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Tacker
-      class V1_0 < Misty::HTTP::Client
+      class V1_0
         extend Misty::Openstack::TackerV1_0
+        include Misty::ClientPack
 
-        def self.api
-          v1_0
+        def api
+          self.class.v1_0
         end
 
-        def self.service_names
+        def service_names
           %w{nfv-orchestration}
         end
       end

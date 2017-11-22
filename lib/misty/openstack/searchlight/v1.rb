@@ -1,17 +1,18 @@
-require 'misty/http/client'
 require 'misty/openstack/searchlight/searchlight_v1'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Searchlight
-      class V1 < Misty::HTTP::Client
+      class V1
         extend Misty::Openstack::SearchlightV1
+        include Misty::ClientPack
 
-        def self.api
-          v1
+        def api
+          self.class.v1
         end
 
-        def self.service_names
+        def service_names
           %w{search}
         end
       end

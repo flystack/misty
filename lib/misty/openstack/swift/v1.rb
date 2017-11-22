@@ -1,26 +1,29 @@
-require 'misty/http/client'
 require 'misty/openstack/swift/swift_v1'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Swift
-      class V1 < Misty::HTTP::Client
-        extend Misty::Openstack::SwiftV1
+      class V1
+        extend  Misty::Openstack::SwiftV1
+        include Misty::ClientPack
 
-        def self.api
-          v1
+        def api
+          self.class.v1
         end
 
-        def self.prefix_path_to_ignore
+        def prefix_path_to_ignore
           '/v1/{account}'
         end
 
-        def self.service_names
+        def service_names
           %w{object-storage object-store}
         end
 
         # Custom requests
-        api_add :bulk_delete
+        def requests_custom
+          [ :bulk_delete ]
+        end
 
         def bulk_delete(data)
           param = 'bulk-delete=1'
