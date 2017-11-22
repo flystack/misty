@@ -1,17 +1,9 @@
-require 'misty/http/net_http'
+require 'misty/auth/errors'
 require 'misty/auth/name'
+require 'misty/http/net_http'
 
 module Misty
-  class Auth
-    class AuthenticationError < StandardError; end
-    class CatalogError        < StandardError; end
-    class TokenError          < StandardError; end
-
-    class ExpiryError      < RuntimeError; end
-    class CredentialsError < RuntimeError; end
-    class InitError        < RuntimeError; end
-    class URLError         < RuntimeError; end
-
+  module Auth
     include Misty::HTTP::NetHTTP
 
     attr_reader :catalog, :token
@@ -41,7 +33,7 @@ module Misty
       Misty::HTTP::NetHTTP.http_request(
         @uri, ssl_verify_mode: @config.ssl_verify_mode, log: @config.log
       ) do |connection|
-        response = connection.post(self.class.path, @credentials.to_json,
+        response = connection.post(path, @credentials.to_json,
           { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })
         unless response.code =~ /200|201/
           raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}"
@@ -76,7 +68,7 @@ module Misty
     def find_url(service, region_id, interface)
       if service['endpoints']
         service['endpoints'].each do |endpoint|
-          if (url = self.class.get_url(endpoint, region_id, interface))
+          if (url = endpoint_url(endpoint, region_id, interface))
             return url
           end
         end

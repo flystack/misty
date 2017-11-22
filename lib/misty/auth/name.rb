@@ -1,5 +1,5 @@
 module Misty
-  class Auth
+  module Auth
     module Domain
       attr_accessor :domain
 
@@ -11,7 +11,7 @@ module Misty
           data.merge!(to_h(:name))
           data.merge!({ :domain => @domain.identity })
         else
-          raise Misty::Auth::CredentialsError, "#{self.class}: An Id, or a name with its domain, must be provided"
+          raise CredentialsError, "#{self.class}: An Id, or a name with its domain, must be provided"
         end
         data
       end
@@ -21,7 +21,7 @@ module Misty
       def identity
         return to_h(:id) unless id.nil?
         return to_h(:name) unless name.nil?
-        raise Misty::Auth::CredentialsError, "#{self.class}: No available id or name"
+        raise CredentialsError, "#{self.class}: No available id or name"
       end
 
       def to_h(var)
@@ -50,7 +50,7 @@ module Misty
 
       def identity
         data = super
-        raise Misty::Auth::CredentialsError, "#{self.class}: No password available" if password.nil?
+        raise CredentialsError, "#{self.class}: No password available" if password.nil?
         data.merge!(to_h(:password))
         { :user => data }
       end

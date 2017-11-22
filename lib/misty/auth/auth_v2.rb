@@ -1,21 +1,15 @@
 require 'misty/auth'
 
 module Misty
-  class AuthV2 < Misty::Auth
-    def self.path
-      '/v2.0/tokens'
-    end
-
-    def self.get_url(endpoint, region_id, interface)
-      return endpoint["#{interface}URL"] if endpoint['region'] == region_id && endpoint["#{interface}URL"]
-    end
+  class AuthV2
+    include Misty::Auth
 
     def credentials
       if @token
         identity = { 'token': { 'id': @token } }
       else
-        raise Misty::Auth::CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
-        raise Misty::Auth::CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
+        raise CredentialsError, "#{self.class}: User name is required" if @user.name.nil?
+        raise CredentialsError, "#{self.class}: User password is required" if @user.password.nil?
         identity = { 'passwordCredentials': user_credentials }
       end
 
@@ -24,10 +18,18 @@ module Misty
       elsif @tenant.name
         identity.merge!('tenantName': @tenant.name)
       else
-        raise Misty::Auth::CredentialsError, "#{self.class}: No tenant available"
+        raise CredentialsError, "#{self.class}: No tenant available"
       end
 
       { 'auth': identity }
+    end
+
+    def endpoint_url(endpoint, region_id, interface)
+      return endpoint["#{interface}URL"] if endpoint['region'] == region_id && endpoint["#{interface}URL"]
+    end
+
+    def path
+      '/v2.0/tokens'
     end
 
     def user_credentials
