@@ -1,14 +1,8 @@
 require 'misty/auth'
 
 module Misty
-  class AuthV3 < Misty::Auth
-    def self.path
-      '/v3/auth/tokens'
-    end
-
-    def self.get_url(endpoint, region_id, interface)
-      return endpoint['url'] if endpoint['region_id'] == region_id && endpoint['interface'] == interface
-    end
+  class AuthV3
+    include Misty::Auth
 
     def credentials
       if @token
@@ -30,10 +24,18 @@ module Misty
       }
     end
 
+    def endpoint_url(endpoint, region_id, interface)
+      return endpoint['url'] if endpoint['region_id'] == region_id && endpoint['interface'] == interface
+    end
+
+    def path
+      '/v3/auth/tokens'
+    end
+
     def scope
       return @project.identity if @project
       return @domain.identity if @domain
-      raise Misty::Auth::CredentialsError, "#{self.class}: No scope available"
+      raise CredentialsError, "#{self.class}: No scope available"
     end
 
     def set(response)
