@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'misty/http/client'
 
 describe Misty::HTTP::Header do
   describe 'create' do

@@ -1,17 +1,18 @@
-require 'misty/http/client'
 require 'misty/openstack/freezer/freezer_v1'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Freezer
-      class V1 < Misty::HTTP::Client
+      class V1
         extend Misty::Openstack::FreezerV1
+        include Misty::ClientPack
 
-        def self.api
-          v1
+        def api
+          self.class.v1
         end
 
-        def self.service_names
+        def service_names
           %w{backup}
         end
       end

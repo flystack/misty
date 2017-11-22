@@ -1,17 +1,18 @@
-require 'misty/http/client'
 require 'misty/openstack/glance/glance_v2'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Glance
-      class V2 < Misty::HTTP::Client
+      class V2
         extend Misty::Openstack::GlanceV2
+        include Misty::ClientPack
 
-        def self.api
-          v2
+        def api
+          self.class.v2
         end
 
-        def self.service_names
+        def service_names
           %w{image}
         end
       end

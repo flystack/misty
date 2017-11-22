@@ -178,6 +178,7 @@ describe 'Misty::Cloud' do
         with(:headers => {'Accept'=>'application/json; q=1.0', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'text/plain', 'User-Agent'=>'Ruby', 'X-Auth-Token'=>'token_data'}).
         to_return(:status => 200, :body => "", :headers => {})
 
+      cloud.object_storage.requests.must_include :bulk_delete
       cloud.object_storage.bulk_delete("container1/object1")
     end
   end

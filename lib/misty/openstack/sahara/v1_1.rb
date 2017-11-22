@@ -1,17 +1,18 @@
-require 'misty/http/client'
 require 'misty/openstack/sahara/sahara_v1_1'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Sahara
-      class V1_1 < Misty::HTTP::Client
+      class V1_1
         extend Misty::Openstack::SaharaV1_1
+        include Misty::ClientPack
 
-        def self.api
-          v1_1
+        def api
+          self.class.v1_1
         end
 
-        def self.service_names
+        def service_names
           %w{data-processing}
         end
       end

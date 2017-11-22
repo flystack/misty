@@ -1,19 +1,20 @@
-require 'misty/http/client'
-require 'misty/microversion'
 require 'misty/openstack/manila/manila_v2'
+require 'misty/client_pack'
+require 'misty/microversion'
 
 module Misty
   module Openstack
     module Manila
-      class V2 < Misty::HTTP::Client
+      class V2
         extend Misty::Openstack::ManilaV2
+        include Misty::ClientPack
         include Misty::Microversion
 
-        def self.api
-          v2
+        def api
+          self.class.v2
         end
 
-        def self.service_names
+        def service_names
           %w{shared-file-systems shared}
         end
       end

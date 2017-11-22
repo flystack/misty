@@ -1,21 +1,22 @@
-require 'misty/http/client'
 require 'misty/openstack/cinder/cinder_v2'
+require 'misty/client_pack'
 
 module Misty
   module Openstack
     module Cinder
-      class V2 < Misty::HTTP::Client
+      class V2
         extend Misty::Openstack::CinderV2
+        include Misty::ClientPack
 
-        def self.api
-          v2
+        def api
+          self.class.v2
         end
 
-        def self.prefix_path_to_ignore
+        def prefix_path_to_ignore
           '/v2/{tenant_id}'
         end
 
-        def self.service_names
+        def service_names
           %w{block-storage, block-store, volume}
         end
       end

@@ -38,7 +38,7 @@ describe Misty::HTTP::MethodBuilder do
 
   describe '#get_method' do
     class Service
-      def self.api
+      def api
         {
           '/' => { GET: [:list_api_versions] },
           '/v2.0/' => { GET: [:show_api_v2_details] },
@@ -79,7 +79,7 @@ describe Misty::HTTP::MethodBuilder do
   describe '#prefixed_path' do
     it 'returns true and same path with empty prefix' do
       class Service
-        def self.prefix_path_to_ignore
+        def prefix_path_to_ignore
           ''
         end
       end
@@ -92,7 +92,7 @@ describe Misty::HTTP::MethodBuilder do
 
     it 'returns false and same path when unmatched prefix' do
       class Service
-        def self.prefix_path_to_ignore
+        def prefix_path_to_ignore
           '/v3/{project_id}'
         end
       end
@@ -105,7 +105,7 @@ describe Misty::HTTP::MethodBuilder do
 
     it 'returns true and filtered path when matched prefix' do
       class Service
-        def self.prefix_path_to_ignore
+        def prefix_path_to_ignore
           '/v3/{project_id}'
         end
       end
