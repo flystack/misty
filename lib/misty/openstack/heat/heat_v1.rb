@@ -1,4 +1,8 @@
 module Misty::Openstack::HeatV1
+  def tag
+    'Orchestration API Reference 10.0.0'
+  end
+
   def api
 {"/v1/{tenant_id}/build_info"=>{:GET=>[:show_build_information]},
  "/"=>{:GET=>[:list_versions]},
@@ -51,6 +55,7 @@ module Misty::Openstack::HeatV1
     [:suspend_stack,
      :resume_stack,
      :cancel_stack_update,
+     :cancel_stack_create_update_without_rollback,
      :check_stack_resources]},
  "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/events"=>
   {:GET=>[:list_stack_events]},

@@ -1,4 +1,8 @@
 module Misty::Openstack::TackerV1_0
+  def tag
+    'NFV Orchestration API Reference 0.8.1'
+  end
+
   def api
 {"/"=>{:GET=>[:list_versions]},
  "/v1.0/extensions"=>{:GET=>[:list_extensions]},

@@ -1,4 +1,8 @@
 module Misty::Openstack::GlanceV1
+  def tag
+    'Image Service API Reference 16.0.0'
+  end
+
   def api
 {"/v1/images"=>{:POST=>[:create_image], :GET=>[:list_images]},
  "/v1/images/detail"=>{:GET=>[:list_images_with_details]},

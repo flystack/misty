@@ -1,4 +1,8 @@
 module Misty::Openstack::NeutronV2_0
+  def tag
+    'Networking API Reference 1.10.1'
+  end
+
   def api
 {"/"=>{:GET=>[:list_api_versions]},
  "/v2.0/"=>{:GET=>[:show_api_v2_details]},
@@ -156,6 +160,8 @@ module Misty::Openstack::NeutronV2_0
    :DELETE=>[:reset_quota_for_a_project]},
  "/v2.0/quotas/{project_id}/default"=>
   {:GET=>[:list_default_quotas_for_a_project]},
+ "/v2.0/quotas/{project_id}/details.json"=>
+  {:GET=>[:show_quota_details_for_a_tenant]},
  "/v2.0/service-providers"=>{:GET=>[:list_service_providers]},
  "/v2.0/{resource_type}/{resource_id}/tags"=>
   {:PUT=>[:replace_all_tags],
@@ -164,6 +170,7 @@ module Misty::Openstack::NeutronV2_0
  "/v2.0/{resource_type}/{resource_id}/tags/{tag}"=>
   {:GET=>[:confirm_a_tag], :PUT=>[:add_a_tag], :DELETE=>[:remove_a_tag]},
  "/v2.0/qos/rule-types"=>{:GET=>[:list_qos_rule_types]},
+ "/v2.0/qos/rule-types/{rule_type}"=>{:GET=>[:show_qos_rule_type_details]},
  "/v2.0/qos/policies"=>
   {:GET=>[:list_qos_policies], :POST=>[:create_qos_policy]},
  "/v2.0/qos/policies/{policy_id}"=>
@@ -184,6 +191,13 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_dscp_marking_rule_details],
    :PUT=>[:update_dscp_marking_rule],
    :DELETE=>[:delete_dscp_marking_rule]},
+ "/v2.0/qos/policies/{policy_id}/minimum_bandwidth_rules"=>
+  {:GET=>[:list_minimum_bandwidth_rules_for_qos_policy],
+   :POST=>[:create_minimum_bandwidth_rule]},
+ "/v2.0/qos/policies/{policy_id}/minimum_bandwidth_rules/{rule_id}"=>
+  {:GET=>[:show_minimum_bandwidth_rule_details],
+   :PUT=>[:update_minimum_bandwidth_rule],
+   :DELETE=>[:delete_minimum_bandwidth_rule]},
  "/v2.0/lbaas/loadbalancers"=>
   {:GET=>[:list_load_balancers], :POST=>[:create_a_load_balancer]},
  "/v2.0/lbaas/loadbalancers/{loadbalancer_id}"=>
@@ -197,22 +211,18 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_listener_details],
    :PUT=>[:update_listener],
    :DELETE=>[:remove_listener]},
- "/v2.0/lbaas/pools"=>
-  {:GET=>[:list_pools],
-   :POST=>[:create_pool]},
+ "/v2.0/lbaas/pools"=>{:GET=>[:list_pools], :POST=>[:create_pool]},
  "/v2.0/lbaas/pools/{pool_id}"=>
-  {:GET=>[:show_pool_details],
-   :PUT=>[:update_pool],
-   :DELETE=>[:remove_pool]},
+  {:GET=>[:show_pool_details], :PUT=>[:update_pool], :DELETE=>[:remove_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members"=>
   {:GET=>[:list_pool_members], :POST=>[:add_member_to_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members/{member_id}"=>
   {:GET=>[:show_pool_member_details],
    :PUT=>[:update_pool_member],
    :DELETE=>[:remove_member_from_pool]},
- "/v2.0/lbaas/healthmonitors"=>{:GET=>[:list_health_monitors]},
- "/v2.0/lbaas/health_monitors"=>{:POST=>[:create_health_monitor]},
- "/v2.0/lbaas/health_monitors/{health_monitor_id}"=>
+ "/v2.0/lbaas/healthmonitors"=>
+  {:GET=>[:list_health_monitors], :POST=>[:create_health_monitor]},
+ "/v2.0/lbaas/healthmonitors/{healthmonitor_id}"=>
   {:GET=>[:show_health_monitor_details],
    :PUT=>[:update_health_monitor],
    :DELETE=>[:remove_health_monitor]},

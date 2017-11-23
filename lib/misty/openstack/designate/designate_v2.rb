@@ -1,4 +1,8 @@
 module Misty::Openstack::DesignateV2
+  def tag
+    'Designate API Reference 6.0.0'
+  end
+
   def api
 {"/"=>{:GET=>[:list_all_api_versions]},
  "/v2/zones"=>{:POST=>[:create_zone], :GET=>[:list_zones]},

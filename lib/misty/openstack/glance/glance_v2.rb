@@ -1,4 +1,8 @@
 module Misty::Openstack::GlanceV2
+  def tag
+    'Image Service API Reference 16.0.0'
+  end
+
   def api
 {"/v2/images"=>{:POST=>[:create_an_image], :GET=>[:show_images]},
  "/v2/images/{image_id}"=>
@@ -21,6 +25,9 @@ module Misty::Openstack::GlanceV2
  "/v2/schemas/member"=>{:GET=>[:show_image_member_schema]},
  "/v2/images/{image_id}/file"=>
   {:PUT=>[:upload_binary_image_data], :GET=>[:download_binary_image_data]},
+ "/v2/images/{image_id}/stage"=>{:PUT=>[:stage_binary_image_data]},
+ "/v2/images/{image_id}/import"=>{:POST=>[:import_an_image]},
+ "/v2/info/import"=>{:GET=>[:import_methods_and_values_discovery]},
  "/v2/tasks"=>{:POST=>[:create_task], :GET=>[:list_tasks]},
  "/v2/tasks/{task_id}"=>{:GET=>[:show_task_details]},
  "/v2/schemas/tasks"=>{:GET=>[:show_tasks_schema]},

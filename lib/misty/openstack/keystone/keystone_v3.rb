@@ -1,4 +1,8 @@
 module Misty::Openstack::KeystoneV3
+  def tag
+    'Identity API Reference v3.8'
+  end
+
   def api
 {"/v3/auth/tokens"=>
   {:POST=>
@@ -84,6 +88,14 @@ module Misty::Openstack::KeystoneV3
   {:GET=>[:show_project_details],
    :PATCH=>[:update_project],
    :DELETE=>[:delete_project]},
+ "/v3/projects/{project_id}/tags"=>
+  {:GET=>[:list_tags_for_a_project],
+   :PUT=>[:modify_tag_list_for_a_project],
+   :DELETE=>[:remove_all_tags_from_a_project]},
+ "/v3/projects/{project_id}/tags/{tag}"=>
+  {:GET=>[:check_if_project_contains_tag],
+   :PUT=>[:add_single_tag_to_a_project],
+   :DELETE=>[:delete_single_tag_from_project]},
  "/v3/regions/{region_id}"=>
   {:GET=>[:show_region_details],
    :PATCH=>[:update_region],

@@ -1,4 +1,8 @@
 module Misty::Openstack::NovaV2_1
+  def tag
+    'Compute API Reference 17.0.0'
+  end
+
   def api
 {"/"=>{:GET=>[:list_all_major_versions]},
  "/{api_version}"=>{:GET=>[:show_details_of_specific_api_version]},
@@ -79,14 +83,17 @@ module Misty::Openstack::NovaV2_1
  "/servers/{server_id}/os-volume_attachments"=>
   {:GET=>[:list_volume_attachments_for_an_instance],
    :POST=>[:attach_a_volume_to_an_instance]},
- "/servers/{server_id}/os-volume_attachments/{attachment_id}"=>
+ "/servers/{server_id}/os-volume_attachments/{volume_id}"=>
   {:GET=>[:show_a_detail_of_a_volume_attachment],
-   :PUT=>[:update_a_volume_attachment],
    :DELETE=>[:detach_a_volume_from_an_instance]},
+ "/servers/{server_id}/os-volume_attachments/{attachment_id}"=>
+  {:PUT=>[:update_a_volume_attachment]},
  "/flavors"=>{:GET=>[:list_flavors], :POST=>[:create_flavor]},
  "/flavors/detail"=>{:GET=>[:list_flavors_with_details]},
  "/flavors/{flavor_id}"=>
-  {:GET=>[:show_flavor_details], :DELETE=>[:delete_flavor]},
+  {:GET=>[:show_flavor_details],
+   :PUT=>[:update_flavor_description],
+   :DELETE=>[:delete_flavor]},
  "/flavors/{flavor_id}/os-flavor-access"=>
   {:GET=>[:list_flavor_access_information_for_given_flavor]},
  "/flavors/{flavor_id}/action"=>
@@ -145,7 +152,7 @@ module Misty::Openstack::NovaV2_1
  "/os-instance_usage_audit_log"=>{:GET=>[:list_server_usage_audits]},
  "/os-instance_usage_audit_log/{before_timestamp}"=>
   {:GET=>[:list_usage_audits_before_specified_time]},
- "/os-migrations"=>{:GET=>[:list_migrations]},
+ "/os-migrations"=>{:GET=>[:old_list_migrations]},
  "/servers/{server_id}/migrations"=>{:GET=>[:list_migrations]},
  "/servers/{server_id}/migrations/{migration_id}"=>
   {:GET=>[:show_migration_details], :DELETE=>[:delete_abort_migration]},
@@ -158,6 +165,9 @@ module Misty::Openstack::NovaV2_1
  "/os-quota-sets/{tenant_id}/defaults"=>
   {:GET=>[:list_default_quotas_for_tenant]},
  "/os-quota-sets/{tenant_id}/detail"=>{:GET=>[:show_the_detail_of_quota]},
+ "/os-quota-class-sets/{id}"=>
+  {:GET=>[:show_the_quota_for_quota_class],
+   :PUT=>[:create_or_update_quotas_for_quota_class]},
  "/os-server-groups"=>
   {:GET=>[:list_server_groups], :POST=>[:create_server_group]},
  "/os-server-groups/{server_group_id}"=>
@@ -171,10 +181,11 @@ module Misty::Openstack::NovaV2_1
  "/os-services"=>{:GET=>[:list_compute_services]},
  "/os-services/disable"=>{:PUT=>[:disable_scheduling_for_a_compute_service]},
  "/os-services/disable-log-reason"=>
-  {:PUT=>[:log_disabled_compute_service_information]},
+  {:PUT=>[:disable_scheduling_for_a_compute_service_and_log_disabled_reason]},
  "/os-services/enable"=>{:PUT=>[:enable_scheduling_for_a_compute_service]},
  "/os-services/force-down"=>{:PUT=>[:update_forced_down]},
- "/os-services/{service_id}"=>{:DELETE=>[:delete_compute_service]},
+ "/os-services/{service_id}"=>
+  {:PUT=>[:update_compute_service], :DELETE=>[:delete_compute_service]},
  "/os-simple-tenant-usage"=>
   {:GET=>[:list_tenant_usage_statistics_for_all_tenants]},
  "/os-simple-tenant-usage/{tenant_id}"=>

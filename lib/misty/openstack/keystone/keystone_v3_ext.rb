@@ -1,4 +1,8 @@
 module Misty::Openstack::KeystoneV3_ext
+  def tag
+    'Identity API Reference v3.8'
+  end
+
   def api_ext
 {"/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}"=>
   {:PUT=>[:associate_policy_and_endpoint],
@@ -97,13 +101,13 @@ module Misty::Openstack::KeystoneV3_ext
    :GET=>[:get_a_mapping],
    :PATCH=>[:update_a_mapping],
    :DELETE=>[:delete_a_mapping]},
- "/v3/OS-FEDERATION/mappings"=>{:GET=>[:list_all_mappings]},
+ "/v3/OS-FEDERATION/mappings"=>{:GET=>[:list_mappings]},
  "/v3/OS-FEDERATION/service_providers/{id}"=>
   {:PUT=>[:register_a_service_provider],
    :GET=>[:get_service_provider],
    :DELETE=>[:delete_service_provider],
    :PATCH=>[:update_service_provider]},
- "/v3/OS-FEDERATION/service_providers"=>{:GET=>[:listing_service_providers]},
+ "/v3/OS-FEDERATION/service_providers"=>{:GET=>[:list_service_providers]},
  "/v3/OS-FEDERATION/projects"=>
   {:GET=>[:list_projects_a_federated_user_can_access]},
  "/v3/OS-FEDERATION/domains"=>

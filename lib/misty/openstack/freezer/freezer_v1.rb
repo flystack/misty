@@ -1,4 +1,8 @@
 module Misty::Openstack::FreezerV1
+  def tag
+    'Backup and Disaster Recovery Service API Reference 5.0.1'
+  end
+
   def api
 {"/v1/backups"=>{:GET=>[:lists_backups]},
  "/v1/backups/{backup_id}"=>

@@ -1,4 +1,8 @@
 module Misty::Openstack::KeystoneV2_0
+  def tag
+    'Identity API Reference v3.8'
+  end
+
   def api
 {"/v2.0/extensions/{alias}"=>{:GET=>[:show_extension_details]},
  "/v2.0/extensions"=>{:GET=>[:list_extensions]},

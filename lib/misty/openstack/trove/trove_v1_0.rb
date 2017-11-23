@@ -1,4 +1,8 @@
 module Misty::Openstack::TroveV1_0
+  def tag
+    'Database API Reference 9.0.0'
+  end
+
   def api
 {"/"=>{:GET=>[:list_versions]},
  "/v1.0"=>{:GET=>[:show_version_details]},

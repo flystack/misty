@@ -8,8 +8,9 @@ module Misty
         include Misty::Openstack::CinderV2
         include Misty::ClientPack
 
+        # TODO: path for '/v2/{admin_project_id}'
         def prefix_path_to_ignore
-          '/v2/{tenant_id}'
+          '/v2/{project_id}'
         end
 
         def service_names

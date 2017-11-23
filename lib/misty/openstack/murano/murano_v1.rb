@@ -1,4 +1,8 @@
 module Misty::Openstack::MuranoV1
+  def tag
+    'Application Catalog API Reference 5.0.0'
+  end
+
   def api
 {"/environments/{environment_id}/actions/{action_id}"=>
   {:POST=>[:execute_action]},

@@ -1,4 +1,8 @@
 module Misty::Openstack::ManilaV2
+  def tag
+    'Shared File Systems API Reference 6.0.0'
+  end
+
   def api
 {"/"=>{:GET=>[:list_all_major_versions]},
  "/{api_version}"=>{:GET=>[:show_details_of_specific_api_version]},
@@ -49,6 +53,14 @@ module Misty::Openstack::ManilaV2
     [:unmanage_share_snapshot,
      :reset_share_snapshot_state,
      :force_delete_share_snapshot]},
+ "/v2/{tenant_id}/snapshot-instances"=>
+  {:GET=>[:list_share_snapshot_instances]},
+ "/v2/{tenant_id}/snapshot-instances/detail"=>
+  {:GET=>[:list_share_snapshot_instances_with_details]},
+ "/v2/{tenant_id}/snapshot-instances/{snapshot_instance_id}"=>
+  {:GET=>[:show_share_snapshot_instance_details]},
+ "/v2/{tenant_id}/snapshot-instances/{snapshot_instance_id}/action"=>
+  {:POST=>[:reset_share_snapshot_instance_state]},
  "/v2/{tenant_id}/share-networks"=>
   {:GET=>[:list_share_networks], :POST=>[:create_share_network]},
  "/v2/{tenant_id}/share-networks/detail"=>
@@ -104,8 +116,8 @@ module Misty::Openstack::ManilaV2
  "/v2/{tenant_id}/services/enable"=>{:PUT=>[:enable_service]},
  "/v2/{tenant_id}/services/disable"=>{:PUT=>[:disable_service]},
  "/v2/{tenant_id}/availability-zones"=>{:GET=>[:list_availability_zones]},
- "/v2/{tenant_id}/os-share-manage"=>{:POST=>[:manage_share], :version => {:min => "2.0", :max => "2.6"}},
- "/v2/{tenant_id}/os-share-unmanage/{share_id}/unmanage"=>{:POST=> [:unmanage_share], :version => {:min => "2.0", :max => "2.6"}},
+ "/v2/{tenant_id}/os-share-manage"=>{:POST=>[:manage_share]},
+ "/v2/{tenant_id}/os-share-unmanage/{share_id}/unmanage"=>{:POST=> [:unmanage_share]},
  "/v2/{tenant_id}/quota-sets/{tenant_id}/defaults"=>
   {:GET=>[:show_default_quota_set]},
  "/v2/{tenant_id}/quota-sets/{tenant_id}?user_id={user_id}"=>
@@ -114,30 +126,57 @@ module Misty::Openstack::ManilaV2
    :DELETE=>[:delete_quota_set]},
  "/v2/{tenant_id}/quota-sets/{tenant_id}/detail?user_id={user_id}"=>
   {:GET=>[:show_quota_set_in_detail]},
- "/v2/{tenant_id}/consistency-groups"=>
-  {:GET=>[:list_consistency_groups], :POST=>[:create_consistency_group]},
- "/v2/{tenant_id}/consistency-groups/detail"=>
-  {:GET=>[:list_consistency_groups_with_details]},
- "/v2/{tenant_id}/consistency-groups/{consistency_group_id}"=>
-  {:GET=>[:show_consistency_group_details],
-   :PUT=>[:update_consistency_group],
-   :DELETE=>[:delete_consistency_group]},
- "/v2/{tenant_id}/consistency-groups/{consistency_group_id}/action"=>
-  {:POST=>[:reset_consistency_group_state, :force_delete_consistency_group]},
- "/v2/{tenant_id}/cgsnapshots"=>
-  {:GET=>[:list_consistency_group_snapshots],
-   :POST=>[:create_consistency_group_snapshot]},
- "/v2/{tenant_id}/cgsnapshots/detail"=>
-  {:GET=>[:list_consistency_group_snapshots_with_details]},
- "/v2/{tenant_id}/cgsnapshots/{cgsnapshot_id}"=>
-  {:GET=>[:show_consistency_group_snapshot_details],
-   :PUT=>[:update_consistency_group_snapshot],
-   :DELETE=>[:delete_consistency_group_snapshot]},
- "/v2/{tenant_id}/cgsnapshots/{cgsnapshot_id}/members"=>
-  {:GET=>[:list_consistency_group_snapshot_members]},
- "/v2/{tenant_id}/cgsnapshots/{cgsnapshot_id}/action"=>
+ "/v2/{tenant_id}/messages"=>{:GET=>[:list_user_messages]},
+ "/v2/{tenant_id}/messages/{message_id}"=>
+  {:GET=>[:show_user_message_details], :DELETE=>[:delete_message]},
+ "/v2/{tenant_id}/share-replicas"=>{:POST=>[:create_share_replica]},
+ "/v2/{tenant_id}/share-replicas/{share_replica_id}/action"=>
   {:POST=>
-    [:reset_consistency_group_snapshot_state,
-     :force_delete_consistency_group_snapshot]}}
+    [:promote_share_replica,
+     :resync_share_replica,
+     :reset_status_of_the_share_replica,
+     :reset_replica_state_of_the_share_replica,
+     :force_delete_share_replica]},
+ "/v2/{tenant_id}/share-replicas?share_id={share_id}"=>
+  {:GET=>[:list_share_replicas]},
+ "/v2/{tenant_id}/share-replicas/detail?share_id={share_id}"=>
+  {:GET=>[:list_share_replicas_with_details]},
+ "/v2/{tenant_id}/share-replicas/{share_replica_id}"=>
+  {:GET=>[:show_share_replica], :DELETE=>[:delete_share_replica]},
+ "/v2/{tenant_id}/share_groups"=>
+  {:GET=>[:list_share_groups], :POST=>[:create_share_group]},
+ "/v2/{tenant_id}/share_groups/{share_group_id}"=>
+  {:GET=>[:show_share_group_details]},
+ "/v2/{tenant_id}/share-groups/{share_group_id}/action"=>
+  {:POST=>[:reset_share_group_state]},
+ "/v2/{tenant_id}/share-groups/{share_group_id}"=>
+  {:PUT=>[:update_share_group], :DELETE=>[:delete_share_group]},
+ "/v2/{tenant_id}/share-group-types"=>
+  {:GET=>[:list_share_group_types], :POST=>[:create_share_group_type]},
+ "/v2/{tenant_id}/share-group-types/default"=>
+  {:GET=>[:list_default_share_group_types]},
+ "/v2/{tenant_id}/share-group-types/{share_group_type_id}/group_specs"=>
+  {:GET=>[:list_share_group_types_extra_specs],
+   :POST=>[:set_extra_spec_for_share_group_type]},
+ "/v2/{tenant_id}/share-group-types/{share_group_type_id}/share_type_access"=>
+  {:GET=>[:show_share_group_type_access_details]},
+ "/v2/{tenant_id}/share-group-types/{share_group_type_id}/group-specs/{group_spec_key}"=>
+  {:DELETE=>[:unset_an_group_spec]},
+ "/v2/{tenant_id}/share-group-types/{share_group_type_id}/action"=>
+  {:POST=>[:add_share_group_type_access, :remove_share_group_type_access]},
+ "/v2/{tenant_id}/share-group-types/{share_group_type_id}"=>
+  {:DELETE=>[:delete_share_group_type]},
+ "/v2/{tenant_id}/share-group-snapshots"=>
+  {:GET=>[:list_share_group_snapshots], :POST=>[:create_share_group_snapshot]},
+ "/v2/{tenant_id}/share-group-snapshots/detail"=>
+  {:GET=>[:list_share_group_snapshots_with_details]},
+ "/v2/{tenant_id}/share-group-snapshots/{group_snapshot_id}/members"=>
+  {:GET=>[:list_share_group_snapshots_members]},
+ "/v2/{tenant_id}/share-group-snapshots/{group_snapshot_id}"=>
+  {:GET=>[:show_share_group_snapshot_details],
+   :PUT=>[:update_share_group_snapshot],
+   :DELETE=>[:delete_share_group_snapshot]},
+ "/v2/{tenant_id}/share-group-snapshots/{group_snapshot_id}/action"=>
+  {:POST=>[:reset_share_group_snapshot_state]}}
   end
 end
