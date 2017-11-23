@@ -1,3 +1,27 @@
+# 1.2.0 - 23 November 2017
+## HTTP Requests
+JSON header automatically generated when data is Array or Hash
+
+## APIs
+* Wrapper requests allow to create requests for any API service
+* Openstack APIs are now included as module (and not extended)
+* Misty::Openstack::Extension module added (see Keystone)
+
+### Swift
+:bulk_delete wrapper added
+
+### Keystone
+API extensions for Keystone v2.0 and v3 are now fusioned into respective API.   
+
+### Schema
+The APIs schema are using https://github.com/flystack/openstack-APIs
+
+## Rakefile
+Build rules for fetch APIs schema.
+
+## Auth
+Misty::Auth re-factored as a mixin
+
 # 1.1.0 - 26 October 2017
 ## HTTP Requests
 * HEAD request fixed: no need for data
