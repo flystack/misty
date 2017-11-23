@@ -1,5 +1,5 @@
 module Misty::Openstack::FreezerV1
-  def v1
+  def api
 {"/v1/backups"=>{:GET=>[:lists_backups]},
  "/v1/backups/{backup_id}"=>
   {:GET=>[:show_backups], :DELETE=>[:delete_backups]},

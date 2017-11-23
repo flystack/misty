@@ -1,5 +1,5 @@
 module Misty::Openstack::DesignateV2
-  def v2
+  def api
 {"/"=>{:GET=>[:list_all_api_versions]},
  "/v2/zones"=>{:POST=>[:create_zone], :GET=>[:list_zones]},
  "/v2/zones/{zone_id}"=>

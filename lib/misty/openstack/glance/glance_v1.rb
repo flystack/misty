@@ -1,5 +1,5 @@
 module Misty::Openstack::GlanceV1
-  def v1
+  def api
 {"/v1/images"=>{:POST=>[:create_image], :GET=>[:list_images]},
  "/v1/images/detail"=>{:GET=>[:list_images_with_details]},
  "/v1/images/{image_id}"=>

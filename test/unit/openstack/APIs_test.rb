@@ -21,20 +21,25 @@ def api_valid?(api_entry)
   end
 end
 
-# For each OpenStack project version, generates an equivalent of the following example:
-# it 'Nova v2.1 loads a valid api structure' do
-#   require 'misty/openstack/nova/v2_1'
-#   api = Misty::Openstack::Nova::V2_1.api
-#   api_valid?(api)
-# end
+def api_validate(project, version)
+  it "#{project} #{version} loads a valid api structure" do
+    require "misty/openstack/#{project}/#{project}_#{Misty::Cloud.dot_to_underscore(version)}"
+    klass = Object.const_get("Misty::Openstack::#{project.capitalize}#{Misty::Cloud.dot_to_underscore(version).capitalize}")
+    client = Object.new
+    client.extend(klass)
+    api_valid?(client.api)
+  end
+end
+
+# Assert each version of OpenStack project loads a valid api structure
 describe 'Openstack API' do
   Misty.services.each do |service|
-    #service.versions.each do |version|
-    #  it "#{service.project} #{version} loads a valid api structure" do
-    #    require "misty/openstack/#{service.project}/#{Misty::Cloud.dot_to_underscore(version)}"
-    #    api = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{Misty::Cloud.dot_to_underscore(version).capitalize}").api
-    #    api_valid?(api)
-    #  end
-    #end
+    if service.versions
+      service.versions.each do |version|
+        api_validate(service.project, version)
+      end
+    elsif service.microversion && !service.microversion.empty?
+      api_validate(service.project, service.microversion)
+    end
   end
 end

@@ -1,5 +1,5 @@
 module Misty::Openstack::CinderV3
-  def v3
+  def api
 {"/"=>{:GET=>[:list_all_api_versions]},
  "/v3"=>{:GET=>[:show_api_v3_details]},
  "/v3/{project_id}/extensions"=>{:GET=>[:list_known_api_extensions]},

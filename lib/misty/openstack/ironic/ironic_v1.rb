@@ -1,5 +1,5 @@
 module Misty::Openstack::IronicV1
-  def v1
+  def api
 {"/"=>{:GET=>[:list_api_versions]},
  "/v1/"=>{:GET=>[:show_v1_api]},
  "/v1/nodes"=>{:POST=>[:create_node], :GET=>[:list_nodes]},

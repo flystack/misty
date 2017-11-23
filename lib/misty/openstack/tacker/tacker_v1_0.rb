@@ -1,5 +1,5 @@
 module Misty::Openstack::TackerV1_0
-  def v1_0
+  def api
 {"/"=>{:GET=>[:list_versions]},
  "/v1.0/extensions"=>{:GET=>[:list_extensions]},
  "/v1.0/extensions/{alias}"=>{:GET=>[:show_extension]},

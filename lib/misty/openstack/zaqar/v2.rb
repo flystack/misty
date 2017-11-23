@@ -5,12 +5,8 @@ module Misty
   module Openstack
     module Zaqar
       class V2
-        extend Misty::Openstack::ZaqarV2
+        include Misty::Openstack::ZaqarV2
         include Misty::ClientPack
-
-        def api
-          self.class.v2
-        end
 
         def service_names
           %w{messaging}

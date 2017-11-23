@@ -1,5 +1,5 @@
 module Misty::Openstack::NovaV2_1
-  def v2_1
+  def api
 {"/"=>{:GET=>[:list_all_major_versions]},
  "/{api_version}"=>{:GET=>[:show_details_of_specific_api_version]},
  "/servers"=>

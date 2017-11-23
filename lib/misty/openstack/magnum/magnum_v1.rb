@@ -1,5 +1,5 @@
 module Misty::Openstack::MagnumV1
-  def v1
+  def api
 {"/"=>{:GET=>[:list_api_versions]},
  "/v1/"=>{:GET=>[:show_v1_api_version]},
  "/v1/bays"=>{:POST=>[:create_new_bay]},

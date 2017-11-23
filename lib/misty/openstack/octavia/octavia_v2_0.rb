@@ -1,5 +1,5 @@
 module Misty::Openstack::OctaviaV2_0
-  def v2_0
+  def api
 {"/v2.0/lbaas/loadbalancers"=>
   {:GET=>[:list_load_balancers], :POST=>[:create_a_load_balancer]},
  "/v2.0/lbaas/loadbalancers/{loadbalancer_id}"=>

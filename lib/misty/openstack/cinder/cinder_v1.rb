@@ -1,5 +1,5 @@
 module Misty::Openstack::CinderV1
-  def v1
+  def api
 {"/v1/{admin_tenant_id}/os-quota-sets/{tenant_id}/detail/{user_id}"=>
   {:GET=>[:show_quota_details_for_user_v1]},
  "/v1/{tenant_id}/os-quota-sets/defaults"=>{:GET=>[:show_default_quotas]},

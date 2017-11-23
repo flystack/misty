@@ -1,5 +1,5 @@
 module Misty::Openstack::MuranoV1
-  def v1
+  def api
 {"/environments/{environment_id}/actions/{action_id}"=>
   {:POST=>[:execute_action]},
  "/environments/{environment_id}/actions/{task_id}"=>

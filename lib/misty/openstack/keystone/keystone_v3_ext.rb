@@ -1,5 +1,5 @@
-module Misty::Openstack::KeystoneV3
-  def v3_ext
+module Misty::Openstack::KeystoneV3_ext
+  def api_ext
 {"/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}"=>
   {:PUT=>[:associate_policy_and_endpoint],
    :GET=>[:verify_a_policy_and_endpoint_association],

@@ -1,5 +1,5 @@
 module Misty::Openstack::SaharaV1_1
-  def v1_1
+  def api
 {"/v1.1/{project_id}/cluster-templates/{cluster_template_id}"=>
   {:GET=>[:show_cluster_template_details],
    :PUT=>[:update_cluster_templates],
