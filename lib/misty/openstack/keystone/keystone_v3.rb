@@ -1,5 +1,5 @@
 module Misty::Openstack::KeystoneV3
-  def v3
+  def api
 {"/v3/auth/tokens"=>
   {:POST=>
     [:password_authentication_with_unscoped_authorization,

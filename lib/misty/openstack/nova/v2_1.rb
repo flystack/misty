@@ -6,14 +6,11 @@ module Misty
   module Openstack
     module Nova
       class V2_1
-        extend Misty::Openstack::NovaV2_1
+        include Misty::Openstack::NovaV2_1
         include Misty::ClientPack
         include Misty::Microversion
 
-        def api
-          self.class.v2_1
-        end
-
+        # TODO: Verify
         # Overrides API because the definitions don't specify prefix
         def self.list_all_major_versions
           http_get('/', headers)

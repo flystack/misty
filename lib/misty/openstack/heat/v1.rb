@@ -5,12 +5,8 @@ module Misty
   module Openstack
     module Heat
       class V1
-        extend Misty::Openstack::HeatV1
+        include Misty::Openstack::HeatV1
         include Misty::ClientPack
-
-        def api
-          self.class.v1
-        end
 
         def prefix_path_to_ignore
           '/v1/{tenant_id}'

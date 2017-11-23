@@ -5,12 +5,8 @@ module Misty
   module Openstack
     module Senlin
       class V1
-        extend Misty::Openstack::SenlinV1
+        include Misty::Openstack::SenlinV1
         include Misty::ClientPack
-
-        def api
-          self.class.v1
-        end
 
         def service_names
           %w{clustering}

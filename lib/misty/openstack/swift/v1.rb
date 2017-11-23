@@ -5,12 +5,8 @@ module Misty
   module Openstack
     module Swift
       class V1
-        extend  Misty::Openstack::SwiftV1
+        include  Misty::Openstack::SwiftV1
         include Misty::ClientPack
-
-        def api
-          self.class.v1
-        end
 
         def prefix_path_to_ignore
           '/v1/{account}'

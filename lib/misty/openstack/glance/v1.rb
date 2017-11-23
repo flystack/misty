@@ -5,12 +5,8 @@ module Misty
   module Openstack
     module Glance
       class V1
-        extend Misty::Openstack::GlanceV1
+        include Misty::Openstack::GlanceV1
         include Misty::ClientPack
-
-        def api
-          self.class.v1
-        end
 
         def service_names
           %w{image}

@@ -1,5 +1,5 @@
 module Misty::Openstack::HeatV1
-  def v1
+  def api
 {"/v1/{tenant_id}/build_info"=>{:GET=>[:show_build_information]},
  "/"=>{:GET=>[:list_versions]},
  "/v1/{tenant_id}/stacks"=>

@@ -1,5 +1,5 @@
 module Misty::Openstack::NeutronV2_0
-  def v2_0
+  def api
 {"/"=>{:GET=>[:list_api_versions]},
  "/v2.0/"=>{:GET=>[:show_api_v2_details]},
  "/v2.0/extensions"=>{:GET=>[:list_extensions]},

@@ -1,5 +1,5 @@
-module Misty::Openstack::KeystoneV2_0
-  def v2_0_ext
+module Misty::Openstack::KeystoneV2_0_ext
+  def api_ext
 {"/v2.0/users/{user_id}/OS-KSADM/enabled"=>{:PUT=>[:enable_disable_user]},
  "/v2.0/users/{user_id}/OS-KSADM/password"=>{:PUT=>[:set_user_password]},
  "/v2.0/users/{user_id}/OS-KSADM/tenant"=>{:PUT=>[:update_user_tenant]},

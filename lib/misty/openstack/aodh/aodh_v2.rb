@@ -1,5 +1,5 @@
 module Misty::Openstack::AodhV2
-  def v2
+  def api
 {"/v2/capabilities"=>{:GET=>[:list_capabilities]},
  "/v2/alarms"=>{:GET=>[:list_alarms], :POST=>[:create_alarm]},
  "/v2/alarms/{alarm_id}"=>

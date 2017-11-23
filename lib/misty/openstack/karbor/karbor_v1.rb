@@ -1,5 +1,5 @@
 module Misty::Openstack::KarborV1
-  def v1
+  def api
 {"/v1/{tenant_id}/protectables"=>{:GET=>[:list_protectable_types]},
  "/v1/{tenant_id}/protectables/{protectable_type}"=>
   {:GET=>[:show_protectable_type]},

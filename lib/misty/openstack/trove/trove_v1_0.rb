@@ -1,5 +1,5 @@
 module Misty::Openstack::TroveV1_0
-  def v1_0
+  def api
 {"/"=>{:GET=>[:list_versions]},
  "/v1.0"=>{:GET=>[:show_version_details]},
  "/v1.0/{accountId}/instances/{instanceId}"=>

@@ -52,15 +52,17 @@ namespace :build do
     require 'yaml'
 
     Dir.glob("build/openstack-APIs/APIs/*/*.yaml") do |entry|
+      ext = ''
       path = entry.gsub('.yaml', '').split('/')
       name = path[-2]
-      version = path[-1].gsub(/\./,'_')
+      version = path[-1].gsub(/\./, '_')
+      ext << '_ext' if version =~ /_ext/
       api = YAML.load_file(entry)
       Dir.mkdir("build/APIs/#{name}") unless Dir.exist?("build/APIs/#{name}")
       puts "Generating build/APIs/#{name}/#{name}_#{version}.rb"
       File.open("build/APIs/#{name}/#{name}_#{version}.rb", 'w') do |f|
         f << "module Misty::Openstack::#{name.capitalize}#{version.capitalize}\n"
-        f << "  def #{version}\n"
+        f << "  def api#{ext}\n"
         PP.pp(api, f)
         f << "  end\n"
         f << "end\n"

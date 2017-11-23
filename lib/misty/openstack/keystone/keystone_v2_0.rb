@@ -1,5 +1,5 @@
 module Misty::Openstack::KeystoneV2_0
-  def v2_0
+  def api
 {"/v2.0/extensions/{alias}"=>{:GET=>[:show_extension_details]},
  "/v2.0/extensions"=>{:GET=>[:list_extensions]},
  "/v2.0/tenants"=>{:GET=>[:list_tenants]},

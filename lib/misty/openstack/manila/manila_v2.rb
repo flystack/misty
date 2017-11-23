@@ -1,5 +1,5 @@
 module Misty::Openstack::ManilaV2
-  def v2
+  def api
 {"/"=>{:GET=>[:list_all_major_versions]},
  "/{api_version}"=>{:GET=>[:show_details_of_specific_api_version]},
  "/v2/{tenant_id}/extensions"=>{:GET=>[:list_extensions]},

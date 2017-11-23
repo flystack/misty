@@ -1,5 +1,5 @@
 module Misty::Openstack::SwiftV1
-  def v1
+  def api
 {"/info"=>{:GET=>[:list_activated_capabilities]},
  "/v1/{account}"=>
   {:GET=>[:show_account_details_and_list_containers],

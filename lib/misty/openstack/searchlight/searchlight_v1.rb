@@ -1,5 +1,5 @@
 module Misty::Openstack::SearchlightV1
-  def v1
+  def api
 {"/v1/search/plugins"=>{:GET=>[:list_plugins]},
  "/v1/search/facets"=>{:GET=>[:list_facets]},
  "/v1/search"=>

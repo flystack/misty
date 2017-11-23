@@ -1,5 +1,5 @@
 module Misty::Openstack::SenlinV1
-  def v1
+  def api
 {"/"=>{:GET=>[:list_major_versions]},
  "/{version}/"=>{:GET=>[:show_details_of_an_api_version]},
  "/v1/build-info"=>{:GET=>[:shows_build_information]},

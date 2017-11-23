@@ -1,5 +1,5 @@
 module Misty::Openstack::ZaqarV2
-  def v2
+  def api
 {"/"=>{:GET=>[:list_major_versions]},
  "/v2/queues"=>{:GET=>[:list_queues]},
  "/v2/queues/{queue_name}"=>

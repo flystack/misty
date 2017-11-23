@@ -1,5 +1,5 @@
 module Misty::Openstack::CeilometerV2
-  def v2
+  def api
 {"/v2/resources"=>{:GET=>[:list_resources]},
  "/v2/resources/{resource_id}"=>{:GET=>[:show_ressource]},
  "/v2/meters"=>{:GET=>[:list_meters]},

@@ -1,5 +1,5 @@
 module Misty::Openstack::CinderV2
-  def v2
+  def api
 {"/"=>{:GET=>[:list_api_versions]},
  "/v2/{tenant_id}/backups/detail"=>{:GET=>[:list_backups_with_details]},
  "/v2/{tenant_id}/backups/{backup_id}"=>
