@@ -1,6 +1,7 @@
 require 'test_helper'
 
-VERBS = [ :COPY, :DELETE, :GET, :HEAD, :PATCH, :POST, :PUT ]
+# TODO: Handle :METHOD
+VERBS = [ :COPY, :DELETE, :GET, :HEAD, :PATCH, :POST, :PUT, :METHOD]
 
 def api_valid?(api_entry)
   api_entry.each do |path, requests|
@@ -14,8 +15,6 @@ def api_valid?(api_entry)
           name.must_be_kind_of Symbol
           name.to_s.wont_match /^id\d*/
         end
-      else
-        verb.must_equal :version
       end
     end
   end
@@ -27,6 +26,7 @@ def api_validate(project, version)
     klass = Object.const_get("Misty::Openstack::#{project.capitalize}#{Misty::Cloud.dot_to_underscore(version).capitalize}")
     client = Object.new
     client.extend(klass)
+    client.tag.must_match /API/
     api_valid?(client.api)
   end
 end

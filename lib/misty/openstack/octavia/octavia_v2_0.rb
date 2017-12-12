@@ -1,4 +1,8 @@
 module Misty::Openstack::OctaviaV2_0
+  def tag
+    'Octavia API Reference 2.0.0'
+  end
+
   def api
 {"/v2.0/lbaas/loadbalancers"=>
   {:GET=>[:list_load_balancers], :POST=>[:create_a_load_balancer]},
@@ -10,6 +14,8 @@ module Misty::Openstack::OctaviaV2_0
   {:GET=>[:get_load_balancer_statistics]},
  "/v2.0/lbaas/loadbalancers/{loadbalancer_id}/status"=>
   {:GET=>[:get_the_load_balancer_status_tree]},
+ "/v2.0/lbaas/loadbalancers/{loadbalancer_id}/failover"=>
+  {:PUT=>[:failover_a_load_balancer]},
  "/v2.0/lbaas/listeners"=>{:GET=>[:list_listeners], :POST=>[:create_listener]},
  "/v2.0/lbaas/listeners/{listener_id}"=>
   {:GET=>[:show_listener_details],
@@ -23,7 +29,9 @@ module Misty::Openstack::OctaviaV2_0
    :PUT=>[:update_a_pool],
    :DELETE=>[:remove_a_pool]},
  "/v2.0/lbaas/pools/{pool_id}/members"=>
-  {:GET=>[:list_members], :POST=>[:create_member]},
+  {:GET=>[:list_members],
+   :POST=>[:create_member],
+   :PUT=>[:batch_update_members]},
  "/v2.0/lbaas/pools/{pool_id}/members/{member-id}"=>
   {:GET=>[:show_member_details]},
  "/v2.0/lbaas/pools/{pool_id}/members/{member_id}"=>
@@ -51,6 +59,8 @@ module Misty::Openstack::OctaviaV2_0
  "/v2.0/lbaas/quotas/{project_id}"=>
   {:GET=>[:show_project_quota],
    :PUT=>[:update_a_quota],
-   :DELETE=>[:remove_a_quota]}}
+   :DELETE=>[:remove_a_quota]},
+ "/v2.0/octavia/amphorae"=>{:GET=>[:list_amphora]},
+ "/v2.0/octavia/amphorae/{amphora_id}"=>{:GET=>[:show_amphora_details]}}
   end
 end

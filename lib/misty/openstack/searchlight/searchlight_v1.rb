@@ -1,4 +1,8 @@
 module Misty::Openstack::SearchlightV1
+  def tag
+    'Search Service API Reference 3.0.1'
+  end
+
   def api
 {"/v1/search/plugins"=>{:GET=>[:list_plugins]},
  "/v1/search/facets"=>{:GET=>[:list_facets]},

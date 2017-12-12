@@ -57,13 +57,19 @@ namespace :build do
       name = path[-2]
       version = path[-1].gsub(/\./, '_')
       ext << '_ext' if version =~ /_ext/
-      api = YAML.load_file(entry)
+      payload = YAML.load_file(entry)
+
       Dir.mkdir("build/APIs/#{name}") unless Dir.exist?("build/APIs/#{name}")
       puts "Generating build/APIs/#{name}/#{name}_#{version}.rb"
       File.open("build/APIs/#{name}/#{name}_#{version}.rb", 'w') do |f|
         f << "module Misty::Openstack::#{name.capitalize}#{version.capitalize}\n"
+
+        f << "  def tag\n"
+        f << "    '#{payload[:tag]}'\n"
+        f << "  end\n\n"
+
         f << "  def api#{ext}\n"
-        PP.pp(api, f)
+        PP.pp(payload[:api], f)
         f << "  end\n"
         f << "end\n"
       end
@@ -77,7 +83,7 @@ namespace :build do
       name = path[-2]
       file = path[-1]
      `diff lib/misty/openstack/#{name}/#{file} build/APIs/#{name}/#{file}`
-     puts "Not the same: #{name}/#{file}" if $?
+     puts "Not the same: #{name}/#{file}" unless $? == 0
     end
   end
 end

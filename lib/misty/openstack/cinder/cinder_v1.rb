@@ -1,4 +1,8 @@
 module Misty::Openstack::CinderV1
+  def tag
+    'Block Storage API Legacy'
+  end
+
   def api
 {"/v1/{admin_tenant_id}/os-quota-sets/{tenant_id}/detail/{user_id}"=>
   {:GET=>[:show_quota_details_for_user_v1]},

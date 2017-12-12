@@ -1,4 +1,8 @@
 module Misty::Openstack::ZaqarV2
+  def tag
+    'Messaging Service API Reference 6.0.0'
+  end
+
   def api
 {"/"=>{:GET=>[:list_major_versions]},
  "/v2/queues"=>{:GET=>[:list_queues]},
@@ -11,13 +15,12 @@ module Misty::Openstack::ZaqarV2
  "/v2/queues/{queue_name}/share"=>{:POST=>[:pre_signed_queue]},
  "/v2/queues/{queue_name}/purge"=>{:POST=>[:purge_queue]},
  "/v2/queues/{queue_name}/messages"=>
-  {:POST=>[:post_message], :GET=>[:list_messages]},
- "/v2/queues/{queue_name}/messages?ids={ids}"=>
-  {:GET=>[:get_a_set_of_messages_by_id],
-   :DELETE=>[:delete_a_set_of_messages_by_id]},
- "/v2/queues/{queue_name}/messages/{messageId}"=>
+  {:POST=>[:post_message],
+   :GET=>[:list_messages, :get_a_set_of_messages],
+   :DELETE=>[:delete_a_set_of_messages]},
+ "/v2/queues/{queue_name}/messages/{message_id}"=>
   {:GET=>[:get_a_specific_message], :DELETE=>[:delete_a_specific_message]},
- "/v2//queues/{queue_name}/claims"=>{:POST=>[:claim_messages]},
+ "/v2/queues/{queue_name}/claims"=>{:POST=>[:claim_messages]},
  "/v2/queues/{queue_name}/claims/{claim_id}"=>
   {:GET=>[:query_claim],
    :PATCH=>[:update_renew_claim],

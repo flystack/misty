@@ -1,4 +1,8 @@
 module Misty::Openstack::SaharaV1_1
+  def tag
+    'Data Processing API Reference 8.0.0'
+  end
+
   def api
 {"/v1.1/{project_id}/cluster-templates/{cluster_template_id}"=>
   {:GET=>[:show_cluster_template_details],

@@ -1,8 +1,12 @@
 module Misty::Openstack::SenlinV1
+  def tag
+    'Clustering API Reference 4.0.1'
+  end
+
   def api
 {"/"=>{:GET=>[:list_major_versions]},
  "/{version}/"=>{:GET=>[:show_details_of_an_api_version]},
- "/v1/build-info"=>{:GET=>[:shows_build_information]},
+ "/v1/build-info"=>{:GET=>[:show_build_information]},
  "/v1/profile-types"=>{:GET=>[:list_profile_types]},
  "/v1/profile-types/{profile_type}"=>{:GET=>[:show_profile_type_details]},
  "/v1/profile-types/{profile_type}/ops"=>
@@ -61,6 +65,7 @@ module Misty::Openstack::SenlinV1
   {:GET=>[:show_receiver_details],
    :PATCH=>[:update_receiver],
    :DELETE=>[:delete_receiver]},
+ "/v1/receivers/{receiver_id}/notify"=>{:POST=>[:notify_receiver]},
  "/v1/events"=>{:GET=>[:list_events]},
  "/v1/events/{event_id}"=>{:GET=>[:shows_event_details]},
  "/v1/webhooks/{webhook_id}/trigger"=>{:POST=>[:trigger_webhook_action]},

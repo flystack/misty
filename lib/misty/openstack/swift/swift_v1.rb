@@ -1,4 +1,8 @@
 module Misty::Openstack::SwiftV1
+  def tag
+    'Object Storage API Reference 2.16.1'
+  end
+
   def api
 {"/info"=>{:GET=>[:list_activated_capabilities]},
  "/v1/{account}"=>

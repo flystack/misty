@@ -1,4 +1,8 @@
 module Misty::Openstack::MagnumV1
+  def tag
+    'Container Infrastructure Management API Reference 5.0.1'
+  end
+
   def api
 {"/"=>{:GET=>[:list_api_versions]},
  "/v1/"=>{:GET=>[:show_v1_api_version]},

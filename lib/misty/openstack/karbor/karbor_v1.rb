@@ -1,4 +1,8 @@
 module Misty::Openstack::KarborV1
+  def tag
+    'Data Protection API Reference 0.5.1'
+  end
+
   def api
 {"/v1/{tenant_id}/protectables"=>{:GET=>[:list_protectable_types]},
  "/v1/{tenant_id}/protectables/{protectable_type}"=>
@@ -27,6 +31,9 @@ module Misty::Openstack::KarborV1
   {:GET=>[:show_checkpoint], :DELETE=>[:delete_checkpoint]},
  "/v1/{tenant_id}/restores"=>
   {:GET=>[:list_restores], :POST=>[:create_restore]},
- "/v1/{tenant_id}/restores/{restore_id}"=>{:GET=>[:show_restore]}}
+ "/v1/{tenant_id}/restores/{restore_id}"=>{:GET=>[:show_restore]},
+ "/v1/{tenant_id}/operation_logs"=>{:GET=>[:list_operation_logs]},
+ "/v1/{tenant_id}/operation_logs/{operation_log_id}"=>
+  {:GET=>[:show_operation_log]}}
   end
 end
