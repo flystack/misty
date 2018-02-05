@@ -30,7 +30,7 @@ module Misty::Openstack::IronicV1
   {:GET=>[:get_console], :PUT=>[:start_stop_console]},
  "/v1/nodes/{node_ident}/vendor_passthru/methods"=>{:GET=>[:list_methods]},
  "/v1/nodes/{node_ident}/vendor_passthru?method={method_name}"=>
-  {:METHOD=>[:call_a_method]},
+  {:GET=>[:call_a_method]},
  "/v1/nodes/{node_ident}/vifs"=>
   {:GET=>[:list_attached_vifs_of_a_node], :POST=>[:attach_a_vif_to_a_node]},
  "/v1/nodes/{node_ident}/vifs/{node_vif_ident}"=>
@@ -81,7 +81,7 @@ module Misty::Openstack::IronicV1
   {:GET=>[:show_driver_logical_disk_properties]},
  "/v1/drivers/{driver_name}/vendor_passthru/methods"=>{:GET=>[:list_driver_methods]},
  "/v1/drivers/{driver_name}/vendor_passthru?method={method_name}"=>
-  {:METHOD=>[:call_driver_method]},
+  {:GET=>[:call_driver_method]},
  "/v1/chassis/detail"=>{:GET=>[:list_chassis_with_details]},
  "/v1/chassis/{chassis_id}"=>
   {:GET=>[:show_chassis_details],
