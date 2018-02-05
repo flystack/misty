@@ -1,7 +1,6 @@
 require 'test_helper'
 
-# TODO: Handle :METHOD
-VERBS = [ :COPY, :DELETE, :GET, :HEAD, :PATCH, :POST, :PUT, :METHOD]
+VERBS = [ :COPY, :DELETE, :GET, :HEAD, :PATCH, :POST, :PUT]
 
 def api_valid?(api_entry)
   api_entry.each do |path, requests|
