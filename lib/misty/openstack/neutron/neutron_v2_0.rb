@@ -12,8 +12,17 @@ module Misty::Openstack::NeutronV2_0
   {:GET=>[:show_network_details],
    :PUT=>[:update_network],
    :DELETE=>[:delete_network]},
+ "/v2.0/networks/{network_id}/dhcp-agents"=>
+  {:GET=>[:list_network_dhcp_agents]},
  "/v2.0/networks"=>
   {:GET=>[:list_networks], :POST=>[:create_network, :bulk_create_networks]},
+ "/v2.0/agents"=>{:GET=>[:list_agents]},
+ "/v2.0/agents/{agent_id}"=>{:GET=>[:show_agent]},
+ "/v2.0/agents/{agent_id}/dhcp-networks"=>
+  {:GET=>[:list_agent_dhcp_networks],
+   :POST=>[:create_agent_dhcp_network]},
+ "/v2.0/agents/{agent_id}/dhcp-networks/{network_id}"=>
+  {:DELETE=>[:delete_agent_dhcp_network]},
  "/v2.0/ports/{port_id}"=>
   {:GET=>[:show_port_details, :show_trunk_details],
    :PUT=>[:update_port],
