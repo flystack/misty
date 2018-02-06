@@ -37,7 +37,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"token": {"is_domain": false, "methods": ["password"], "roles": [{"id":
-        "213532edcc504e83940ae2993c1f1e6a", "name": "admin"}], "expires_at": "2018-02-06T11:50:25.000000Z",
+        "213532edcc504e83940ae2993c1f1e6a", "name": "admin"}], "expires_at": "2100-02-06T11:50:25.000000Z",
         "project": {"domain": {"id": "default", "name": "Default"}, "id": "59c8c1f16fac4c51901777909300a613",
         "name": "admin"}, "catalog": [{"endpoints": [], "type": "metering", "id":
         "01c6a80de7584a8f89ba9695843ef05c", "name": "ceilometer"}, {"endpoints": [{"region_id":
@@ -140,7 +140,7 @@ http_interactions:
         "heat"}], "user": {"password_expires_at": null, "domain": {"id": "default",
         "name": "Default"}, "id": "56d5f121c4b94edd90d57703dad4247a", "name": "admin"},
         "audit_ids": ["yyAERzrqQCe-D5ZcKPoijg"], "issued_at": "2018-02-06T10:50:25.000000Z"}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:25 GMT
 - request:
     method: get
@@ -179,7 +179,7 @@ http_interactions:
         "", "version": "", "id": "v2.0"}, {"status": "CURRENT", "updated": "2013-07-23T11:33:21Z",
         "links": [{"href": "http://192.0.2.6:8774/v2.1/", "rel": "self"}], "min_version":
         "2.1", "version": "2.53", "id": "v2.1"}]}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:25 GMT
 - request:
     method: post
@@ -230,7 +230,7 @@ http_interactions:
         "http://192.0.2.6:8774/v2.1/servers/69caa692-4fe3-4acc-9b8c-865ef973ccbe",
         "rel": "self"}, {"href": "http://192.0.2.6:8774/servers/69caa692-4fe3-4acc-9b8c-865ef973ccbe",
         "rel": "bookmark"}], "adminPass": "hWnNd88itWAL"}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:26 GMT
 - request:
     method: get
@@ -278,7 +278,7 @@ http_interactions:
         [{"href": "http://192.0.2.6:8774/v2.1/servers/69caa692-4fe3-4acc-9b8c-865ef973ccbe",
         "rel": "self"}, {"href": "http://192.0.2.6:8774/servers/69caa692-4fe3-4acc-9b8c-865ef973ccbe",
         "rel": "bookmark"}], "name": "test_create_server"}]}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:27 GMT
 - request:
     method: get
@@ -338,7 +338,7 @@ http_interactions:
         null, "name": "test_create_server", "created": "2018-02-06T10:50:26Z", "tenant_id":
         "59c8c1f16fac4c51901777909300a613", "os-extended-volumes:volumes_attached":
         [], "metadata": {}}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:27 GMT
 - request:
     method: put
@@ -393,7 +393,7 @@ http_interactions:
         "", "accessIPv6": "", "progress": 0, "flavor": {"id": "1", "links": [{"href":
         "http://192.0.2.6:8774/flavors/1", "rel": "bookmark"}]}, "id": "69caa692-4fe3-4acc-9b8c-865ef973ccbe",
         "metadata": {}}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:27 GMT
 - request:
     method: delete
@@ -436,6 +436,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 10:50:27 GMT
 recorded_with: VCR 3.0.3
