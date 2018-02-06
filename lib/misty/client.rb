@@ -39,7 +39,6 @@ module Misty
       @version = nil
       @microversion = false
       @headers = Misty::HTTP::Header.new(@config.headers.get.clone)
-      @headers.add('X-Auth-Token' => @auth.get_token.to_s)
       @headers.add(microversion_header) if microversion
       @headers.add(@options.headers) unless @options.headers.empty?
     end

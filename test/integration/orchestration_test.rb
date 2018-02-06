@@ -48,7 +48,19 @@ heat_template2 = {
 }
 
 describe 'Orchestration Service using Heat v1' do
+  let(:auth) do
+    {
+      :url                => 'http://192.0.2.21:5000',
+      :user               => 'admin',
+      :password           => 'CJk9hb2ZFR96Ypu74KFFGWuhv',
+      :project            => 'admin',
+      :project_domain_id  => 'default',
+      :domain             => 'default'
+    }
+  end
+
   it 'GET/POST/PUT/DELETE requests' do
+
     VCR.use_cassette 'orchestration using heat v1' do
       cloud = Misty::Cloud.new(:auth => auth, :orchestration => {:api_version => 'v1'})
 

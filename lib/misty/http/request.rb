@@ -12,8 +12,7 @@ module Misty
       end
 
       def http(request)
-        # get token for every new request
-        request['X-Auth-Token'] = @auth.get_token.to_s
+        request['X-Auth-Token'] = @auth.get_token
 
         Misty::HTTP::NetHTTP.http_request(
           @uri, ssl_verify_mode: @options.ssl_verify_mode, log: @config.log

@@ -1,6 +1,17 @@
 require 'test_helper'
 
 describe 'Network Service Neutron v2.0 features' do
+  let(:auth) do
+    {
+      :url                => 'http://192.0.2.6:5000',
+      :user               => 'admin',
+      :password           => 'QJdEmBzzEJpfpeRY6e3TEk7TW',
+      :project            => 'admin',
+      :project_domain_id  => 'default',
+      :domain             => 'default'
+    }
+  end
+
   it 'GET/POST/PUT/DELETE requests' do
     VCR.use_cassette 'network using neutron v2.0' do
       cloud = Misty::Cloud.new(:auth => auth, :network => {:api_version => 'v2.0'})
@@ -15,7 +26,7 @@ describe 'Network Service Neutron v2.0 features' do
       # GET
       response = cloud.network.list_networks
       response.code.must_equal '200'
-      response.body['networks'].size.must_equal 3
+      response.body['networks'].size.must_equal 2
 
       # GET with URI value
       response = cloud.network.show_network_details(id)
@@ -29,7 +40,8 @@ describe 'Network Service Neutron v2.0 features' do
       response.body['network']['name'].must_equal 'test_updated_network'
 
       # DELETE with URI value
-      cloud.network.delete_network(id).code.must_equal '204'
+      response = cloud.network.delete_network(id)
+      response.code.must_equal '204'
     end
   end
 end
