@@ -1,3 +1,10 @@
+# 1.3.0 - 06 February 2018
+## Identity
+Re-authenticate if token is expired
+
+## APIs
+APIs are tagged as they are retrieved during build process from "https://github.com/flystack/openstack-APIs"
+
 # 1.2.0 - 23 November 2017
 ## HTTP Requests
 JSON header automatically generated when data is Array or Hash
