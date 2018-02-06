@@ -20,6 +20,12 @@ module Misty
       end
     end
 
+    def get(name)
+      @services.each do |service|
+        return service if service.name == name
+      end
+    end
+
     def names
       service_names = []
       @services.each do |service|
