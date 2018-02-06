@@ -60,7 +60,6 @@ describe 'Orchestration Service using Heat v1' do
   end
 
   it 'GET/POST/PUT/DELETE requests' do
-
     VCR.use_cassette 'orchestration using heat v1' do
       cloud = Misty::Cloud.new(:auth => auth, :orchestration => {:api_version => 'v1'})
 

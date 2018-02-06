@@ -37,7 +37,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"token": {"is_domain": false, "methods": ["password"], "roles": [{"id":
-        "213532edcc504e83940ae2993c1f1e6a", "name": "admin"}], "expires_at": "2018-02-06T12:13:41.000000Z",
+        "213532edcc504e83940ae2993c1f1e6a", "name": "admin"}], "expires_at": "2100-02-06T12:13:41.000000Z",
         "project": {"domain": {"id": "default", "name": "Default"}, "id": "59c8c1f16fac4c51901777909300a613",
         "name": "admin"}, "catalog": [{"endpoints": [], "type": "metering", "id":
         "01c6a80de7584a8f89ba9695843ef05c", "name": "ceilometer"}, {"endpoints": [{"region_id":
@@ -140,7 +140,7 @@ http_interactions:
         "heat"}], "user": {"password_expires_at": null, "domain": {"id": "default",
         "name": "Default"}, "id": "56d5f121c4b94edd90d57703dad4247a", "name": "admin"},
         "audit_ids": ["Y5jQFLXqRPmcXVKdDDbFhA"], "issued_at": "2018-02-06T11:13:41.000000Z"}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 11:13:41 GMT
 - request:
     method: post
@@ -175,7 +175,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"network":{"provider:physical_network":null,"ipv6_address_scope":null,"revision_number":3,"port_security_enabled":true,"provider:network_type":"vxlan","id":"831ad638-1ac4-45ee-a26b-fd43cbe9fe88","router:external":false,"availability_zone_hints":[],"availability_zones":[],"provider:segmentation_id":16,"ipv4_address_scope":null,"shared":false,"project_id":"59c8c1f16fac4c51901777909300a613","status":"ACTIVE","subnets":[],"description":"","tags":[],"updated_at":"2018-02-06T11:13:41Z","is_default":false,"qos_policy_id":null,"name":"test_network","admin_state_up":true,"tenant_id":"59c8c1f16fac4c51901777909300a613","created_at":"2018-02-06T11:13:41Z","mtu":1450}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 11:13:42 GMT
 - request:
     method: get
@@ -210,7 +210,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"networks":[{"provider:physical_network":null,"ipv6_address_scope":null,"revision_number":5,"port_security_enabled":true,"mtu":1450,"id":"204e3939-34d2-40af-b52d-f58cfec1e2b1","router:external":true,"availability_zone_hints":[],"availability_zones":["nova"],"provider:segmentation_id":83,"ipv4_address_scope":null,"shared":false,"project_id":"59c8c1f16fac4c51901777909300a613","status":"ACTIVE","subnets":["29684fae-6cb5-470b-a893-e57b726b9aeb"],"description":"","tags":[],"updated_at":"2018-01-25T03:20:43Z","is_default":false,"qos_policy_id":null,"name":"external","admin_state_up":true,"tenant_id":"59c8c1f16fac4c51901777909300a613","created_at":"2018-01-25T03:20:20Z","provider:network_type":"vxlan"},{"provider:physical_network":null,"ipv6_address_scope":null,"revision_number":3,"port_security_enabled":true,"mtu":1450,"id":"831ad638-1ac4-45ee-a26b-fd43cbe9fe88","router:external":false,"availability_zone_hints":[],"availability_zones":[],"provider:segmentation_id":16,"ipv4_address_scope":null,"shared":false,"project_id":"59c8c1f16fac4c51901777909300a613","status":"ACTIVE","subnets":[],"description":"","tags":[],"updated_at":"2018-02-06T11:13:41Z","qos_policy_id":null,"name":"test_network","admin_state_up":true,"tenant_id":"59c8c1f16fac4c51901777909300a613","created_at":"2018-02-06T11:13:41Z","provider:network_type":"vxlan"}]}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 11:13:42 GMT
 - request:
     method: get
@@ -245,7 +245,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"network":{"provider:physical_network":null,"ipv6_address_scope":null,"revision_number":3,"port_security_enabled":true,"provider:network_type":"vxlan","id":"831ad638-1ac4-45ee-a26b-fd43cbe9fe88","router:external":false,"availability_zone_hints":[],"availability_zones":[],"provider:segmentation_id":16,"ipv4_address_scope":null,"shared":false,"project_id":"59c8c1f16fac4c51901777909300a613","status":"ACTIVE","subnets":[],"description":"","tags":[],"updated_at":"2018-02-06T11:13:41Z","qos_policy_id":null,"name":"test_network","admin_state_up":true,"tenant_id":"59c8c1f16fac4c51901777909300a613","created_at":"2018-02-06T11:13:41Z","mtu":1450}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 11:13:42 GMT
 - request:
     method: put
@@ -280,7 +280,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"network":{"provider:physical_network":null,"ipv6_address_scope":null,"revision_number":4,"port_security_enabled":true,"provider:network_type":"vxlan","id":"831ad638-1ac4-45ee-a26b-fd43cbe9fe88","router:external":false,"availability_zone_hints":[],"availability_zones":[],"provider:segmentation_id":16,"ipv4_address_scope":null,"shared":false,"project_id":"59c8c1f16fac4c51901777909300a613","status":"ACTIVE","subnets":[],"description":"","tags":[],"updated_at":"2018-02-06T11:13:42Z","qos_policy_id":null,"name":"test_updated_network","admin_state_up":true,"tenant_id":"59c8c1f16fac4c51901777909300a613","created_at":"2018-02-06T11:13:41Z","mtu":1450}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 11:13:42 GMT
 - request:
     method: delete
@@ -313,6 +313,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Tue, 06 Feb 2018 11:13:43 GMT
 recorded_with: VCR 3.0.3
