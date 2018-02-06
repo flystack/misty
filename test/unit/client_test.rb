@@ -86,12 +86,12 @@ describe Misty::Client do
 
   describe 'headers' do
     it 'returns default global along with token' do
-      service.headers.get.must_equal ({"Accept"=>"application/json; q=1.0", "X-Auth-Token"=>"token_id"})
+      service.headers.get.must_equal ({"Accept"=>"application/json; q=1.0"})
     end
 
     it 'inject headers parameter' do
       service(content_type = :ruby, params = {:headers => {'Oh' => 'my!'}}).
-        headers.get.must_equal ({"Accept"=>"application/json; q=1.0", "X-Auth-Token"=>"token_id", "Oh"=>"my!"})
+        headers.get.must_equal ({"Accept"=>"application/json; q=1.0", "Oh"=>"my!"})
     end
   end
 end

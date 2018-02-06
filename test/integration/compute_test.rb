@@ -1,12 +1,24 @@
 require 'test_helper'
 
+
 describe 'Compute Service Nova v2.1 features' do
+  let(:auth) do
+    {
+      :url                => 'http://192.0.2.6:5000',
+      :user               => 'admin',
+      :password           => 'QJdEmBzzEJpfpeRY6e3TEk7TW',
+      :project            => 'admin',
+      :project_domain_id  => 'default',
+      :domain             => 'default'
+    }
+  end
+
   it 'GET/POST/PUT/DELETE requests' do
     VCR.use_cassette 'compute using nova v2.1' do
       cloud = Misty::Cloud.new(:auth => auth, :compute => {:api_version => 'v2.1'})
 
       # POST with body data
-      server = { 'name': 'test_create_server', 'flavorRef': '1', 'imageRef': 'c091ccf2-a4ae-4fa0-a716-defd6376b5dc', 'networks': [{'uuid': '9c6e43b6-3d1d-4106-ad45-5fc3f5e371ee'}]}
+      server = { 'name': 'test_create_server', 'flavorRef': '1', 'imageRef': '07bd625e-d3ae-415c-bc82-46d66168378a', 'networks': [{'uuid': '204e3939-34d2-40af-b52d-f58cfec1e2b1'}]}
       data = Misty.to_json('server' => server)
       response = cloud.compute.create_server(data)
       response.code.must_equal '202'
@@ -16,8 +28,7 @@ describe 'Compute Service Nova v2.1 features' do
       # GET
       response = cloud.compute.list_servers
       response.code.must_equal '200'
-      response.body['servers'].size.must_equal 2
-
+      response.body['servers'].size.must_equal 1
       # GET with URI value
       response = cloud.compute.show_server_details(id)
       response.code.must_equal '200'
