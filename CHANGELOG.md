@@ -1,3 +1,7 @@
+# 1.3.1 - 06 February 2018
+## Integration test
+Fast forward expiry time stamp to fix expired token
+
 # 1.3.0 - 06 February 2018
 ## Identity
 Re-authenticate if token is expired
