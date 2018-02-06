@@ -24,6 +24,7 @@ module Misty
       @services.each do |service|
         return service if service.name == name
       end
+      nil
     end
 
     def names
