@@ -37,7 +37,7 @@ module Misty
   INTERFACE = 'public'
 
   # Default log file. Use :log_file option to override
-  LOG_FILE = 'misty.log'
+  LOG_FILE = '/dev/null'
 
   # Default log level. Use :log_level option to override
   LOG_LEVEL = Logger::INFO

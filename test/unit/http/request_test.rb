@@ -126,7 +126,7 @@ describe Misty::HTTP::Request do
     end
 
     it '#http_to_s' do
-      service.http_to_s('/resource', 'headers',  'data'  => 'value').must_equal "base_url='localhost:80', path='/resource', header=headers, data='{\"data\"=>\"value\"}'"
+      service.http_to_s('VERB', '/resource', 'headers',  'data'  => 'value').must_equal "HTTP VERB base_url='localhost:80', path='/resource', header=headers, data='{\"data\"=>\"value\"}'"
     end
   end
 end
