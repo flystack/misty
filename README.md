@@ -245,9 +245,9 @@ auth = {
 ```
 ### Logging parameters
 * :log_file  
-  File name and path for log file.  
-  Value is file path or IO object - Default is `./misty.log`.  
-  For example: use STDOUT for terminal output or alternatively use '/dev/null' to avoid the logs entirely.
+  Log destination.  
+  Value is either file path (./misty.log) or IO object (SDOUT)
+  Default is no output (`/dev/null`).  
 * :log_level  
   Value is Fixnum - Default is 1 (Logger::INFO) - See Logger from Ruby standard Library
 

@@ -24,59 +24,60 @@ module Misty
       end
 
       def http_delete(path, headers)
-        @config.log.info(http_to_s(path, headers))
+        @config.log.info(http_to_s('DELETE', path, headers))
         request = Net::HTTP::Delete.new(path, headers)
         http(request)
       end
 
       def http_copy(path, headers)
-        @config.log.info(http_to_s(path, headers))
+        @config.log.info(http_to_s('COPY', path, headers))
         request = Net::HTTP::Copy.new(path, headers)
         http(request)
       end
 
       def http_get(path, headers)
-        @config.log.info(http_to_s(path, headers))
+        @config.log.info(http_to_s('GET', path, headers))
         request = Net::HTTP::Get.new(path, headers)
         http(request)
       end
 
       def http_head(path, headers)
-        @config.log.info(http_to_s(path, headers))
+        @config.log.info(http_to_s('HEAD', path, headers))
         request = Net::HTTP::Head.new(path, headers)
         http(request)
       end
 
       def http_options(path, headers)
-        @config.log.info(http_to_s(path, headers))
+        @config.log.info(http_to_s('OPTIONS', path, headers))
         request = Net::HTTP::Options.new(path, headers)
         http(request)
       end
 
       def http_patch(path, headers, data)
-        @config.log.info(http_to_s(path, headers, data))
+        @config.log.info(http_to_s('PATCH', path, headers, data))
         request = Net::HTTP::Patch.new(path, headers)
         request.body = data
         http(request)
       end
 
       def http_post(path, headers, data)
-        @config.log.info(http_to_s(path, headers, data))
+        @config.log.info(http_to_s('POST', path, headers, data))
         request = Net::HTTP::Post.new(path, headers)
         request.body = data
         http(request)
       end
 
       def http_put(path, headers, data)
-        @config.log.info(http_to_s(path, headers, data))
+        @config.log.info(http_to_s('PUT', path, headers, data))
         request = Net::HTTP::Put.new(path, headers)
         request.body = data
         http(request)
       end
 
-      def http_to_s(path, headers, data = nil)
-        log = "base_url='#{@uri.host}:#{@uri.port}', path='#{path}', header=#{headers}"
+      def http_to_s(verb, path, headers, data = nil)
+        log = "HTTP #{verb} base_url='#{@uri.host}:#{@uri.port}', path='#{path}', header=#{headers}"
         log << ", data='#{data}'" if data
+        log
       end
     end
   end
