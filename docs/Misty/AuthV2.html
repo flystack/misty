@@ -59,7 +59,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../Object.html">Object</a>
+  <p class="link">Object
   
 </div>
 
@@ -110,8 +110,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -148,24 +146,24 @@
           
           <div class="method-source-code" id="credentials-source">
             <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">credentials</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">credentials</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@token</span>
-    <span class="ruby-identifier">identity</span> = { <span class="ruby-string">&#39;token&#39;</span><span class="ruby-operator">:</span> { <span class="ruby-string">&#39;id&#39;</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@token</span> } }
+    <span class="ruby-identifier">identity</span> = { <span class="ruby-value">&#39;token&#39;:</span> { <span class="ruby-value">&#39;id&#39;:</span> <span class="ruby-ivar">@token</span> } }
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">CredentialsError</span>, <span class="ruby-node">&quot;#{self.class}: User name is required&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">CredentialsError</span>, <span class="ruby-node">&quot;#{self.class}: User password is required&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">password</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">identity</span> = { <span class="ruby-string">&#39;passwordCredentials&#39;</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_credentials</span> }
+    <span class="ruby-identifier">identity</span> = { <span class="ruby-value">&#39;passwordCredentials&#39;:</span> <span class="ruby-identifier">user_credentials</span> }
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tenant</span>.<span class="ruby-identifier">id</span>
-    <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-string">&#39;tenantId&#39;</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tenant</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-value">&#39;tenantId&#39;:</span> <span class="ruby-ivar">@tenant</span>.<span class="ruby-identifier">id</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@tenant</span>.<span class="ruby-identifier">name</span>
-    <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-string">&#39;tenantName&#39;</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tenant</span>.<span class="ruby-identifier">name</span>)
+    <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-value">&#39;tenantName&#39;:</span> <span class="ruby-ivar">@tenant</span>.<span class="ruby-identifier">name</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">CredentialsError</span>, <span class="ruby-node">&quot;#{self.class}: No tenant available&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  { <span class="ruby-string">&#39;auth&#39;</span><span class="ruby-operator">:</span> <span class="ruby-identifier">identity</span> }
+  { <span class="ruby-value">&#39;auth&#39;:</span> <span class="ruby-identifier">identity</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -197,7 +195,7 @@
           
           <div class="method-source-code" id="endpoint_url-source">
             <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">endpoint_url</span>(<span class="ruby-identifier">endpoint</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">endpoint_url</span>(<span class="ruby-identifier">endpoint</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-node">&quot;#{interface}URL&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-string">&#39;region&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">region_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-node">&quot;#{interface}URL&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -230,7 +228,7 @@
           
           <div class="method-source-code" id="path-source">
             <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
   <span class="ruby-string">&#39;/v2.0/tokens&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -263,7 +261,7 @@
           
           <div class="method-source-code" id="set-source">
             <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">response</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set</span>(<span class="ruby-identifier">response</span>)
   <span class="ruby-identifier">payload</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
   <span class="ruby-identifier">token</span>   = <span class="ruby-identifier">payload</span>[<span class="ruby-string">&#39;access&#39;</span>][<span class="ruby-string">&#39;token&#39;</span>][<span class="ruby-string">&#39;id&#39;</span>]
   <span class="ruby-identifier">catalog</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-string">&#39;access&#39;</span>][<span class="ruby-string">&#39;serviceCatalog&#39;</span>]
@@ -300,7 +298,7 @@
           
           <div class="method-source-code" id="set_credentials-source">
             <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_credentials</span>(<span class="ruby-identifier">auth</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_credentials</span>(<span class="ruby-identifier">auth</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">auth</span>[<span class="ruby-value">:token</span>]
     <span class="ruby-ivar">@token</span> = <span class="ruby-identifier">auth</span>[<span class="ruby-value">:token</span>]
   <span class="ruby-keyword">else</span>
@@ -341,10 +339,10 @@
           
           <div class="method-source-code" id="user_credentials-source">
             <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">user_credentials</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">user_credentials</span>
   {
-    <span class="ruby-string">&#39;username&#39;</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span>,
-    <span class="ruby-string">&#39;password&#39;</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">password</span>
+    <span class="ruby-value">&#39;username&#39;:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span>,
+    <span class="ruby-value">&#39;password&#39;:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">password</span>
   }
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -364,8 +362,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

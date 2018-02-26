@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,17 +119,17 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/aodh/aodh_v2.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/v2/capabilities&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_capabilities</span>]},
- <span class="ruby-string">&quot;/v2/alarms&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_alarms</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_alarm</span>]},
- <span class="ruby-string">&quot;/v2/alarms/{alarm_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_alarm</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:&quot;update_alarm}&quot;</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_alarm</span>]},
- <span class="ruby-string">&quot;/v2/alarms/{alarm_id}/history&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_alarm_history</span>]},
- <span class="ruby-string">&quot;/v2/alarms/{alarm_id}/state&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_alarm_state</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:&quot;update_alarm_state}&quot;</span>]},
- <span class="ruby-string">&quot;/v2/query/alarms&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_alarms_query</span>]},
- <span class="ruby-string">&quot;/v2/query/alarms/history&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_alarm_query_history</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/aodh/aodh_v2.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/v2/capabilities&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_capabilities</span>]},
+ <span class="ruby-string">&quot;/v2/alarms&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_alarms</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_alarm</span>]},
+ <span class="ruby-string">&quot;/v2/alarms/{alarm_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_alarm</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:&quot;update_alarm}&quot;</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_alarm</span>]},
+ <span class="ruby-string">&quot;/v2/alarms/{alarm_id}/history&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_alarm_history</span>]},
+ <span class="ruby-string">&quot;/v2/alarms/{alarm_id}/state&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_alarm_state</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:&quot;update_alarm_state}&quot;</span>]},
+ <span class="ruby-string">&quot;/v2/query/alarms&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_alarms_query</span>]},
+ <span class="ruby-string">&quot;/v2/query/alarms/history&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_alarm_query_history</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -162,8 +160,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/aodh/aodh_v2.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/aodh/aodh_v2.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Alarming API Legacy&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -183,8 +181,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

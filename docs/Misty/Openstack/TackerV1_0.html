@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,39 +119,39 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/tacker/tacker_v1_0.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_versions</span>]},
- <span class="ruby-string">&quot;/v1.0/extensions&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_extensions</span>]},
- <span class="ruby-string">&quot;/v1.0/extensions/{alias}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_extension</span>]},
- <span class="ruby-string">&quot;/v1.0/vnfds&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_vnfd</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_vnfds</span>]},
- <span class="ruby-string">&quot;/v1.0/vnfds/{vnfd_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_vnfd</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_vnfd</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_vnfd</span>]},
- <span class="ruby-string">&quot;/v1.0/vnfs&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_vnf</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_vnfs</span>]},
- <span class="ruby-string">&quot;/v1.0/vnfs/{vnf_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_vnf</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_vnf</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_vnf</span>]},
- <span class="ruby-string">&quot;/v1.0/vnfs/{vnf_id}/resources&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_vnf_resources</span>]},
- <span class="ruby-string">&quot;/v1.0/vnfs/{vnf_id}/actions&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:trigger_vnf_scaling</span>]},
- <span class="ruby-string">&quot;/v1.0/vims&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:register_vim</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_vims</span>]},
- <span class="ruby-string">&quot;/v1.0/vims/{vim_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_vim</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_vim</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_vim</span>]},
- <span class="ruby-string">&quot;/v1.0/events&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_events</span>]},
- <span class="ruby-string">&quot;/v1.0/events/{event_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_event</span>]},
- <span class="ruby-string">&quot;/v1.0/vnffgds&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_vnffgd</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_vnffgds</span>]},
- <span class="ruby-string">&quot;/v1.0/vnffgds/{vnffgd_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_vnffgd</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_vnffgd</span>]},
- <span class="ruby-string">&quot;/v1.0/vnffgs&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_vnffg</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_vnffgs</span>]},
- <span class="ruby-string">&quot;/v1.0/vnffgs/{vnffg_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_vnffg</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_vnffg</span>]},
- <span class="ruby-string">&quot;/v1.0/nfps&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_nfps</span>]},
- <span class="ruby-string">&quot;/v1.0/nfps/{nfp_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_nfp</span>]},
- <span class="ruby-string">&quot;/v1.0/sfcs&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_sfcs</span>]},
- <span class="ruby-string">&quot;/v1.0/sfcs/{sfc_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_sfc</span>]},
- <span class="ruby-string">&quot;/v1.0/classifiers&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_classifiers</span>]},
- <span class="ruby-string">&quot;/v1.0/classifiers/{sfc_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_classifier</span>]},
- <span class="ruby-string">&quot;/v1.0/nsds&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_nsd</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_nsds</span>]},
- <span class="ruby-string">&quot;/v1.0/nsds/{nsd_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_nsd</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_nsd</span>]},
- <span class="ruby-string">&quot;/v1.0/nss&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_ns</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_nss</span>]},
- <span class="ruby-string">&quot;/v1.0/nss/{ns_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_ns</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/tacker/tacker_v1_0.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_versions</span>]},
+ <span class="ruby-string">&quot;/v1.0/extensions&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_extensions</span>]},
+ <span class="ruby-string">&quot;/v1.0/extensions/{alias}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_extension</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnfds&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_vnfd</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_vnfds</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnfds/{vnfd_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_vnfd</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_vnfd</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_vnfd</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnfs&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_vnf</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_vnfs</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnfs/{vnf_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_vnf</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_vnf</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_vnf</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnfs/{vnf_id}/resources&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_vnf_resources</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnfs/{vnf_id}/actions&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:trigger_vnf_scaling</span>]},
+ <span class="ruby-string">&quot;/v1.0/vims&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:register_vim</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_vims</span>]},
+ <span class="ruby-string">&quot;/v1.0/vims/{vim_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_vim</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_vim</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_vim</span>]},
+ <span class="ruby-string">&quot;/v1.0/events&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_events</span>]},
+ <span class="ruby-string">&quot;/v1.0/events/{event_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_event</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnffgds&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_vnffgd</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_vnffgds</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnffgds/{vnffgd_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_vnffgd</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_vnffgd</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnffgs&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_vnffg</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_vnffgs</span>]},
+ <span class="ruby-string">&quot;/v1.0/vnffgs/{vnffg_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_vnffg</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_vnffg</span>]},
+ <span class="ruby-string">&quot;/v1.0/nfps&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_nfps</span>]},
+ <span class="ruby-string">&quot;/v1.0/nfps/{nfp_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_nfp</span>]},
+ <span class="ruby-string">&quot;/v1.0/sfcs&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_sfcs</span>]},
+ <span class="ruby-string">&quot;/v1.0/sfcs/{sfc_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_sfc</span>]},
+ <span class="ruby-string">&quot;/v1.0/classifiers&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_classifiers</span>]},
+ <span class="ruby-string">&quot;/v1.0/classifiers/{sfc_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_classifier</span>]},
+ <span class="ruby-string">&quot;/v1.0/nsds&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_nsd</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_nsds</span>]},
+ <span class="ruby-string">&quot;/v1.0/nsds/{nsd_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_nsd</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_nsd</span>]},
+ <span class="ruby-string">&quot;/v1.0/nss&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_ns</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_nss</span>]},
+ <span class="ruby-string">&quot;/v1.0/nss/{ns_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_ns</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -184,8 +182,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/tacker/tacker_v1_0.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/tacker/tacker_v1_0.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;NFV Orchestration API Reference 0.8.1&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -205,8 +203,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

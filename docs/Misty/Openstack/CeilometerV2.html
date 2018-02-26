@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,18 +119,18 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/ceilometer/ceilometer_v2.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/v2/resources&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_resources</span>]},
- <span class="ruby-string">&quot;/v2/resources/{resource_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_ressource</span>]},
- <span class="ruby-string">&quot;/v2/meters&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_meters</span>]},
- <span class="ruby-string">&quot;/v2/meters/{meter_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_meter</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_meter_samples</span>]},
- <span class="ruby-string">&quot;/v2/meters/{meter_name}/statistics&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_statistics</span>]},
- <span class="ruby-string">&quot;/v2/samples&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_samples</span>]},
- <span class="ruby-string">&quot;/v2/samples/{sample_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_sample</span>]},
- <span class="ruby-string">&quot;/v2/capabilities&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_capabilities</span>]},
- <span class="ruby-string">&quot;/v2/query/samples&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_query_sample</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/ceilometer/ceilometer_v2.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/v2/resources&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_resources</span>]},
+ <span class="ruby-string">&quot;/v2/resources/{resource_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_ressource</span>]},
+ <span class="ruby-string">&quot;/v2/meters&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_meters</span>]},
+ <span class="ruby-string">&quot;/v2/meters/{meter_name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_meter</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_meter_samples</span>]},
+ <span class="ruby-string">&quot;/v2/meters/{meter_name}/statistics&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_statistics</span>]},
+ <span class="ruby-string">&quot;/v2/samples&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_samples</span>]},
+ <span class="ruby-string">&quot;/v2/samples/{sample_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_sample</span>]},
+ <span class="ruby-string">&quot;/v2/capabilities&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_capabilities</span>]},
+ <span class="ruby-string">&quot;/v2/query/samples&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_query_sample</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -163,8 +161,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/ceilometer/ceilometer_v2.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/ceilometer/ceilometer_v2.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Metering API Legacy&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -184,8 +182,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

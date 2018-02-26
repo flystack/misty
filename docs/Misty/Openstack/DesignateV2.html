@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,74 +119,74 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/designate/designate_v2.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_api_versions</span>]},
- <span class="ruby-string">&quot;/v2/zones&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_zone</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_zones</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_zone</span>], <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_zone</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_zone</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/nameservers&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_the_name_servers_for_a_zone</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/imports&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_a_zone_import</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_zone_imports</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/imports/{zone_import_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_zone_import</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_zone_import</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/export&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_a_zone_export</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/exports&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_zone_exports</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/exports/{zone_export_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_zone_export_information</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_zone_export</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/exports/{zone_export_id}/export&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:retrive_a_zone_export_from_the_designate_datastore</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/abandon&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:abandon_zone</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/xfr&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:manually_trigger_an_update_of_a_secondary_zone</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/transfer_requests&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_zone_transfer_request</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/transfer_requests&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_zone_transfer_requests</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/transfer_requests/{zone_transfer_request_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_zone_transfer_request</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_zone_transfer_request</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_zone_transfer_request</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/transfer_accepts&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_zone_transfer_accept</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_zone_transfer_accepts</span>]},
- <span class="ruby-string">&quot;/v2/zones/tasks/transfer_requests/{zone_transfer_accept_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_zone_transfer_accept</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/recordsets&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/designate/designate_v2.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_api_versions</span>]},
+ <span class="ruby-string">&quot;/v2/zones&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_zone</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_zones</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_zone</span>], <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_a_zone</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_zone</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/nameservers&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_the_name_servers_for_a_zone</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/imports&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_a_zone_import</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_zone_imports</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/imports/{zone_import_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_zone_import</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_zone_import</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/export&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_a_zone_export</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/exports&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_zone_exports</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/exports/{zone_export_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_zone_export_information</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_zone_export</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/exports/{zone_export_id}/export&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:retrive_a_zone_export_from_the_designate_datastore</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/abandon&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:abandon_zone</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/xfr&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:manually_trigger_an_update_of_a_secondary_zone</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/tasks/transfer_requests&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_zone_transfer_request</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/transfer_requests&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_zone_transfer_requests</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/transfer_requests/{zone_transfer_request_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_zone_transfer_request</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_a_zone_transfer_request</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_zone_transfer_request</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/transfer_accepts&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_zone_transfer_accept</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_zone_transfer_accepts</span>]},
+ <span class="ruby-string">&quot;/v2/zones/tasks/transfer_requests/{zone_transfer_accept_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_zone_transfer_accept</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/recordsets&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>
     [<span class="ruby-value">:create_recordset</span>,
      <span class="ruby-value">:create_a_mx_recordset</span>,
      <span class="ruby-value">:create_a_sshfp_recordset</span>,
      <span class="ruby-value">:create_a_spf_recordset</span>,
      <span class="ruby-value">:create_a_srv_recordset</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_recordsets_in_a_zone</span>]},
- <span class="ruby-string">&quot;/v2/recordsets&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_recordsets_owned_by_project</span>]},
- <span class="ruby-string">&quot;/v2/zones/{zone_id}/recordsets/{recordset_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_recordset</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_recordset</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_recordset</span>]},
- <span class="ruby-string">&quot;/v2/pools&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_pools</span>]},
- <span class="ruby-string">&quot;/v2/pools/{pool_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_pool</span>]},
- <span class="ruby-string">&quot;/v2/limits&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_project_limits</span>]},
- <span class="ruby-string">&quot;/v2/tlds&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_tld</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_tlds</span>]},
- <span class="ruby-string">&quot;/v2/tlds/{tld_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_tld</span>], <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_tld</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_tld</span>]},
- <span class="ruby-string">&quot;/v2/tsigkeys&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_tsigkeys</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_tsigkeys</span>]},
- <span class="ruby-string">&quot;/v2/tsigkeys/{tsigkey_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_tsigkey</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_tsigkey</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_tsigkey</span>]},
- <span class="ruby-string">&quot;/v2/blacklists&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_blacklist</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_blacklists</span>]},
- <span class="ruby-string">&quot;/v2/blacklists/{blacklist_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_blacklist</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_blacklist</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_blacklist</span>]},
- <span class="ruby-string">&quot;/v2/quotas/{project_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:view_quotas</span>], <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:set_quotas</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:reset_quotas</span>]},
- <span class="ruby-string">&quot;/v2/quotas/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:view_current_project_s_quotas</span>]},
- <span class="ruby-string">&quot;/v2/service_status&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_statuses</span>]},
- <span class="ruby-string">&quot;/v2/reverse/floatingips/{region}:{floatingip_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:set_floatingip_s_ptr_record</span>, <span class="ruby-value">:unset_floatingip_s_ptr_record</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_floatingip_s_ptr_record</span>]},
- <span class="ruby-string">&quot;/v2/reverse/floatingips&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_floatingip_s_ptr_record</span>]}}
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_recordsets_in_a_zone</span>]},
+ <span class="ruby-string">&quot;/v2/recordsets&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_recordsets_owned_by_project</span>]},
+ <span class="ruby-string">&quot;/v2/zones/{zone_id}/recordsets/{recordset_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_recordset</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_a_recordset</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_recordset</span>]},
+ <span class="ruby-string">&quot;/v2/pools&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_pools</span>]},
+ <span class="ruby-string">&quot;/v2/pools/{pool_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_pool</span>]},
+ <span class="ruby-string">&quot;/v2/limits&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_project_limits</span>]},
+ <span class="ruby-string">&quot;/v2/tlds&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_tld</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_tlds</span>]},
+ <span class="ruby-string">&quot;/v2/tlds/{tld_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_tld</span>], <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_tld</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_tld</span>]},
+ <span class="ruby-string">&quot;/v2/tsigkeys&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_tsigkeys</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_tsigkeys</span>]},
+ <span class="ruby-string">&quot;/v2/tsigkeys/{tsigkey_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_a_tsigkey</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_tsigkey</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_tsigkey</span>]},
+ <span class="ruby-string">&quot;/v2/blacklists&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_blacklist</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_blacklists</span>]},
+ <span class="ruby-string">&quot;/v2/blacklists/{blacklist_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_blacklist</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_blacklist</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_blacklist</span>]},
+ <span class="ruby-string">&quot;/v2/quotas/{project_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:view_quotas</span>], <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:set_quotas</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:reset_quotas</span>]},
+ <span class="ruby-string">&quot;/v2/quotas/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:view_current_project_s_quotas</span>]},
+ <span class="ruby-string">&quot;/v2/service_status&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_statuses</span>]},
+ <span class="ruby-string">&quot;/v2/reverse/floatingips/{region}:{floatingip_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:set_floatingip_s_ptr_record</span>, <span class="ruby-value">:unset_floatingip_s_ptr_record</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_floatingip_s_ptr_record</span>]},
+ <span class="ruby-string">&quot;/v2/reverse/floatingips&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_floatingip_s_ptr_record</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -219,8 +217,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/designate/designate_v2.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/designate/designate_v2.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Designate API Reference 6.0.0&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -240,8 +238,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,49 +119,49 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/zaqar/zaqar_v2.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_major_versions</span>]},
- <span class="ruby-string">&quot;/v2/queues&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_queues</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_queue</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_queue</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_queue_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_queue</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/stats&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_queue_stats</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/share&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:pre_signed_queue</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/purge&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:purge_queue</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/messages&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:post_message</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_messages</span>, <span class="ruby-value">:get_a_set_of_messages</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_set_of_messages</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/messages/{message_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_a_specific_message</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_specific_message</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/claims&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:claim_messages</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/claims/{claim_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:query_claim</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_renew_claim</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_release_claim</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/subscriptions&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_subscriptions</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_subscription</span>]},
- <span class="ruby-string">&quot;/v2/queues/{queue_name}/subscriptions/{subscription_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_subscription</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_subscription_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_subscription</span>]},
- <span class="ruby-string">&quot;/v2/ping&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:ping</span>]},
- <span class="ruby-string">&quot;/v2/health&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:health</span>]},
- <span class="ruby-string">&quot;/v2/pools&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_pools</span>]},
- <span class="ruby-string">&quot;/v2/pools/{pool_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_pool</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_pool</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_pool_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_pool</span>]},
- <span class="ruby-string">&quot;/v2/flavors&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_flavors</span>]},
- <span class="ruby-string">&quot;/v2/flavors/{flavor_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_flavor</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_flavor</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_flavor_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_flavor</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/zaqar/zaqar_v2.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_major_versions</span>]},
+ <span class="ruby-string">&quot;/v2/queues&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_queues</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_queue</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_queue</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_queue_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_queue</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/stats&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_queue_stats</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/share&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:pre_signed_queue</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/purge&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:purge_queue</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/messages&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:post_message</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_messages</span>, <span class="ruby-value">:get_a_set_of_messages</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_set_of_messages</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/messages/{message_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_a_specific_message</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_specific_message</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/claims&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:claim_messages</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/claims/{claim_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:query_claim</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_renew_claim</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_release_claim</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/subscriptions&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_subscriptions</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_subscription</span>]},
+ <span class="ruby-string">&quot;/v2/queues/{queue_name}/subscriptions/{subscription_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_subscription</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_subscription_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_subscription</span>]},
+ <span class="ruby-string">&quot;/v2/ping&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:ping</span>]},
+ <span class="ruby-string">&quot;/v2/health&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:health</span>]},
+ <span class="ruby-string">&quot;/v2/pools&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_pools</span>]},
+ <span class="ruby-string">&quot;/v2/pools/{pool_name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_pool</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_pool</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_pool_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_pool</span>]},
+ <span class="ruby-string">&quot;/v2/flavors&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_flavors</span>]},
+ <span class="ruby-string">&quot;/v2/flavors/{flavor_name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_flavor</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_flavor</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_flavor_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_flavor</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -194,8 +192,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/zaqar/zaqar_v2.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/zaqar/zaqar_v2.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Messaging Service API Reference 6.0.0&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -215,8 +213,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

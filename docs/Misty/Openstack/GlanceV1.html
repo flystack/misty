@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,20 +119,20 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/glance/glance_v1.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/v1/images&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_image</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_images</span>]},
- <span class="ruby-string">&quot;/v1/images/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_images_with_details</span>]},
- <span class="ruby-string">&quot;/v1/images/{image_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_image</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_image_details_and_image_data</span>],
-   <span class="ruby-value">:HEAD=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_image_metadata</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_image</span>]},
- <span class="ruby-string">&quot;/v1/images/{image_id}/members/{member_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_member_to_image</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_member</span>]},
- <span class="ruby-string">&quot;/v1/images/{image_id}/members&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:replace_membership_list_for_an_image</span>]},
- <span class="ruby-string">&quot;/v1/shared-images/{owner_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_shared_images</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/glance/glance_v1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/v1/images&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_image</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_images</span>]},
+ <span class="ruby-string">&quot;/v1/images/detail&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_images_with_details</span>]},
+ <span class="ruby-string">&quot;/v1/images/{image_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_image</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_image_details_and_image_data</span>],
+   <span class="ruby-value">:HEAD</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_image_metadata</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_image</span>]},
+ <span class="ruby-string">&quot;/v1/images/{image_id}/members/{member_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:add_member_to_image</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:remove_member</span>]},
+ <span class="ruby-string">&quot;/v1/images/{image_id}/members&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:replace_membership_list_for_an_image</span>]},
+ <span class="ruby-string">&quot;/v1/shared-images/{owner_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_shared_images</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -165,8 +163,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/glance/glance_v1.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/glance/glance_v1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Image Service API Reference 16.0.0&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -186,8 +184,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

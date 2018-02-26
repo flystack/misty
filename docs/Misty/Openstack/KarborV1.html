@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,39 +119,39 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/karbor/karbor_v1.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/v1/{tenant_id}/protectables&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_protectable_types</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/protectables/{protectable_type}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_protectable_type</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/protectables/{protectable_type}/instances&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_protectable_instances</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/protectables/{protectable_type}/instances/{resource_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_protectable_instance</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/providers&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_protection_providers</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/providers/{provider_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_protection_provider</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/plans&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_plans</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_plan</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/plans/{plan_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_plan</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_plan</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_plan</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/triggers&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_triggers</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_trigger</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/triggers/{trigger_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_trigger</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_trigger</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_trigger</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/scheduled_operations&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_scheduled_operations</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_scheduled_operation</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/scheduled_operations/{scheduled_operation_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_scheduled_operation</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_scheduled_operation</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/providers/{provider_id}/checkpoints&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_checkpoints</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_checkpoint</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/providers/{provider_id}/checkpoints/{checkpoint_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_checkpoint</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_checkpoint</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/restores&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_restores</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_restore</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/restores/{restore_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_restore</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/operation_logs&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_operation_logs</span>]},
- <span class="ruby-string">&quot;/v1/{tenant_id}/operation_logs/{operation_log_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_operation_log</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/karbor/karbor_v1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/v1/{tenant_id}/protectables&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_protectable_types</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/protectables/{protectable_type}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_protectable_type</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/protectables/{protectable_type}/instances&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_protectable_instances</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/protectables/{protectable_type}/instances/{resource_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_protectable_instance</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/providers&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_protection_providers</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/providers/{provider_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_protection_provider</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/plans&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_plans</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_plan</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/plans/{plan_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_plan</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_plan</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_plan</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/triggers&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_triggers</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_trigger</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/triggers/{trigger_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_trigger</span>], <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_trigger</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_trigger</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/scheduled_operations&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_scheduled_operations</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_scheduled_operation</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/scheduled_operations/{scheduled_operation_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_scheduled_operation</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_scheduled_operation</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/providers/{provider_id}/checkpoints&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_checkpoints</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_checkpoint</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/providers/{provider_id}/checkpoints/{checkpoint_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_checkpoint</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_checkpoint</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/restores&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_restores</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_restore</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/restores/{restore_id}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_restore</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/operation_logs&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_operation_logs</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/operation_logs/{operation_log_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_operation_log</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -184,8 +182,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/karbor/karbor_v1.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/karbor/karbor_v1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Data Protection API Reference 0.5.1&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -205,8 +203,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

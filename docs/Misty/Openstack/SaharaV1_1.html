@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,87 +119,81 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/sahara/sahara_v1_1.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/v1.1/{project_id}/cluster-templates/{cluster_template_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_cluster_template_details</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_cluster_templates</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_cluster_template</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/cluster-templates&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_cluster_templates</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_cluster_templates</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/cluster-templates?limit=2&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:id11</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/clusters&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_available_clusters</span>, <span class="ruby-value">:id19</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_cluster</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/clusters/multiple&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_multiple_clusters</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/clusters/{cluster_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_a_cluster</span>, <span class="ruby-value">:show_progress</span>, <span class="ruby-value">:id55</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_cluster</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:scale_cluster</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_cluster</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/data-sources/{data_source_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_data_source_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_data_source</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_data_source</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/data-sources&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_data_sources</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_data_source</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/data-sourses?sort_by=-name&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:id49</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/images/{image_id}/tag&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_tags_to_image</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/images/{image_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_image_details</span>],
-   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:register_image</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:unregister_image</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/images/{image_id}/untag&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_tags_from_image</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/images&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_images</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_job_binaries</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_job_binary</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries?sort_by=created_at&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:id82</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries/{job_binary_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_job_binary_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_job_binary</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_job_binary</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries/{job_binary_id}/data&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_job_binary_data</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions/{job_execution_id}/refresh-status&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:refresh_job_execution_status</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_job_executions</span>]},
- <span class="ruby-string">&quot;&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:&quot;/v1.1/{project_id}/job-executions&quot;</span>=<span class="ruby-operator">&gt;</span>[<span class="ruby-value">:id112</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions/{job_execution_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_job_execution_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_job_execution</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_job_execution</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions/{job_execution_id}/cancel&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:cancel_job_execution</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-types&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_job_types</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals/{name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_job_binary_internal</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals/{job_binary_internals_id}/data&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_job_binary_internal_data</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals/{job_binary_internals_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_job_binary_internal_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_job_binary_internal</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_job_binary_internal</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_job_binary_internals</span>, <span class="ruby-value">:id157</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/jobs/{job_id}/execute&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:run_job</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/jobs&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_jobs</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_job</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/jobs/{job_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_job_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_job</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_job_object</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/node-group-templates&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_node_group_templates</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_node_group_template</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/node-group-templates?limit=2&amp;marker=38b4e146-1d39-4822-bad2-fef1bf304a52&amp;sort_by=name&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:id185</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/node-group-templates/{node_group_template_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_node_group_template_details</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_node_group_template</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_node_group_template</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/plugins/{plugin_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_plugin_details</span>], <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_plugin_details</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/plugins&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_plugins</span>]},
- <span class="ruby-string">&quot;/v1.1/{project_id}/plugins/{plugin_name}/{version}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_plugin_version_details</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/sahara/sahara_v1_1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/v1.1/{project_id}/cluster-templates/{cluster_template_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_cluster_template_details</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_cluster_templates</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_cluster_template</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/cluster-templates&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_cluster_templates</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_cluster_templates</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/clusters&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_available_clusters</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_cluster</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/clusters/multiple&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_multiple_clusters</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/clusters/{cluster_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_of_a_cluster</span>, <span class="ruby-value">:show_progress</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_cluster</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:scale_cluster</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_cluster</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/data-sources/{data_source_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_data_source_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_data_source</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_data_source</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/data-sources&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_data_sources</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_data_source</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/images/{image_id}/tag&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:add_tags_to_image</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/images/{image_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_image_details</span>],
+   <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:register_image</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:unregister_image</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/images/{image_id}/untag&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:remove_tags_from_image</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/images&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_images</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_job_binaries</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_job_binary</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries/{job_binary_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_job_binary_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_job_binary</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_job_binary</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binaries/{job_binary_id}/data&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_job_binary_data</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions/{job_execution_id}/refresh-status&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:refresh_job_execution_status</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_job_executions</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions/{job_execution_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_job_execution_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_job_execution</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_job_execution</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-executions/{job_execution_id}/cancel&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:cancel_job_execution</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-types&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_job_types</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals/{name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_job_binary_internal</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals/{job_binary_internals_id}/data&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_job_binary_internal_data</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals/{job_binary_internals_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_job_binary_internal_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_job_binary_internal</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_job_binary_internal</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/job-binary-internals&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_job_binary_internals</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/jobs/{job_id}/execute&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:run_job</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/jobs&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_jobs</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_job</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/jobs/{job_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_job_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:remove_job</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_job_object</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/node-group-templates&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_node_group_templates</span>], <span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_node_group_template</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/node-group-templates/{node_group_template_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_node_group_template_details</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_node_group_template</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_node_group_template</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/plugins/{plugin_name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_plugin_details</span>], <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_plugin_details</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/plugins&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_plugins</span>]},
+ <span class="ruby-string">&quot;/v1.1/{project_id}/plugins/{plugin_name}/{version}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_plugin_version_details</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -232,8 +224,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/sahara/sahara_v1_1.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/sahara/sahara_v1_1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Data Processing API Reference 8.0.0&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -253,8 +245,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

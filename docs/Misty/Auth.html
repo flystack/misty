@@ -107,8 +107,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -179,7 +177,7 @@
           
           <div class="method-source-code" id="factory-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">config</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">factory</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">config</span>)
   <span class="ruby-identifier">version</span> = <span class="ruby-identifier">auth</span>[<span class="ruby-value">:tenant_id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">auth</span>[<span class="ruby-value">:tenant</span>] <span class="ruby-operator">?</span> <span class="ruby-string">&#39;V2&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;V3&#39;</span>
   <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-node">&quot;Misty::Auth#{version}&quot;</span>)
   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">config</span>)
@@ -214,7 +212,7 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">config</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">config</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">auth</span>[<span class="ruby-value">:context</span>]
     <span class="ruby-comment"># bypass the authentication by given token catalog and expire date</span>
     <span class="ruby-ivar">@token</span>   = <span class="ruby-identifier">auth</span>[<span class="ruby-value">:context</span>][<span class="ruby-value">:token</span>]
@@ -267,12 +265,12 @@
           
           <div class="method-source-code" id="authenticate-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 33</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authenticate</span>
   <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">NetHTTP</span>.<span class="ruby-identifier">http_request</span>(
-    <span class="ruby-ivar">@uri</span>, <span class="ruby-identifier">ssl_verify_mode</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@ssl_verify_mode</span>, <span class="ruby-identifier">log</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@log</span>
+    <span class="ruby-ivar">@uri</span>, <span class="ruby-value">ssl_verify_mode:</span> <span class="ruby-ivar">@ssl_verify_mode</span>, <span class="ruby-value">log:</span> <span class="ruby-ivar">@log</span>
   ) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">connection</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-ivar">@credentials</span>.<span class="ruby-identifier">to_json</span>,
-      { <span class="ruby-string">&#39;Content-Type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/json&#39;</span>, <span class="ruby-string">&#39;Accept&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/json&#39;</span> })
+      { <span class="ruby-string">&#39;Content-Type&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/json&#39;</span>, <span class="ruby-string">&#39;Accept&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/json&#39;</span> })
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/200|201/</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">AuthenticationError</span>, <span class="ruby-node">&quot;Response code=#{response.code}, Msg=#{response.msg}&quot;</span>
     <span class="ruby-keyword">end</span>
@@ -309,7 +307,7 @@
           
           <div class="method-source-code" id="expired-3F-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">expired?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expired?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@expires</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@expires</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ExpiryError</span>, <span class="ruby-string">&#39;Missing token expiration data&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -345,7 +343,7 @@
           
           <div class="method-source-code" id="find_url-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_url</span>(<span class="ruby-identifier">service</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_url</span>(<span class="ruby-identifier">service</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">service</span>[<span class="ruby-string">&#39;endpoints&#39;</span>]
     <span class="ruby-identifier">service</span>[<span class="ruby-string">&#39;endpoints&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">endpoint</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">url</span> = <span class="ruby-identifier">endpoint_url</span>(<span class="ruby-identifier">endpoint</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>))
@@ -386,7 +384,7 @@
           
           <div class="method-source-code" id="get_service-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_service</span>(<span class="ruby-identifier">service_names</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_service</span>(<span class="ruby-identifier">service_names</span>)
   <span class="ruby-ivar">@catalog</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">service</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">service</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">service_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">service</span>[<span class="ruby-string">&#39;type&#39;</span>])
   <span class="ruby-keyword">end</span>
@@ -422,7 +420,7 @@
           
           <div class="method-source-code" id="get_token-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 64</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_token</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_token</span>
   <span class="ruby-ivar">@token</span>, <span class="ruby-ivar">@catalog</span>, <span class="ruby-ivar">@expires</span> = <span class="ruby-identifier">set</span>(<span class="ruby-identifier">authenticate</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">expired?</span>
   <span class="ruby-ivar">@token</span>
 <span class="ruby-keyword">end</span></pre>
@@ -456,7 +454,7 @@
           
           <div class="method-source-code" id="get_url-source">
             <pre><span class="ruby-comment"># File lib/misty/auth.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_url</span>(<span class="ruby-identifier">service_names</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_url</span>(<span class="ruby-identifier">service_names</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
   <span class="ruby-identifier">find_url</span>(<span class="ruby-identifier">get_service</span>(<span class="ruby-identifier">service_names</span>), <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -476,8 +474,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

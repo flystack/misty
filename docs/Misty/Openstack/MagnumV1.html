@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,46 +119,46 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/magnum/magnum_v1.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_api_versions</span>]},
- <span class="ruby-string">&quot;/v1/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_v1_api_version</span>]},
- <span class="ruby-string">&quot;/v1/bays&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_new_bay</span>]},
- <span class="ruby-string">&quot;/v1/bays/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_bays</span>]},
- <span class="ruby-string">&quot;/v1/bays/{bay_ident}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_a_bay</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_bay</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_information_of_bay</span>]},
- <span class="ruby-string">&quot;/v1/baymodels/&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_new_baymodel</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_baymodels</span>]},
- <span class="ruby-string">&quot;/v1/baymodels/{baymodel_ident}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_a_baymodel</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_baymodel</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_information_of_baymodel</span>]},
- <span class="ruby-string">&quot;/v1/clusters&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_new_cluster</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_clusters</span>]},
- <span class="ruby-string">&quot;/v1/clusters/{cluster_ident}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_a_cluster</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_cluster</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_information_of_cluster</span>]},
- <span class="ruby-string">&quot;/v1/clustertemplates&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_new_cluster_template</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_cluster_templates</span>]},
- <span class="ruby-string">&quot;/v1/clustertemplates/{clustertemplate_ident}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_a_cluster_template</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_cluster_template</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_information_of_cluster_template</span>]},
- <span class="ruby-string">&quot;/v1/certificates/{bay_uuid/cluster_uuid}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_about_the_ca_certificate_for_a_bay_cluster</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:rotate_the_ca_certificate_for_a_bay_cluster</span>]},
- <span class="ruby-string">&quot;/v1/certificates/&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:generate_the_ca_certificate_for_a_bay_cluster</span>]},
- <span class="ruby-string">&quot;/v1/mservices&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_container_infrastructure_management_services</span>]},
- <span class="ruby-string">&quot;/v1/stats?project_id=&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_stats_for_a_tenant</span>]},
- <span class="ruby-string">&quot;/v1/stats&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_overall_stats</span>]},
- <span class="ruby-string">&quot;/v1/quotas&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:set_new_quota</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_quotas</span>]},
- <span class="ruby-string">&quot;/v1/quotas/{project_id}/{resource}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_a_quota</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_resource_quota</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_resource_quota</span>]}}
+            <pre><span class="ruby-comment"># File lib/misty/openstack/magnum/magnum_v1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_api_versions</span>]},
+ <span class="ruby-string">&quot;/v1/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_v1_api_version</span>]},
+ <span class="ruby-string">&quot;/v1/bays&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_new_bay</span>]},
+ <span class="ruby-string">&quot;/v1/bays/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_bays</span>]},
+ <span class="ruby-string">&quot;/v1/bays/{bay_ident}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_of_a_bay</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_bay</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_information_of_bay</span>]},
+ <span class="ruby-string">&quot;/v1/baymodels/&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_new_baymodel</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_baymodels</span>]},
+ <span class="ruby-string">&quot;/v1/baymodels/{baymodel_ident}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_of_a_baymodel</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_baymodel</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_information_of_baymodel</span>]},
+ <span class="ruby-string">&quot;/v1/clusters&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_new_cluster</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_clusters</span>]},
+ <span class="ruby-string">&quot;/v1/clusters/{cluster_ident}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_of_a_cluster</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_cluster</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_information_of_cluster</span>]},
+ <span class="ruby-string">&quot;/v1/clustertemplates&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_new_cluster_template</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_cluster_templates</span>]},
+ <span class="ruby-string">&quot;/v1/clustertemplates/{clustertemplate_ident}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_of_a_cluster_template</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_cluster_template</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_information_of_cluster_template</span>]},
+ <span class="ruby-string">&quot;/v1/certificates/{bay_uuid/cluster_uuid}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_about_the_ca_certificate_for_a_bay_cluster</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:rotate_the_ca_certificate_for_a_bay_cluster</span>]},
+ <span class="ruby-string">&quot;/v1/certificates/&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:generate_the_ca_certificate_for_a_bay_cluster</span>]},
+ <span class="ruby-string">&quot;/v1/mservices&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_container_infrastructure_management_services</span>]},
+ <span class="ruby-string">&quot;/v1/stats?project_id=&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_stats_for_a_tenant</span>]},
+ <span class="ruby-string">&quot;/v1/stats&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_overall_stats</span>]},
+ <span class="ruby-string">&quot;/v1/quotas&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:set_new_quota</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_quotas</span>]},
+ <span class="ruby-string">&quot;/v1/quotas/{project_id}/{resource}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_details_of_a_quota</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_a_resource_quota</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_resource_quota</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -191,8 +189,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/magnum/magnum_v1.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/magnum/magnum_v1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Container Infrastructure Management API Reference 5.0.1&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -212,8 +210,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

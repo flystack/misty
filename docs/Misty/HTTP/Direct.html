@@ -93,8 +93,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -131,7 +129,7 @@
           
           <div class="method-source-code" id="base_set-source">
             <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 5</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">base_set</span>(<span class="ruby-identifier">base_path</span>)
   <span class="ruby-identifier">base</span> = <span class="ruby-identifier">base_path</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">base_path</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@base_path</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -164,7 +162,7 @@
           
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_delete</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -197,7 +195,7 @@
           
           <div class="method-source-code" id="get-source">
             <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_get</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -230,7 +228,7 @@
           
           <div class="method-source-code" id="post-source">
             <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_post</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>, <span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -263,7 +261,7 @@
           
           <div class="method-source-code" id="put-source">
             <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 21</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">put</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">put</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_put</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>, <span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -283,8 +281,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

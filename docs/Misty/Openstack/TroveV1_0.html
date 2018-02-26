@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,55 +119,55 @@
 
           
           <div class="method-source-code" id="api-source">
-            <pre><span class="ruby-comment"># File build/APIs/trove/trove_v1_0.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
-{<span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_versions</span>]},
- <span class="ruby-string">&quot;/v1.0&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_version_details</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_database_instance</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_database_instance_details</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:attach_configuration_group</span>, <span class="ruby-value">:detach_configuration_group</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:detach_replica</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_database_instance</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_database_instances</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/configuration&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_configuration_defaults</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/action&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/trove/trove_v1_0.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api</span>
+{<span class="ruby-string">&quot;/&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_versions</span>]},
+ <span class="ruby-string">&quot;/v1.0&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_version_details</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_database_instance</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_database_instance_details</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:attach_configuration_group</span>, <span class="ruby-value">:detach_configuration_group</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:detach_replica</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_database_instance</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_database_instances</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/configuration&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_configuration_defaults</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/action&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>
     [<span class="ruby-value">:restart_instance</span>,
      <span class="ruby-value">:resize_instance</span>,
      <span class="ruby-value">:resize_instance_volume</span>,
      <span class="ruby-value">:promote_instance_to_replica_source</span>,
      <span class="ruby-value">:delete_replication_base_instance</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/databases/{databaseName}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_database</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/databases&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_database</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_instance_databases</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/root&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:enable_root_user</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_root_enabled_status_for_database_instance</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:disable_root_user</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/users/{name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_user</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/users&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_user</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_database_instance_users</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/flavors/{flavorId}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_flavor_details</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/flavors&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_flavors</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/datastores/versions/{datastore_version_id}/parameters/{parameter_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_configuration_parameter_details</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/datastores/{datastore_name}/versions&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_datastore_versions</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/datastores/versions/{datastore_version_id}/parameters&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_configuration_parameters</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/configurations&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_configuration_group</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_configuration_groups</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/configurations/{configId}/instances&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_configuration_group_instances</span>]},
- <span class="ruby-string">&quot;/v1.0/{accountId}/configurations/{configId}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_configuration_group</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:patch_configuration_group</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_configuration_group_details</span>],
-   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_configuration_group</span>]}}
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/databases/{databaseName}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_database</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/databases&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_database</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_instance_databases</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/root&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:enable_root_user</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_root_enabled_status_for_database_instance</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:disable_root_user</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/users/{name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_user</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/instances/{instanceId}/users&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_user</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_database_instance_users</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/flavors/{flavorId}&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_flavor_details</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/flavors&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_flavors</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/datastores/versions/{datastore_version_id}/parameters/{parameter_name}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_configuration_parameter_details</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/datastores/{datastore_name}/versions&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_datastore_versions</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/datastores/versions/{datastore_version_id}/parameters&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_configuration_parameters</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/configurations&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_configuration_group</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_configuration_groups</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/configurations/{configId}/instances&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_configuration_group_instances</span>]},
+ <span class="ruby-string">&quot;/v1.0/{accountId}/configurations/{configId}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_configuration_group</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:patch_configuration_group</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_configuration_group_details</span>],
+   <span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_configuration_group</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -200,8 +198,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/trove/trove_v1_0.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/trove/trove_v1_0.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Database API Reference 9.0.0&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -221,8 +219,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
