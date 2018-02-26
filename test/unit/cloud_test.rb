@@ -54,9 +54,7 @@ describe Misty::Cloud do
   describe '#config' do
     it 'sets up default values' do
       Misty::Auth.stub :factory, nil do
-        config = Misty::Cloud.set_configuration({})
-        config.must_be_kind_of Misty::Cloud::Config
-
+        config = Misty::Config.new
         config.content_type.must_equal Misty::CONTENT_TYPE
         config.headers.must_be_kind_of Misty::HTTP::Header
         config.headers.get.must_equal({"Accept"=>"application/json; q=1.0"})

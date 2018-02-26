@@ -3,7 +3,7 @@ require 'auth_helper'
 
 describe Misty::Auth do
   let(:config) do
-    Misty::Cloud::Config.new
+    Misty::Config.new
   end
 
   describe Misty::AuthV3 do

@@ -1,13 +1,10 @@
+require 'misty/config'
 require 'misty/auth/auth_v2'
 require 'misty/auth/auth_v3'
 require 'misty/http/header'
 
 module Misty
   class Cloud
-    class Config
-      attr_accessor :auth, :content_type, :interface, :log, :region_id, :ssl_verify_mode, :headers
-    end
-
     attr_reader :auth
 
     def self.dot_to_underscore(val)
@@ -15,21 +12,8 @@ module Misty
     end
 
     def initialize(args)
-      @config = self.class.set_configuration(args)
+      @config = Misty::Config.new(args)
       @auth = Misty::Auth.factory(args[:auth], @config)
-    end
-
-    def self.set_configuration(params)
-      config = Config.new
-      config.content_type = params[:content_type] ? params[:content_type] : Misty::CONTENT_TYPE
-      config.interface = params[:interface] ? params[:interface] : Misty::INTERFACE
-      config.log = Logger.new(params[:log_file] ? params[:log_file] : Misty::LOG_FILE)
-      config.log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL
-      config.region_id = params[:region_id] ? params[:region_id] : Misty::REGION_ID
-      config.ssl_verify_mode = params.key?(:ssl_verify_mode) ? params[:ssl_verify_mode] : Misty::SSL_VERIFY_MODE
-      config.headers = Misty::HTTP::Header.new('Accept' => 'application/json; q=1.0')
-      config.headers.add(params[:headers]) if params[:headers] && !params[:headers].empty?
-      config
     end
 
     def build_service(args)
