@@ -219,31 +219,40 @@
 
         <div class="method-description">
           
-          <p>Following options are global to all services unless specifically provided
-for a service.</p>
+          <h4 id="method-c-new-label-Attributes">Attributes<span><a href="#method-c-new-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>:content_type Format of the body of the successful <a
-href="HTTP.html">HTTP</a> responses to be <a href="../JSON.html">JSON</a>
-or Ruby structures. Type: Symbol Allowed values: `:json`, `:ruby` Default:
-`:ruby`</p>
-</li><li>
-<p>:headers <a href="HTTP.html">HTTP</a> Headers to be applied to all services
-Type: Hash Default: {}</p>
-</li><li>
-<p>:region_id Type: String Default: “regionOne”</p>
-</li><li>
-<p>:interface Type: String Allowed values: “public”, “internal”, “admin”
-Default: “public”</p>
-</li><li>
-<p>:ssl_verify_mode When using SSL mode (defined by URI scheme =&gt;
-“https://”) Type: Boolean Default: `true`</p>
+<p><code>params</code> - <code>Hash</code> of options applied globally to all
+services unless specifically overridden by a service.</p>
 </li></ul>
+
+<p>The entries are:</p>
+<dl class="rdoc-list note-list"><dt><code>:content_type</code>
+<dd>
+<p>Format of the body of the successful <a href="HTTP.html">HTTP</a> responses
+to be <a href="../JSON.html">JSON</a> or Ruby structures. Type: Symbol
+Allowed values: `:json`, `:ruby` Default: `:ruby`</p>
+</dd><dt><code>:headers</code>
+<dd>
+<p><a href="HTTP.html">HTTP</a> Headers to be applied to all services Type:
+Hash Default: {}</p>
+</dd><dt><code>:region_id</code>
+<dd>
+<p>Type: String Default: “regionOne”</p>
+</dd><dt><code>:interface</code>
+<dd>
+<p>Type: String Allowed values: “public”, “internal”, “admin” Default:
+“public”</p>
+</dd><dt><code>:ssl_verify_mode</code>
+<dd>
+<p>When using SSL mode (defined by URI scheme =&gt; “https://”) Type: Boolean
+Default: `true`</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/misty/config.rb, line 26</span>
+            <pre><span class="ruby-comment"># File lib/misty/config.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">params</span> = {})
   <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:log_file</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:log_file</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">LOG_FILE</span>)
   <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:log_level</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:log_level</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">LOG_LEVEL</span>
