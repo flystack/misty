@@ -256,7 +256,7 @@ openstack = Misty::Cloud.new(:auth => auth, :content_type => :ruby, :log_file =>
 ```
 
 #### Global parameters
-See [Cloud configuration parameters](docs/Misty/Config.html).
+See [Cloud configuration parameters](https://flystack.github.io/misty/Misty/Config.html).
 
 ### Service parameters
 Each service can have specific parameters.
@@ -266,7 +266,7 @@ openstack.identity(:version => '2.0')
 openstack.compute(:version => '2.15')
 ```
 
-For more information see [Service parameters](docs/Misty/Client.html)
+For more information see [Service parameters](https://flystack.github.io/misty//Misty/Client.html)
 
 ### Services Headers
 HTTP headers can be optionally added to any request.
