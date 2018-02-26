@@ -15,7 +15,8 @@ describe 'Compute Service Nova v2.1 features' do
 
   it 'GET/POST/PUT/DELETE requests' do
     VCR.use_cassette 'compute using nova v2.1' do
-      cloud = Misty::Cloud.new(:auth => auth, :compute => {:api_version => 'v2.1'})
+      cloud = Misty::Cloud.new(:auth => auth)
+      cloud.compute(:api_version => 'v2.1')
 
       # POST with body data
       server = { 'name': 'test_create_server', 'flavorRef': '1', 'imageRef': '07bd625e-d3ae-415c-bc82-46d66168378a', 'networks': [{'uuid': '204e3939-34d2-40af-b52d-f58cfec1e2b1'}]}

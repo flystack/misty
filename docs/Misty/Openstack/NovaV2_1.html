@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Misty::Openstack::NovaV2_1 - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-api">#api</a>
+    
+    <li ><a href="#method-i-tag">#tag</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Misty::Openstack::NovaV2_1">
+  <h1 id="module-Misty::Openstack::NovaV2_1" class="module">
+    module Misty::Openstack::NovaV2_1
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-api" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">api</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="api-source">
+            <pre><span class="ruby-comment"># File build/APIs/nova/nova_v2_1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
+{<span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_major_versions</span>]},
+ <span class="ruby-string">&quot;/{api_version}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_details_of_specific_api_version</span>]},
+ <span class="ruby-string">&quot;/servers&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_servers</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_server</span>, <span class="ruby-value">:create_multiple_servers</span>]},
+ <span class="ruby-string">&quot;/servers/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_servers_detailed</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_server_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_server</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_server</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/action&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+    [<span class="ruby-value">:add_associate_floating_ip_addfloatingip_action_deprecated</span>,
+     <span class="ruby-value">:add_security_group_to_a_server_addsecuritygroup_action</span>,
+     <span class="ruby-value">:change_administrative_password_changepassword_action</span>,
+     <span class="ruby-value">:confirm_resized_server_confirmresize_action</span>,
+     <span class="ruby-value">:create_server_back_up_createbackup_action</span>,
+     <span class="ruby-value">:create_image_createimage_action</span>,
+     <span class="ruby-value">:lock_server_lock_action</span>,
+     <span class="ruby-value">:pause_server_pause_action</span>,
+     <span class="ruby-value">:reboot_server_reboot_action</span>,
+     <span class="ruby-value">:rebuild_server_rebuild_action</span>,
+     <span class="ruby-value">:remove_disassociate_floating_ip_removefloatingip_action_deprecated</span>,
+     <span class="ruby-value">:remove_security_group_from_a_server_removesecuritygroup_action</span>,
+     <span class="ruby-value">:rescue_server_rescue_action</span>,
+     <span class="ruby-value">:resize_server_resize_action</span>,
+     <span class="ruby-value">:resume_suspended_server_resume_action</span>,
+     <span class="ruby-value">:revert_resized_server_revertresize_action</span>,
+     <span class="ruby-value">:start_server_os_start_action</span>,
+     <span class="ruby-value">:stop_server_os_stop_action</span>,
+     <span class="ruby-value">:suspend_server_suspend_action</span>,
+     <span class="ruby-value">:unlock_server_unlock_action</span>,
+     <span class="ruby-value">:unpause_server_unpause_action</span>,
+     <span class="ruby-value">:unrescue_server_unrescue_action</span>,
+     <span class="ruby-value">:add_associate_fixed_ip_addfixedip_action_deprecated</span>,
+     <span class="ruby-value">:remove_disassociate_fixed_ip_removefixedip_action_deprecated</span>,
+     <span class="ruby-value">:evacuate_server_evacuate_action</span>,
+     <span class="ruby-value">:force_delete_server_forcedelete_action</span>,
+     <span class="ruby-value">:restore_soft_deleted_instance_restore_action</span>,
+     <span class="ruby-value">:show_console_output_os_getconsoleoutput_action</span>,
+     <span class="ruby-value">:shelve_server_shelve_action</span>,
+     <span class="ruby-value">:shelf_offload_remove_server_shelveoffload_action</span>,
+     <span class="ruby-value">:unshelve_restore_shelved_server_unshelve_action</span>,
+     <span class="ruby-value">:trigger_crash_dump_in_server</span>,
+     <span class="ruby-value">:get_rdp_console_os_getrdpconsole_action_deprecated</span>,
+     <span class="ruby-value">:get_serial_console_os_getserialconsole_action_deprecated</span>,
+     <span class="ruby-value">:get_spice_console_os_getspiceconsole_action_deprecated</span>,
+     <span class="ruby-value">:get_vnc_console_os_getvncconsole_action_deprecated</span>,
+     <span class="ruby-value">:inject_network_information_injectnetworkinfo_action</span>,
+     <span class="ruby-value">:migrate_server_migrate_action</span>,
+     <span class="ruby-value">:live_migrate_server_os_migratelive_action</span>,
+     <span class="ruby-value">:reset_networking_on_a_server_resetnetwork_action</span>,
+     <span class="ruby-value">:reset_server_state_os_resetstate_action</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/remote-consoles&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_remote_console</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-security-groups&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_security_groups_by_server</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/diagnostics&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_server_diagnostics</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/ips&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_ips</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/ips/{network_label}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_ip_details</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/metadata&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_metadata</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_update_metadata_items</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:replace_metadata_items</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/metadata/{key}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_metadata_item_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_update_metadata_item</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_metadata_item</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-instance-actions&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_actions_for_server</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-instance-actions/{request_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_server_action_details</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-interface&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_port_interfaces</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_interface</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-interface/{port_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_port_interface_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:detach_interface</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-server-password&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_server_password</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:clear_admin_password</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-volume_attachments&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_volume_attachments_for_an_instance</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:attach_a_volume_to_an_instance</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-volume_attachments/{volume_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_detail_of_a_volume_attachment</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:detach_a_volume_from_an_instance</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-volume_attachments/{attachment_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_volume_attachment</span>]},
+ <span class="ruby-string">&quot;/flavors&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_flavors</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_flavor</span>]},
+ <span class="ruby-string">&quot;/flavors/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_flavors_with_details</span>]},
+ <span class="ruby-string">&quot;/flavors/{flavor_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_flavor_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_flavor_description</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_flavor</span>]},
+ <span class="ruby-string">&quot;/flavors/{flavor_id}/os-flavor-access&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_flavor_access_information_for_given_flavor</span>]},
+ <span class="ruby-string">&quot;/flavors/{flavor_id}/action&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+    [<span class="ruby-value">:add_flavor_access_to_tenant_addtenantaccess_action</span>,
+     <span class="ruby-value">:remove_flavor_access_from_tenant_removetenantaccess_action</span>]},
+ <span class="ruby-string">&quot;/flavors/{flavor_id}/os-extra_specs&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_extra_specs_for_a_flavor</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_extra_specs_for_a_flavor</span>]},
+ <span class="ruby-string">&quot;/flavors/{flavor_id}/os-extra_specs/{flavor_extra_spec_key}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_an_extra_spec_for_a_flavor</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_an_extra_spec_for_a_flavor</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_an_extra_spec_for_a_flavor</span>]},
+ <span class="ruby-string">&quot;/os-keypairs&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_keypairs</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_import_keypair</span>]},
+ <span class="ruby-string">&quot;/os-keypairs/{keypair_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_keypair_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_keypair</span>]},
+ <span class="ruby-string">&quot;/limits&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_rate_and_absolute_limits</span>]},
+ <span class="ruby-string">&quot;/os-agents&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_agent_builds</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_agent_build</span>]},
+ <span class="ruby-string">&quot;/os-agents/{agent_build_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_agent_build</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_agent_build</span>]},
+ <span class="ruby-string">&quot;/os-aggregates&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_aggregates</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_aggregate</span>]},
+ <span class="ruby-string">&quot;/os-aggregates/{aggregate_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_aggregate_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_aggregate</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_aggregate</span>]},
+ <span class="ruby-string">&quot;/os-aggregates/{aggregate_id}/action&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_host</span>, <span class="ruby-value">:remove_host</span>, <span class="ruby-value">:create_or_update_aggregate_metadata</span>]},
+ <span class="ruby-string">&quot;/os-assisted-volume-snapshots&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_assisted_volume_snapshots</span>]},
+ <span class="ruby-string">&quot;/os-assisted-volume-snapshots/{snapshot_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_assisted_volume_snapshot</span>]},
+ <span class="ruby-string">&quot;/os-availability-zone&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_availability_zone_information</span>]},
+ <span class="ruby-string">&quot;/os-availability-zone/detail&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_detailed_availability_zone_information</span>]},
+ <span class="ruby-string">&quot;/os-cells&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_cells</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_cell</span>]},
+ <span class="ruby-string">&quot;/os-cells/capacities&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:capacities</span>]},
+ <span class="ruby-string">&quot;/os-cells/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_cells_with_details</span>]},
+ <span class="ruby-string">&quot;/os-cells/info&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:info_for_this_cell</span>]},
+ <span class="ruby-string">&quot;/os-cells/{cell_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_cell_data</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_cell</span>]},
+ <span class="ruby-string">&quot;/os-cells/{cell_od}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_cell</span>]},
+ <span class="ruby-string">&quot;/os-cells/{cell_id}/capacities&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_cell_capacities</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/consoles&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:lists_consoles</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_console</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/consoles/{console_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_console_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_console</span>]},
+ <span class="ruby-string">&quot;/os-console-auth-tokens/{console_token}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_console_connection_information</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_hypervisors</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_hypervisors_details</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors/statistics&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_hypervisor_statistics</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors/{hypervisor_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_hypervisor_details</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors/{hypervisor_id}/uptime&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_hypervisor_uptime</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors/{hypervisor_hostname_pattern}/search&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:search_hypervisor</span>]},
+ <span class="ruby-string">&quot;/os-hypervisors/{hypervisor_hostname_pattern}/servers&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_hypervisor_servers</span>]},
+ <span class="ruby-string">&quot;/os-instance_usage_audit_log&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_server_usage_audits</span>]},
+ <span class="ruby-string">&quot;/os-instance_usage_audit_log/{before_timestamp}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_usage_audits_before_specified_time</span>]},
+ <span class="ruby-string">&quot;/os-migrations&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_migrations</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/migrations&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:id321</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/migrations/{migration_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_migration_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_abort_migration</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/migrations/{migration_id}/action&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:force_migration_complete_action_force_complete_action</span>]},
+ <span class="ruby-string">&quot;/os-quota-sets/{tenant_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_a_quota</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_quotas</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:revert_quotas_to_defaults</span>]},
+ <span class="ruby-string">&quot;/os-quota-sets/{tenant_id}/defaults&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_default_quotas_for_tenant</span>]},
+ <span class="ruby-string">&quot;/os-quota-sets/{tenant_id}/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_the_detail_of_quota</span>]},
+ <span class="ruby-string">&quot;/os-quota-class-sets/{id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_the_quota_for_quota_class</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_update_quotas_for_quota_class</span>]},
+ <span class="ruby-string">&quot;/os-server-groups&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_server_groups</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_server_group</span>]},
+ <span class="ruby-string">&quot;/os-server-groups/{server_group_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_server_group_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_server_group</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/tags&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_tags</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:replace_tags</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_all_tags</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/tags/{tag}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:check_tag_existence</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_a_single_tag</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_single_tag</span>]},
+ <span class="ruby-string">&quot;/os-services&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_compute_services</span>]},
+ <span class="ruby-string">&quot;/os-services/disable&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:disable_scheduling_for_a_compute_service</span>]},
+ <span class="ruby-string">&quot;/os-services/disable-log-reason&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:disable_scheduling_for_a_compute_service_and_log_disabled_reason</span>]},
+ <span class="ruby-string">&quot;/os-services/enable&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:enable_scheduling_for_a_compute_service</span>]},
+ <span class="ruby-string">&quot;/os-services/force-down&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_forced_down</span>]},
+ <span class="ruby-string">&quot;/os-services/{service_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_compute_service</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_compute_service</span>]},
+ <span class="ruby-string">&quot;/os-simple-tenant-usage&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_tenant_usage_statistics_for_all_tenants</span>]},
+ <span class="ruby-string">&quot;/os-simple-tenant-usage/{tenant_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_usage_statistics_for_tenant</span>]},
+ <span class="ruby-string">&quot;/os-server-external-events&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:run_events</span>]},
+ <span class="ruby-string">&quot;/extensions&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_extensions</span>]},
+ <span class="ruby-string">&quot;/extensions/{alias}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_extension_details</span>]},
+ <span class="ruby-string">&quot;/os-networks&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_networks</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_network</span>]},
+ <span class="ruby-string">&quot;/os-networks/add&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_network</span>]},
+ <span class="ruby-string">&quot;/os-networks/{network_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_network_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_network</span>]},
+ <span class="ruby-string">&quot;/os-networks/{network_id}/action&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+    [<span class="ruby-value">:associate_host_deprecated</span>,
+     <span class="ruby-value">:disassociate_network_deprecated</span>,
+     <span class="ruby-value">:disassociate_host_deprecated</span>,
+     <span class="ruby-value">:disassociate_project_deprecated</span>]},
+ <span class="ruby-string">&quot;/os-volumes&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_volumes</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_volume</span>]},
+ <span class="ruby-string">&quot;/os-volumes/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_volumes_with_details</span>]},
+ <span class="ruby-string">&quot;/os-volumes/{volume_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_volume_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_volume</span>]},
+ <span class="ruby-string">&quot;/os-snapshots&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_snapshots</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_snapshot</span>]},
+ <span class="ruby-string">&quot;/os-snapshots/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_snapshots_with_details</span>]},
+ <span class="ruby-string">&quot;/os-snapshots/{snapshot_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_snapshot_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_snapshot</span>]},
+ <span class="ruby-string">&quot;/images&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_images</span>]},
+ <span class="ruby-string">&quot;/images/detail&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_images_with_details</span>]},
+ <span class="ruby-string">&quot;/images/{image_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_image_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_image</span>]},
+ <span class="ruby-string">&quot;/images/{image_id}/metadata&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_image_metadata</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_image_metadata</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_image_metadata</span>]},
+ <span class="ruby-string">&quot;/images/{image_id}/metadata/{key}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_image_metadata_item</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_update_image_metadata_item</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_image_metadata_item</span>]},
+ <span class="ruby-string">&quot;/os-baremetal-nodes&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_bare_metal_nodes</span>]},
+ <span class="ruby-string">&quot;/os-baremetal-nodes/{node_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_bare_metal_node_details</span>]},
+ <span class="ruby-string">&quot;/os-tenant-networks&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_project_networks</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_project_network</span>]},
+ <span class="ruby-string">&quot;/os-tenant-networks/{network_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_project_network_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_project_network</span>]},
+ <span class="ruby-string">&quot;/os-fixed-ips/{fixed_ip}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_fixed_ip_details</span>]},
+ <span class="ruby-string">&quot;/os-fixed-ips/{fixed_ip}/action&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:reserve_or_release_a_fixed_ip</span>]},
+ <span class="ruby-string">&quot;/os-floating-ip-dns&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_dns_domains</span>]},
+ <span class="ruby-string">&quot;/os-floating-ip-dns/{domain}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_update_dns_domain</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_dns_domain</span>]},
+ <span class="ruby-string">&quot;/os-floating-ip-dns/{domain}/entries/{ip}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_dns_entries</span>]},
+ <span class="ruby-string">&quot;/os-floating-ip-dns/{domain}/entries/{name}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:find_unique_dns_entry</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_or_update_dns_entry</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_dns_entry</span>]},
+ <span class="ruby-string">&quot;/os-floating-ip-pools&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_floating_ip_pools</span>]},
+ <span class="ruby-string">&quot;/os-floating-ips&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_floating_ip_addresses</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_allocate_floating_ip_address</span>]},
+ <span class="ruby-string">&quot;/os-floating-ips/{floating_ip_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_floating_ip_address_details</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_deallocate_floating_ip_address</span>]},
+ <span class="ruby-string">&quot;/os-floating-ips-bulk&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_floating_ips</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_floating_ips</span>]},
+ <span class="ruby-string">&quot;/os-floating-ips-bulk/delete&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:bulk_delete_floating_ips</span>]},
+ <span class="ruby-string">&quot;/os-floating-ips-bulk/{host_name}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_floating_ips_by_host</span>]},
+ <span class="ruby-string">&quot;/os-fping&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:ping_instances</span>]},
+ <span class="ruby-string">&quot;/os-fping/{instance_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:ping_an_instance</span>]},
+ <span class="ruby-string">&quot;/os-security-groups&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_security_groups</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_security_group</span>]},
+ <span class="ruby-string">&quot;/os-security-groups/{security_group_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_security_group_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_security_group</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_security_group</span>]},
+ <span class="ruby-string">&quot;/os-security-group-default-rules&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_default_security_group_rules</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_default_security_group_rule</span>]},
+ <span class="ruby-string">&quot;/os-security-group-default-rules/{security_group_default_rule_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_default_security_group_rule_details</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_default_security_group_rule</span>]},
+ <span class="ruby-string">&quot;/os-security-group-rules&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_security_group_rule</span>]},
+ <span class="ruby-string">&quot;/os-security-group-rules/{security_group_rule_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_security_group_rule</span>]},
+ <span class="ruby-string">&quot;/os-hosts&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_hosts</span>]},
+ <span class="ruby-string">&quot;/os-hosts/{host_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_host_details</span>], <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_host_status</span>]},
+ <span class="ruby-string">&quot;/os-hosts/{host_name}/reboot&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:reboot_host</span>]},
+ <span class="ruby-string">&quot;/os-hosts/{host_name}/shutdown&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:shut_down_host</span>]},
+ <span class="ruby-string">&quot;/os-hosts/{host_name}/startup&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:start_host</span>]},
+ <span class="ruby-string">&quot;/servers/{server_id}/os-virtual-interfaces&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_virtual_interfaces</span>]},
+ <span class="ruby-string">&quot;/os-certificates&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_root_certificate</span>]},
+ <span class="ruby-string">&quot;/os-certificates/root&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_root_certificate_details</span>]},
+ <span class="ruby-string">&quot;/os-cloudpipe&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_cloudpipes</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_cloudpipe</span>]},
+ <span class="ruby-string">&quot;/os-cloudpipe/configure-project&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_cloudpipe</span>]}}
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tag</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tag-source">
+            <pre><span class="ruby-comment"># File build/APIs/nova/nova_v2_1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+  <span class="ruby-string">&#39;Compute API Reference 17.0.0&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

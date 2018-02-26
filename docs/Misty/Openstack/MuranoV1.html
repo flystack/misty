@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Misty::Openstack::MuranoV1 - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-api">#api</a>
+    
+    <li ><a href="#method-i-tag">#tag</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Misty::Openstack::MuranoV1">
+  <h1 id="module-Misty::Openstack::MuranoV1" class="module">
+    module Misty::Openstack::MuranoV1
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-api" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">api</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="api-source">
+            <pre><span class="ruby-comment"># File build/APIs/murano/murano_v1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
+{<span class="ruby-string">&quot;/environments/{environment_id}/actions/{action_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:execute_action</span>]},
+ <span class="ruby-string">&quot;/environments/{environment_id}/actions/{task_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_action_result</span>]},
+ <span class="ruby-string">&quot;/actions&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:execute_static_action</span>]},
+ <span class="ruby-string">&quot;/catalog/categories&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_categories</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_category</span>]},
+ <span class="ruby-string">&quot;/catalog/categories/{category_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_category_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_category</span>]},
+ <span class="ruby-string">&quot;/deployments&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_deployments</span>]},
+ <span class="ruby-string">&quot;/environments&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_environments</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_environment</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:rename_environment</span>],
+   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_environment_details</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_environment</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}/model/{path}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_environment_model</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}/model/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_environment_model</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}/lastStatus&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_environment_last_status</span>]},
+ <span class="ruby-string">&quot;/v1/catalog/packages&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_packages</span>, <span class="ruby-value">:search_for_packages</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:upload_package</span>]},
+ <span class="ruby-string">&quot;/v1/catalog/packages/{package_id}/download&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:download_package</span>]},
+ <span class="ruby-string">&quot;/v1/catalog/packages/{package_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_package_details</span>],
+   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_package</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_package</span>]},
+ <span class="ruby-string">&quot;/v1/catalog/packages/{package_id}/ui&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_ui_definition</span>]},
+ <span class="ruby-string">&quot;/v1/catalog/packages/{package_id}/logo&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_logo</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}/configure&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:configure_environment_open_session</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}/sessions/{session_id}/deploy&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:deploy_session</span>]},
+ <span class="ruby-string">&quot;/environments/{env_id}/sessions/{session_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_session_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_session</span>]},
+ <span class="ruby-string">&quot;/templates&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_environment_templates</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_environment_template</span>]},
+ <span class="ruby-string">&quot;/templates/{env_temp_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_environment_template_details</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_environment_template</span>]},
+ <span class="ruby-string">&quot;/templates/{env_temp_id}/services&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_application_to_environment_template</span>],
+   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_application_details_for_environment_template</span>]},
+ <span class="ruby-string">&quot;/templates/{env_temp_id}/services/{service_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_application_from_an_environment_template</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_application_for_an_environment_template</span>]},
+ <span class="ruby-string">&quot;/templates/{env_temp_id}/create-environment&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_environment_from_environment_template</span>]},
+ <span class="ruby-string">&quot;/templates/{env_temp_id}/clone&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:clone_environment_template</span>]}}
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tag</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tag-source">
+            <pre><span class="ruby-comment"># File build/APIs/murano/murano_v1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+  <span class="ruby-string">&#39;Application Catalog API Reference 5.0.0&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

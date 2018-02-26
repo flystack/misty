@@ -75,7 +75,7 @@ describe Misty do
     end
 
     it 'has dns service' do
-      service = Misty::services.find { |s| s.name == :domain_name_server}
+      service = Misty::services.find { |s| s.name == :dns}
       validate_service(service)
       validate_versions(service)
     end

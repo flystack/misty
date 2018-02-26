@@ -31,7 +31,7 @@ describe Misty::Microversion do
       'token_id'
     end
 
-    setup = Misty::Cloud::Config.new
+    setup = Misty::Config.new
     setup.content_type = :ruby
     setup.log = Logger.new('/dev/null')
     setup.interface = Misty::INTERFACE
