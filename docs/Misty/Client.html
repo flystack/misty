@@ -196,11 +196,10 @@ Type: String Allowed values: “CURRENT”, “LATEST”, “SUPPORTED”, or a 
 number such as “2.0” or “3” Default: `“CURRENT”`</p>
 </li></ul>
 
-<p>Example: openstack = <a
-href="Cloud.html#method-c-new">Misty::Cloud.new</a>(:auth =&gt; auth,
-:log_level =&gt; 0, :identity =&gt; {:region_id =&gt; &#39;regionTwo&#39;},
-:compute =&gt; {:version =&gt; &#39;2.27&#39;, :interface =&gt;
-&#39;admin&#39;})</p>
+<h4 id="method-c-new-label-Example">Example<span><a href="#method-c-new-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">openstack</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(:<span class="ruby-identifier">auth</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">auth</span>, :<span class="ruby-identifier">log_level</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>, :<span class="ruby-identifier">identity</span> =<span class="ruby-operator">&gt;</span> {:<span class="ruby-identifier">region_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;regionTwo&#39;</span>}, :<span class="ruby-identifier">compute</span> =<span class="ruby-operator">&gt;</span> {:<span class="ruby-identifier">version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;2.27&#39;</span>, :<span class="ruby-identifier">interface</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>})
+</pre>
           
           
 
