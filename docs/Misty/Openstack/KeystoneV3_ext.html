@@ -84,8 +84,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -121,128 +119,128 @@
 
           
           <div class="method-source-code" id="api_ext-source">
-            <pre><span class="ruby-comment"># File build/APIs/keystone/keystone_v3_ext.rb, line 6</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api_ext</span>
-{<span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:associate_policy_and_endpoint</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:verify_a_policy_and_endpoint_association</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_policy_and_endpoint_association</span>]},
- <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:associate_policy_and_service_type_endpoint</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:verify_a_policy_and_service_type_endpoint_association</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_policy_and_service_type_endpoint_association</span>]},
- <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/policy&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_policy_for_endpoint</span>],
-   <span class="ruby-value">:HEAD=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:check_policy_and_service_endpoint_association</span>]},
- <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}/regions/{region_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:associate_policy_and_service_type_endpoint_in_a_region</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:verify_a_policy_and_service_type_endpoint_in_a_region_association</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/keystone/keystone_v3_ext.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api_ext</span>
+{<span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:associate_policy_and_endpoint</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:verify_a_policy_and_endpoint_association</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_policy_and_endpoint_association</span>]},
+ <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:associate_policy_and_service_type_endpoint</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:verify_a_policy_and_service_type_endpoint_association</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_policy_and_service_type_endpoint_association</span>]},
+ <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/policy&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_policy_for_endpoint</span>],
+   <span class="ruby-value">:HEAD</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:check_policy_and_service_endpoint_association</span>]},
+ <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}/regions/{region_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:associate_policy_and_service_type_endpoint_in_a_region</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:verify_a_policy_and_service_type_endpoint_in_a_region_association</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>
     [<span class="ruby-value">:delete_a_policy_and_service_type_endpoint_in_a_region_association</span>]},
- <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_policy_and_service_endpoint_associations</span>]},
- <span class="ruby-string">&quot;/v3/endpoints/{endpoint_id}/OS-ENDPOINT-POLICY/policy&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_the_effective_policy_associated_with_an_endpoint</span>]},
- <span class="ruby-string">&quot;/v3/OS-OAUTH1/consumers&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_consumer</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_consumers</span>]},
- <span class="ruby-string">&quot;/v3/OS-OAUTH1/consumers/{consumer_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_consumer</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_consumer_details</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_consumer</span>]},
- <span class="ruby-string">&quot;/v3/OS-OAUTH1/request_token&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_request_token</span>]},
- <span class="ruby-string">&quot;/v3/OS-OAUTH1/authorize/{request_token_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:authorize_request_token</span>]},
- <span class="ruby-string">&quot;/v3/OS-OAUTH1/access_token&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_access_token</span>]},
- <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_access_token</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:revoke_access_token</span>]},
- <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_access_tokens</span>]},
- <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}/roles&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_roles_for_an_access_token</span>]},
- <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}/roles/{role_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_role_details_for_an_access_token</span>]},
- <span class="ruby-string">&quot;/v3/auth/tokens&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+ <span class="ruby-string">&quot;/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_policy_and_service_endpoint_associations</span>]},
+ <span class="ruby-string">&quot;/v3/endpoints/{endpoint_id}/OS-ENDPOINT-POLICY/policy&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_the_effective_policy_associated_with_an_endpoint</span>]},
+ <span class="ruby-string">&quot;/v3/OS-OAUTH1/consumers&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_consumer</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_consumers</span>]},
+ <span class="ruby-string">&quot;/v3/OS-OAUTH1/consumers/{consumer_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_consumer</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_consumer_details</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_consumer</span>]},
+ <span class="ruby-string">&quot;/v3/OS-OAUTH1/request_token&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_request_token</span>]},
+ <span class="ruby-string">&quot;/v3/OS-OAUTH1/authorize/{request_token_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:authorize_request_token</span>]},
+ <span class="ruby-string">&quot;/v3/OS-OAUTH1/access_token&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_access_token</span>]},
+ <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_access_token</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:revoke_access_token</span>]},
+ <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_access_tokens</span>]},
+ <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}/roles&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_roles_for_an_access_token</span>]},
+ <span class="ruby-string">&quot;/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}/roles/{role_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_role_details_for_an_access_token</span>]},
+ <span class="ruby-string">&quot;/v3/auth/tokens&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>
     [<span class="ruby-value">:authenticate_with_identity_api</span>,
      <span class="ruby-value">:consuming_a_trust</span>,
      <span class="ruby-value">:request_a_scoped_os_federation_token</span>]},
- <span class="ruby-string">&quot;/v3/OS-TRUST/trusts&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_trust</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_trusts</span>]},
- <span class="ruby-string">&quot;/v3/OS-TRUST/trusts/{trust_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_trust</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_trust</span>]},
- <span class="ruby-string">&quot;/v3/OS-TRUST/trusts/{trust_id}/roles&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_roles_delegated_by_a_trust</span>]},
- <span class="ruby-string">&quot;/v3/OS-TRUST/trusts/{trust_id}/roles/{role_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:HEAD=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:check_if_a_role_is_delegated_by_a_trust</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_role_delegated_by_a_trust</span>]},
- <span class="ruby-string">&quot;/v3/OS-REVOKE/events&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_revocation_events</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_endpoint_group</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_endpoint_groups</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_endpoint_group</span>],
-   <span class="ruby-value">:HEAD=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:check_endpoint_group</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_endpoint_group</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_endpoint_group</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/projects/{project_id}/endpoints/{endpoint_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_association</span>],
-   <span class="ruby-value">:HEAD=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:check_association</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_association</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/projects/{project_id}/endpoints&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_associations_by_project</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoints/{endpoint_id}/projects&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_associations_by_endpoint</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects/{project_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_endpoint_group_to_project_association</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_endpoint_group_to_project_association</span>],
-   <span class="ruby-value">:HEAD=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:check_endpoint_group_to_project_association</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_endpoint_group_to_project_association</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_projects_associated_with_endpoint_group</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/endpoints&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_endpoints_associated_with_endpoint_group</span>]},
- <span class="ruby-string">&quot;/v3/OS-EP-FILTER/projects/{project_id}/endpoint_groups&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_endpoint_groups_associated_with_project</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:register_an_identity_provider</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_identity_provider</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_identity_provider</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_identity_provider</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_identity_providers</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:add_a_protocol_and_attribute_mapping_to_an_identity_provider</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_a_protocol_and_attribute_mapping_for_an_identity_provider</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>
+ <span class="ruby-string">&quot;/v3/OS-TRUST/trusts&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_trust</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_trusts</span>]},
+ <span class="ruby-string">&quot;/v3/OS-TRUST/trusts/{trust_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_trust</span>], <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_trust</span>]},
+ <span class="ruby-string">&quot;/v3/OS-TRUST/trusts/{trust_id}/roles&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_roles_delegated_by_a_trust</span>]},
+ <span class="ruby-string">&quot;/v3/OS-TRUST/trusts/{trust_id}/roles/{role_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:HEAD</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:check_if_a_role_is_delegated_by_a_trust</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_role_delegated_by_a_trust</span>]},
+ <span class="ruby-string">&quot;/v3/OS-REVOKE/events&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_revocation_events</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_endpoint_group</span>], <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_endpoint_groups</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_endpoint_group</span>],
+   <span class="ruby-value">:HEAD</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:check_endpoint_group</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_endpoint_group</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_endpoint_group</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/projects/{project_id}/endpoints/{endpoint_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_association</span>],
+   <span class="ruby-value">:HEAD</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:check_association</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_association</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/projects/{project_id}/endpoints&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_associations_by_project</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoints/{endpoint_id}/projects&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_associations_by_endpoint</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects/{project_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_endpoint_group_to_project_association</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_endpoint_group_to_project_association</span>],
+   <span class="ruby-value">:HEAD</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:check_endpoint_group_to_project_association</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_endpoint_group_to_project_association</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_projects_associated_with_endpoint_group</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/endpoints&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_endpoints_associated_with_endpoint_group</span>]},
+ <span class="ruby-string">&quot;/v3/OS-EP-FILTER/projects/{project_id}/endpoint_groups&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_endpoint_groups_associated_with_project</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:register_an_identity_provider</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_identity_provider</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_identity_provider</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_identity_provider</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_identity_providers</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:add_a_protocol_and_attribute_mapping_to_an_identity_provider</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_a_protocol_and_attribute_mapping_for_an_identity_provider</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>
     [<span class="ruby-value">:update_the_attribute_mapping_for_an_identity_provider_and_protocol</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>
     [<span class="ruby-value">:delete_a_protocol_and_attribute_mapping_from_an_identity_provider</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{id}/protocols&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_all_protocol_and_attribute_mappings_of_an_identity_provider</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/mappings/{id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_a_mapping</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_a_mapping</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_mapping</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_mapping</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/mappings&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_mappings</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/service_providers/{id}&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:register_a_service_provider</span>],
-   <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_service_provider</span>],
-   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_service_provider</span>],
-   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_service_provider</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/service_providers&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_service_providers</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/projects&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_projects_a_federated_user_can_access</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/domains&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_domains_a_federated_user_can_access</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}/auth&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:request_an_unscoped_os_federation_token</span>]},
- <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/websso/{protocol_id}?origin=https%3A//horizon.example.com&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:web_single_sign_on_authentication_new_in_version_1_2</span>]},
- <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/identity_providers/{idp_id}/protocol/{protocol_id}/websso?origin=https%3A//horizon.example.com&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:web_single_sign_on_authentication_new_in_version_1_3</span>]},
- <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/saml2&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:generate_a_saml_assertion</span>]},
- <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/saml2/ecp&quot;</span>=<span class="ruby-operator">&gt;</span>
-  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:generate_an_ecp_wrapped_saml_assertion</span>]},
- <span class="ruby-string">&quot;/v3/OS-FEDERATION/saml2/metadata&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:retrieve_metadata_properties</span>]},
- <span class="ruby-string">&quot;/v3/OS-SIMPLE-CERT/ca&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_ca_certificate</span>]},
- <span class="ruby-string">&quot;/v3/OS-SIMPLE-CERT/certificates&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_signing_certificate</span>]}}
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{id}/protocols&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_all_protocol_and_attribute_mappings_of_an_identity_provider</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/mappings/{id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:create_a_mapping</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_a_mapping</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_a_mapping</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_a_mapping</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/mappings&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_mappings</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/service_providers/{id}&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:PUT</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:register_a_service_provider</span>],
+   <span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:get_service_provider</span>],
+   <span class="ruby-value">:DELETE</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:delete_service_provider</span>],
+   <span class="ruby-value">:PATCH</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:update_service_provider</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/service_providers&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_service_providers</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/projects&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_projects_a_federated_user_can_access</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/domains&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:list_domains_a_federated_user_can_access</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}/auth&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:request_an_unscoped_os_federation_token</span>]},
+ <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/websso/{protocol_id}?origin=https%3A//horizon.example.com&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:web_single_sign_on_authentication_new_in_version_1_2</span>]},
+ <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/identity_providers/{idp_id}/protocol/{protocol_id}/websso?origin=https%3A//horizon.example.com&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:web_single_sign_on_authentication_new_in_version_1_3</span>]},
+ <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/saml2&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:generate_a_saml_assertion</span>]},
+ <span class="ruby-string">&quot;/v3/auth/OS-FEDERATION/saml2/ecp&quot;</span><span class="ruby-operator">=&gt;</span>
+  {<span class="ruby-value">:POST</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:generate_an_ecp_wrapped_saml_assertion</span>]},
+ <span class="ruby-string">&quot;/v3/OS-FEDERATION/saml2/metadata&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:retrieve_metadata_properties</span>]},
+ <span class="ruby-string">&quot;/v3/OS-SIMPLE-CERT/ca&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_ca_certificate</span>]},
+ <span class="ruby-string">&quot;/v3/OS-SIMPLE-CERT/certificates&quot;</span><span class="ruby-operator">=&gt;</span>{<span class="ruby-value">:GET</span><span class="ruby-operator">=&gt;</span>[<span class="ruby-value">:show_signing_certificate</span>]}}
   <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -273,8 +271,8 @@
 
           
           <div class="method-source-code" id="tag-source">
-            <pre><span class="ruby-comment"># File build/APIs/keystone/keystone_v3_ext.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+            <pre><span class="ruby-comment"># File lib/misty/openstack/keystone/keystone_v3_ext.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tag</span>
   <span class="ruby-string">&#39;Identity API Reference v3.8&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -294,8 +292,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
