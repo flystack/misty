@@ -13,7 +13,7 @@ module Misty
     { name: :data_processing,                     project: :sahara,      versions: ['v1.1']},
     { name: :data_protection_orchestration,       project: :karbor,      versions: ['v1']},
     { name: :database,                            project: :trove,       versions: ['v1.0']},
-    { name: :domain_name_server,                  project: :designate,   versions: ['v2']},
+    { name: :dns               ,                  project: :designate,   versions: ['v2']},
     { name: :identity,                            project: :keystone,    versions: ['v3', 'v2.0']},
     { name: :image,                               project: :glance,      versions: ['v2', 'v1']},
     { name: :load_balancer,                       project: :octavia,     versions: ['v2.0']},
@@ -42,7 +42,7 @@ module Misty
   # Default log level. Use :log_level option to override
   LOG_LEVEL = Logger::INFO
 
-  # Default Region ID
+  # Default Region
   REGION_ID = 'regionOne'
 
   # Default when uri.scheme is https

@@ -32,13 +32,13 @@ describe Misty::Cloud do
     end
 
     it 'uses default version when provided version is out of range' do
-      cloud = Misty::Cloud.new(:auth => auth, :identity => {:api_version => 'v1'})
-      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
+      cloud = Misty::Cloud.new(:auth => auth)
+      cloud.identity(:api_version => 'v1').must_be_kind_of Misty::Openstack::Keystone::V3
     end
 
     it 'uses provided version' do
-      cloud = Misty::Cloud.new(:auth => auth, :identity => {:api_version => 'v2.0'})
-      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V2_0
+      cloud = Misty::Cloud.new(:auth => auth)
+      cloud.identity(:api_version => 'v2.0').must_be_kind_of Misty::Openstack::Keystone::V2_0
     end
   end
 

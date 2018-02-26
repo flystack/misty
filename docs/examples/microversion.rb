@@ -3,7 +3,8 @@ require 'misty'
 require 'pp'
 
 require './auth_v3'
-cloud = Misty::Cloud.new(:auth => authv3, :compute => {:version => '2.25'})
+cloud = Misty::Cloud.new(:auth => authv3)
+cloud.compute(:version => '2.25')
 
 pp cloud.compute.versions
 

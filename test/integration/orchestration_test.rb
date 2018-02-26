@@ -61,7 +61,8 @@ describe 'Orchestration Service using Heat v1' do
 
   it 'GET/POST/PUT/DELETE requests' do
     VCR.use_cassette 'orchestration using heat v1' do
-      cloud = Misty::Cloud.new(:auth => auth, :orchestration => {:api_version => 'v1'})
+      cloud = Misty::Cloud.new(:auth => auth)
+      cloud.orchestration(:api_version => 'v1')
 
       # POST with body data
       data_heat_template1 = Misty.to_json(heat_template1)

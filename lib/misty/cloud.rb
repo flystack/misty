@@ -14,10 +14,9 @@ module Misty
       val.gsub(/\./,'_')
     end
 
-    def initialize(params)
-      @params = params
-      @config = self.class.set_configuration(params)
-      @auth = Misty::Auth.factory(params[:auth], @config)
+    def initialize(args)
+      @config = self.class.set_configuration(args)
+      @auth = Misty::Auth.factory(args[:auth], @config)
     end
 
     def self.set_configuration(params)
@@ -33,107 +32,130 @@ module Misty
       config
     end
 
-    def build_service(service_name)
-      service = Misty.services.find {|service| service.name == service_name}
-      options = @params[service.name] ? @params[service.name] : {}
-      version = self.class.dot_to_underscore(service.version(options[:api_version]))
+    def build_service(args)
+      service = Misty.services.find {|service| service.name == args[:service]}
+      args.delete(:service)
+      version = self.class.dot_to_underscore(service.version(args[:api_version]))
       klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
-      klass.new(@auth, @config, options)
+      klass.new(@auth, @config, args)
     end
 
-    def application_catalog
-      @application_catalog ||= build_service(:application_catalog)
+    def application_catalog(args = {})
+      args[:service] = :application_catalog
+      @application_catalog ||= build_service(args)
     end
 
-    def alarming
-      @alarming ||= build_service(:alarming)
+    def alarming(args = {})
+      args[:service] = :alarming
+      @alarming ||= build_service(args)
     end
 
-    def backup
-      @backup ||= build_service(:backup)
+    def backup(args = {})
+      args[:service] = :backup
+      @backup ||= build_service(args)
     end
 
-    def baremetal
-      @baremetal ||= build_service(:baremetal)
+    def baremetal(args = {})
+      args[:service] = :baremetal
+      @baremetal ||= build_service(args)
     end
 
-    def block_storage
-      @block_storage ||= build_service(:block_storage)
+    def block_storage(args = {})
+      args[:service] = :block_storage
+      @block_storage ||= build_service(args)
     end
 
-    def clustering
-      @clustering ||= build_service(:clustering)
+    def clustering(args = {})
+      args[:service] = :clustering
+      @clustering ||= build_service(args)
     end
 
-    def compute
-      @compute ||= build_service(:compute)
+    def compute(args = {})
+      args[:service] = :compute
+      @compute ||= build_service(args)
     end
 
-    def container_infrastructure_management
-      @container_infrastructure_management ||= build_service(:container_infrastructure_management)
+    def container_infrastructure_management(args = {})
+      args[:service] = :container_infrastructure_management
+      @container_infrastructure_management ||= build_service(args)
     end
 
-    def data_processing
-      @data_processing ||= build_service(:data_processing)
+    def data_processing(args = {})
+      args[:service] = :data_processing
+      @data_processing ||= build_service(args)
     end
 
-    def data_protection_orchestration
-      @data_protection_orchestration ||= build_service(:data_protection_orchestration)
+    def data_protection_orchestration(args = {})
+      args[:service] = :data_protection_orchestration
+      @data_protection_orchestration ||= build_service(args)
     end
 
-    def database
-      @database ||= build_service(:database)
+    def database(args = {})
+      args[:service] = :database
+      @database ||= build_service(args)
     end
 
-    def domain_name_server
-      @domain_name_server ||= build_service(:domain_name_server)
+    def dns(args = {})
+      args[:service] = :dns
+      @dns ||= build_service(args)
     end
 
-    def identity
-      @identity ||= build_service(:identity)
+    def identity(args = {})
+      args[:service] = :identity
+      @identity ||= build_service(args)
     end
 
-    def image
-      @image ||= build_service(:image)
+    def image(args = {})
+      args[:service] = :image
+      @image ||= build_service(args)
     end
 
-    def load_balancer
-      @load_balancer ||= build_service(:load_balancer)
+    def load_balancer(args = {})
+      args[:service] = :load_balancer
+      @load_balancer ||= build_service(args)
     end
 
-    def messaging
-      @messaging ||= build_service(:messaging)
+    def messaging(args = {})
+      args[:service] = :messaging
+      @messaging ||= build_service(args)
     end
 
-    def metering
-      @metering ||= build_service(:metering)
+    def metering(args = {})
+      args[:service] = :metering
+      @metering ||= build_service(args)
     end
 
-    def networking
-      @networking ||= build_service(:networking)
+    def networking(args = {})
+      args[:service] = :networking
+      @networking ||= build_service(args)
     end
 
-    def nfv_orchestration
-      @nfv_orchestration ||= build_service(:nfv_orchestration)
+    def nfv_orchestration(args = {})
+      args[:service] = :nfv_orchestration
+      @nfv_orchestration ||= build_service(args)
     end
 
-    def object_storage
-      @object_storage ||= build_service(:object_storage)
+    def object_storage(args = {})
+      args[:service] = :object_storage
+      @object_storage ||= build_service(args)
     end
 
-    def orchestration
-      @orchestration ||= build_service(:orchestration)
+    def orchestration(args = {})
+      args[:service] = :orchestration
+      @orchestration ||= build_service(args)
     end
 
-    def search
-      @search ||= build_service(:search)
+    def search(args = {})
+      args[:service] = :search
+      @search ||= build_service(args)
     end
 
-    def shared_file_systems
-      @shared_file_systems ||= build_service(:shared_file_systems)
+    def shared_file_systems(args = {})
+      args[:service] = :shared_file_systems
+      @shared_file_systems ||= build_service(args)
     end
 
-    alias dns domain_name_server
+    alias domain_name_server dns
     alias volume block_storage
 
     private
