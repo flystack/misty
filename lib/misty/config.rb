@@ -2,24 +2,28 @@ module Misty
   class Config
     attr_accessor :auth, :content_type, :headers, :interface, :log, :region_id, :ssl_verify_mode
 
-    # Following options are global to all services unless specifically provided for a service.
-    # * :content_type
+    # ==== Attributes
+    # * +params+ - +Hash+ of options applied globally to all services unless specifically
+    #   overridden by a service.
+    #
+    # The entries are:
+    # +:content_type+::
     #   Format of the body of the successful HTTP responses to be JSON or Ruby structures.
     #   Type: Symbol
     #   Allowed values: `:json`, `:ruby`
     #   Default: `:ruby`
-    # * :headers
+    # +:headers+::
     #   HTTP Headers to be applied to all services
     #   Type: Hash
     #   Default: {}
-    # * :region_id
+    # +:region_id+::
     #   Type: String
     #   Default: "regionOne"
-    # * :interface
+    # +:interface+::
     #   Type: String
     #   Allowed values: "public", "internal", "admin"
     #   Default: "public"
-    # * :ssl_verify_mode
+    # +:ssl_verify_mode+::
     #   When using SSL mode (defined by URI scheme => "https://")
     #   Type: Boolean
     #   Default: `true`
