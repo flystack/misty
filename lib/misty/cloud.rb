@@ -4,6 +4,11 @@ require 'misty/auth/auth_v3'
 require 'misty/http/header'
 
 module Misty
+  # Cloud is the OpenStack cloud entry point
+  #
+  # ==== Attributes
+  #
+  # * +args+ - Hash of credentials and configuration parameters
   class Cloud
     attr_reader :auth
 

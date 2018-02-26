@@ -44,8 +44,8 @@ module Misty
     #   Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
     #   Default: `"CURRENT"`
     #
-    # Example:
-    # openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => 'regionTwo'}, :compute => {:version => '2.27', :interface => 'admin'})
+    # ==== Example
+    #   openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => 'regionTwo'}, :compute => {:version => '2.27', :interface => 'admin'})
     def initialize(auth, config, options = {})
       @auth = auth
       @config = config
