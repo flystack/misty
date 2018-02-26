@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Introduction">Introduction</a>
+    <li><a href="#label-Features">Features</a>
+    <li><a href="#label-A+solid+KISS">A solid KISS</a>
+    <li><a href="#label-APIs+Definitions">APIs Definitions</a>
+    <li><a href="#label-Install+-26+Use">Install &amp; Use</a>
+    <li><a href="#label-Fetch+and+install">Fetch and install</a>
+    <li><a href="#label-Quick+start">Quick start</a>
+    <li><a href="#label-Services">Services</a>
+    <li><a href="#label-Headers">Headers</a>
+    <li><a href="#label-Prefixes">Prefixes</a>
+    <li><a href="#label-Aliases">Aliases</a>
+    <li><a href="#label-Openstack+service+name">Openstack service name</a>
+    <li><a href="#label-Requests">Requests</a>
+    <li><a href="#label-Setup">Setup</a>
+    <li><a href="#label-Authentication+information+parameter">Authentication information parameter</a>
+    <li><a href="#label-Keystone+v3">Keystone v3</a>
+    <li><a href="#label-Keystone+v2.0">Keystone v2.0</a>
+    <li><a href="#label-Logging+parameters">Logging parameters</a>
+    <li><a href="#label-Global+parameters">Global parameters</a>
+    <li><a href="#label-Service+parameters">Service parameters</a>
+    <li><a href="#label-Services+Headers">Services Headers</a>
+    <li><a href="#label-Direct+REST+HTTP+Methods">Direct REST HTTP Methods</a>
+    <li><a href="#label-Requirements">Requirements</a>
+    <li><a href="#label-Ruby+versions+tested">Ruby versions tested</a>
+    <li><a href="#label-Contributing">Contributing</a>
+    <li><a href="#label-Copyright">Copyright</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./CHANGELOG_md.html">CHANGELOG</a>
+  
+    <li><a href="./Gemfile.html">Gemfile</a>
+  
+    <li><a href="./Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="./LICENSE_md.html">LICENSE</a>
+  
+    <li><a href="./OpenstackAPI_md.html">OpenstackAPI</a>
+  
+    <li><a href="./README_md.html">README</a>
+  
+    <li><a href="./Rakefile.html">Rakefile</a>
+  
+    <li><a href="./build/openstack-APIs/API-ref_yaml.html">API-ref.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/aodh/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/ceilometer/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/cinder/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/cinder/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/cinder/v3_yaml.html">v3.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/designate/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/freezer/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/glance/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/glance/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/heat/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/ironic/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/karbor/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/keystone/v2_0_ext_yaml.html">v2.0.ext.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/keystone/v2_0_yaml.html">v2.0.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/keystone/v3_ext_yaml.html">v3.ext.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/keystone/v3_yaml.html">v3.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/magnum/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/manila/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/murano/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/neutron/v2_0_yaml.html">v2.0.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/nova/v2_1_yaml.html">v2.1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/octavia/v2_0_yaml.html">v2.0.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/sahara/v1_1_yaml.html">v1.1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/searchlight/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/senlin/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/swift/v1_yaml.html">v1.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/tacker/v1_0_yaml.html">v1.0.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/trove/v1_0_yaml.html">v1.0.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/APIs/zaqar/v2_yaml.html">v2.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/LICENSE.html">LICENSE</a>
+  
+    <li><a href="./build/openstack-APIs/Legacy_yaml.html">Legacy.yaml</a>
+  
+    <li><a href="./build/openstack-APIs/README_md.html">README</a>
+  
+    <li><a href="./misty_gemspec.html">misty.gemspec</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README.md">
+
+<h1 id="label-Introduction">Introduction<span><a href="#label-Introduction">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Misty.html">Misty</a> is a HTTP client for OpenStack APIs, aiming
+to be fast, flexible and exhaustive. <a href="Misty.html">Misty</a> acts as
+a conduit to OpenStack APIs by handling requests as transparently as
+possible.</p>
+
+<h2 id="label-Features">Features<span><a href="#label-Features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Flexible Openstack APIs integration</p>
+</li><li>
+<p>Standardized Openstack APIs: <a
+href="https://developer.openstack.org/api-guide/quick-start/">Based upon
+API-ref</a></p>
+</li><li>
+<p>Automatically generated API schemas - Any request can be overridden</p>
+</li><li>
+<p>Versions and Microversions</p>
+</li><li>
+<p>Transparent Request data hanlding</p>
+</li><li>
+<p>Response data format of choice: <a href="JSON.html">JSON</a> or raw (Ruby)</p>
+</li><li>
+<p>Custom HTTP Methods for special needs</p>
+</li><li>
+<p>On demand services - Auto loads required versions</p>
+</li><li>
+<p>Low dependency - Use standard Net/HTTP and <a href="JSON.html">JSON</a> gem
+only</p>
+</li><li>
+<p>Persistent HTTP connections (default since HTTP 1.1 anyway)</p>
+</li></ul>
+
+<h2 id="label-A+solid+KISS">A solid KISS<span><a href="#label-A+solid+KISS">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>For REST transactions <a href="Misty.html">Misty</a> relies on standard
+Net/HTTP library.<br> No other gems are required besides &#39;json&#39;.</p>
+
+<p>Not having to use the help of a more complex HTTP framework is a choice
+that reduces dependencies.<br> Meanwhile a better reason would be because
+Openstack offers a common modus operandi across all APIs.<br> The
+authentication process provides a <a href="Service.html">Service</a>
+Catalog serving all available APIs entry points.</p>
+
+<h2 id="label-APIs+Definitions">APIs Definitions<span><a href="#label-APIs+Definitions">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The rich variety of OpenStack projects requires lots of Application Program
+Interfaces to handle.<br> Maintaining and extending those APIs implies a
+structural complexity challenge.<br> Therefore the more automated the
+process, the better.<br> Thanks to the help of Phoenix project <a
+href="https://developer.openstack.org/api-guide/quick-start/">OpenStack
+API-ref</a> providing the latest standard of OpenStack APIs.<br> The APIs
+interface definitions are generated automatically from the API-ref
+reference manuals (misty-builder) which allows: * More consistent APIs *
+More recent APIs definitions * Easier addition of a new service&#39;s API</p>
+
+<p>[1] <a
+href="https://developer.openstack.org/api-guide/quick-start">developer.openstack.org/api-guide/quick-start</a>/</p>
+
+<h1 id="label-Install+-26+Use">Install &amp; Use<span><a href="#label-Install+-26+Use">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-Fetch+and+install">Fetch and install<span><a href="#label-Fetch+and+install">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-identifier">gem</span> <span class="ruby-identifier">install</span> <span class="ruby-identifier">misty</span>
+</pre>
+
+<h2 id="label-Quick+start">Quick start<span><a href="#label-Quick+start">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;misty&#39;</span>
+
+<span class="ruby-identifier">auth_v3</span> = {
+  :<span class="ruby-identifier">url</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+  :<span class="ruby-identifier">user</span>               =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  :<span class="ruby-identifier">password</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+  :<span class="ruby-identifier">domain</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;default&#39;</span>,
+  :<span class="ruby-identifier">project</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  :<span class="ruby-identifier">project_domain_id</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;default&#39;</span>
+}
+
+<span class="ruby-identifier">openstack</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(:<span class="ruby-identifier">auth</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">auth_v3</span>)
+
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">openstack</span>.<span class="ruby-identifier">compute</span>.<span class="ruby-identifier">list_servers</span>.<span class="ruby-identifier">body</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">openstack</span>.<span class="ruby-identifier">compute</span>.<span class="ruby-identifier">list_flavors</span>.<span class="ruby-identifier">body</span>
+<span class="ruby-identifier">networks</span> = <span class="ruby-identifier">openstack</span>.<span class="ruby-identifier">networking</span>.<span class="ruby-identifier">list_networks</span>
+<span class="ruby-identifier">network_id</span> = <span class="ruby-identifier">networks</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;networks&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;id&#39;</span>]
+<span class="ruby-identifier">network</span> = <span class="ruby-identifier">openstack</span>.<span class="ruby-identifier">networking</span>.<span class="ruby-identifier">show_network_details</span>(<span class="ruby-identifier">network_id</span>)
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">network</span>.<span class="ruby-identifier">body</span>
+</pre>
+
+<h2 id="label-Services">Services<span><a href="#label-Services">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Once a <a href="Misty/Cloud.html">Misty::Cloud</a> object is created, the
+Openstack services can be used.</p>
+
+<p>The Cloud object is authenticated by the identity server (bootstrap) and is
+provided with a service catalog. When an OpenStack API service is required,
+the catalog entry&#39;s endpoint is used and the service is dynamically
+called.</p>
+
+<p>Each service name (i.e. <code>compute</code>) is the object handling API
+requests.</p>
+
+<p><code>ruby openstack = Misty::Cloud.new(:auth =&gt; { ... })
+openstack.compute.list_servers openstack.networking.list_networks data =
+Misty.to_json(&#39;network&#39;: {&#39;name&#39;: &#39;my-network&#39;})
+openstack.networking.create_network(data) </code></p>
+
+<p>To obtain the list of supported services: <code>ruby &gt; require
+&#39;misty&#39; &gt; puts Misty.services application_catalog: murano,
+versions: [&quot;v1&quot;] alarming: aodh, versions: [&quot;v2&quot;]
+backup: freezer, versions: [&quot;v1&quot;] baremetal: ironic,
+microversion: v1 block_storage: cinder, versions: [&quot;v2&quot;,
+&quot;v1&quot;], microversion: v3 clustering: senlin, versions:
+[&quot;v1&quot;] compute: nova, microversion: v2.1
+container_infrastructure_management: magnum, microversion: v1
+data_processing: sahara, versions: [&quot;v1.1&quot;]
+data_protection_orchestration: karbor, versions: [&quot;v1&quot;] database:
+trove, versions: [&quot;v1.0&quot;] dns: designate, versions:
+[&quot;v2&quot;] identity: keystone, versions: [&quot;v3&quot;,
+&quot;v2.0&quot;] image: glance, versions: [&quot;v2&quot;, &quot;v1&quot;]
+load_balancer: octavia, versions: [&quot;v2.0&quot;] messaging: zaqar,
+versions: [&quot;v2&quot;] metering: ceilometer, versions: [&quot;v2&quot;]
+networking: neutron, versions: [&quot;v2.0&quot;] nfv_orchestration:
+tacker, versions: [&quot;v1.0&quot;] object_storage: swift, versions:
+[&quot;v1&quot;] orchestration: heat, versions: [&quot;v1&quot;] search:
+searchlight, versions: [&quot;v1&quot;] shared_file_systems: manila,
+microversion: v2 </code></p>
+
+<h3 id="label-Headers">Headers<span><a href="#label-Headers">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>HTTP headers can be defined at 3 different levels: * Global headers are
+applied across all services, see <code>:headers</code> in “Global
+parameters” section. * <a href="Service.html">Service</a> level headers are
+applied on every request of an involved service, see “Services options”
+section. * Request level header are passed on per request basis.</p>
+
+<p>The Headers are cumulative, therefore a request level header will be added
+on top of the global and <a href="Service.html">Service</a> levels headers.</p>
+
+<h3 id="label-Prefixes">Prefixes<span><a href="#label-Prefixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>A shorter name can be used to call a service only if it&#39;s unique among
+all services. For instance <code>net</code> or <code>network</code> can be
+used instead of <code>networking</code>. Meanwhile <code>data</code>
+doesn&#39;t work because it&#39;s ambiguous between
+<code>data_processing</code> and <code>data_protection_orchestration</code></p>
+
+<h3 id="label-Aliases">Aliases<span><a href="#label-Aliases">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><code>domain_name_server</code> is an alias for <code>dns</code></p>
+</li><li>
+<p><code>volume</code> is an alias for <code>block_storage</code></p>
+</li></ul>
+
+<h2 id="label-Openstack+service+name">Openstack service name<span><a href="#label-Openstack+service+name">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Different service names can be used for a specific Openstack <a
+href="Service.html">Service</a> by using the :service_names option (see
+below).</p>
+
+<h2 id="label-Requests">Requests<span><a href="#label-Requests">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The requests method provides the available requests for a service, for
+example: “`ruby openstack.compute.requests</p>
+
+<p>=&gt; [:add_a_single_tag, 
+:add_associate_fixed_ip_addfixedip_action_deprecated, 
+:add_associate_floating_ip_addfloatingip_action_deprecated, 
+:add_flavor_access_to_tenant_addtenantaccess_action,  :add_host, 
+:add_network,  :add_security_group_to_a_server_addsecuritygroup_action, 
+:associate_host_deprecated,  :attach_a_volume_to_an_instance, 
+:bulk_delete_floating_ips,  :capacities, 
+:change_administrative_password_changepassword_action, 
+:check_tag_existence,  :clear_admin_password, 
+:confirm_resized_server_confirmresize_action,  :create_agent_build, 
+:create_aggregate,  :create_allocate_floating_ip_address, 
+:create_assisted_volume_snapshots,  :create_cell,  :create_cloudpipe, 
+:create_console, …/… “`</p>
+
+<h2 id="label-Setup">Setup<span><a href="#label-Setup">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Authentication+information+parameter">Authentication information parameter<span><a href="#label-Authentication+information+parameter">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>The URL and credentials details are necessary to authenticate with the
+identity server (Keystone).</p>
+
+<p>The credentials are a combination of “id” and “name” used to uniquely
+identify projects, users and their domains. When using only the name, a
+domain must be specified to guarantee a unique record from the Identity
+service.</p>
+
+<p>The following parameters can be used:<br> * <code>:domain_id</code><br> 
+Domain id used for authentication scope<br>  Default:
+<code>&quot;default&quot;</code><br> * <code>:domain</code><br>  Domain
+name used for authentication scope<br>  Default:
+<code>&quot;Default&quot;</code><br> * <code>:project_id</code><br> 
+Project id<br> * <code>:project</code><br>  Project name<br> *
+<code>:project_domain_id</code><br>  Project domain id *
+<code>:project_domain</code><br>  Project domain name<br> *
+<code>:tenant_id</code><br>  Tenant id, used only for Keystone v2.0<br> *
+<code>:tenant</code><br>  Tenant name, used only for Keystone v2.0<br> *
+<code>:user_id</code><br>  User id<br> * <code>:user</code><br>  User
+name<br> * <code>:user_domain_id</code><br>  User domain id *
+<code>:user_domain</code><br>  User domain name<br> *
+<code>:password</code><br>  Password for user. Cannot be used together with
+<code>:token</code>. * <code>:token</code><br>  User provided token,
+overrides all user and password parameters. * <code>:context</code><br> 
+Bypass the authentication by providing a proper context with <code>token
+id</code>, <code>service catalog</code> and <code>expire date</code>. 
+Overrides all user and password parameters<br>  Example: <code>{:context
+=&gt; { :token =&gt; token_id, :catalog =&gt; service_catalog, :expires
+=&gt; expire_date }}</code></p>
+
+<h4 id="label-Keystone+v3">Keystone v3<span><a href="#label-Keystone+v3">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Keystone v3 is default recommended version:</p>
+
+<pre class="ruby"><span class="ruby-identifier">auth</span> = {
+  :<span class="ruby-identifier">url</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+  :<span class="ruby-identifier">user</span>           =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  :<span class="ruby-identifier">user_domain</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;default&#39;</span>,
+  :<span class="ruby-identifier">password</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+  :<span class="ruby-identifier">project</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  :<span class="ruby-identifier">project_domain</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;default&#39;</span>
+  }
+}
+</pre>
+
+<p>Alternatively, using IDs:</p>
+
+<pre class="ruby"><span class="ruby-identifier">auth</span> = {
+  :<span class="ruby-identifier">url</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+  :<span class="ruby-identifier">user_id</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;48985e6b8da145699d411f12a3459fca&#39;</span>,
+  :<span class="ruby-identifier">password</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+  :<span class="ruby-identifier">project_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;8e1e232f6cbb4116bbef715d8a0afe6e&#39;</span>,
+  }
+}
+</pre>
+
+<h4 id="label-Keystone+v2.0">Keystone v2.0<span><a href="#label-Keystone+v2.0">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Provide the tenant details, <a href="Misty.html">Misty</a> will detect
+it&#39;s using v2.0 for authentication:</p>
+
+<pre class="ruby"><span class="ruby-identifier">auth</span> = {
+  :<span class="ruby-identifier">url</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+  :<span class="ruby-identifier">user</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  :<span class="ruby-identifier">password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+  :<span class="ruby-identifier">tenant</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+}
+</pre>
+
+<h3 id="label-Logging+parameters">Logging parameters<span><a href="#label-Logging+parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>:log_file<br>  Log destination.<br>  Value is either file path
+(./misty.log) or IO object (SDOUT)  Default is no output
+(<code>/dev/null</code>).</p>
+</li><li>
+<p>:log_level<br>  Value is Fixnum - Default is 1 (Logger::INFO) - See Logger
+from Ruby standard Library</p>
+</li></ul>
+
+<pre class="ruby"><span class="ruby-identifier">openstack</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(:<span class="ruby-identifier">auth</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">auth</span>, :<span class="ruby-identifier">content_type</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">ruby</span>, :<span class="ruby-identifier">log_file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">STDOUT</span>)
+</pre>
+
+<h4 id="label-Global+parameters">Global parameters<span><a href="#label-Global+parameters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>See <a href="doc/Misty/Config.html">Cloud</a> parameters</p>
+
+<h3 id="label-Service+parameters"><a href="Service.html">Service</a> parameters<span><a href="#label-Service+parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Each service can have specific parameters.</p>
+
+<pre class="ruby"><span class="ruby-identifier">openstack</span>.<span class="ruby-identifier">identity</span>(:<span class="ruby-identifier">version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;2.0&#39;</span>)
+<span class="ruby-identifier">openstack</span>.<span class="ruby-identifier">compute</span>(:<span class="ruby-identifier">version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;2.15&#39;</span>)
+</pre>
+
+<p>See <a href="doc/Misty/Client.html">Cloud</a> parameters for more
+information.</p>
+
+<h3 id="label-Services+Headers">Services Headers<span><a href="#label-Services+Headers">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>HTTP headers can be optionally added to any request. A Header object must
+be created and passed as the last parameter of a request.</p>
+
+<p>For example for an already initialized cloud: “`ruby header = <a
+href="Misty/HTTP/Header.html#method-c-new">Misty::HTTP::Header.new</a>( 
+&#39;x-container-meta-web-listings&#39; =&gt; false, 
+&#39;x-container-meta-quota-count&#39; =&gt; “”, 
+&#39;x-container-meta-quota-bytes&#39; =&gt; nil, 
+&#39;x-versions-location&#39; =&gt; “”, 
+&#39;x-container-meta-web-index&#39; =&gt; “” )</p>
+
+<p>openstack.object_storage.create_update_or_delete_container_metadata(container_name,
+header) “`</p>
+
+<h2 id="label-Direct+REST+HTTP+Methods">Direct REST HTTP Methods<span><a href="#label-Direct+REST+HTTP+Methods">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>To send requests directly use the &#39;get&#39;, &#39;delete&#39;,
+&#39;post&#39; and &#39;put&#39; methods directly: <code>ruby
+openstack.network.post(&#39;/v2.0/qos/policies/48985e6b8da145699d411f12a3459fca/dscp_marking_rules&#39;,
+data) </code></p>
+
+<h1 id="label-Requirements">Requirements<span><a href="#label-Requirements">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-Ruby+versions+tested">Ruby versions tested<span><a href="#label-Ruby+versions+tested">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Ruby MRI 2.4.2</p>
+</li><li>
+<p>Ruby MRI 2.4.1</p>
+</li><li>
+<p>Ruby MRI 2.4.0</p>
+</li><li>
+<p>Ruby MRI 2.3.4</p>
+</li><li>
+<p>Ruby MRI 2.3.3</p>
+</li><li>
+<p>Ruby MRI 2.3.2</p>
+</li><li>
+<p>Ruby MRI 2.3.1</p>
+</li><li>
+<p>Ruby MRI 2.3.0</p>
+</li></ul>
+
+<h1 id="label-Contributing">Contributing<span><a href="#label-Contributing">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Contributors are welcome and must adhere to the <a
+href="http://contributor-covenant.org/">Contributor covenant code of
+conduct</a>.</p>
+
+<p>Please submit issues/bugs and patches on the <a
+href="https://github.com/flystack/misty">Misty repository</a>.</p>
+
+<h1 id="label-Copyright">Copyright<span><a href="#label-Copyright">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Apache License Version 2.0, January 2004 <a
+href="http://www.apache.org/licenses">www.apache.org/licenses</a>/ - See <a
+href="LICENSE.md">LICENSE</a> for details.</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

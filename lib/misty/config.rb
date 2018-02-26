@@ -2,6 +2,27 @@ module Misty
   class Config
     attr_accessor :auth, :content_type, :headers, :interface, :log, :region_id, :ssl_verify_mode
 
+    # Following options are global to all services unless specifically provided for a service.
+    # * :content_type
+    #   Format of the body of the successful HTTP responses to be JSON or Ruby structures.
+    #   Type: Symbol
+    #   Allowed values: `:json`, `:ruby`
+    #   Default: `:ruby`
+    # * :headers
+    #   HTTP Headers to be applied to all services
+    #   Type: Hash
+    #   Default: {}
+    # * :region_id
+    #   Type: String
+    #   Default: "regionOne"
+    # * :interface
+    #   Type: String
+    #   Allowed values: "public", "internal", "admin"
+    #   Default: "public"
+    # * :ssl_verify_mode
+    #   When using SSL mode (defined by URI scheme => "https://")
+    #   Type: Boolean
+    #   Default: `true`
     def initialize(params = {})
       @log = Logger.new(params[:log_file] ? params[:log_file] : Misty::LOG_FILE)
       @log.level = params[:log_level] ? params[:log_level] : Misty::LOG_LEVEL

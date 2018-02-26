@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module OpenStackAPIs::Webcrawler - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add_method_name">#add_method_name</a>
+    
+    <li ><a href="#method-i-api_ref">#api_ref</a>
+    
+    <li ><a href="#method-i-api_web">#api_web</a>
+    
+    <li ><a href="#method-i-elements-3F">#elements?</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-OpenStackAPIs::Webcrawler">
+  <h1 id="module-OpenStackAPIs::Webcrawler" class="module">
+    module OpenStackAPIs::Webcrawler
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_method_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_method_name</span><span
+            class="method-args">(verb, path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_method_name-source">
+            <pre><span class="ruby-comment"># File build/openstack-APIs/lib/openstack_apis/webcrawler.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_method_name</span>(<span class="ruby-identifier">verb</span>, <span class="ruby-identifier">path</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">elements?</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">subpath</span> = <span class="ruby-regexp">/(.*)(\{.*\})(.*)/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">verb</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/get/</span>
+      <span class="ruby-string">&quot;show_&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/delete/</span>
+      <span class="ruby-string">&quot;delete_&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/post/</span>
+      <span class="ruby-string">&quot;create_&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/put/</span>
+      <span class="ruby-string">&quot;update_&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">word</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">verb</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/get/</span>
+      <span class="ruby-node">&quot;list_#{word}&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/post/</span>
+      <span class="ruby-node">&quot;create_#{word}&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/put/</span>
+      <span class="ruby-node">&quot;create_#{word}&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/delete/</span>
+      <span class="ruby-node">&quot;delete_#{word}&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-api_ref" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">api_ref</span><span
+            class="method-args">(page)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="api_ref-source">
+            <pre><span class="ruby-comment"># File build/openstack-APIs/lib/openstack_apis/webcrawler.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">api_ref</span>(<span class="ruby-identifier">page</span>)
+  <span class="ruby-identifier">tag</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">toc</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&#39;div.docs-sidebar-toc&#39;</span>).<span class="ruby-identifier">select</span>
+  <span class="ruby-identifier">toc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&#39;div.docs-sidebar-section&#39;</span>).<span class="ruby-identifier">css</span>(<span class="ruby-string">&#39;a.docs-sidebar-section-title&#39;</span>).<span class="ruby-identifier">css</span>(<span class="ruby-string">&#39;h4&#39;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">api</span> = {}
+  <span class="ruby-identifier">group</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;div.detail-control&quot;</span>).<span class="ruby-identifier">select</span>
+  <span class="ruby-identifier">group</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">verb</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;div.operation&quot;</span>).<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;span.label&quot;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_sym</span>
+    <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;div.endpoint-container&quot;</span>).<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;div.row&quot;</span>).<span class="ruby-identifier">select</span>
+    <span class="ruby-identifier">details</span> = []
+    <span class="ruby-identifier">cont</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">details</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">name</span> = <span class="ruby-identifier">e</span>[<span class="ruby-string">&quot;id&quot;</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/-/</span>, <span class="ruby-string">&#39;_&#39;</span>).<span class="ruby-identifier">to_sym</span>
+    <span class="ruby-identifier">request</span> = { <span class="ruby-identifier">verb</span> =<span class="ruby-operator">&gt;</span> [ <span class="ruby-identifier">name</span> ]}
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">details</span>[<span class="ruby-value">0</span>]
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">api</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">api</span>[<span class="ruby-identifier">path</span>].<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">verb</span>)
+        <span class="ruby-identifier">api</span>[<span class="ruby-identifier">path</span>][<span class="ruby-identifier">verb</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">name</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">api</span>[<span class="ruby-identifier">path</span>].<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">request</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">api</span>[<span class="ruby-identifier">path</span>] = <span class="ruby-identifier">request</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> {<span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-identifier">tag</span>, <span class="ruby-identifier">api</span><span class="ruby-operator">:</span> <span class="ruby-identifier">api</span>}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-api_web" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">api_web</span><span
+            class="method-args">(page)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>For Legacy pages</p>
+          
+          
+
+          
+          <div class="method-source-code" id="api_web-source">
+            <pre><span class="ruby-comment"># File build/openstack-APIs/lib/openstack_apis/webcrawler.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">api_web</span>(<span class="ruby-identifier">page</span>)
+  <span class="ruby-identifier">list</span> = []
+  <span class="ruby-identifier">group</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;div.section&quot;</span>).<span class="ruby-identifier">select</span>
+  <span class="ruby-identifier">group</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">section</span><span class="ruby-operator">|</span>
+    <span class="ruby-node">%w{get put post delete}</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">verb</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">op</span> = <span class="ruby-identifier">section</span>.<span class="ruby-identifier">css</span>(<span class="ruby-node">&quot;dl.#{verb}&quot;</span>).<span class="ruby-identifier">select</span>
+      <span class="ruby-identifier">op</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">req</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">request</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&quot;dt&quot;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">value</span>
+        <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">request</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">request</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">api</span> = {}
+  <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;--&#39;</span>,<span class="ruby-string">&#39;--/&#39;</span>)
+    <span class="ruby-identifier">verb</span>, <span class="ruby-identifier">path</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;--&quot;</span>)
+    <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;-&#39;</span>,<span class="ruby-string">&#39;/&#39;</span>)
+    <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;(&#39;</span>,<span class="ruby-string">&#39;{&#39;</span>)
+    <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;)&#39;</span>,<span class="ruby-string">&#39;}&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">api</span>[<span class="ruby-identifier">path</span>]
+      <span class="ruby-comment"># Add request to existing path</span>
+      <span class="ruby-identifier">api</span>[<span class="ruby-identifier">path</span>].<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">verb</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">to_sym</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">add_method_name</span>(<span class="ruby-identifier">verb</span>, <span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_sym</span>])
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># Add new path with request</span>
+      <span class="ruby-identifier">api</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">path</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">verb</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">to_sym</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">add_method_name</span>(<span class="ruby-identifier">verb</span>, <span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_sym</span>]})
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">api</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-elements-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">elements?</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="elements-3F-source">
+            <pre><span class="ruby-comment"># File build/openstack-APIs/lib/openstack_apis/webcrawler.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">elements?</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(.*)(\{.*\})(.*)/</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

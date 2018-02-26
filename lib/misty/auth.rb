@@ -23,7 +23,8 @@ module Misty
       else
         raise URLError, 'No URL provided' if auth[:url].nil? || auth[:url].empty?
         @uri = URI.parse(auth[:url])
-        @config = config
+        @log = config.log
+        @ssl_verify_mode = config.ssl_verify_mode
         @credentials = set_credentials(auth)
         @token, @catalog, @expires = set(authenticate)
       end
@@ -31,7 +32,7 @@ module Misty
 
     def authenticate
       Misty::HTTP::NetHTTP.http_request(
-        @uri, ssl_verify_mode: @config.ssl_verify_mode, log: @config.log
+        @uri, ssl_verify_mode: @ssl_verify_mode, log: @log
       ) do |connection|
         response = connection.post(path, @credentials.to_json,
           { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })

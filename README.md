@@ -256,76 +256,17 @@ openstack = Misty::Cloud.new(:auth => auth, :content_type => :ruby, :log_file =>
 ```
 
 #### Global parameters
-The following options are applied to each service unless specifically provided for a service.
+See [Cloud configuration parameters](docs/Misty/Config.html).
 
-* :content_type  
-  Format of the body of the successful HTTP responses to be JSON or Ruby structures.  
-  Type: Symbol  
-  Allowed values: `:json`, `:ruby`  
-  Default: `:ruby`
-* :headers  
-  HTTP Headers to be applied to all services
-  Type: Hash  
-  Default: {}
-* :region_id  
-  Type: String  
-  Default: "regionOne"  
-* :interface  
-  Type: String  
-  Allowed values: "public", "internal", "admin"  
-  Default: "public"  
-* :ssl_verify_mode  
-  When using SSL mode (defined by URI scheme => "https://")  
-  Type: Boolean  
-  Default: `true`  
-
-### Services Options
+### Service parameters
 Each service can have specific parameters.
 
 ```ruby
-openstack = Misty::Cloud.new(:auth => auth)
-
 openstack.identity(:version => '2.0')
 openstack.compute(:version => '2.15')
 ```
 
-The following options are available:
-* :api_version  
-  Type: String  
-  Default: The latest supported version - See Misty.services for other versions.  
-* :base_path  
-  Allows to force the base path for every URL requests.  
-  Type: String  
-* :base_url  
-  Allows to force the base URL for every requests.  
-  Type: String        
-* :headers
-  Optional headers
-  Type: Hash
-* :interface  
-  Allows to provide an alternate interface. Allowed values are "public", "internal" or "admin"  
-  Type: String  
-  Default: Determined from global value  
-* :region_id  
-  Type: String  
-  Default: Determined from global value  
-* :service_names  
-  Allows to use a difference name for the service. For instance "identity3" for the identity service.  
-  Type: String  
-  Default: Determined from Misty.services  
-* :ssl_verify_mode  
-  Type: Boolean  
-  Default: Determined from global value  
-* :version  
-  Version to be used when microversion is supported by the service.  
-  Type: String  
-  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"  
-  Default: `"CURRENT"`  
-
-Example:
-```ruby
-openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => 'regionTwo'}, :compute => {:version => '2.27', :interface => 'admin'})
-```
+For more information see [Service parameters](docs/Misty/Client.html)
 
 ### Services Headers
 HTTP headers can be optionally added to any request.

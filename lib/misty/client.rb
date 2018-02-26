@@ -11,24 +11,41 @@ module Misty
 
     attr_reader :headers, :microversion
 
-    # Options - Values shown are the default
-    #   Base path can be forced (Not recommended, mainly used for test purposes)
-    #    :base_path => nil
-    #   URL can be forced (Helps when setup is broken)
-    #    :base_url => nil
+    # The following options are available:
+    # * :api_version
+    #   Type: String
+    #   Default: The latest supported version - See Misty.services for other versions.
+    # * :base_path
+    #   Allows to force the base path for every URL requests.
+    #   Type: String
+    # * :base_url
+    #   Allows to force the base URL for every requests.
+    #   Type: String
+    # * :headers
     #   Optional headers
-    #    :headers => {}
-    #   Endpoint type (admin, public or internal)
-    #    :interface => "public"
-    #   Region ID
-    #    :region_id => "regionOne"
-    #   Service name
-    #    The Service names are pre defined but more can be added using this option.
-    #    :service_name
-    #   SSL Verify Mode
-    #    :ssl_verify_mode => true
-    #   (micro)version: Can be numbered (3.1) or by state (CURRENT, LATEST or SUPPORTED)
-    #     :version => "CURRENT"
+    #   Type: Hash
+    # * :interface
+    #   Allows to provide an alternate interface. Allowed values are "public", "internal" or "admin"
+    #   Type: String
+    #   Default: Determined from global value
+    # * :region_id
+    #   Type: String
+    #   Default: Determined from global value
+    # * :service_names
+    #   Allows to use a difference name for the service. For instance "identity3" for the identity service.
+    #   Type: String
+    #   Default: Determined from Misty.services
+    # * :ssl_verify_mode
+    #   Type: Boolean
+    #   Default: Determined from global value
+    # * :version
+    #   Version to be used when microversion is supported by the service.
+    #   Type: String
+    #   Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
+    #   Default: `"CURRENT"`
+    #
+    # Example:
+    # openstack = Misty::Cloud.new(:auth => auth, :log_level => 0, :identity => {:region_id => 'regionTwo'}, :compute => {:version => '2.27', :interface => 'admin'})
     def initialize(auth, config, options = {})
       @auth = auth
       @config = config

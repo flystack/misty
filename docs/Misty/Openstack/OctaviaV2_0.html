@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Misty::Openstack::OctaviaV2_0 - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-api">#api</a>
+    
+    <li ><a href="#method-i-tag">#tag</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Misty::Openstack::OctaviaV2_0">
+  <h1 id="module-Misty::Openstack::OctaviaV2_0" class="module">
+    module Misty::Openstack::OctaviaV2_0
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-api" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">api</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="api-source">
+            <pre><span class="ruby-comment"># File build/APIs/octavia/octavia_v2_0.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
+{<span class="ruby-string">&quot;/v2.0/lbaas/loadbalancers&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_load_balancers</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_a_load_balancer</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/loadbalancers/{loadbalancer_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_load_balancer_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_load_balancer</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_load_balancer</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/loadbalancers/{loadbalancer_id}/stats&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_load_balancer_statistics</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/loadbalancers/{loadbalancer_id}/status&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_the_load_balancer_status_tree</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/loadbalancers/{loadbalancer_id}/failover&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:failover_a_load_balancer</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/listeners&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_listeners</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_listener</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/listeners/{listener_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_listener_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_listener</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_listener</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/listeners/{listener_id}/stats&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_listener_statistics</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/pools&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_pools</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_pool</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/pools/{pool_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_pool_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_pool</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_pool</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/pools/{pool_id}/members&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_members</span>],
+   <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_member</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:batch_update_members</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/pools/{pool_id}/members/{member-id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_member_details</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/pools/{pool_id}/members/{member_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_member</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_member</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/healthmonitors&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_health_monitors</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_health_monitor</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/healthmonitors/{healthmonitor_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_health_monitor_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_health_monitor</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_health_monitor</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/l7policies&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_l7_policies</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_an_l7_policy</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/l7policies/{l7policy_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_l7_policy_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_l7_policy</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_l7_policy</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/l7policies/{l7policy_id}/rules&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_l7_rules</span>], <span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_an_l7_rule</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/l7policies/{l7policy_id}/rules/{l7rule_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_l7_rule_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_l7_rule</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_l7_rule</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/quotas&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_quota</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/quotas/defaults&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_quota_defaults</span>]},
+ <span class="ruby-string">&quot;/v2.0/lbaas/quotas/{project_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_project_quota</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_a_quota</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:remove_a_quota</span>]},
+ <span class="ruby-string">&quot;/v2.0/octavia/amphorae&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_amphora</span>]},
+ <span class="ruby-string">&quot;/v2.0/octavia/amphorae/{amphora_id}&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_amphora_details</span>]}}
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tag</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tag-source">
+            <pre><span class="ruby-comment"># File build/APIs/octavia/octavia_v2_0.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+  <span class="ruby-string">&#39;Octavia API Reference 2.0.0&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

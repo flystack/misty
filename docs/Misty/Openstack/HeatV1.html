@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Misty::Openstack::HeatV1 - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-api">#api</a>
+    
+    <li ><a href="#method-i-tag">#tag</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Misty::Openstack::HeatV1">
+  <h1 id="module-Misty::Openstack::HeatV1" class="module">
+    module Misty::Openstack::HeatV1
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-api" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">api</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="api-source">
+            <pre><span class="ruby-comment"># File build/APIs/heat/heat_v1.rb, line 6</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">api</span>
+{<span class="ruby-string">&quot;/v1/{tenant_id}/build_info&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_build_information</span>]},
+ <span class="ruby-string">&quot;/&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_versions</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_stack</span>, <span class="ruby-value">:adopt_stack</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_stacks</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/preview&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:preview_stack</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_identity}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:find_stack</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:find_stack_for_deletion</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_stack_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_stack</span>],
+   <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_stack_patch</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_stack</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/preview&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:preview_stack_update</span>], <span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:preview_stack_update_patch</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/abandon&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:abandon_stack</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/export&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:export_stack</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/template&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_stack_template</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/environment&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_stack_environment</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/files&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:get_stack_files</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_identity}/resources&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:find_stack_resources</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_stack_resources</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_resource_data</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/metadata&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_resource_metadata</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/signal&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:send_a_signal_to_a_resource</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name_or_physical_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:PATCH=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:mark_a_resource_as_unhealthy</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/outputs&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_outputs</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/outputs/{output_key}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_output</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:snapshot_a_stack</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_snapshots</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots/{snapshot_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_snapshot</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_a_snapshot</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots/{snapshot_id}/restore&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:restore_snapshot</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>
+    [<span class="ruby-value">:suspend_stack</span>,
+     <span class="ruby-value">:resume_stack</span>,
+     <span class="ruby-value">:cancel_stack_update</span>,
+     <span class="ruby-value">:cancel_stack_create_update_without_rollback</span>,
+     <span class="ruby-value">:check_stack_resources</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/events&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_stack_events</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/events&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:find_stack_events</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/events&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_resource_events</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/events/{event_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_event_details</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/template_versions&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_template_versions</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/template_versions/{template_version}/functions&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_template_functions</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/validate&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:validate_template</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/software_configs&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_configuration</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_configs</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/software_configs/{config_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_configuration_details</span>], <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_config</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/software_deployments&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:POST=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:create_deployment</span>], <span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_deployments</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/software_deployments/{deployment_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_deployment_details</span>],
+   <span class="ruby-value">:PUT=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:update_deployment</span>],
+   <span class="ruby-value">:DELETE=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:delete_deployment</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/software_deployments/metadata/{server_id}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_server_configuration_metadata</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/resource_types&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:list_resource_types</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/resource_types/{type_name}/template&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_resource_type_template</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/resource_types/{type_name}&quot;</span>=<span class="ruby-operator">&gt;</span>
+  {<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_resource_type_schema</span>]},
+ <span class="ruby-string">&quot;/v1/{tenant_id}/services&quot;</span>=<span class="ruby-operator">&gt;</span>{<span class="ruby-value">:GET=</span><span class="ruby-operator">&gt;</span>[<span class="ruby-value">:show_orchestration_engine_status</span>]}}
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tag</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tag-source">
+            <pre><span class="ruby-comment"># File build/APIs/heat/heat_v1.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tag</span>
+  <span class="ruby-string">&#39;Orchestration API Reference 10.0.0&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
