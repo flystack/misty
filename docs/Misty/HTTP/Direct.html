@@ -87,8 +87,8 @@
 
   <section class="description">
     
-<p>Provides methods to submit the current service with a path and override
-@base_path if needed</p>
+<p>Allows to submit http request wwith provided path and override base_path if
+needed</p>
 
   </section>
 
@@ -122,13 +122,28 @@
 
         <div class="method-description">
           
-          
+          <h4 id="method-i-base_set-label-Examples">Examples<span><a href="#method-i-base_set-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre>auth = { ... }
+cloud = Misty::Cloud.new(:auth =&gt; auth)
+
+net = cloud.network.get(&#39;/v2.0/networks&#39;)
+pp net.body
+
+id = cloud.identity.get(&#39;/&#39;)
+pp id.body
+
+servers = cloud.compute.get(&#39;/servers&#39;)
+pp servers.body
+
+img = cloud.image.get(&#39;/v1&#39;)
+pp img.body</pre>
           
           
 
           
           <div class="method-source-code" id="base_set-source">
-            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 5</span>
+            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">base_set</span>(<span class="ruby-identifier">base_path</span>)
   <span class="ruby-identifier">base</span> = <span class="ruby-identifier">base_path</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">base_path</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@base_path</span>
 <span class="ruby-keyword">end</span></pre>
@@ -161,7 +176,7 @@
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 9</span>
+            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_delete</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -194,7 +209,7 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 13</span>
+            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_get</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -227,7 +242,7 @@
 
           
           <div class="method-source-code" id="post-source">
-            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_post</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>, <span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -260,7 +275,7 @@
 
           
           <div class="method-source-code" id="put-source">
-            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 21</span>
+            <pre><span class="ruby-comment"># File lib/misty/http/direct.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">put</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">base_path</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">http_put</span>(<span class="ruby-identifier">base_set</span>(<span class="ruby-identifier">base_path</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>, <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">get</span>, <span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>

@@ -52,6 +52,15 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Misty::AuthV2-label-Attributes">Attributes</a>
+    <li><a href="#class-Misty::AuthV2-label-Example">Example</a>
+  </ul>
+</div>
+
 
   <div id="class-metadata">
     
@@ -107,6 +116,48 @@
 
   <section class="description">
     
+<p><a href="Openstack.html">Openstack</a> Identity service Keystone version
+2.0, which is deprecated, uses a tenant name or id to authenticates
+<code>Misty::AuthV2</code> is used if the authentication credentials
+contains a tenant name or id.</p>
+
+<h4 id="class-Misty::AuthV2-label-Attributes">Attributes<span><a href="#class-Misty::AuthV2-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>The following credentials parameters can be used:</p>
+<ul><li>
+<p><code>:tenant_id</code> - Tenant id, used only for Keystone v2.0 only</p>
+</li><li>
+<p><code>:tenant</code> - Tenant name, used only for Keystone v2.0  only</p>
+</li><li>
+<p><code>:user_id</code> - User id</p>
+</li><li>
+<p><code>:user</code> - User name</p>
+</li><li>
+<p><code>:password</code> - User password. Exclusive with :token.</p>
+</li><li>
+<p><code>:ssl_verify_mode</code> - Boolean flag for SSL client verification.
+SSL is defined when URI scheme =&gt; “https://”.</p>
+</li><li>
+<p><code>:token</code> - User provided token, overrides all user and password
+parameters.</p>
+</li></ul>
+
+<h4 id="class-Misty::AuthV2-label-Example">Example<span><a href="#class-Misty::AuthV2-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">auth_v2</span> = {
+  <span class="ruby-value">:url</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+  <span class="ruby-value">:user</span>     <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  <span class="ruby-value">:password</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+  <span class="ruby-value">:tenant</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+}
+<span class="ruby-identifier">cloud</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:auth</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">auth_v2</span>)
+</pre>
+
+<p>Also, the API request set is specific to this version:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cloud</span>.<span class="ruby-identifier">identity</span>.<span class="ruby-identifier">list_tenants</span>
+</pre>
+
   </section>
 
   
@@ -145,7 +196,7 @@
 
           
           <div class="method-source-code" id="credentials-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 7</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">credentials</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@token</span>
     <span class="ruby-identifier">identity</span> = { <span class="ruby-value">&#39;token&#39;:</span> { <span class="ruby-value">&#39;id&#39;:</span> <span class="ruby-ivar">@token</span> } }
@@ -194,7 +245,7 @@
 
           
           <div class="method-source-code" id="endpoint_url-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">endpoint_url</span>(<span class="ruby-identifier">endpoint</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-node">&quot;#{interface}URL&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-string">&#39;region&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">region_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-node">&quot;#{interface}URL&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -227,7 +278,7 @@
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 31</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
   <span class="ruby-string">&#39;/v2.0/tokens&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -260,7 +311,7 @@
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 42</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set</span>(<span class="ruby-identifier">response</span>)
   <span class="ruby-identifier">payload</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
   <span class="ruby-identifier">token</span>   = <span class="ruby-identifier">payload</span>[<span class="ruby-string">&#39;access&#39;</span>][<span class="ruby-string">&#39;token&#39;</span>][<span class="ruby-string">&#39;id&#39;</span>]
@@ -297,7 +348,7 @@
 
           
           <div class="method-source-code" id="set_credentials-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 50</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_credentials</span>(<span class="ruby-identifier">auth</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">auth</span>[<span class="ruby-value">:token</span>]
     <span class="ruby-ivar">@token</span> = <span class="ruby-identifier">auth</span>[<span class="ruby-value">:token</span>]
@@ -338,7 +389,7 @@
 
           
           <div class="method-source-code" id="user_credentials-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v2.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">user_credentials</span>
   {
     <span class="ruby-value">&#39;username&#39;:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">name</span>,

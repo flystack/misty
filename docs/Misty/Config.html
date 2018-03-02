@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Misty::Config - RDoc Documentation</title>
+<title>module Misty::Config - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -19,7 +19,7 @@
 
 
 
-<body id="top" role="document" class="class">
+<body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -52,17 +52,19 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#module-Misty::Config-label-Authentication+credentials+options">Authentication credentials options</a>
+    <li><a href="#module-Misty::Config-label-Examples">Examples</a>
+  </ul>
+</div>
+
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">Object
-  
-</div>
-
+    
     
     
     <!-- Method Quickref -->
@@ -71,7 +73,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-set_config">#set_config</a>
     
   </ul>
 </div>
@@ -79,13 +81,40 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Misty::Config">
-  <h1 id="class-Misty::Config" class="class">
-    class Misty::Config
+<main role="main" aria-labelledby="module-Misty::Config">
+  <h1 id="module-Misty::Config" class="module">
+    module Misty::Config
   </h1>
 
   <section class="description">
     
+<p>Module setting up and validationg configuration parameters</p>
+
+<p>The configuration at the <code>Misty::Cloud</code> level is global then
+local at <code>Misty::Cloud::Service</code> level. All parameters but
+<code>:auth</code> are optionals and default values are defined if not
+specified. +@globals+ holds all the configuration data which is passed each
+service when needed.</p>
+
+<h4 id="module-Misty::Config-label-Authentication+credentials+options">Authentication credentials options<span><a href="#module-Misty::Config-label-Authentication+credentials+options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p><code>:auth</code> - Hash containing auhthentication URL and credentials
+details to authenticate against OpenStack identity server Keystone.</p>
+
+<h4 id="module-Misty::Config-label-Examples">Examples<span><a href="#module-Misty::Config-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;misty&#39;</span>
+ <span class="ruby-identifier">auth</span> = {
+   <span class="ruby-value">:url</span>                <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+   <span class="ruby-value">:user</span>               <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+   <span class="ruby-value">:password</span>           <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+   <span class="ruby-value">:domain</span>             <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;default&#39;</span>,
+   <span class="ruby-value">:project</span>            <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+   <span class="ruby-value">:project_domain_id</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;default&#39;</span>
+ }
+ <span class="ruby-identifier">cloud</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:auth</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">auth</span>, <span class="ruby-value">:log_file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;./misty.log&#39;</span>)
+</pre>
+
   </section>
 
   
@@ -95,120 +124,70 @@
     
 
     
-
-    
-    <section class="attribute-method-details" class="method-section">
+    <section class="constants-list">
       <header>
-        <h3>Attributes</h3>
+        <h3>Constants</h3>
       </header>
-
+      <dl>
       
-      <div id="attribute-i-auth" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">auth</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="CONTENT_TYPE">CONTENT_TYPE
         
+        <dd><p>Default REST content type. Use :json or :ruby</p>
         
-        
-        </div>
-      </div>
       
-      <div id="attribute-i-content_type" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">content_type</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="CONTENT_TYPES">CONTENT_TYPES
         
+        <dd><p>Valid content format</p>
         
-        
-        </div>
-      </div>
       
-      <div id="attribute-i-headers" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">headers</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="INTERFACE">INTERFACE
         
+        <dd><p>Default Interface</p>
         
-        
-        </div>
-      </div>
       
-      <div id="attribute-i-interface" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">interface</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="INTERFACES">INTERFACES
         
+        <dd><p>Valid endpoint interfaces</p>
         
-        
-        </div>
-      </div>
       
-      <div id="attribute-i-log" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">log</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="LOG_FILE">LOG_FILE
         
+        <dd><p>Default Log file</p>
         
-        
-        </div>
-      </div>
       
-      <div id="attribute-i-region_id" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">region_id</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="LOG_LEVEL">LOG_LEVEL
         
+        <dd><p>Default Log level</p>
         
-        
-        </div>
-      </div>
       
-      <div id="attribute-i-ssl_verify_mode" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">ssl_verify_mode</span><span
-            class="attribute-access-type">[RW]</span>
-        </div>
-
-        <div class="method-description">
+        <dt id="REGION_ID">REGION_ID
         
+        <dd><p>Default Region</p>
         
-        
-        </div>
-      </div>
       
+        <dt id="SSL_VERIFY_MODE">SSL_VERIFY_MODE
+        
+        <dd><p>Default when uri.scheme is https</p>
+        
+      
+      </dl>
     </section>
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-new" class="method-detail ">
+      <div id="method-i-set_config" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(params = {})</span>
+          <span class="method-name">set_config</span><span
+            class="method-args">(arg = {}, defaults = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -217,51 +196,26 @@
 
         <div class="method-description">
           
-          <h4 id="method-c-new-label-Attributes">Attributes<span><a href="#method-c-new-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+          <h4 id="method-i-set_config-label-Attributes">Attributes<span><a href="#method-i-set_config-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>params</code> - <code>Hash</code> of options applied globally to all
-services unless specifically overridden by a service.</p>
+<p><code>arg</code> - <code>Hash</code> of configuration options</p>
 </li></ul>
-
-<p>The entries are:</p>
-<dl class="rdoc-list note-list"><dt><code>:content_type</code>
-<dd>
-<p>Format of the body of the successful <a href="HTTP.html">HTTP</a> responses
-to be JSON or Ruby structures. Type: Symbol Allowed values: `:json`,
-`:ruby` Default: `:ruby`</p>
-</dd><dt><code>:headers</code>
-<dd>
-<p><a href="HTTP.html">HTTP</a> Headers to be applied to all services Type:
-Hash Default: {}</p>
-</dd><dt><code>:region_id</code>
-<dd>
-<p>Type: String Default: “regionOne”</p>
-</dd><dt><code>:interface</code>
-<dd>
-<p>Type: String Allowed values: “public”, “internal”, “admin” Default:
-“public”</p>
-</dd><dt><code>:ssl_verify_mode</code>
-<dd>
-<p>When using SSL mode (defined by URI scheme =&gt; “https://”) Type: Boolean
-Default: `true`</p>
-</dd></dl>
           
           
 
           
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/misty/config.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">params</span> = {})
-  <span class="ruby-ivar">@log</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:log_file</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:log_file</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">LOG_FILE</span>)
-  <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:log_level</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:log_level</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">LOG_LEVEL</span>
-
-  <span class="ruby-ivar">@headers</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Header</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Accept&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/json; q=1.0&#39;</span>)
-  <span class="ruby-ivar">@headers</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:headers</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:headers</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:headers</span>].<span class="ruby-identifier">empty?</span>
-
-  <span class="ruby-ivar">@content_type</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:content_type</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:content_type</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">CONTENT_TYPE</span>
-  <span class="ruby-ivar">@interface</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:interface</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:interface</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">INTERFACE</span>
-  <span class="ruby-ivar">@region_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:region_id</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:region_id</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">REGION_ID</span>
-  <span class="ruby-ivar">@ssl_verify_mode</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:ssl_verify_mode</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:ssl_verify_mode</span>] <span class="ruby-operator">:</span> <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL_VERIFY_MODE</span>
+          <div class="method-source-code" id="set_config-source">
+            <pre><span class="ruby-comment"># File lib/misty/config.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_config</span>(<span class="ruby-identifier">arg</span> = {}, <span class="ruby-identifier">defaults</span> = {})
+  <span class="ruby-identifier">set</span> = {}
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:log</span>] = <span class="ruby-identifier">set_log</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:log_file</span>], <span class="ruby-identifier">arg</span>[<span class="ruby-value">:log_level</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:log</span>])
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:auth</span>] = <span class="ruby-identifier">set_auth</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:auth</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:auth</span>])
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:content_type</span>] = <span class="ruby-identifier">set_content_type</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:content_type</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:content_type</span>])
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:headers</span>] = <span class="ruby-identifier">set_headers</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:headers</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:headers</span>])
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:interface</span>] = <span class="ruby-identifier">set_interface</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:interface</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:interface</span>])
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:region_id</span>] = <span class="ruby-identifier">set_region_id</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:region_id</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:region_id</span>])
+  <span class="ruby-identifier">set</span>[<span class="ruby-value">:ssl_verify_mode</span>] = <span class="ruby-identifier">set_ssl_verify_mode</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">:ssl_verify_mode</span>], <span class="ruby-identifier">defaults</span>[<span class="ruby-value">:ssl_verify_mode</span>])
+  <span class="ruby-identifier">set</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
