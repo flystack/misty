@@ -1,4 +1,8 @@
 require 'misty/services'
+require 'logger'
+
+# Misty is a HTTP client for OpenStack APIs, aiming to be fast, flexible and exhaustive.
+# Misty acts as a conduit to OpenStack APIs by handling requests as transparently as possible.
 
 module Misty
   SERVICES = [
@@ -27,26 +31,8 @@ module Misty
     { name: :shared_file_systems,                 project: :manila,      microversion: 'v2'}
   ]
 
-  # Default REST content type. Use :json or :ruby
-  CONTENT_TYPE = :ruby
-
   # Default Domain ID
   DOMAIN_ID = 'default'
-
-  # Default Interface
-  INTERFACE = 'public'
-
-  # Default log file. Use :log_file option to override
-  LOG_FILE = '/dev/null'
-
-  # Default log level. Use :log_level option to override
-  LOG_LEVEL = Logger::INFO
-
-  # Default Region
-  REGION_ID = 'regionOne'
-
-  # Default when uri.scheme is https
-  SSL_VERIFY_MODE = true
 
   def self.json_encode?(data)
     return true if data.is_a?(Array) || data.is_a?(Hash)
@@ -61,6 +47,10 @@ module Misty
     end
     return false
   end
+
+  # Provides list of supported services
+  # ==== Example
+  #     pp Misty.services
 
   def self.services
     services = Misty::Services.new

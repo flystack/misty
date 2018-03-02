@@ -1,5 +1,4 @@
 require 'rake/testtask'
-require 'rdoc/task'
 
 task :default => [:test]
 
@@ -26,6 +25,7 @@ task :integration do
   end
 end
 
+require 'rdoc/task'
 desc 'Build RDoc'
 RDoc::Task.new do |rdoc|
   rdoc.main = "index.html"

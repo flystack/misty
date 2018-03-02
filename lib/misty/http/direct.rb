@@ -1,7 +1,24 @@
 module Misty
   module HTTP
-    # Provides methods to submit the current service with a path and override @base_path if needed
+    # Allows to submit http request wwith provided path and override base_path if needed
     module Direct
+
+      # ==== Examples
+      #    auth = { ... }
+      #    cloud = Misty::Cloud.new(:auth => auth)
+      #
+      #    net = cloud.network.get('/v2.0/networks')
+      #    pp net.body
+      #
+      #    id = cloud.identity.get('/')
+      #    pp id.body
+      #
+      #    servers = cloud.compute.get('/servers')
+      #    pp servers.body
+      #
+      #    img = cloud.image.get('/v1')
+      #    pp img.body
+
       def base_set(base_path)
         base = base_path ? base_path : @base_path
       end

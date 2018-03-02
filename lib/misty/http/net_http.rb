@@ -1,6 +1,6 @@
 module Misty
   module HTTP
-    # This class implements the http request routine.
+    # This class wraps net/http request routine.
     module NetHTTP
       def self.http_request(uri, options = {})
         http_options = {}

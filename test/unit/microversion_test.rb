@@ -1,7 +1,8 @@
 require 'test_helper'
 require 'auth_helper'
-require 'misty/client'
+require 'misty/openstack/service'
 require 'misty/microversion'
+require 'misty/config'
 
 describe Misty::Microversion do
   let(:versions_data) do
@@ -21,29 +22,33 @@ describe Misty::Microversion do
   end
 
   let(:microversion_service) do
-    auth = Minitest::Mock.new
+    auther = Minitest::Mock.new
 
-    def auth.get_url(*args)
+    def auther.get_url(*args)
       'http://localhost'
     end
 
-    def auth.get_token
+    def auther.get_token
       'token_id'
     end
-
-    setup = Misty::Config.new
-    setup.content_type = :ruby
-    setup.log = Logger.new('/dev/null')
-    setup.interface = Misty::INTERFACE
-    setup.region_id = Misty::REGION_ID
-    setup.ssl_verify_mode = Misty::SSL_VERIFY_MODE
-    setup.headers = Misty::HTTP::Header.new('Accept' => 'application/json; q=1.0')
 
     stub_request(:get, 'http://localhost/').
       with(:headers => {'Accept'=>'application/json'}).
       to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
 
-    Misty::Openstack::Nova::V2_1.new(auth, setup, {})
+    globals = Class.new do
+      include Misty::Config
+
+      attr_reader :config
+
+      def initialize(args)
+        @config = set_config({})
+        @config[:auth] = args
+      end
+    end
+
+    args = globals.new(auther)
+    Misty::Openstack::Nova::V2_1.new(args.config)
   end
 
   describe '#version_get' do

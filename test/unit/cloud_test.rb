@@ -2,14 +2,14 @@ require 'test_helper'
 require 'service_helper'
 require 'auth_helper'
 
-describe '#dot_to_underscore' do
-  it 'returns a valid name' do
-    name = Misty::Cloud.dot_to_underscore('v20.90.01')
-    name.must_equal 'v20_90_01'
-  end
-end
-
 describe Misty::Cloud do
+  describe '#dot_to_underscore' do
+    it 'returns a valid name' do
+      name = Misty::Cloud.dot_to_underscore('v20.90.01')
+      name.must_equal 'v20_90_01'
+    end
+  end
+
   describe 'A service' do
     let(:auth) do
       stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
@@ -51,21 +51,6 @@ describe Misty::Cloud do
     end
   end
 
-  describe '#config' do
-    it 'sets up default values' do
-      Misty::Auth.stub :factory, nil do
-        config = Misty::Config.new
-        config.content_type.must_equal Misty::CONTENT_TYPE
-        config.headers.must_be_kind_of Misty::HTTP::Header
-        config.headers.get.must_equal({"Accept"=>"application/json; q=1.0"})
-        config.interface.must_equal Misty::INTERFACE
-        config.log.must_be_kind_of Logger
-        config.region_id.must_equal Misty::REGION_ID
-        config.ssl_verify_mode.must_equal Misty::SSL_VERIFY_MODE
-      end
-    end
-  end
-
   describe '#new' do
     describe 'fails' do
       it 'when no parameters' do
@@ -77,7 +62,7 @@ describe Misty::Cloud do
       it 'with empty credentials' do
         proc do
           Misty::Cloud.new(:auth => {})
-        end.must_raise Misty::Auth::URLError
+        end.must_raise Misty::Auth::CredentialsError
       end
 
       it 'with incomplete credentials' do
@@ -128,7 +113,7 @@ describe Misty::Cloud do
 
           Misty::AuthV2.stub :new, authv2 do
             cloud = Misty::Cloud.new(:auth => authv2_data)
-            authv2.verify
+            assert_mock authv2
           end
         end
       end
@@ -148,7 +133,7 @@ describe Misty::Cloud do
 
           Misty::AuthV3.stub :new, authv3 do
             cloud = Misty::Cloud.new(:auth => authv3_data)
-            authv3.verify
+            assert_mock authv3
           end
         end
       end

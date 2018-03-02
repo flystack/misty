@@ -1,20 +1,27 @@
+require 'logger'
 require 'misty/auth/errors'
 require 'misty/auth/name'
 require 'misty/http/net_http'
+require 'misty/config'
 
 module Misty
+
+  # The credentials are a combination of "id" and "name" used to uniquely identify the context.
+  # +Misty::Auth+ is mixing the common interface between +Misty::AuthV3+ and +Misty::AuthV2+
+
   module Auth
     include Misty::HTTP::NetHTTP
 
     attr_reader :catalog, :token
 
-    def self.factory(auth, config)
+    def self.build(auth)
+      raise CredentialsError if auth.empty?
       version = auth[:tenant_id] || auth[:tenant] ? 'V2' : 'V3'
       klass = Object.const_get("Misty::Auth#{version}")
-      klass.new(auth, config)
+      klass.new(auth)
     end
 
-    def initialize(auth, config)
+    def initialize(auth)
       if auth[:context]
         # bypass the authentication by given token catalog and expire date
         @token   = auth[:context][:token]
@@ -23,10 +30,11 @@ module Misty
       else
         raise URLError, 'No URL provided' if auth[:url].nil? || auth[:url].empty?
         @uri = URI.parse(auth[:url])
-        @log = config.log
-        @ssl_verify_mode = config.ssl_verify_mode
+        @ssl_verify_mode = auth[:ssl_verify_mode] ? auth[:ssl_verify_mode] : Misty::Config::SSL_VERIFY_MODE
         @credentials = set_credentials(auth)
         @token, @catalog, @expires = set(authenticate)
+        # TODO: Pass main log object
+        @log = Logger.new('/dev/null')
       end
     end
 
