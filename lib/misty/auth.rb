@@ -8,7 +8,7 @@ module Misty
 
   # The credentials are a combination of "id" and "name" used to uniquely identify the context.
   # +Misty::Auth+ is mixing the common interface between +Misty::AuthV3+ and +Misty::AuthV2+
-
+  #
   module Auth
     include Misty::HTTP::NetHTTP
 
@@ -21,6 +21,10 @@ module Misty
       klass.new(auth)
     end
 
+    # ==== Attributes
+    #
+    # * +auth+ - Hash of credentials parameters for authentication
+    #
     def initialize(auth)
       if auth[:context]
         # bypass the authentication by given token catalog and expire date

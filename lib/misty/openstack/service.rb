@@ -4,32 +4,11 @@ module Misty
       include Misty::Config
 
       attr_reader :headers, :microversion
+
       # ==== Attributes
       #
       # * +args+ - Hash of configuration parameters for authentication, log, and services options.
       #
-      # ==== Options
-      #
-      # The globals configuration variables are passed from +Misty::Cloud+.
-      # They can be overriden for local needs at the service level.
-      # On top of that, the following parameters can also be used:
-      #
-      # * +:base_path+ - Allows to force the base path for every URL requests
-      # * +:base_url+ - Allows to force the base URL for every requests
-      # * +:version+ - Version to be used when microversion is supported by the service.
-      #     Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
-      #     Default: `"CURRENT"`
-      #
-      # ==== Examples
-      #
-      #   # Initialize cloud with globals
-      #   #
-      #   cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
-      #   # Use a different options for the identify service, therefore override global defaults or specified values
-      #   cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
-      #   # Provide service specific option
-      #   cloud.compute  => {:version => '2.27'})
-
       def initialize(args)
         @auth = args[:auth]
         @log = args[:log]
@@ -67,35 +46,7 @@ module Misty
         ''
       end
 
-      # Provides requests available for current service
-      #
-      # ==== Example
-      #
-      #  # Output truncated
-      #  cloud.compute.requests
-      #  => [:add_a_single_tag,
-      #   :add_associate_fixed_ip_addfixedip_action_deprecated,
-      #   :add_associate_floating_ip_addfloatingip_action_deprecated,
-      #   :add_flavor_access_to_tenant_addtenantaccess_action,
-      #   :add_host,
-      #   :add_network,
-      #   :add_security_group_to_a_server_addsecuritygroup_action,
-      #   :associate_host_deprecated,
-      #   :attach_a_volume_to_an_instance,
-      #   :bulk_delete_floating_ips,
-      #   :capacities,
-      #   :change_administrative_password_changepassword_action,
-      #   :check_tag_existence,
-      #   :clear_admin_password,
-      #   :confirm_resized_server_confirmresize_action,
-      #   :create_agent_build,
-      #   :create_aggregate,
-      #   :create_allocate_floating_ip_address,
-      #   :create_assisted_volume_snapshots,
-      #   :create_cell,
-      #   :create_cloudpipe,
-      #   :create_console]
-
+      # Generate available requests available for current service
       def requests
         requests_api + requests_custom
       end
