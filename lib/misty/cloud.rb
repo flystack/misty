@@ -23,128 +23,218 @@ module Misty
       @globals = set_config(args)
     end
 
-    def build_service(args)
-      service = Misty.services.find {|service| service.name == args[:service]}
-      args.delete(:service)
-      locals = set_config(args, @globals)
-      version = self.class.dot_to_underscore(service.version(args[:api_version]))
+    def build_service(method, arg)
+      service = Misty.services.find {|service| service.name == method}
+      version = self.class.dot_to_underscore(service.default_version(arg[:api_version]))
       klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
-      klass.new(locals)
+      klass.new(set_config(arg, @globals))
     end
 
-    def application_catalog(args = {})
-      args[:service] = :application_catalog
-      @application_catalog ||= build_service(args)
+    def application_catalog(arg = {})
+      if @application_catalog
+        @application_catalog.set_ether_config(arg) if arg
+        @application_catalog
+      else
+        @application_catalog = build_service(__method__, arg)
+      end
     end
 
-    def alarming(args = {})
-      args[:service] = :alarming
-      @alarming ||= build_service(args)
+    def alarming(arg = {})
+      if @alarming
+        @alarming.set_ether_config(arg) if arg
+        @alarming
+      else
+        @alarming = build_service(__method__, arg)
+      end
     end
 
-    def backup(args = {})
-      args[:service] = :backup
-      @backup ||= build_service(args)
+    def backup(arg = {})
+      if @backup
+        @backup.set_ether_config(arg) if arg
+        @backup
+      else
+        @backup = build_service(__method__, arg)
+      end
     end
 
-    def baremetal(args = {})
-      args[:service] = :baremetal
-      @baremetal ||= build_service(args)
+    def baremetal(arg = {})
+      if @baremetal
+        @baremetal.set_ether_config(arg) if arg
+        @baremetal
+      else
+        @baremetal = build_service(__method__, arg)
+      end
     end
 
-    def block_storage(args = {})
-      args[:service] = :block_storage
-      @block_storage ||= build_service(args)
+    def block_storage(arg = {})
+      if @block_storage
+        @block_storage.set_ether_config(arg) if arg
+        @block_storage
+      else
+        @block_storage = build_service(__method__, arg)
+      end
     end
 
-    def clustering(args = {})
-      args[:service] = :clustering
-      @clustering ||= build_service(args)
+    def clustering(arg = {})
+      if @clustering
+        @clustering.set_ether_config(arg) if arg
+        @clustering
+      else
+        @clustering = build_service(__method__, arg)
+      end
     end
 
-    def compute(args = {})
-      args[:service] = :compute
-      @compute ||= build_service(args)
+    def compute(arg = {})
+      if @compute
+        @compute.set_ether_config(arg) if arg
+        @compute
+      else
+        @compute = build_service(__method__, arg)
+      end
     end
 
-    def container_infrastructure_management(args = {})
-      args[:service] = :container_infrastructure_management
-      @container_infrastructure_management ||= build_service(args)
+    def container_infrastructure_management(arg = {})
+      if @container_infrastructure_management
+        @container_infrastructure_management.set_ether_config(arg) if arg
+        @container_infrastructure_management
+      else
+        @container_infrastructure_management = build_service(__method__, arg)
+      end
     end
 
-    def data_processing(args = {})
-      args[:service] = :data_processing
-      @data_processing ||= build_service(args)
+    def data_processing(arg = {})
+      if @data_processing
+        @data_processing.set_ether_config(arg) if arg
+        @data_processing
+      else
+        @data_processing = build_service(__method__, arg)
+      end
     end
 
-    def data_protection_orchestration(args = {})
-      args[:service] = :data_protection_orchestration
-      @data_protection_orchestration ||= build_service(args)
+    def data_protection_orchestration(arg = {})
+      if @data_protection_orchestration
+        @data_protection_orchestration.set_ether_config(arg) if arg
+        @data_protection_orchestration
+      else
+        @data_protection_orchestration = build_service(__method__, arg)
+      end
     end
 
-    def database(args = {})
-      args[:service] = :database
-      @database ||= build_service(args)
+    def database(arg = {})
+      if @database
+        @database.set_ether_config(arg) if arg
+        @database
+      else
+        @database = build_service(__method__, arg)
+      end
     end
 
-    def dns(args = {})
-      args[:service] = :dns
-      @dns ||= build_service(args)
+    def dns(arg = {})
+      if @dns
+        @dns.set_ether_config(arg) if arg
+        @dns
+      else
+        @dns = build_service(__method__, arg)
+      end
     end
 
-    def identity(args = {})
-      args[:service] = :identity
-      @identity ||= build_service(args)
+    def identity(arg = {})
+      if @identity
+        @identity.set_ether_config(arg) if arg
+        @identity
+      else
+        @identity = build_service(__method__, arg)
+      end
     end
 
-    def image(args = {})
-      args[:service] = :image
-      @image ||= build_service(args)
+    def image(arg = {})
+      if @image
+        @image.set_ether_config(arg) if arg
+        @image
+      else
+        @image = build_service(__method__, arg)
+      end
     end
 
-    def load_balancer(args = {})
-      args[:service] = :load_balancer
-      @load_balancer ||= build_service(args)
+    def load_balancer(arg = {})
+      if @load_balancer
+        @load_balancer.set_ether_config(arg) if arg
+        @load_balancer
+      else
+        @load_balancer = build_service(__method__, arg)
+      end
     end
 
-    def messaging(args = {})
-      args[:service] = :messaging
-      @messaging ||= build_service(args)
+    def messaging(arg = {})
+      if @messaging
+        @messaging.set_ether_config(arg) if arg
+        @messaging
+      else
+        @messaging = build_service(__method__, arg)
+      end
     end
 
-    def metering(args = {})
-      args[:service] = :metering
-      @metering ||= build_service(args)
+    def metering(arg = {})
+      if @metering
+        @metering.set_ether_config(arg) if arg
+        @metering
+      else
+        @metering = build_service(__method__, arg)
+      end
     end
 
-    def networking(args = {})
-      args[:service] = :networking
-      @networking ||= build_service(args)
+    def networking(arg = {})
+      if @networking
+        @networking.set_ether_config(arg) if arg
+        @networking
+      else
+        @networking = build_service(__method__, arg)
+      end
     end
 
-    def nfv_orchestration(args = {})
-      args[:service] = :nfv_orchestration
-      @nfv_orchestration ||= build_service(args)
+    def nfv_orchestration(arg = {})
+      if @nfv_orchestration
+        @nfv_orchestration.set_ether_config(arg) if arg
+        @nfv_orchestration
+      else
+        @nfv_orchestration = build_service(__method__, arg)
+      end
     end
 
-    def object_storage(args = {})
-      args[:service] = :object_storage
-      @object_storage ||= build_service(args)
+    def object_storage(arg = {})
+      if @object_storage
+        @object_storage.set_ether_config(arg) if arg
+        @object_storage
+      else
+        @object_storage = build_service(__method__, arg)
+      end
     end
 
-    def orchestration(args = {})
-      args[:service] = :orchestration
-      @orchestration ||= build_service(args)
+    def orchestration(arg = {})
+      if @orchestration
+        @orchestration.set_ether_config(arg) if arg
+        @orchestration
+      else
+        @orchestration = build_service(__method__, arg)
+      end
     end
 
-    def search(args = {})
-      args[:service] = :search
-      @search ||= build_service(args)
+    def search(arg = {})
+      if @search
+        @search.set_ether_config(arg) if arg
+        @search
+      else
+        @search = build_service(__method__, arg)
+      end
     end
 
-    def shared_file_systems(args = {})
-      args[:service] = :shared_file_systems
-      @shared_file_systems ||= build_service(args)
+    def shared_file_systems(arg = {})
+      if @shared_file_systems
+        @shared_file_systems.set_ether_config(arg) if arg
+        @shared_file_systems
+      else
+        @shared_file_systems = build_service(__method__, arg)
+      end
     end
 
     alias domain_name_server dns

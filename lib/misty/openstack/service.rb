@@ -51,6 +51,11 @@ module Misty
         requests_api + requests_custom
       end
 
+      def set_ether_config(arg)
+        @ether_content_type = arg[:content_type] if arg[:content_type]
+        @ether_headers = HTTP::Header.new(arg[:headers]) if arg[:headers]
+      end
+
       private
 
       def baseclass

@@ -3,7 +3,13 @@ module Misty
     module Request
       def decode?(response)
         return false if response.body.nil? || response.body.empty?
-        if @content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
+        if @ether_content_type
+          content_type = @ether_content_type
+          @ether_content_type = nil
+        else
+          content_type = @content_type
+        end
+        if content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
           && !response.is_a?(Net::HTTPResetContent) && response.header['content-type'] \
           && response.header['content-type'].include?('application/json')
           return true

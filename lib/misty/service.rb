@@ -16,18 +16,15 @@ module Misty
       str
     end
 
-    def version(api_version = nil)
-      if api_version
-        return api_version if (@versions && @versions.include?(api_version)) || @microversion == api_version
-      end
-      default_version
-    end
-
-    private
-
-    def default_version
-      return @microversion if @microversion
-      return self.versions.sort[-1]
+    def default_version(api_version = nil)
+      res = if api_version && (@versions&.include?(api_version) || api_version == @microversion)
+              api_version
+            elsif @microversion
+              @microversion
+            else
+              self.versions.sort[-1]
+            end
+      res
     end
   end
 end
