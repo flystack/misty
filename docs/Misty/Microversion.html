@@ -85,6 +85,58 @@
 
   <section class="description">
     
+<p>Microvesion handles OpenStack <a href="Services.html">Services</a>
+supporting <a href="Microversion.html">Microversion</a> feature</p>
+
+<h4 id="module-Misty::Microversion-label-Examples">Examples<span><a href="#module-Misty::Microversion-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Use <code>:version</code> option</p>
+
+<pre>cloud = Misty::Cloud.new(:auth =&gt; { ... })
+pp cloud.compute.versions
+=&gt; [{&quot;status&quot;=&gt;&quot;SUPPORTED&quot;,
+&quot;updated&quot;=&gt;&quot;2011-01-21T11:33:21Z&quot;,
+&quot;links&quot;=&gt;[{&quot;href&quot;=&gt;&quot;http://192.0.2.1:8774/v2/&quot;, &quot;rel&quot;=&gt;&quot;self&quot;}],
+&quot;min_version&quot;=&gt;&quot;&quot;,
+&quot;version&quot;=&gt;&quot;&quot;,
+&quot;id&quot;=&gt;&quot;v2.0&quot;},
+{&quot;status&quot;=&gt;&quot;CURRENT&quot;,
+&quot;updated&quot;=&gt;&quot;2013-07-23T11:33:21Z&quot;,
+&quot;links&quot;=&gt;[{&quot;href&quot;=&gt;&quot;http://192.0.2.1:8774/v2.1/&quot;, &quot;rel&quot;=&gt;&quot;self&quot;}],
+&quot;min_version&quot;=&gt;&quot;2.1&quot;,
+&quot;version&quot;=&gt;&quot;2.53&quot;,
+&quot;id&quot;=&gt;&quot;v2.1&quot;}]
+
+cloud.compute(:version =&gt; &#39;2.25&#39;)
+data_keypair = Misty.to_json(&#39;keypair&#39;: {&#39;name&#39;: &#39;admin-keypair&#39;})
+admin_keypair = cloud.compute.create_or_import_keypair(data_keypair)
+user_id = admin_keypair.body[&#39;keypair&#39;][&#39;user_id&#39;]
+keypairs = cloud.compute.list_keypairs
+pp keypairs.body</pre>
+
+<p>Nova version 2.10+, a keypair name can be filtered by user_id</p>
+
+<pre>user_id=1e50c2f0995446fd9b135a1a549cabdb&#39;
+cloud.compute(:version =&gt; &#39;2.10&#39;)show_keypair_details(&quot;admin-keypair?user_id=#{user_id}&quot;)</pre>
+
+<p>Nova version 2.2+ the type field is returned too when showing keypair
+details</p>
+
+<pre>cloud.compute(:version =&gt; &#39;2.2&#39;)
+pp admin_keypair.body
+=&gt; {&#39;keypair&#39;=&gt;
+     {&#39;public_key&#39;=&gt;
+       &#39;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDjenEe7B87OQHYjZAdJWmaY13mF0N3VooviHypEXaSDfEmFj4GinXorKD0kdXAL30orT0wgAVtpAvRhH2iFTPF2VKCdq4VMzLuai60e3oB3vsTWdZQIJtvaW0mpTNVUQKczbFhRFUi4CNsAijjmGJJgxhihd6rAfynFtalLO0yNn3dKtEMbsvs7KeMxT9SXbfLmEXD4reAK/WXQBVjrEjJIgpC3+SXOO6vsavaOTFu7/Nbha/p4g4yJ3rHUU+7lj79a7iy0sNeExBSZ2aKTq7FQ5XDmtZjjpUeas16kMMX5HdxISYkbq3QnG9iTrIy+GEAYKkZPzhuAa76Qpze35aV Generated-by-Nova\n&#39;,
+      &#39;user_id&#39;=&gt;&#39;1e50c2f0995446fd9b135a1a549cabdb&#39;,
+      &#39;name&#39;=&gt;&#39;admin-keypair&#39;,
+      &#39;deleted&#39;=&gt;false,
+      &#39;created_at&#39;=&gt;&#39;2016-11-23T01:23:53.000000&#39;,
+      &#39;updated_at&#39;=&gt;nil,
+      &#39;fingerprint&#39;=&gt;&#39;4e:db:2d:bd:93:70:01:b8:61:17:96:23:e0:78:e2:69&#39;,
+      &#39;deleted_at&#39;=&gt;nil,
+      &#39;type&#39;=&gt;&#39;ssh&#39;,
+      &#39;id&#39;=&gt;8}}</pre>
+
   </section>
 
   
@@ -122,7 +174,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(auth, cloud, options)</span>
+            class="method-args">(*args)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -142,11 +194,11 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">cloud</span>, <span class="ruby-identifier">options</span>)
+            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@microversion</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-ivar">@version</span> = <span class="ruby-identifier">version_get</span>(<span class="ruby-ivar">@options</span>.<span class="ruby-identifier">version</span>)
+  <span class="ruby-ivar">@version</span> = <span class="ruby-identifier">version_get</span>(<span class="ruby-ivar">@init_version</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -185,7 +237,7 @@
 
           
           <div class="method-source-code" id="microversion_header-source">
-            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 13</span>
+            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">microversion_header</span>
   {<span class="ruby-string">&#39;X-Openstack-API-Version&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;#{baseclass.downcase} #{@version}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -218,7 +270,7 @@
 
           
           <div class="method-source-code" id="version_get-source">
-            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version_get</span>(<span class="ruby-identifier">version_option</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">VERSION_STATES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">version_option</span>)
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">version_by_state</span>(<span class="ruby-identifier">version_option</span>)
@@ -255,7 +307,7 @@
 
           
           <div class="method-source-code" id="versions-source">
-            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 25</span>
+            <pre><span class="ruby-comment"># File lib/misty/microversion.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">versions</span>
   <span class="ruby-ivar">@versions</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">versions_fetch</span>
 <span class="ruby-keyword">end</span></pre>

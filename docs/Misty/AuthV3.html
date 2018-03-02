@@ -52,6 +52,17 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Misty::AuthV3-label-Attributes">Attributes</a>
+    <li><a href="#class-Misty::AuthV3-label-Arguments">Arguments</a>
+    <li><a href="#class-Misty::AuthV3-label-Examples">Examples</a>
+    <li><a href="#class-Misty::AuthV3-label-Note">Note</a>
+  </ul>
+</div>
+
 
   <div id="class-metadata">
     
@@ -107,6 +118,104 @@
 
   <section class="description">
     
+<p><a href="Openstack.html">Openstack</a> Identity service Keystone version 3
+relies on the concept of domain name or id to authenticates
+<code>Misty::AuthV3</code> is used by default unless authentication
+credentials contains a tenant name or id in wich case it will use on
+<code>Misty::AuthV2</code>.</p>
+
+<p>The credentials are a combination of “id” and “name” used to uniquely
+identify projects, users and their domains. When using only the name, a
+domain must be specified to guarantee a unique record from the Identity
+service.</p>
+
+<h4 id="class-Misty::AuthV3-label-Attributes">Attributes<span><a href="#class-Misty::AuthV3-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>args</code> - Hash of configuration parameters for authentication,
+log, and services options.</p>
+</li></ul>
+
+<p>See <code>Misty::Config</code> for details</p>
+
+<h4 id="class-Misty::AuthV3-label-Arguments">Arguments<span><a href="#class-Misty::AuthV3-label-Arguments">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>The following parameters can be used: To authenticate with credentials
+details:</p>
+<ul><li>
+<p><code>:domain_id</code> - Domain id, default: “default”</p>
+</li><li>
+<p><code>:domain</code> - Domain name, default: “Default”</p>
+</li><li>
+<p><code>:project_id</code> - Project id</p>
+</li><li>
+<p><code>:project</code> - Project name</p>
+</li><li>
+<p><code>:project_domain_id</code> - Project domain id</p>
+</li><li>
+<p><code>:project_domain</code> - Project domain name</p>
+</li><li>
+<p><code>:user_id</code> - User id</p>
+</li><li>
+<p><code>:user</code> - User name</p>
+</li><li>
+<p><code>:user_domain_id</code> - User domain id</p>
+</li><li>
+<p><code>:user_domain</code> - User domain name</p>
+</li><li>
+<p><code>:password</code> - User password. Exclusive with :token.</p>
+</li><li>
+<p><code>:ssl_verify_mode</code> - Boolean flag for SSL client verification.
+SSL is defined when URI scheme =&gt; “https://”.</p>
+</li><li>
+<p><code>:token</code> - User provided token, overrides all user and password
+parameters.</p>
+</li></ul>
+
+<p>Or alternatively with a context:</p>
+<ul><li>
+<p><code>:context</code> - Allow to provide already authenticated context with
+service catalog, token and its expire date. Overrides all user and password
+parameters and assumes V3.</p>
+</li></ul>
+
+<h4 id="class-Misty::AuthV3-label-Examples">Examples<span><a href="#class-Misty::AuthV3-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Authenticate using credentials</p>
+
+<pre class="ruby"><span class="ruby-identifier">auth_v3</span> = {
+  <span class="ruby-value">:url</span>                <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;http://localhost:5000&#39;</span>,
+  <span class="ruby-value">:user</span>               <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  <span class="ruby-value">:password</span>           <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>,
+  <span class="ruby-value">:domain</span>             <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;default&#39;</span>,
+  <span class="ruby-value">:project</span>            <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;admin&#39;</span>,
+  <span class="ruby-value">:project_domain_id</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;default&#39;</span>
+}
+<span class="ruby-identifier">cloud</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:auth</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">auth_v3</span>)
+</pre>
+
+<p>Or alternatively using a context</p>
+
+<pre class="ruby"> <span class="ruby-identifier">context</span> = {
+   <span class="ruby-value">:context</span> <span class="ruby-operator">=&gt;</span> { <span class="ruby-value">:token</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">token_id</span>, <span class="ruby-value">:catalog</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">service_catalog</span>, <span class="ruby-value">:expires</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">expire_date</span> }
+ }
+<span class="ruby-identifier">cloud</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:auth</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">context</span>)
+</pre>
+
+<p>Also, the API request set is specific to this version:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cloud</span>.<span class="ruby-identifier">identity</span>.<span class="ruby-identifier">list_projects</span>
+</pre>
+
+<h4 id="class-Misty::AuthV3-label-Note">Note<span><a href="#class-Misty::AuthV3-label-Note">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>It&#39;s possible to authenticate against Keystone V3 and use the identity
+service v2.0, for instance: In which case API set for v2.0 applies: tenants
+are available but not the projects.</p>
+
+<pre class="ruby"><span class="ruby-identifier">cloud</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Cloud</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:auth</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">auth_v3</span>)
+<span class="ruby-identifier">cloud</span>.<span class="ruby-identifier">identity</span>(<span class="ruby-value">:api_version</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;v2.0&#39;</span>)
+</pre>
+
   </section>
 
   
@@ -145,7 +254,7 @@
 
           
           <div class="method-source-code" id="credentials-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 7</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">credentials</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@token</span>
     <span class="ruby-identifier">identity</span> = {
@@ -194,7 +303,7 @@
 
           
           <div class="method-source-code" id="endpoint_url-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">endpoint_url</span>(<span class="ruby-identifier">endpoint</span>, <span class="ruby-identifier">region_id</span>, <span class="ruby-identifier">interface</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-string">&#39;region_id&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">region_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">endpoint</span>[<span class="ruby-string">&#39;interface&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">interface</span>
 <span class="ruby-keyword">end</span></pre>
@@ -227,7 +336,7 @@
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 31</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
   <span class="ruby-string">&#39;/v3/auth/tokens&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -260,7 +369,7 @@
 
           
           <div class="method-source-code" id="scope-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scope</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">identity</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@project</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@domain</span>.<span class="ruby-identifier">identity</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@domain</span>
@@ -295,7 +404,7 @@
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 41</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set</span>(<span class="ruby-identifier">response</span>)
   <span class="ruby-identifier">payload</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
   <span class="ruby-identifier">token</span> = <span class="ruby-identifier">response</span>[<span class="ruby-string">&#39;x-subject-token&#39;</span>]
@@ -332,7 +441,7 @@
 
           
           <div class="method-source-code" id="set_credentials-source">
-            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 49</span>
+            <pre><span class="ruby-comment"># File lib/misty/auth/auth_v3.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_credentials</span>(<span class="ruby-identifier">auth</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">auth</span>[<span class="ruby-value">:project_id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">auth</span>[<span class="ruby-value">:project</span>]
     <span class="ruby-comment"># scope: project</span>

@@ -70,9 +70,21 @@
   </li>
   <li class="class">
     <a href="Misty/AuthV2.html">Misty::AuthV2</a>
+
+    <ul>
+      <li><a href="Misty/AuthV2.html#label-Attributes">Attributes</a>
+      <li><a href="Misty/AuthV2.html#label-Example">Example</a>
+    </ul>
   </li>
   <li class="class">
     <a href="Misty/AuthV3.html">Misty::AuthV3</a>
+
+    <ul>
+      <li><a href="Misty/AuthV3.html#label-Attributes">Attributes</a>
+      <li><a href="Misty/AuthV3.html#label-Arguments">Arguments</a>
+      <li><a href="Misty/AuthV3.html#label-Examples">Examples</a>
+      <li><a href="Misty/AuthV3.html#label-Note">Note</a>
+    </ul>
   </li>
   <li class="module">
     <a href="Misty/Client.html">Misty::Client</a>
@@ -91,10 +103,20 @@
 
     <ul>
       <li><a href="Misty/Cloud.html#label-Attributes">Attributes</a>
+      <li><a href="Misty/Cloud.html#label-Options">Options</a>
+      <li><a href="Misty/Cloud.html#label-Quick+Start">Quick Start</a>
+    </ul>
+  </li>
+  <li class="module">
+    <a href="Misty/Config.html">Misty::Config</a>
+
+    <ul>
+      <li><a href="Misty/Config.html#label-Authentication+credentials+options">Authentication credentials options</a>
+      <li><a href="Misty/Config.html#label-Examples">Examples</a>
     </ul>
   </li>
   <li class="class">
-    <a href="Misty/Config.html">Misty::Config</a>
+    <a href="Misty/Config/InvalidDataError.html">Misty::Config::InvalidDataError</a>
   </li>
   <li class="module">
     <a href="Misty/HTTP.html">Misty::HTTP</a>
@@ -122,6 +144,10 @@
   </li>
   <li class="module">
     <a href="Misty/Microversion.html">Misty::Microversion</a>
+
+    <ul>
+      <li><a href="Misty/Microversion.html#label-Examples">Examples</a>
+    </ul>
   </li>
   <li class="class">
     <a href="Misty/Microversion/VersionError.html">Misty::Microversion::VersionError</a>
@@ -334,6 +360,9 @@
     <a href="Misty/Openstack/SenlinV1.html">Misty::Openstack::SenlinV1</a>
   </li>
   <li class="module">
+    <a href="Misty/Openstack/Service.html">Misty::Openstack::Service</a>
+  </li>
+  <li class="module">
     <a href="Misty/Openstack/Swift.html">Misty::Openstack::Swift</a>
   </li>
   <li class="class">
@@ -381,14 +410,14 @@
 <ul>
 
   <li class="method">
+    <a href="Misty/Auth.html#method-c-build">::build</a>
+    &mdash;
+    <span class="container">Misty::Auth</span>
+
+  <li class="method">
     <a href="Misty/Cloud.html#method-c-dot_to_underscore">::dot_to_underscore</a>
     &mdash;
     <span class="container">Misty::Cloud</span>
-
-  <li class="method">
-    <a href="Misty/Auth.html#method-c-factory">::factory</a>
-    &mdash;
-    <span class="container">Misty::Auth</span>
 
   <li class="method">
     <a href="Misty/HTTP/NetHTTP.html#method-c-http_request">::http_request</a>
@@ -409,11 +438,6 @@
     <a href="Misty/Cloud.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Misty::Cloud</span>
-
-  <li class="method">
-    <a href="Misty/Config.html#method-c-new">::new</a>
-    &mdash;
-    <span class="container">Misty::Config</span>
 
   <li class="method">
     <a href="Misty/HTTP/Header.html#method-c-new">::new</a>
@@ -444,6 +468,11 @@
     <a href="Misty/Microversion.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Misty::Microversion</span>
+
+  <li class="method">
+    <a href="Misty/Openstack/Service.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Misty::Openstack::Service</span>
 
   <li class="method">
     <a href="Misty.html#method-c-services">::services</a>
@@ -971,6 +1000,11 @@
     <span class="container">Misty::Client</span>
 
   <li class="method">
+    <a href="Misty/Openstack/Service.html#method-i-prefix_path_to_ignore">#prefix_path_to_ignore</a>
+    &mdash;
+    <span class="container">Misty::Openstack::Service</span>
+
+  <li class="method">
     <a href="Misty/HTTP/Direct.html#method-i-put">#put</a>
     &mdash;
     <span class="container">Misty::HTTP::Direct</span>
@@ -979,6 +1013,11 @@
     <a href="Misty/Client.html#method-i-requests">#requests</a>
     &mdash;
     <span class="container">Misty::Client</span>
+
+  <li class="method">
+    <a href="Misty/Openstack/Service.html#method-i-requests">#requests</a>
+    &mdash;
+    <span class="container">Misty::Openstack::Service</span>
 
   <li class="method">
     <a href="Misty/Openstack/Swift/V1.html#method-i-requests_custom">#requests_custom</a>
@@ -1139,6 +1178,11 @@
     <a href="Misty/AuthV3.html#method-i-set">#set</a>
     &mdash;
     <span class="container">Misty::AuthV3</span>
+
+  <li class="method">
+    <a href="Misty/Config.html#method-i-set_config">#set_config</a>
+    &mdash;
+    <span class="container">Misty::Config</span>
 
   <li class="method">
     <a href="Misty/AuthV2.html#method-i-set_credentials">#set_credentials</a>

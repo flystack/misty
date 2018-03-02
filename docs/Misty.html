@@ -83,6 +83,11 @@
 
   <section class="description">
     
+<p><a href="Misty.html">Misty</a> is a <a href="Misty/HTTP.html">HTTP</a>
+client for OpenStack APIs, aiming to be fast, flexible and exhaustive. <a
+href="Misty.html">Misty</a> acts as a conduit to OpenStack APIs by handling
+requests as transparently as possible.</p>
+
   </section>
 
   
@@ -98,44 +103,14 @@
       </header>
       <dl>
       
-        <dt id="CONTENT_TYPE">CONTENT_TYPE
-        
-        <dd><p>Default REST content type. Use :json or :ruby</p>
-        
-      
         <dt id="DOMAIN_ID">DOMAIN_ID
         
         <dd><p>Default Domain ID</p>
         
       
-        <dt id="INTERFACE">INTERFACE
-        
-        <dd><p>Default Interface</p>
-        
-      
-        <dt id="LOG_FILE">LOG_FILE
-        
-        <dd><p>Default log file. Use :log_file option to override</p>
-        
-      
-        <dt id="LOG_LEVEL">LOG_LEVEL
-        
-        <dd><p>Default log level. Use :log_level option to override</p>
-        
-      
-        <dt id="REGION_ID">REGION_ID
-        
-        <dd><p>Default Region</p>
-        
-      
         <dt id="SERVICES">SERVICES
         
         <dd>
-        
-      
-        <dt id="SSL_VERIFY_MODE">SSL_VERIFY_MODE
-        
-        <dd><p>Default when uri.scheme is https</p>
         
       
         <dt id="VERSION">VERSION
@@ -175,7 +150,7 @@
 
           
           <div class="method-source-code" id="json_encode-3F-source">
-            <pre><span class="ruby-comment"># File lib/misty/misty.rb, line 51</span>
+            <pre><span class="ruby-comment"># File lib/misty/misty.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">json_encode?</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
@@ -212,13 +187,18 @@
 
         <div class="method-description">
           
-          
+          <p>Provides list of supported services</p>
+
+<h4 id="method-c-services-label-Example">Example<span><a href="#method-c-services-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">pp</span> <span class="ruby-constant">Misty</span>.<span class="ruby-identifier">services</span>
+</pre>
           
           
 
           
           <div class="method-source-code" id="services-source">
-            <pre><span class="ruby-comment"># File lib/misty/misty.rb, line 65</span>
+            <pre><span class="ruby-comment"># File lib/misty/misty.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">services</span>
   <span class="ruby-identifier">services</span> = <span class="ruby-constant">Misty</span><span class="ruby-operator">::</span><span class="ruby-constant">Services</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-constant">SERVICES</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">service</span><span class="ruby-operator">|</span>
@@ -255,7 +235,7 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/misty/misty.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/misty/misty.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_json</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
     <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">data</span>)
