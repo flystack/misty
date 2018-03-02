@@ -1,6 +1,33 @@
 require 'misty/auth'
 
 module Misty
+  #
+  # Openstack Identity service Keystone version 2.0, which is deprecated, uses a tenant name or id to authenticates
+  # +Misty::AuthV2+ is used if the authentication credentials contains a tenant name or id.
+  #
+  # ==== Attributes
+  #
+  # The following credentials parameters can be used:
+  # * +:tenant_id+ - Tenant id, used only for Keystone v2.0 only
+  # * +:tenant+ - Tenant name, used only for Keystone v2.0  only
+  # * +:user_id+ - User id
+  # * +:user+ - User name
+  # * +:password+ - User password. Exclusive with :token.
+  # * +:ssl_verify_mode+ - Boolean flag for SSL client verification. SSL is defined when URI scheme => "https://".
+  # * +:token+ - User provided token, overrides all user and password parameters.
+  #
+  # ==== Example
+  #    auth_v2 = {
+  #      :url      => 'http://localhost:5000',
+  #      :user     => 'admin',
+  #      :password => 'secret',
+  #      :tenant   => 'admin',
+  #    }
+  #    cloud = Misty::Cloud.new(:auth => auth_v2)
+  #
+  # Also, the API request set is specific to this version:
+  #   cloud.identity.list_tenants
+  #
   class AuthV2
     include Misty::Auth
 

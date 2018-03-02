@@ -1,4 +1,3 @@
-require 'logger'
 require 'json'
 require 'net/http'
 require 'time'

@@ -222,7 +222,8 @@ describe 'Misty::Cloud' do
 
     it '#data is ambiguous' do
       stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-        with(:body => JSON.dump(auth_body), :headers => auth_headers)
+        with(:body => JSON.dump(auth_body), :headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('Identity', 'keystone')), :headers => token_header)
 
       proc do
         cloud.data

@@ -3,7 +3,7 @@ module Misty
     module Request
       def decode?(response)
         return false if response.body.nil? || response.body.empty?
-        if @config.content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
+        if @content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
           && !response.is_a?(Net::HTTPResetContent) && response.header['content-type'] \
           && response.header['content-type'].include?('application/json')
           return true
@@ -15,7 +15,7 @@ module Misty
         request['X-Auth-Token'] = @auth.get_token
 
         Misty::HTTP::NetHTTP.http_request(
-          @uri, ssl_verify_mode: @options.ssl_verify_mode, log: @config.log
+          @uri, ssl_verify_mode: @ssl_verify_mode, log: @log
         ) do |connection|
           response = connection.request(request)
           response.body = JSON.parse(response.body) if decode?(response)
@@ -24,51 +24,51 @@ module Misty
       end
 
       def http_delete(path, headers)
-        @config.log.info(http_to_s('DELETE', path, headers))
+        @log.info(http_to_s('DELETE', path, headers))
         request = Net::HTTP::Delete.new(path, headers)
         http(request)
       end
 
       def http_copy(path, headers)
-        @config.log.info(http_to_s('COPY', path, headers))
+        @log.info(http_to_s('COPY', path, headers))
         request = Net::HTTP::Copy.new(path, headers)
         http(request)
       end
 
       def http_get(path, headers)
-        @config.log.info(http_to_s('GET', path, headers))
+        @log.info(http_to_s('GET', path, headers))
         request = Net::HTTP::Get.new(path, headers)
         http(request)
       end
 
       def http_head(path, headers)
-        @config.log.info(http_to_s('HEAD', path, headers))
+        @log.info(http_to_s('HEAD', path, headers))
         request = Net::HTTP::Head.new(path, headers)
         http(request)
       end
 
       def http_options(path, headers)
-        @config.log.info(http_to_s('OPTIONS', path, headers))
+        @log.info(http_to_s('OPTIONS', path, headers))
         request = Net::HTTP::Options.new(path, headers)
         http(request)
       end
 
       def http_patch(path, headers, data)
-        @config.log.info(http_to_s('PATCH', path, headers, data))
+        @log.info(http_to_s('PATCH', path, headers, data))
         request = Net::HTTP::Patch.new(path, headers)
         request.body = data
         http(request)
       end
 
       def http_post(path, headers, data)
-        @config.log.info(http_to_s('POST', path, headers, data))
+        @log.info(http_to_s('POST', path, headers, data))
         request = Net::HTTP::Post.new(path, headers)
         request.body = data
         http(request)
       end
 
       def http_put(path, headers, data)
-        @config.log.info(http_to_s('PUT', path, headers, data))
+        @log.info(http_to_s('PUT', path, headers, data))
         request = Net::HTTP::Put.new(path, headers)
         request.body = data
         http(request)

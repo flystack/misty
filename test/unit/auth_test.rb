@@ -2,10 +2,6 @@ require 'test_helper'
 require 'auth_helper'
 
 describe Misty::Auth do
-  let(:config) do
-    Misty::Config.new
-  end
-
   describe Misty::AuthV3 do
     describe '#new' do
       it 'fails when missing credentials' do
@@ -13,7 +9,7 @@ describe Misty::Auth do
         to_return(:status => 200, :body => "{\"token\":{\"catalog\":[]}}", :headers => {'x-subject-token'=>'token_data'})
 
         proc do
-          Misty::AuthV3.new({}, config)
+          Misty::AuthV3.new({})
         end.must_raise Misty::Auth::URLError
       end
 
@@ -21,17 +17,18 @@ describe Misty::Auth do
         describe 'with a project scope' do
           it 'authenticates using a project id' do
             auth = {
-              :url        => 'http://localhost:5000',
-              :user_id    => 'user_id',
-              :password   => 'secret',
-              :project_id => 'project_id'
+              :url             => 'http://localhost:5000',
+              :user_id         => 'user_id',
+              :password        => 'secret',
+              :project_id      => 'project_id',
+              :ssl_verify_mode => false
             }
 
             stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
 
           it 'authenticates using a project name and a project domain id' do
@@ -47,7 +44,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"name\":\"project\",\"domain\":{\"id\":\"domain_id\"}}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
         end
 
@@ -64,7 +61,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"domain\":{\"id\":\"domain_id\"}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
 
           it 'authenticates using a domain name' do
@@ -79,7 +76,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"domain\":{\"name\":\"domain\"}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
         end
       end
@@ -97,7 +94,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"token\"}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
 
           it 'authenticates using a project name and a project domain id' do
@@ -112,7 +109,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"token\"}},\"scope\":{\"project\":{\"name\":\"project\",\"domain\":{\"id\":\"domain_id\"}}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
         end
 
@@ -128,7 +125,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"token\"}},\"scope\":{\"domain\":{\"id\":\"domain_id\"}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
 
           it 'authenticates using a domain name' do
@@ -142,7 +139,7 @@ describe Misty::Auth do
               with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"token\"}},\"scope\":{\"domain\":{\"name\":\"domain\"}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-            Misty::AuthV3.new(auth, config)
+            Misty::AuthV3.new(auth)
           end
         end
       end
@@ -163,7 +160,7 @@ describe Misty::Auth do
         stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
         to_return(:status => 200, :body => "{\"token\":{\"catalog\":[\"catalog_data\"]}}", :headers => {'x-subject-token'=>'token_data'})
 
-        auth = Misty::AuthV3.new(authv3_creds, config)
+        auth = Misty::AuthV3.new(authv3_creds)
         auth.stub :expired?, false do
           auth.get_token.must_equal 'token_data'
         end
@@ -173,7 +170,7 @@ describe Misty::Auth do
         stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
         to_return(:status => 200, :body => "{\"token\":{\"catalog\":[\"catalog_data\"]}}", :headers => {'x-subject-token'=>'token_data'})
 
-        auth = Misty::AuthV3.new(authv3_creds, config)
+        auth = Misty::AuthV3.new(authv3_creds)
         auth.catalog.must_equal ['catalog_data']
       end
 
@@ -181,7 +178,7 @@ describe Misty::Auth do
         stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
         to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {'x-subject-token'=>'token_data'})
 
-        auth = Misty::AuthV3.new(authv3_creds, config)
+        auth = Misty::AuthV3.new(authv3_creds)
         auth.get_url(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
       end
     end
@@ -194,7 +191,7 @@ describe Misty::Auth do
           to_return(:status => 200, :body => "{\"access\":{\"token\":{\"id\":\"token_data\"}}}", :headers => {})
 
         proc do
-          Misty::AuthV2.new({}, config)
+          Misty::AuthV2.new({})
         end.must_raise Misty::Auth::URLError
       end
 
@@ -211,7 +208,7 @@ describe Misty::Auth do
             with(:body => "{\"auth\":{\"passwordCredentials\":{\"username\":\"user\",\"password\":\"secret\"},\"tenantName\":\"tenant\"}}").
             to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {})
 
-          Misty::AuthV2.new(auth, config)
+          Misty::AuthV2.new(auth)
         end
 
         it 'authenticates using the tenant id' do
@@ -226,7 +223,7 @@ describe Misty::Auth do
             with(:body => "{\"auth\":{\"passwordCredentials\":{\"username\":\"user\",\"password\":\"secret\"},\"tenantId\":\"tenant_id\"}}").
             to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {})
 
-          Misty::AuthV2.new(auth, config)
+          Misty::AuthV2.new(auth)
         end
       end
 
@@ -242,7 +239,7 @@ describe Misty::Auth do
             with(:body => "{\"auth\":{\"token\":{\"id\":\"token_id\"},\"tenantName\":\"tenant\"}}").
             to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {})
 
-          Misty::AuthV2.new(auth, config)
+          Misty::AuthV2.new(auth)
         end
 
         it 'authenticates using the tenant id' do
@@ -256,7 +253,7 @@ describe Misty::Auth do
             with(:body => "{\"auth\":{\"token\":{\"id\":\"token_id\"},\"tenantId\":\"tenant_id\"}}").
             to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {})
 
-          Misty::AuthV2.new(auth, config)
+          Misty::AuthV2.new(auth)
         end
       end
     end
@@ -275,7 +272,7 @@ describe Misty::Auth do
         stub_request(:post, 'http://localhost:5000/v2.0/tokens').
           to_return(:status => 200, :body => "{\"access\":{\"token\":{\"id\":\"token_data\"},\"serviceCatalog\":[\"catalog_data\"]}}", :headers => {})
 
-        auth = Misty::AuthV2.new(authv2_creds, config)
+        auth = Misty::AuthV2.new(authv2_creds)
         auth.stub :expired?, false do
           auth.get_token.must_equal 'token_data'
         end
@@ -285,7 +282,7 @@ describe Misty::Auth do
         stub_request(:post, 'http://localhost:5000/v2.0/tokens').
           to_return(:status => 200, :body => "{\"access\":{\"token\":{\"id\":\"token_data\"},\"serviceCatalog\":[\"catalog_data\"]}}", :headers => {})
 
-        auth = Misty::AuthV2.new(authv2_creds, config)
+        auth = Misty::AuthV2.new(authv2_creds)
         auth.catalog.must_equal ['catalog_data']
       end
 
@@ -293,7 +290,7 @@ describe Misty::Auth do
         stub_request(:post, 'http://localhost:5000/v2.0/tokens').
           to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
-        auth = Misty::AuthV2.new(authv2_creds, config)
+        auth = Misty::AuthV2.new(authv2_creds)
         auth.get_url(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
       end
     end
