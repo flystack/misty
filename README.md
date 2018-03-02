@@ -187,31 +187,6 @@ header = Misty::HTTP::Header.new(
 openstack.object_storage.create_update_or_delete_container_metadata(container_name, header)
 ```
 
-## Service level configuration parameters
-The same parameters used at the global configuration variables can be applied at Service level.
-The global values passed from +Misty::Cloud+ level are then overridden at the Service level.
-
-Also, the following parameters can be used:
-* `:api_version` - String for specifying Openstack API service version to use. Default is latest supported version.
-* `:base_path` - Allows to force the base path for every URL requests Default nil.
-* `:base_url` - Allows to force the base URL for every requests. Default nil.
-* `:version` - Version to be used when microversion is supported by the service. Default: `"CURRENT"`
-  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
-
-### Examples
-Initialize cloud
-```ruby
-cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
-```
-
-Then use different options, for example, the identify service, therefore overriding respective global defaults or
-specified values
-```ruby
- cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
-Provide service specific option
- cloud.compute  => {:version => '2.27'})
-```
-
 ## Services
 The latest list of supported service can be obtain following this:
 ```
@@ -243,6 +218,30 @@ search: searchlight, versions: ["v1"]
 shared_file_systems: manila, microversion: v2
 ```
 
+### Service level configuration parameters
+The same parameters used at the global configuration variables can be applied at Service level.
+The global values passed from +Misty::Cloud+ level are then overridden at the Service level.
+
+Also, the following parameters can be used:
+* `:api_version` - String for specifying Openstack API service version to use. Default is latest supported version.
+* `:base_path` - Allows to force the base path for every URL requests Default nil.
+* `:base_url` - Allows to force the base URL for every requests. Default nil.
+* `:version` - Version to be used when microversion is supported by the service. Default: `"CURRENT"`
+  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
+
+#### Examples
+Initialize cloud
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
+```
+
+Then use different options, for example, the identify service, therefore overriding respective global defaults or
+specified values
+```ruby
+ cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
+Provide service specific option
+ cloud.compute  => {:version => '2.27'})
+```
 ### Service short cut - Prefixes
 A shorter name can be used to call a service only if it's unique among all services.
 For instance `net` or `network` can be used instead of `networking` because it's not ambiguous.
