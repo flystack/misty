@@ -1,7 +1,7 @@
 # Introduction
 Misty is a HTTP client for OpenStack APIs, aiming to be slick and dynamic.
 
-It handles OpenStack APIs requests as Transparently as possible by:
+Misty handles OpenStack APIs requests as Transparently as possible by:
 * Directly submitting request to Openstack Service endpoints
 * Or by using APIs Schema defined functions which are dynamically extracted from OpenStackAPI reference.
 
@@ -15,14 +15,6 @@ It handles OpenStack APIs requests as Transparently as possible by:
 * On demand services - Auto loads required versions
 * Low dependency - Use standard Net/HTTP and JSON gem only
 * Persistent HTTP connections (default since HTTP 1.1 anyway)
-
-## A solid KISS
-For REST transactions Misty relies on standard Net/HTTP library.  
-No other gems are required besides 'json'.  
-
-Not having to use the help of a more complex HTTP framework is a choice that reduces dependencies.  
-Meanwhile a better reason would be because Openstack offers a common modus operandi across all APIs.  
-The authentication process provides a Service Catalog serving all available APIs entry points.
 
 # How To
 Fetch and install
