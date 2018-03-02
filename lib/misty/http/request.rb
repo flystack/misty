@@ -1,6 +1,9 @@
 module Misty
   module HTTP
     module Request
+
+      DECODE_TO_JSON = ["application/json", "application/octet-stream"].freeze
+
       def decode?(response)
         return false if response.body.nil? || response.body.empty?
         if @ether_content_type
@@ -9,10 +12,18 @@ module Misty
         else
           content_type = @content_type
         end
-        if content_type != :json && response.code =~ /2??/ && !response.is_a?(Net::HTTPNoContent) \
-          && !response.is_a?(Net::HTTPResetContent) && response.header['content-type'] \
-          && response.header['content-type'].include?('application/json')
+        if content_type != :json && response.code =~ /2??/ \
+          && !response.is_a?(Net::HTTPNoContent) \
+          && !response.is_a?(Net::HTTPResetContent) \
+          && response.header['content-type'] && decode_to_json?(response.header['content-type'])
           return true
+        end
+        false
+      end
+
+      def decode_to_json?(content_type)
+        DECODE_TO_JSON.each do |type|
+          return true if content_type.include?(type)
         end
         false
       end
