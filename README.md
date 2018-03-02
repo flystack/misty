@@ -1,14 +1,16 @@
 # Introduction
-Misty is a HTTP client for OpenStack APIs, aiming to be fast, flexible and exhaustive.
-Misty acts as a conduit to OpenStack APIs by handling requests as transparently as possible.
+Misty is a HTTP client for OpenStack APIs, aiming to be slick and dynamic.
+
+It handles OpenStack APIs requests as Transparently as possible by:
+* Directly submitting request to Openstack Service endpoints
+* Or by using APIs Schema defined functions which are dynamically extracted from OpenStackAPI reference.
 
 ## Features
-* Flexible Openstack APIs integration
-* Standardized Openstack APIs: [Based upon API-ref](https://developer.openstack.org/api-guide/quick-start/)
-* Automatically generated API schemas - Any request can be overridden
+* Standardized OpenStack APIs: [Based upon API-ref](https://developer.openstack.org/api-guide/quick-start/) it offers
+  the flexibility to easily integrate new OpenStack services. Any request can be overridden or completed
 * Versions and Microversions
-* Transparent Request data hanlding
-* Response data format of choice: JSON or raw (Ruby)
+* Transparent Request data handling
+* Response data format of choice: JSON or raw Ruby
 * Custom HTTP Methods for special needs
 * On demand services - Auto loads required versions
 * Low dependency - Use standard Net/HTTP and JSON gem only
@@ -21,20 +23,6 @@ No other gems are required besides 'json'.
 Not having to use the help of a more complex HTTP framework is a choice that reduces dependencies.  
 Meanwhile a better reason would be because Openstack offers a common modus operandi across all APIs.  
 The authentication process provides a Service Catalog serving all available APIs entry points.
-
-## APIs Definitions
-The rich variety of OpenStack projects requires lots of Application Program Interfaces to handle.  
-Maintaining and extending those APIs implies a structural complexity challenge.  
-Therefore the more automated the process, the better.  
-Thanks to the help of Phoenix project [OpenStack API-ref](https://developer.openstack.org/api-guide/quick-start/)
-providing the latest standard of OpenStack APIs.  
-The APIs interface definitions are generated automatically from the API-ref reference manuals (misty-builder) which
-allows:
-* More consistent APIs
-* More recent APIs definitions
-* Easier addition of a new service's API
-
-[1] https://developer.openstack.org/api-guide/quick-start/
 
 # How To
 Fetch and install
