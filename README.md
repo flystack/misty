@@ -35,7 +35,11 @@ cloud = Misty::Cloud.new(
     :project            => 'admin',
     :project_domain_id  => 'default'
   })
-
+  ```
+  
+  Then requets can be made against OpenStack services:
+  
+```
   servers = cloud.compute.list_servers.body
   networks = cloud.networking.list_networks
   first_network_id = networks.body['networks'][0]['id']
@@ -46,7 +50,7 @@ cloud = Misty::Cloud.new(
 ```
 
 ## Authentication
-Openstack Identity service Keystone version 3, the default and version 2.0, deprecated are available.
+Openstack Identity service Keystone version 3 is the default, version 2.0, although deprecated, is available.
 
 ### Parameters
 The following parameters can be used:
@@ -71,8 +75,8 @@ To authenticate with credentials details:
 #### Keystone v3
 Version 3 relies on the concept of domain name or id to authenticates
 
-+Misty::AuthV3+ is used by default unless authentication credentials contains a tenant name or id in wich case it
-will use on +Misty::AuthV2+.
+`Misty::AuthV3` is used by default unless authentication credentials contains a tenant name or id in wich case it
+will use on `Misty::AuthV2`.
 
 The credentials are a combination of "id" and "name" used to uniquely identify projects, users and their domains.
 When using only the name, a domain must be specified to guarantee a unique record from the Identity service.
