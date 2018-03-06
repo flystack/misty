@@ -10,7 +10,7 @@ Misty handles OpenStack APIs requests as Transparently as possible by:
   the flexibility to easily integrate new OpenStack services. Any request can be overridden or completed
 * Versions and Microversions
 * Transparent Request data handling
-* Response data format of choice: JSON or raw Ruby
+* Response data format of choice: JSON or Hash
 * Custom HTTP Methods for special needs
 * On demand services - Auto loads required versions
 * Low dependency - Use standard Net/HTTP and JSON gem only
@@ -36,9 +36,9 @@ cloud = Misty::Cloud.new(
     :project_domain_id  => 'default'
   })
   ```
-  
+
   Then requets can be made against OpenStack services:
-  
+
 ```
   servers = cloud.compute.list_servers.body
   networks = cloud.networking.list_networks
@@ -142,7 +142,7 @@ The configuration parameters used to initialize `Misty::Cloud` are global. They 
 defaults are applied if needed.
 
 * `:auth` - Authentication credentials hash containing 'auth_url' and user context. See `Misty::Auth`.
-* `:content_type` - HTTP responses body format. :json or :ruby structures. Default is `Misty::Config::CONTENT_TYPE`.
+* `:content_type` - HTTP responses body format. :json or :hash structures. Default is `Misty::Config::CONTENT_TYPE`.
 * `:headers` - Hash of extra HTTP headers to be applied to all services
 * `:interface` - Endpoint interface, allowed values are: "public", "internal", "admin".
 * `:log_file` - Log destination, Value is either file path (./misty.log) or IO object (SDOUT). Default is '/dev/null'

@@ -4,36 +4,12 @@ require 'misty/auth/auth_v3'
 require 'misty/http/header'
 
 module Misty
+  class Config
+    # Default REST content type. Use :json or :hash
+    CONTENT_TYPE = :hash
 
-  # Module setting up and validationg configuration parameters
-  #
-  # The configuration at the +Misty::Cloud+ level is global then local at +Misty::Cloud::Service+ level.
-  # All parameters but +:auth+ are optionals and default values are defined if not specified.
-  # +@globals+ holds all the configuration data which is passed each service when needed.
-  #
-  # ==== Authentication credentials options
-  #
-  # +:auth+ - Hash containing auhthentication URL and credentials details to authenticate against OpenStack identity
-  # server Keystone.
-  #
-  # ==== Examples
-  #
-  #   require 'misty'
-  #    auth = {
-  #      :url                => 'http://localhost:5000',
-  #      :user               => 'admin',
-  #      :password           => 'secret',
-  #      :domain             => 'default',
-  #      :project            => 'admin',
-  #      :project_domain_id  => 'default'
-  #    }
-  #    cloud = Misty::Cloud.new(:auth => auth, :log_file => './misty.log')
-
-  module Config
-    class InvalidDataError < StandardError; end
-
-    # Default REST content type. Use :json or :ruby
-    CONTENT_TYPE = :ruby
+    # Valid content format
+    CONTENT_TYPES = %i{hash json}
 
     # Default Interface
     INTERFACE = 'public'
@@ -53,17 +29,63 @@ module Misty
     # Default when uri.scheme is https
     SSL_VERIFY_MODE = true
 
-    # Valid content format
-    CONTENT_TYPES = %i{ruby json}
-
     # ==== Attributes
     #
     # * +arg+ - +Hash+ of configuration options
 
-    def set_config(arg = {}, defaults = {})
+    attr_reader :auth, :log, :services
+
+    def initialize(arg)
+      raise CredentialsError if arg.nil? || arg.empty? || arg[:auth].nil? || arg[:auth].empty?
+      @auth = Misty::Auth.build(arg[:auth]) # TODO: pass @log
+      @log = set_log(arg[:log_file], arg[:log_level])
+      @globals = set_config(arg)
+      @services = {}
+      # TODO: Adjust Services to use enumerable
+      arg.each do |e, k|
+        Misty::SERVICES.each do |serv|
+          @services[e] = k if serv[:name] == e
+        end
+      end
+    end
+
+    def get_service(method)
       set = {}
-      set[:log] = set_log(arg[:log_file], arg[:log_level], defaults[:log])
-      set[:auth] = set_auth(arg[:auth], defaults[:auth])
+      set[:auth] = @auth
+      set[:log] = @log
+      service_config = @services.key?(method) ? @services[method] : nil
+      if service_config
+        set[:config] = set_config(service_config, @globals)
+        set[:config].merge!(set_service(service_config))
+      else
+        set[:config] = @globals
+      end
+      set
+    end
+
+    def set_service(arg)
+      set = {}
+      set[:base_path] = arg[:base_path] ? arg[:base_path] : nil
+      set[:base_url] = arg[:base_url] ? arg[:base_url] : nil
+      set[:version] = arg[:version] ? arg[:version] : nil
+      set[:api_version] = arg[:api_version] ? arg[:api_version] : nil
+      set
+    end
+
+    private
+
+    def get_defaults
+      set = {}
+      set[:content_type] = CONTENT_TYPE
+      set[:headers] = HTTP::Header.new('Accept' => 'application/json; q=1.0')
+      set[:interface] = INTERFACE
+      set[:region_id] = REGION_ID
+      set[:ssl_verify_mode] = SSL_VERIFY_MODE
+      set
+    end
+
+    def set_config(arg = {}, defaults = get_defaults)
+      set = {}
       set[:content_type] = set_content_type(arg[:content_type], defaults[:content_type])
       set[:headers] = set_headers(arg[:headers], defaults[:headers])
       set[:interface] = set_interface(arg[:interface], defaults[:interface])
@@ -72,109 +94,43 @@ module Misty
       set
     end
 
-    private
-
-    def set_auth(val, default)
-      if default
-        default
-      elsif val
-        Misty::Auth.build(val)
-      end
-    end
 
     def set_content_type(val, default)
-      res = if val
-              val
-            elsif default
-              default
-            else
-              CONTENT_TYPE
-            end
+      res = val.nil? ? default : val
       raise InvalidDataError, "Config ':content_type' must be one of #{CONTENT_TYPES}" unless CONTENT_TYPES.include?(res)
       res
     end
 
     def set_headers(val, default)
-      init = HTTP::Header.new('Accept' => 'application/json; q=1.0')
       res = if val && !val.empty?
-              if default
-                default.add(val)
-                default
-              else
-                init.add(val)
-                init
-              end
-            elsif default
+              default.add(val)
               default
-            else
-              init
+            else default
+              default
             end
       res
     end
 
     def set_interface(val, default)
-      res = if val
-              val
-            elsif default
-              default
-            else
-              INTERFACE
-            end
+        res = val.nil? ? default : val
       raise InvalidDataError, "Config ':interface' must be one of #{INTERFACES}" unless INTERFACES.include?(res)
       res
     end
 
-    def set_log(log_file, log_level, default)
-      log_file = set_log_file(log_file)
-      log_level = set_log_level(log_level)
-
-      if default
-        default
-      else
-        log = Logger.new(log_file)
-        log.level = log_level
-        log
-      end
-    end
-
-    def set_log_level(val)
-      res = if val
-              val
-            else
-              LOG_LEVEL
-            end
-      res
-    end
-
-    def set_log_file(val)
-      res = if val
-              val
-            else
-              LOG_FILE
-            end
-      res
+    def set_log(file, level)
+      log = Logger.new(file ? file : LOG_FILE)
+      log.level = level ? level : LOG_LEVEL
+      log
     end
 
     def set_region_id(val, default)
-      res = if val
-              val
-            elsif default
-              default
-            else
-              REGION_ID
-            end
+        res = val.nil? ? default : val
       raise InvalidDataError, "Config ':region_id' must be a String" unless res.kind_of? String
       res
     end
 
     def set_ssl_verify_mode(val, default)
-      res = if !val.nil?
-              val
-            elsif !default.nil?
-              default
-            else
-              SSL_VERIFY_MODE
-            end
+        res = val.nil? ? default : val
       raise InvalidDataError, "Config ':ssl_verify_mode' must be a Boolean" unless res == !!res
       res
     end

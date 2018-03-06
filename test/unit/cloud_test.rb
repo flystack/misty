@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'service_helper'
 require 'auth_helper'
 
 describe Misty::Cloud do
@@ -10,35 +9,44 @@ describe Misty::Cloud do
     end
   end
 
-  describe 'A service' do
-    let(:auth) do
-      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-        with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"name\":\"admin\",\"domain\":{\"id\":\"default\"},\"password\":\"secret\"}}},\"scope\":{\"project\":{\"name\":\"admin\",\"domain\":{\"id\":\"default\"}}}}}",
-        :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
-        to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
-
-      auth = {
-        :url                => 'http://localhost:5000',
-        :user               => 'admin',
-        :password           => 'secret',
-        :project            => 'admin',
-        :project_domain_id  => 'default'
+  describe 'identity' do
+    let(:arg) do
+      arg = {
+        :auth => {
+          :url             => 'http://localhost:5000',
+          :user_id         => 'user_id',
+          :password        => 'secret',
+          :project_id      => 'project_id',
+          :ssl_verify_mode => false
+        },
       }
     end
 
+    let(:auth_request) do
+      stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+        with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}",
+           :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body =>  JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
+    end
+
     it 'uses default version' do
-      cloud = Misty::Cloud.new(:auth => auth)
+      auth_request
+      cloud = Misty::Cloud.new(arg)
       cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
     end
 
     it 'uses default version when provided version is out of range' do
-      cloud = Misty::Cloud.new(:auth => auth)
-      cloud.identity(:api_version => 'v1').must_be_kind_of Misty::Openstack::Keystone::V3
+      auth_request
+      arg.merge!(:identity => {:api_version => 'v1'})
+      cloud = Misty::Cloud.new(arg)
+      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
     end
 
     it 'uses provided version' do
-      cloud = Misty::Cloud.new(:auth => auth)
-      cloud.identity(:api_version => 'v2.0').must_be_kind_of Misty::Openstack::Keystone::V2_0
+      auth_request
+      arg.merge!(:identity => {:api_version => 'v2.0'})
+      cloud = Misty::Cloud.new(arg)
+      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V2_0
     end
   end
 
@@ -62,13 +70,13 @@ describe Misty::Cloud do
       it 'with empty credentials' do
         proc do
           Misty::Cloud.new(:auth => {})
-        end.must_raise Misty::Auth::CredentialsError
+        end.must_raise Misty::Config::CredentialsError
       end
 
       it 'with incomplete credentials' do
         proc do
           Misty::Cloud.new(:auth => {:user => 'user', :url => 'http://localhost' })
-        end.must_raise Misty::Auth::CredentialsError
+        end.must_raise Misty::Config::CredentialsError
       end
 
       it 'without url' do

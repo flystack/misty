@@ -14,8 +14,7 @@ describe 'Networking Service Neutron v2.0 features' do
 
   it 'GET/POST/PUT/DELETE requests' do
     VCR.use_cassette 'networking using neutron v2.0' do
-      cloud = Misty::Cloud.new(:auth => auth)
-      cloud.networking(:api_version => 'v2.0')
+      cloud = Misty::Cloud.new(:auth => auth, :networking => {:api_version => 'v2.0'})
 
       # POST with body data
       data = Misty.to_json('network' => { 'name': 'test_network' })

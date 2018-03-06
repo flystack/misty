@@ -45,7 +45,7 @@ describe Misty::Openstack::Service do
     end
 
     it 'inject headers parameter' do
-      service(content_type = :ruby, params = {:headers => {'Oh' => 'my!'}}).
+      service(content_type = :hash, params = {:headers => {'Oh' => 'my!'}}).
         headers.get.must_equal ({"Accept"=>"application/json; q=1.0", "Oh"=>"my!"})
     end
   end
