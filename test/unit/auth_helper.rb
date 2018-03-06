@@ -2,7 +2,7 @@ def auth_response_v3(type, name)
   { 'token' =>
     { 'methods' => ['password'],
       'roles' => [{ 'id' => 'id_roles', 'name' => 'admin' }],
-      'expires_at' => '2016-11-29T07:45:29.908554Z',
+      'expires_at' => '2017-11-29T07:45:29.908554Z',
       'project' => { 'domain' => { 'id' => 'default', 'name' => 'Default' }, 'id' => 'project_id', 'name' => 'admin' },
       'catalog' =>
       [{ 'endpoints' =>
@@ -26,14 +26,14 @@ def auth_response_v3(type, name)
          'name'      => name }],
       'user' => { 'domain' => { 'id' => 'default', 'name' => 'Default' }, 'id' => 'id_user', 'name' => 'admin' },
       'audit_ids' => ['id_audits'],
-      'issued_at' => '2016-11-29T06:45:29.908578Z' } }
+      'issued_at' => '2017-11-29T06:45:29.908578Z' } }
 end
 
 def auth_response_v2(type, name)
   { 'access' =>
     { 'token' =>
-      { 'issued_at' => '2016-12-05T10:44:31.454741Z',
-        'expires' => '2016-12-05T11:44:31Z',
+      { 'issued_at' => '2017-12-05T10:44:31.454741Z',
+        'expires' => '2017-12-05T11:44:31Z',
         'id' => '4ae647d3a5294690a3c29bc658e17e26',
         'tenant' => { 'description' => 'admin tenant', 'enabled' => true, 'id' => 'tenant_id', 'name' => 'admin' },
         'audit_ids' => ['Ye0Rq1HzTk2ggUAg8nDGbQ'] },

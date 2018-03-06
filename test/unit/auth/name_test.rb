@@ -51,7 +51,7 @@ describe Misty::Auth::User do
       proc do
         user = Misty::Auth::User.new('user_id', 'User')
         user.identity
-      end.must_raise Misty::Auth::CredentialsError
+      end.must_raise Misty::Config::CredentialsError
     end
 
     it "when id is provided it doesn't require domain" do
@@ -78,7 +78,7 @@ describe Misty::Auth::User do
       proc do
         user = Misty::Auth::User.new(nil, 'User')
         user.identity
-      end.must_raise Misty::Auth::CredentialsError
+      end.must_raise Misty::Config::CredentialsError
     end
   end
 end
@@ -106,7 +106,7 @@ describe Misty::Auth::ProjectScope do
       proc do
         project = Misty::Auth::ProjectScope.new(nil, 'Project')
         project.identity
-      end.must_raise Misty::Auth::CredentialsError
+      end.must_raise Misty::Config::CredentialsError
     end
   end
 end

@@ -1,5 +1,4 @@
 require 'logger'
-require 'misty/auth/errors'
 require 'misty/auth/name'
 require 'misty/http/net_http'
 require 'misty/config'
@@ -15,7 +14,6 @@ module Misty
     attr_reader :catalog, :token
 
     def self.build(auth)
-      raise CredentialsError if auth.empty?
       version = auth[:tenant_id] || auth[:tenant] ? 'V2' : 'V3'
       klass = Object.const_get("Misty::Auth#{version}")
       klass.new(auth)

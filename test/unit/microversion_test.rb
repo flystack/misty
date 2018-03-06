@@ -21,60 +21,56 @@ describe Misty::Microversion do
           'id' => 'v2.1' }] }
   end
 
-  let(:microversion_service) do
-    auther = Minitest::Mock.new
+  let(:config) do
+    arg = {
+      :auth => {
+        :url             => 'http://localhost:5000',
+        :user_id         => 'user_id',
+        :password        => 'secret',
+        :project_id      => 'project_id',
+        :ssl_verify_mode => false
+      }
+    }
+    Misty::Config.new(arg)
+  end
 
-    def auther.get_url(*args)
-      'http://localhost'
-    end
+  let(:service) do
+    stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+      with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}",
+        :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body =>  JSON.dump(auth_response_v3('compute', 'nova')), :headers => {})
 
-    def auther.get_token
-      'token_id'
-    end
-
-    stub_request(:get, 'http://localhost/').
-      with(:headers => {'Accept'=>'application/json'}).
+    stub_request(:get, "http://localhost/").
+      with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
 
-    globals = Class.new do
-      include Misty::Config
-
-      attr_reader :config
-
-      def initialize(args)
-        @config = set_config({})
-        @config[:auth] = args
-      end
-    end
-
-    args = globals.new(auther)
-    Misty::Openstack::Nova::V2_1.new(args.config)
+    service = Misty::Openstack::Nova::V2_1.new(config.get_service(:compute))
   end
 
   describe '#version_get' do
     it 'returns the version number' do
-      microversion_service.version_get('2.12').must_equal '2.12'
+      service.version_get('2.12').must_equal '2.12'
     end
 
     it 'returns the version number' do
-      microversion_service.version_get('CURRENT').must_equal '2.25'
+      service.version_get('CURRENT').must_equal '2.25'
     end
 
     it 'fails when version is not within supporterd interval' do
       proc do
-        microversion_service.version_get('2.0')
+        service.version_get('2.0')
       end.must_raise Misty::Microversion::VersionError
     end
 
     it 'fails when LATEST version is not available' do
       proc do
-        microversion_service.version_get('LATEST')
+        service.version_get('LATEST')
       end.must_raise Misty::Microversion::VersionError
     end
 
     it 'fails when using an invalid version State' do
       proc do
-        microversion_service.version_get('OTHER')
+        service.version_get('OTHER')
       end.must_raise Misty::Microversion::VersionError
     end
   end

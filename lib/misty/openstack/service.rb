@@ -1,35 +1,29 @@
 module Misty
   module Openstack
     module Service
-      include Misty::Config
-
       attr_reader :headers, :microversion
 
       # ==== Attributes
       #
-      # * +args+ - Hash of configuration parameters for authentication, log, and services options.
+      # * +arg+ - +Misty::Config+ instance
       #
-      def initialize(args)
-        @auth = args[:auth]
-        @log = args[:log]
+      def initialize(arg)
+        @auth = arg[:auth]
+        @log = arg[:log]
+        @config = arg[:config]
 
-        # Service level parameters "locals"
-        @interface = args[:interface]
-        @content_type = args[:content_type]
-        @region_id = args[:region_id]
-        @ssl_verify_mode = args[:ssl_verify_mode]
-        @headers = Misty::HTTP::Header.new(args[:headers].get.clone)
+        @content_type = @config[:content_type]
+        @headers = Misty::HTTP::Header.new(@config[:headers].get.clone)
         @headers.add(microversion_header) if microversion
+        @ssl_verify_mode = @config[:ssl_verify_mode]
 
-        @uri = URI.parse(@auth.get_url(service_names, @region_id, @interface))
+        @uri = URI.parse(@auth.get_url(service_names, @config[:region_id], @config[:interface]))
 
-        @base_path = args[:base_path] ? args[:base_path] : nil
-        @base_url  = args[:base_url]  ? args[:base_url] : nil
-        @init_version = args[:version] ? args[:version] : 'CURRENT'
-
-        @base_path = @base_path ? @base_path : @uri.path
+        @base_path = @config[:base_path] ? @config[:base_path] : @uri.path
         @base_path = @base_path.chomp('/')
-        @version = nil
+        @base_url  = @config[:base_url]  ? @config[:base_url] : nil
+        @init_version = @config[:version] ? @config[:version] : 'CURRENT'
+
         @microversion = false
       end
 

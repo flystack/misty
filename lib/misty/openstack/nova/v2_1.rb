@@ -31,6 +31,11 @@ module Misty
           header.merge!('X-Openstack-Nova-API-Version' => "#{@version}",)
           header
         end
+
+        # TODO: New microversion
+        #def microversion
+        #  '2.60'
+        #end
       end
     end
   end
