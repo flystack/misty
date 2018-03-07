@@ -10,8 +10,12 @@ module Misty
         include Misty::ClientPack
         include Misty::HTTP::Microversion
 
+        def microversion
+          '1.4'
+        end
+
         def service_names
-          %w{container}
+          %w{container-infrastructure-management container-infrastructure}
         end
       end
     end

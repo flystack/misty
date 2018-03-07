@@ -2,15 +2,17 @@ require 'test_helper'
 require 'auth_helper'
 
 describe 'Misty::Cloud' do
-  let(:cloud) do
-    auth = {
+  let(:auth) do
+    {
       :url               => 'http://localhost:5000',
       :user              => 'admin',
       :password          => 'secret',
       :project           => 'admin',
       :project_domain_id => 'default'
     }
+  end
 
+  let(:cloud) do
     Misty::Cloud.new(:auth => auth)
   end
 
@@ -100,16 +102,42 @@ describe 'Misty::Cloud' do
     cloud.block_storage.must_be_kind_of Misty::Openstack::Cinder::V3
   end
 
-  it '#compute' do
-    stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-      with(:body => JSON.dump(auth_body), :headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(auth_response_v3('compute', 'nova')), :headers => token_header)
+  describe '#compute' do
+    it 'without microversion provided' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        with(:body => JSON.dump(auth_body), :headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('compute', 'nova')), :headers => token_header)
 
-    stub_request(:get, 'http://localhost/').
-      with(:headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
+      stub_request(:get, 'http://localhost/').
+        with(:headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
 
-    cloud.compute.must_be_kind_of Misty::Openstack::Nova::V2_1
+      cloud.compute.must_be_kind_of Misty::Openstack::Nova::V2_1
+    end
+
+    it 'with microversion provided' do
+      stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        with(:body => JSON.dump(auth_body), :headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('compute', 'nova')), :headers => token_header)
+
+      stub_request(:get, 'http://localhost/').
+        with(:headers => auth_headers).
+        to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
+
+      compute_cloud = Misty::Cloud.new(:auth => auth, :compute => {:version => '2.17'})
+
+      compute_cloud.compute.must_be_kind_of Misty::Openstack::Nova::V2_1
+
+      stub_request(:get, "http://localhost/servers").
+        with(:headers => {'Accept'=>'application/json; q=1.0', 'X-Auth-Token'=>'token_data', 'X-Openstack-Nova-Api-Version'=>'2.17'})
+
+      compute_cloud.compute.list_servers
+
+      stub_request(:get, "http://localhost/servers").
+        with(:headers => {'Accept'=>'application/json; q=1.0', 'X-Auth-Token'=>'token_data', 'X-Openstack-Nova-Api-Version'=>'2.19'})
+
+      compute_cloud.compute(:version => '2.19').list_servers
+    end
   end
 
   it '#dataProcessing' do
@@ -175,7 +203,7 @@ describe 'Misty::Cloud' do
         to_return(:status => 200, :body => JSON.dump(auth_response_v3('object-store', 'swift')), :headers => token_header)
 
       stub_request(:post, "http://localhost/?bulk-delete=1").
-        with(:headers => {'Accept'=>'application/json; q=1.0', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'text/plain', 'User-Agent'=>'Ruby', 'X-Auth-Token'=>'token_data'}).
+        with(:headers => {'Accept'=>'application/json; q=1.0', 'Content-Type'=>'text/plain', 'User-Agent'=>'Ruby', 'X-Auth-Token'=>'token_data'}).
         to_return(:status => 200, :body => "", :headers => {})
 
       cloud.object_storage.requests.must_include :bulk_delete

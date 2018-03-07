@@ -23,8 +23,8 @@ module Misty
 
         def bulk_delete(data)
           param = 'bulk-delete=1'
-          header = Misty::HTTP::Header.new('Content-Type' => 'text/plain')
-          create_update_or_delete_account_metadata(param, data, header)
+          @request_headers.add('Content-Type' => 'text/plain')
+          create_update_or_delete_account_metadata(param, data)
         end
       end
     end

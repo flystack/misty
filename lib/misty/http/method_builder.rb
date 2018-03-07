@@ -21,13 +21,6 @@ module Misty
       end
 
       def method_call(method, *args)
-        if args[-1].class == Misty::HTTP::Header
-          header = Misty::HTTP::Header.new(@headers.get.clone)
-          header.add(args.pop.get)
-        else
-          header = @headers
-        end
-
         base, path = prefixed_path(method[:path])
         size_path_parameters = count_path_params(path)
         path_params = args[0, size_path_parameters]
@@ -37,26 +30,26 @@ module Misty
 
         case method[:request]
         when :COPY
-          http_copy(final_path, header.get)
+          http_copy(final_path, @request_headers.get)
         when :DELETE
-          http_delete(final_path, header.get)
+          http_delete(final_path, @request_headers.get)
         when :GET
           final_path << query_param(args_left.shift) if args_left && args_left.size == 1
-          http_get(final_path, header.get)
+          http_get(final_path, @request_headers.get)
         when :HEAD
-          http_head(final_path, header.get)
+          http_head(final_path, @request_headers.get)
         when :POST
           final_path << query_param(args_left.shift) if args_left && args_left.size == 2
-          data = process_data(header, args_left)
-          http_post(final_path, header.get, data)
+          data = process_data(@request_headers, args_left)
+          http_post(final_path, @request_headers.get, data)
         when :PUT
           final_path << query_param(args_left.shift) if args_left && args_left.size == 2
-          data = process_data(header, args_left)
-          http_put(final_path, header.get, data)
+          data = process_data(@request_headers, args_left)
+          http_put(final_path, @request_headers.get, data)
         when :PATCH
           final_path << query_param(args_left.shift) if args_left && args_left.size == 2
-          data = process_data(header, args_left)
-          http_patch(final_path, header.get, data)
+          data = process_data(@request_headers, args_left)
+          http_patch(final_path, @request_headers.get, data)
         else
           raise SyntaxError, "Invalid HTTP request: #{method[:request]}"
         end

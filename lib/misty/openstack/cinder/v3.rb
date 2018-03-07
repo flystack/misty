@@ -10,6 +10,14 @@ module Misty
         include Misty::ClientPack
         include Misty::Microversion
 
+        def microversion
+          '3.44'
+        end
+
+        def microversion_header(version)
+          {'X-Openstack-Cinder-API-Version' => "#{version}"}
+        end
+
         def prefix_path_to_ignore
           '/v3/{tenant_id}'
         end

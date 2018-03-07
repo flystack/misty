@@ -25,10 +25,6 @@ describe Misty::Microversion do
       service = Object.new
       service.extend(Misty::Microversion)
 
-      def service.asked_version=(val)
-        @asked_version = val
-      end
-
       def service.headers
         @headers = Misty::HTTP::Header.new
       end
@@ -63,39 +59,41 @@ describe Misty::Microversion do
         to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
       end
 
-      it 'returns asked version number when in supported min/max range' do
+      it 'set microversion when number within min/max range' do
         fetch_request
-        service.asked_version=('2.12')
-        service.set_version
-        service.microversion_header.must_equal({"X-Openstack-API-Version" => "object 2.12"})
+
+        def service.service_names
+          %w{service_name1}
+        end
+
+        service.microversion_header('2.60').must_equal({"X-Openstack-API-Version" => "service_name1 2.60"})
       end
 
       it 'fails when asked version is not within min-max range' do
         fetch_request
-        service.asked_version=('3.20')
+
         proc do
-          service.set_version
+          service.set_version('3.20')
         end.must_raise Misty::Microversion::VersionError
       end
     end
 
-    it "set version to 'latest' word" do
-      service.asked_version=('latest')
-      service.set_version
-      service.microversion_header.must_equal({"X-Openstack-API-Version" => "object latest"})
+    it "set microversion to 'latest'" do
+      def service.service_names
+        %w{service_name2}
+      end
+      service.microversion_header('latest').must_equal({"X-Openstack-API-Version" => "service_name2 latest"})
     end
 
     it 'fails when version is a wrong word' do
       proc do
-        service.asked_version=('testing')
-        service.set_version
+        service.set_version('testing')
       end.must_raise Misty::Microversion::VersionError
     end
 
     it "fails when version does't match <number.number>" do
       proc do
-        service.asked_version=('1.2.3')
-        service.set_version
+        service.set_version('1.2.3')
       end.must_raise Misty::Microversion::VersionError
     end
   end
