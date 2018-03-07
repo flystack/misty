@@ -1,7 +1,7 @@
 # Introduction
 Misty is a HTTP client for OpenStack APIs, aiming to be slick and dynamic.
 
-Misty handles OpenStack APIs requests as Transparently as possible by:
+Misty handles OpenStack APIs requests as transparently as possible by:
 * Directly submitting request to Openstack Service endpoints
 * Or by using APIs Schema defined functions which are dynamically extracted from OpenStackAPI reference.
 
