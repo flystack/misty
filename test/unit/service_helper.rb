@@ -25,6 +25,7 @@ def service(param_content_type = :hash, params = {})
 
   config = Misty::Config.new(arg)
 
+# TODO: remove
 #  stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
 #    with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}").
 #    to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})

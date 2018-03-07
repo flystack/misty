@@ -20,8 +20,8 @@ module Misty
           http_get("/#{version}", headers)
         end
 
-        def service_names
-            %w{compute}
+        def microversion
+          '2.60'
         end
 
         def microversion_header
@@ -32,10 +32,9 @@ module Misty
           header
         end
 
-        # TODO: New microversion
-        #def microversion
-        #  '2.60'
-        #end
+        def service_names
+          %w{compute}
+        end
       end
     end
   end
