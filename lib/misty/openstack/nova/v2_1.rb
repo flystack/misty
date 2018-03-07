@@ -24,12 +24,13 @@ module Misty
           '2.60'
         end
 
-        def microversion_header
-          # Versions 2.27+ use default OpenStack-API-Version
-          header = super
-          # For prior vesions then remove once depcrecated
-          header.merge!('X-Openstack-Nova-API-Version' => "#{@version}",)
-          header
+        def microversion_header(version)
+          # Use default 'OpenStack-API-Version' or older 'X-Openstack-Nova-API-Version'
+          if @version >= '2.27'
+            super
+          else
+            {'X-Openstack-Nova-API-Version' => "#{version}"}
+          end
         end
 
         def service_names

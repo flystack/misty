@@ -10,6 +10,14 @@ module Misty
         include Misty::ClientPack
         include Misty::Microversion
 
+        def microversion
+          '2.40'
+        end
+
+        def microversion_header(version)
+          {'X-Openstack-Manila-API-Version' => "#{version}"}
+        end
+
         def service_names
           %w{shared-file-systems shared}
         end

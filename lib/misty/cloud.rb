@@ -31,139 +31,139 @@ module Misty
 
     def application_catalog(arg = {})
       @application_catalog ||= build_service(__method__)
-      @application_catalog.set_ether_config(arg) if arg
+      @application_catalog.request_config(arg)
       @application_catalog
     end
 
     def alarming(arg = {})
       @alarming ||= build_service(__method__)
-      @alarming.set_ether_config(arg) if arg
+      @alarming.request_config(arg)
       @alarming
     end
 
     def backup(arg = {})
       @backup ||= build_service(__method__)
-      @backup.set_ether_config(arg) if arg
+      @backup.request_config(arg)
       @backup
     end
 
     def baremetal(arg = {})
       @baremetal ||= build_service(__method__)
-      @baremetal.set_ether_config(arg) if arg
+      @baremetal.request_config(arg)
       @baremetal
     end
 
     def block_storage(arg = {})
       @block_storage ||= build_service(__method__)
-      @block_storage.set_ether_config(arg) if arg
+      @block_storage.request_config(arg)
       @block_storage
     end
 
     def clustering(arg = {})
       @clustering ||= build_service(__method__)
-      @clustering.set_ether_config(arg) if arg
+      @clustering.request_config(arg)
       @clustering
     end
 
     def compute(arg = {})
       @compute ||= build_service(__method__)
-      @compute.set_ether_config(arg) if arg
+      @compute.request_config(arg)
       @compute
     end
 
     def container_infrastructure_management(arg = {})
       @container_infrastructure_management ||= build_service(__method__)
-      @container_infrastructure_management.set_ether_config(arg) if arg
+      @container_infrastructure_management.request_config(arg)
       @container_infrastructure_management
     end
 
     def data_processing(arg = {})
       @data_processing ||= build_service(__method__)
-      @data_processing.set_ether_config(arg) if arg
+      @data_processing.request_config(arg)
       @data_processing
     end
 
     def data_protection_orchestration(arg = {})
       @data_protection_orchestration ||= build_service(__method__)
-      @data_protection_orchestration.set_ether_config(arg) if arg
+      @data_protection_orchestration.request_config(arg)
       @data_protection_orchestration
     end
 
     def database(arg = {})
       @database ||= build_service(__method__)
-      @database.set_ether_config(arg) if arg
+      @database.request_config(arg)
       @database
     end
 
     def dns(arg = {})
       @dns ||= build_service(__method__)
-      @dns.set_ether_config(arg) if arg
+      @dns.request_config(arg)
       @dns
     end
 
     def identity(arg = {})
       @identity ||= build_service(__method__)
-      @identity.set_ether_config(arg) if arg
+      @identity.request_config(arg)
       @identity
     end
 
     def image(arg = {})
       @image ||= build_service(__method__)
-      @image.set_ether_config(arg) if arg
+      @image.request_config(arg)
       @image
     end
 
     def load_balancer(arg = {})
       @load_balancer ||= build_service(__method__)
-      @load_balancer.set_ether_config(arg) if arg
+      @load_balancer.request_config(arg)
       @load_balancer
     end
 
     def messaging(arg = {})
       @messaging ||= build_service(__method__)
-      @messaging.set_ether_config(arg) if arg
+      @messaging.request_config(arg)
       @messaging
     end
 
     def metering(arg = {})
       @metering ||= build_service(__method__)
-      @metering.set_ether_config(arg) if arg
+      @metering.request_config(arg)
       @metering
     end
 
     def networking(arg = {})
       @networking ||= build_service(__method__)
-      @networking.set_ether_config(arg) if arg
+      @networking.request_config(arg)
       @networking
     end
 
     def nfv_orchestration(arg = {})
       @nfv_orchestration ||= build_service(__method__)
-      @nfv_orchestration.set_ether_config(arg) if arg
+      @nfv_orchestration.request_config(arg)
       @nfv_orchestration
     end
 
     def object_storage(arg = {})
       @object_storage ||= build_service(__method__)
-      @object_storage.set_ether_config(arg) if arg
+      @object_storage.request_config(arg)
       @object_storage
     end
 
     def orchestration(arg = {})
       @orchestration ||= build_service(__method__)
-      @orchestration.set_ether_config(arg) if arg
+      @orchestration.request_config(arg)
       @orchestration
     end
 
     def search(arg = {})
       @search ||= build_service(__method__)
-      @search.set_ether_config(arg) if arg
+      @search.request_config(arg)
       @search
     end
 
     def shared_file_systems(arg = {})
       @shared_file_systems ||= build_service(__method__)
-      @shared_file_systems.set_ether_config(arg) if arg
+      @shared_file_systems.request_config(arg)
       @shared_file_systems
     end
 

@@ -22,8 +22,10 @@ module Misty
         @base_path = @base_path.chomp('/')
         @base_url  = @config[:base_url]  ? @config[:base_url] : nil
 
-        @asked_version = @config[:version] ? @config[:version] : ''
-        set_version if microversion
+        if microversion
+          asked_version = @config[:version] ? @config[:version] : ''
+          @version = set_version(asked_version)
+        end
       end
 
       # When a catalog provides a base path and the Service API definition containts the generic equivalent as prefix
@@ -44,11 +46,22 @@ module Misty
         requests_api + requests_custom
       end
 
-      def set_ether_config(arg)
-        @ether_content_type = arg[:content_type] if arg[:content_type]
-        @ether_headers = HTTP::Header.new(arg[:headers]) if arg[:headers]
+      # Each option is recreated to bear new value or the one propagated from defaults, globals or service levels
+      def request_config(arg = {})
+        @request_content_type = arg[:content_type] ? arg[:content_type] : @content_type
+        @request_headers = Misty::HTTP::Header.new(@headers.get.clone)
+        @request_headers.add(arg[:headers]) if arg[:headers]
+        if microversion
+          request_version = if arg[:version]
+                               set_version(arg[:version])
+                             else
+                               @version
+                             end
+          @request_headers.add(microversion_header(request_version)) if request_version
+        end
       end
 
+      # TODO: remove
       def baseclass
         self.class.to_s.split('::')[-1]
       end
