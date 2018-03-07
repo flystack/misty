@@ -1,8 +1,7 @@
 require 'test_helper'
 require 'auth_helper'
-require 'misty/openstack/service'
 require 'misty/microversion'
-require 'misty/config'
+require 'misty/http/request'
 
 describe Misty::Microversion do
   let(:versions_data) do
@@ -17,60 +16,86 @@ describe Misty::Microversion do
           'updated' => '2013-07-23T11:33:21Z',
           'links' => [{ 'href' => 'http://localhost/v2.1/', 'rel' => 'self' }],
           'min_version' => '2.1',
-          'version' => '2.25',
+          'version' => '2.60',
           'id' => 'v2.1' }] }
   end
 
-  let(:config) do
-    arg = {
-      :auth => {
-        :url             => 'http://localhost:5000',
-        :user_id         => 'user_id',
-        :password        => 'secret',
-        :project_id      => 'project_id',
-        :ssl_verify_mode => false
-      }
-    }
-    Misty::Config.new(arg)
-  end
+  describe '#set_version' do
+    let(:service) do
+      service = Object.new
+      service.extend(Misty::Microversion)
 
-  let(:service) do
-    stub_request(:post, "http://localhost:5000/v3/auth/tokens").
-      with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}",
-        :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body =>  JSON.dump(auth_response_v3('compute', 'nova')), :headers => {})
+      def service.asked_version=(val)
+        @asked_version = val
+      end
 
-    stub_request(:get, "http://localhost/").
-      with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
-
-    service = Misty::Openstack::Nova::V2_1.new(config.get_service(:compute))
-  end
-
-  describe '#version_get' do
-    it 'returns the version number' do
-      service.version_get('2.12').must_equal '2.12'
+      def service.headers
+        @headers = Misty::HTTP::Header.new
+      end
+      service.headers
+      service
     end
 
-    it 'returns the version number' do
-      service.version_get('CURRENT').must_equal '2.25'
+    describe 'fetch versions' do
+      before do
+        service.extend(Misty::HTTP::Request)
+
+        stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
+        with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}").
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
+
+        def service.setup
+          @uri = URI.parse('http://localhost/')
+          @log = Logger.new('/dev/null')
+          @auth = Misty::AuthV3.new(
+            :url             => 'http://localhost:5000',
+            :user_id         => 'user_id',
+            :password        => 'secret',
+            :project_id      => 'project_id'
+          )
+        end
+        service.setup
+      end
+
+      let(:fetch_request) do
+        stub_request(:get, "http://localhost/").
+        with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby', 'X-Auth-Token'=>'token_data'}).
+        to_return(:status => 200, :body => JSON.dump(versions_data), :headers => {})
+      end
+
+      it 'returns asked version number when in supported min/max range' do
+        fetch_request
+        service.asked_version=('2.12')
+        service.set_version
+        service.microversion_header.must_equal({"X-Openstack-API-Version" => "object 2.12"})
+      end
+
+      it 'fails when asked version is not within min-max range' do
+        fetch_request
+        service.asked_version=('3.20')
+        proc do
+          service.set_version
+        end.must_raise Misty::Microversion::VersionError
+      end
     end
 
-    it 'fails when version is not within supporterd interval' do
+    it "set version to 'latest' word" do
+      service.asked_version=('latest')
+      service.set_version
+      service.microversion_header.must_equal({"X-Openstack-API-Version" => "object latest"})
+    end
+
+    it 'fails when version is a wrong word' do
       proc do
-        service.version_get('2.0')
+        service.asked_version=('testing')
+        service.set_version
       end.must_raise Misty::Microversion::VersionError
     end
 
-    it 'fails when LATEST version is not available' do
+    it "fails when version does't match <number.number>" do
       proc do
-        service.version_get('LATEST')
-      end.must_raise Misty::Microversion::VersionError
-    end
-
-    it 'fails when using an invalid version State' do
-      proc do
-        service.version_get('OTHER')
+        service.asked_version=('1.2.3')
+        service.set_version
       end.must_raise Misty::Microversion::VersionError
     end
   end

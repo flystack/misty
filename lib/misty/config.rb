@@ -53,7 +53,7 @@ module Misty
       set = {}
       set[:auth] = @auth
       set[:log] = @log
-      service_config = @services.key?(method) ? @services[method] : nil
+      service_config = @services.key?(method) ? @services[method] : {}
       if service_config
         set[:config] = set_config(service_config, @globals)
         set[:config].merge!(set_service(service_config))

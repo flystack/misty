@@ -14,7 +14,6 @@ module Misty
 
         @content_type = @config[:content_type]
         @headers = Misty::HTTP::Header.new(@config[:headers].get.clone)
-        @headers.add(microversion_header) if microversion
         @ssl_verify_mode = @config[:ssl_verify_mode]
 
         @uri = URI.parse(@auth.get_url(service_names, @config[:region_id], @config[:interface]))
@@ -22,9 +21,9 @@ module Misty
         @base_path = @config[:base_path] ? @config[:base_path] : @uri.path
         @base_path = @base_path.chomp('/')
         @base_url  = @config[:base_url]  ? @config[:base_url] : nil
-        @init_version = @config[:version] ? @config[:version] : 'CURRENT'
 
-        @microversion = false
+        @asked_version = @config[:version] ? @config[:version] : ''
+        set_version if microversion
       end
 
       # When a catalog provides a base path and the Service API definition containts the generic equivalent as prefix
@@ -50,11 +49,11 @@ module Misty
         @ether_headers = HTTP::Header.new(arg[:headers]) if arg[:headers]
       end
 
-      private
-
       def baseclass
         self.class.to_s.split('::')[-1]
       end
+
+      private
 
       def requests_api
         @requests_api_list ||= begin

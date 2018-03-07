@@ -9,11 +9,11 @@ module Misty
     { name: :application_catalog,                 project: :murano,      versions: ['v1']},
     { name: :alarming,                            project: :aodh,        versions: ['v2']},
     { name: :backup,                              project: :freezer,     versions: ['v1']},
-    { name: :baremetal,                           project: :ironic,      microversion: 'v1'},
-    { name: :block_storage,                       project: :cinder,      microversion: 'v3', versions: ['v2', 'v1']},
+    { name: :baremetal,                           project: :ironic,      versions: ['v1'],             microversion: 'v1'},
+    { name: :block_storage,                       project: :cinder,      versions: ['v3', 'v2', 'v1'], microversion: 'v3'},
     { name: :clustering,                          project: :senlin,      versions: ['v1']},
-    { name: :compute,                             project: :nova,        microversion: 'v2.1'},
-    { name: :container_infrastructure_management, project: :magnum,      microversion: 'v1'},
+    { name: :compute,                             project: :nova,        versions: ['v2.1'],           microversion: 'v2.1'},
+    { name: :container_infrastructure_management, project: :magnum,      versions: ['v1'],             microversion: 'v1'},
     { name: :data_processing,                     project: :sahara,      versions: ['v1.1']},
     { name: :data_protection_orchestration,       project: :karbor,      versions: ['v1']},
     { name: :database,                            project: :trove,       versions: ['v1.0']},
@@ -28,7 +28,7 @@ module Misty
     { name: :object_storage,                      project: :swift,       versions: ['v1']},
     { name: :orchestration,                       project: :heat,        versions: ['v1']},
     { name: :search,                              project: :searchlight, versions: ['v1']},
-    { name: :shared_file_systems,                 project: :manila,      microversion: 'v2'}
+    { name: :shared_file_systems,                 project: :manila,      versions: ['v2'],             microversion: 'v2'}
   ]
 
   # Default Domain ID
