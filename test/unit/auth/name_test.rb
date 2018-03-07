@@ -47,38 +47,42 @@ describe Misty::Auth::User do
   end
 
   describe '#identity' do
-    it 'raises an error when password is missing' do
-      proc do
+    describe 'succesful' do
+      it "with user id and user name" do
         user = Misty::Auth::User.new('user_id', 'User')
-        user.identity
-      end.must_raise Misty::Config::CredentialsError
-    end
+        user.password = 'secret'
+        user.identity.must_equal ({:user=>{:id=>'user_id', :password=>'secret'}})
+      end
 
-    it "when id is provided it doesn't require domain" do
-      user = Misty::Auth::User.new('user_id', 'User')
-      user.password = 'secret'
-      user.identity.must_equal ({:user=>{:id=>'user_id', :password=>'secret'}})
-    end
-
-    it 'when id is nul and name is provided it uses domain id' do
-      user = Misty::Auth::User.new(nil, 'User')
-      user.password = 'secret'
-      user.domain = Misty::Auth::Name.new('default', nil)
-      user.identity.must_equal ({:user=>{:name=>'User', :domain=>{:id=>'default'}, :password=>'secret'}})
-    end
-
-    it 'when id is nul and name is provided it uses domain name' do
-      user = Misty::Auth::User.new(nil, 'User')
-      user.password = 'secret'
-      user.domain = Misty::Auth::Name.new(nil, 'Default')
-      user.identity.must_equal ({:user=>{:name=>'User', :domain=>{:name=>'Default'}, :password=>'secret'}})
-    end
-
-    it 'raises an error with no user id and no domain are provided' do
-      proc do
+      it 'with user name and user domain name' do
         user = Misty::Auth::User.new(nil, 'User')
-        user.identity
-      end.must_raise Misty::Config::CredentialsError
+        user.password = 'secret'
+        user.domain = Misty::Auth::Name.new('default', nil)
+        user.identity.must_equal ({:user=>{:name=>'User', :domain=>{:id=>'default'}, :password=>'secret'}})
+      end
+
+      it 'with user name and domain name' do
+        user = Misty::Auth::User.new(nil, 'User')
+        user.password = 'secret'
+        user.domain = Misty::Auth::Name.new(nil, 'Default')
+        user.identity.must_equal ({:user=>{:name=>'User', :domain=>{:name=>'Default'}, :password=>'secret'}})
+      end
+    end
+
+    describe 'raises an error' do
+      it 'raises an error when password is missing' do
+        proc do
+          user = Misty::Auth::User.new('user_id', 'User')
+          user.identity
+        end.must_raise Misty::Config::CredentialsError
+      end
+
+      it 'with only user name and no domain' do
+        proc do
+          user = Misty::Auth::User.new(nil, 'User')
+          user.identity
+        end.must_raise Misty::Config::CredentialsError
+      end
     end
   end
 end

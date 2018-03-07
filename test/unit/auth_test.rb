@@ -37,11 +37,28 @@ describe Misty::Auth do
               :user_id           => 'user_id',
               :password          => 'secret',
               :project           => 'project',
-              :project_domain_id => 'domain_id'
+              :project_domain_id => 'project_domain_id'
             }
 
             stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-              with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"name\":\"project\",\"domain\":{\"id\":\"domain_id\"}}}}}").
+              with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"name\":\"project\",\"domain\":{\"id\":\"project_domain_id\"}}}}}").
+              to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
+
+            Misty::AuthV3.new(auth)
+          end
+
+          it 'authenticates using a project name and a project domain name' do
+            auth = {
+              :url               => 'http://localhost:5000',
+              :user              => 'user',
+              :user_domain       => 'user_domain',
+              :password          => 'secret',
+              :project           => 'project',
+              :project_domain    => 'project_domain'
+            }
+
+            stub_request(:post, "http://localhost:5000/v3/auth/tokens").
+              with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"name\":\"user\",\"domain\":{\"name\":\"user_domain\"},\"password\":\"secret\"}}},\"scope\":{\"project\":{\"name\":\"project\",\"domain\":{\"name\":\"project_domain\"}}}}}").
               to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
             Misty::AuthV3.new(auth)
