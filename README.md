@@ -67,6 +67,7 @@ To authenticate with credentials details:
 * `:ssl_verify_mode` - Boolean flag for SSL client verification. SSL is defined when URI scheme => "https://".
 * `:tenant_id` - Tenant id, used for v2.0 only.
 * `:tenant` - Tenant name, used for v2.0 only.
+* `:token` - Allow to provide unscoped token.
 * `:user_id` - User id
 * `:user` - User name
 * `:user_domain_id` - User domain id

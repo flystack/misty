@@ -67,7 +67,6 @@ module Misty
         end
       end
 
-      # TODO: Restore :token option
       if auth[:token]
         @token = auth[:token]
       else
