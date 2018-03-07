@@ -48,10 +48,11 @@ module Misty
 
     def set_credentials(auth)
       if auth[:project_id] || auth[:project]
-        # scope: project
-        project_domain_id = auth[:project_domain_id]
-        if project_domain_id.nil? && auth[:project_domain].nil?
+        if auth[:project_domain_id].nil? && auth[:project_domain].nil?
           project_domain_id = Misty::DOMAIN_ID
+        else
+          project_domain_id = auth[:project_domain_id] if auth[:project_domain_id]
+          project_domain = auth[:project_domain] if auth[:project_domain]
         end
 
         @project = Misty::Auth::ProjectScope.new(auth[:project_id], auth[:project])
@@ -66,13 +67,21 @@ module Misty
         end
       end
 
+      # TODO: Restore :token option
       if auth[:token]
         @token = auth[:token]
       else
-        user_domain_id = auth[:user_domain_id] ? auth[:user_domain_id] : Misty::DOMAIN_ID
         @user = Misty::Auth::User.new(auth[:user_id], auth[:user])
+
+        if auth[:user_domain_id].nil? && auth[:user_domain].nil?
+          user_domain_id = Misty::DOMAIN_ID
+        else
+          user_domain_id = auth[:user_domain_id] if auth[:user_domain_id]
+          user_domain = auth[:user_domain] if auth[:user_domain]
+        end
+
+        @user.domain = Misty::Auth::Name.new(user_domain_id, user_domain)
         @user.password = auth[:password]
-        @user.domain = Misty::Auth::Name.new(user_domain_id, auth[:user_domain])
       end
 
       credentials
