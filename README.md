@@ -172,7 +172,7 @@ openstack.object_storage.create_update_or_delete_container_metadata(container_na
 ```
 
 ## Services
-The latest list of supported service can be obtain following this:
+The latest list of supported service can be obtain from `Misty.services`:
 ```
 require 'misty'
 puts Misty.services
@@ -180,11 +180,11 @@ puts Misty.services
 application_catalog: murano, versions: ["v1"]
 alarming: aodh, versions: ["v2"]
 backup: freezer, versions: ["v1"]
-baremetal: ironic, microversion: v1
-block_storage: cinder, versions: ["v2", "v1"], microversion: v3
+baremetal: ironic, versions: ["v1"], microversion: v1
+block_storage: cinder, versions: ["v3", "v2", "v1"], microversion: v3
 clustering: senlin, versions: ["v1"]
-compute: nova, microversion: v2.1
-container_infrastructure_management: magnum, microversion: v1
+compute: nova, versions: ["v2.1"], microversion: v2.1
+container_infrastructure_management: magnum, versions: ["v1"], microversion: v1
 data_processing: sahara, versions: ["v1.1"]
 data_protection_orchestration: karbor, versions: ["v1"]
 database: trove, versions: ["v1.0"]
@@ -199,7 +199,7 @@ nfv_orchestration: tacker, versions: ["v1.0"]
 object_storage: swift, versions: ["v1"]
 orchestration: heat, versions: ["v1"]
 search: searchlight, versions: ["v1"]
-shared_file_systems: manila, microversion: v2
+shared_file_systems: manila, versions: ["v2"], microversion: v2
 ```
 
 ### Service level configuration parameters
@@ -310,6 +310,57 @@ response = cloud.orchestration.create_stack(data_heat_template)
 id = response.body['stack']['id']
     stack = cloud.orchestration.show_stack_details('test_stack', id)
 pp stack.body
+```
+### Microversion
+#### Examples
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... })
+pp cloud.compute.versions
+=> [{"status"=>"SUPPORTED",
+"updated"=>"2011-01-21T11:33:21Z",
+"links"=>[{"href"=>"http://192.0.2.1:8774/v2/", "rel"=>"self"}],
+"min_version"=>"",
+"version"=>"",
+"id"=>"v2.0"},
+{"status"=>"CURRENT",
+"updated"=>"2013-07-23T11:33:21Z",
+"links"=>[{"href"=>"http://192.0.2.1:8774/v2.1/", "rel"=>"self"}],
+"min_version"=>"2.1",
+"version"=>"2.53",
+"id"=>"v2.1"}]
+```
+
+```ruby
+cloud.compute(:version => '2.25')
+data_keypair = Misty.to_json('keypair': {'name': 'admin-keypair'})
+admin_keypair = cloud.compute.create_or_import_keypair(data_keypair)
+user_id = admin_keypair.body['keypair']['user_id']
+keypairs = cloud.compute.list_keypairs
+pp keypairs.body
+```
+
+Nova version 2.10+, a keypair name can be filtered by user_id
+```ruby
+user_id=1e50c2f0995446fd9b135a1a549cabdb
+cloud.compute(:version => '2.10').show_keypair_details("admin-keypair?user_id=#{user_id}")
+```
+
+With Nova version 2.2+, the type field is also returned when showing keypair details
+```ruby
+cloud.compute(:version => '2.2')
+pp admin_keypair.body
+=> {'keypair'=>
+    {'public_key'=>
+      'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDjenEe7B87OQHYjZAdJWmaY13mF0N3VooviHypEXaSDfEmFj4GinXorKD0kdXAL30orT0wgAVtpAvRhH2iFTPF2VKCdq4VMzLuai60e3oB3vsTWdZQIJtvaW0mpTNVUQKczbFhRFUi4CNsAijjmGJJgxhihd6rAfynFtalLO0yNn3dKtEMbsvs7KeMxT9SXbfLmEXD4reAK/WXQBVjrEjJIgpC3+SXOO6vsavaOTFu7/Nbha/p4g4yJ3rHUU+7lj79a7iy0sNeExBSZ2aKTq7FQ5XDmtZjjpUeas16kMMX5HdxISYkbq3QnG9iTrIy+GEAYKkZPzhuAa76Qpze35aV Generated-by-Nova\n',
+     'user_id'=>'1e50c2f0995446fd9b135a1a549cabdb',
+     'name'=>'admin-keypair',
+     'deleted'=>false,
+     'created_at'=>'2016-11-23T01:23:53.000000',
+     'updated_at'=>nil,
+     'fingerprint'=>'4e:db:2d:bd:93:70:01:b8:61:17:96:23:e0:78:e2:69',
+     'deleted_at'=>nil,
+     'type'=>'ssh',
+     'id'=>8}}
 ```
 
 # OpenstackAPI notes
