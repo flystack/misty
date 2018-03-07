@@ -78,6 +78,8 @@ describe Misty::Config do
 
       it 'with Cloud level parameters' do
         auth_request
+
+        LOG_FILE_NAME = "./misty-unit_test-#{Process.pid}"
         config = Misty::Config.new(
           :auth            => auth,
           :content_type    => :json,
@@ -85,7 +87,7 @@ describe Misty::Config do
           :interface       => 'admin',
           :region_id       => 'regionTest',
           :ssl_verify_mode => false,
-          :log_file        => './test.log'
+          :log_file        => LOG_FILE_NAME
         )
         def config.globals
           @globals
@@ -96,6 +98,8 @@ describe Misty::Config do
         config.globals[:interface].must_equal 'admin'
         config.globals[:region_id].must_equal 'regionTest'
         config.globals[:ssl_verify_mode].must_equal false
+        File.exist?(LOG_FILE_NAME).must_equal true
+        File.delete(LOG_FILE_NAME) if File.exist?(LOG_FILE_NAME)
       end
 
       describe 'service level configurations' do
