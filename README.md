@@ -5,16 +5,26 @@ Misty handles OpenStack APIs requests as Transparently as possible by:
 * Directly submitting request to Openstack Service endpoints
 * Or by using APIs Schema defined functions which are dynamically extracted from OpenStackAPI reference.
 
-## Features
-* Standardized OpenStack APIs: [Based upon API-ref](https://developer.openstack.org/api-guide/quick-start/) it offers
-  the flexibility to easily integrate new OpenStack services. Any request can be overridden or completed
-* Versions and Microversions
-* Transparent Request data handling
-* Response data format of choice: JSON or Hash
+## Main features
+* Standardized OpenStack APIs: [Based upon API-ref](https://developer.openstack.org/api-guide/quick-start/) offering
+  flexibility to easily integrate new OpenStack services. Any request can be overridden or completed
+* Microversions & Legacy Versions
+* Transparent request data handling and response data format of choice: JSON or Hash
 * Custom HTTP Methods for special needs
-* On demand services - Auto loads required versions
-* Low dependency - Use standard Net/HTTP and JSON gem only
-* Persistent HTTP connections (default since HTTP 1.1 anyway)
+* And also: Lazy service loading, Low gem dependency (use only Net/HTTP and JSON), Persistent HTTP connections (default since HTTP 1.1 anyway)
+
+### Current Microversion support
+* Cinder
+  v3.44
+* Ironic
+  v1.32
+* Magnum
+  v1.4
+* Manilla
+  v2.40
+* Nova
+  v2.60
+
 
 # How To
 Fetch and install
@@ -48,11 +58,44 @@ cloud = Misty::Cloud.new(
   cloud.network.create_network(network)
   v1 = cloud.baremetal.show_v1_api
 ```
+## Configuration
+To provide the maximum flexibility, there are 4 levels of configuration which are always propagated from top to bottom.
+* The Cloud global defaults
+* The Cloud global parameters
+* The service level parameters
+* The request level ephemeral parameters
 
-## Authentication
+No global parameters provided, the defaults are applied.
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... })
+```
+
+Some provided global parameters, which override respective global and apply at service level.
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... }, :log_file => './misty.log', :headers => {"x-tra:" => "value"})
+```
+
+Provided service level parameters are applied for all service requests.  
+Some such as the headers are cumulative.  
+Others such as the microversion feature, don't have global definition.
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... }, compute {:version => 2.60})
+# All following requests are going to be with version 2.60, unless overridden at request level
+cloud.compute.list_servers
+```
+
+And finally, at requests level, provided parameters are ephemeral
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... })
+cloud.compute(:version => 'latest', :content_type => :json, :headers => {"key" => "value"}).list_servers
+# Back to defaults (since there are no global or service level parameters provided)
+cloud.compute.list_servers
+```
+
+### Authentication
 Openstack Identity service Keystone version 3 is the default, version 2.0, although deprecated, is available.
 
-### Parameters
+#### Parameters
 The following parameters can be used:
 To authenticate with credentials details:
 * `:context` - Allow to provide already authenticated context(catalog, token, expiry time). Used for v2.0 only.
@@ -73,7 +116,7 @@ To authenticate with credentials details:
 * `:user_domain_id` - User domain id
 * `:user_domain` - User domain name
 
-#### Keystone v3
+##### Keystone v3
 Version 3 relies on the concept of domain name or id to authenticates
 
 `Misty::AuthV3` is used by default unless authentication credentials contains a tenant name or id in wich case it
@@ -82,7 +125,7 @@ will use on `Misty::AuthV2`.
 The credentials are a combination of "id" and "name" used to uniquely identify projects, users and their domains.
 When using only the name, a domain must be specified to guarantee a unique record from the Identity service.
 
-##### Examples
+###### Examples
 ```ruby
 auth = {
   :url            => 'http://localhost:5000',
@@ -115,7 +158,7 @@ context = { :context => { :token => token_id, :catalog => service_catalog, :expi
 cloud = Misty::Cloud.new(:auth => context)
 ```
 
-#### Keystone v2.0
+##### Keystone v2.0
 By providing tenant details Misty will detect it's using v2.0 for authentication:
 
 ```ruby
@@ -130,7 +173,7 @@ cloud = Misty::Cloud.new(:auth => auth_v2)
 cloud.identity.list_tenants
 ```
 
-#### Note
+##### Note
 It's possible to authenticate against Keystone V3 and use the identity service v2.0, for instance:
 In which case API set for v2.0 applies: tenants are available but not the projects.
 ```ruby
@@ -138,7 +181,7 @@ cloud = Misty::Cloud.new(:auth => auth_v3)
 cloud.identity(:api_version => 'v2.0')
 ```
 
-## Global configuration options
+### Global configuration options
 The configuration parameters used to initialize `Misty::Cloud` are global. They are optionals and Misty::Config
 defaults are applied if needed.
 
@@ -172,6 +215,32 @@ header = Misty::HTTP::Header.new(
 openstack.object_storage.create_update_or_delete_container_metadata(container_name, header)
 ```
 
+### Service and Request levels configuration parameters
+The same parameters used at the global configuration variables can be applied at Service level or at a Request level.
+ The global values passed from `Misty::Cloud` level are then overridden at the Service level.
+
+The following parameters can be also used:
+* `:api_version` - String for specifying Openstack API service version to use. Default is latest supported version.
+  Applies only at service level as it's needed for service creation.
+* `:base_path` - Allows to force the base path for every URL requests Default nil.
+* `:base_url` - Allows to force the base URL for every requests. Default nil.
+* `:version` - Version to be used when microversion is supported by the service. Default: `nil`
+  Allowed values: `'latest'`, or a version number such as '2.10'
+
+#### Examples
+Initialize cloud
+```ruby
+cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
+```
+
+Then use different options, for example, the identify service, therefore overriding respective global defaults or
+specified values
+```ruby
+ cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
+Provide service specific option
+ cloud.compute  => {:version => '2.27'})
+```
+
 ## Services
 The latest list of supported service can be obtain from `Misty.services`:
 ```
@@ -203,31 +272,7 @@ search: searchlight, versions: ["v1"]
 shared_file_systems: manila, versions: ["v2"], microversion: v2
 ```
 
-### Service level configuration parameters
-The same parameters used at the global configuration variables can be applied at Service level.
-The global values passed from +Misty::Cloud+ level are then overridden at the Service level.
-
-Also, the following parameters can be used:
-* `:api_version` - String for specifying Openstack API service version to use. Default is latest supported version.
-* `:base_path` - Allows to force the base path for every URL requests Default nil.
-* `:base_url` - Allows to force the base URL for every requests. Default nil.
-* `:version` - Version to be used when microversion is supported by the service. Default: `"CURRENT"`
-  Allowed values: "CURRENT", "LATEST", "SUPPORTED", or a version number such as "2.0" or "3"
-
-#### Examples
-Initialize cloud
-```ruby
-cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
-```
-
-Then use different options, for example, the identify service, therefore overriding respective global defaults or
-specified values
-```ruby
- cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
-Provide service specific option
- cloud.compute  => {:version => '2.27'})
-```
-### Service short cut - Prefixes
+### Service Prefix
 A shorter name can be used to call a service only if it's unique among all services.
 For instance `net` or `network` can be used instead of `networking` because it's not ambiguous.
 Meanwhile `data` doesn't work because it's ambiguous between `data_processing` and `data_protection_orchestration`
@@ -305,15 +350,18 @@ heat_template = {
   },
   "timeout_mins": 60
 }
-    cloud = Misty::Cloud.new(:auth => { ... })
+
+require 'misty'
+require 'pp'
+cloud = Misty::Cloud.new(:auth => { ... })
 data_heat_template = Misty.to_json(heat_template)
 response = cloud.orchestration.create_stack(data_heat_template)
 id = response.body['stack']['id']
-    stack = cloud.orchestration.show_stack_details('test_stack', id)
+stack = cloud.orchestration.show_stack_details('test_stack', id)
 pp stack.body
 ```
-### Microversion
-#### Examples
+
+#### Some usage examples
 ```ruby
 cloud = Misty::Cloud.new(:auth => { ... })
 pp cloud.compute.versions

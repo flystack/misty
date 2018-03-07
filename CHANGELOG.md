@@ -1,3 +1,44 @@
+# 1.3.4 - 07 March 2018
+## CI
+Added OpenLab app
+https://openlabtesting.org/
+
+## Cloud and Openstack Services configuration management
+* Using prototyping instead of inheritance for Misty::Config module.
+  Restructured the propagation of the parameter from top (defaults) to bottom (request) levels:
+  At top level are the Defaults parameters
+  At Cloud level are the Globals parameters
+  At Service level are service specific parameters
+  At Request level are the ephemeral parameters applying only for a request.
+* Log
+  * Fixed empty logs
+  * Refactored
+
+## Microversion
+Using OpenStack API WG guidelines for version validation
+Following microversion latest support
+## Cinder - v3.44
+## Ironic - v1.32
+## Magnum - v1.4
+## Manilla - v2.40
+## Nova - v2.60
+
+## Authentication
+Fixed Project domain name issue which was ignored as project domain id was used instead by default
+https://github.com/flystack/misty/issues/115
+
+## Engine
+Only Ruby MRI versions active are tested
+
+## README
+Updated to reflect above
+Reorganized with how-to to reduce duplication and bring more consistency
+
+# 1.3.3 - 07 February 2018
+* Fixed Misty::Services.names
+
+# 1.3.2 - Does not exist
+
 # 1.3.1 - 06 February 2018
 ## Integration test
 Fast forward expiry time stamp to fix expired token
