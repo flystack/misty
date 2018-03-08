@@ -12,8 +12,8 @@ module Misty
           '/v1/{tenant_id}'
         end
 
-        def service_names
-          %w{orchestration}
+        def service_types
+          %w(orchestration)
         end
       end
     end

@@ -12,8 +12,8 @@ module Misty
           '/v1/{account}'
         end
 
-        def service_names
-          %w{object-storage object-store}
+        def service_types
+          %w(object-store)
         end
 
         # Custom requests

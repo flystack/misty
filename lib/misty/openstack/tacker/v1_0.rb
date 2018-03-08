@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::TackerV1_0
         include Misty::ClientPack
 
-        def service_names
-          %w{nfv-orchestration}
+        def service_types
+          %w(nfv-orchestration)
         end
       end
     end

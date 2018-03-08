@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::SenlinV1
         include Misty::ClientPack
 
-        def service_names
-          %w{clustering}
+        def service_types
+          %w(clustering resource-cluster cluster)
         end
       end
     end

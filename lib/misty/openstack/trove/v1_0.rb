@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::TroveV1_0
         include Misty::ClientPack
 
-        def service_names
-          %w{database}
+        def service_types
+          %w(database)
         end
       end
     end

@@ -15,7 +15,7 @@ module Misty
     INTERFACE = 'public'
 
     # Valid endpoint interfaces
-    INTERFACES = %w{admin public internal}
+    INTERFACES = %w(admin public internal)
 
     # Default Log file
     LOG_FILE  = '/dev/null'

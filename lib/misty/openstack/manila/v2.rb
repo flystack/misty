@@ -18,8 +18,8 @@ module Misty
           {'X-Openstack-Manila-API-Version' => "#{version}"}
         end
 
-        def service_names
-          %w{shared-file-systems shared}
+        def service_types
+          %w(shared-file-system share sharev2)
         end
       end
     end

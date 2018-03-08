@@ -33,8 +33,8 @@ module Misty
           end
         end
 
-        def service_names
-          %w{compute}
+        def service_types
+          %w(compute)
         end
       end
     end

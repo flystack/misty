@@ -8,8 +8,13 @@ module Misty
         include Misty::Openstack::GlanceV2
         include Misty::ClientPack
 
-        def service_names
-          %w{image}
+        def service_types
+          %w(image)
+        end
+
+        # Custom requests
+        def list_images
+          show_images
         end
       end
     end

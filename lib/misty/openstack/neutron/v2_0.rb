@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::NeutronV2_0
         include Misty::ClientPack
 
-        def service_names
-          %w{network networking}
+        def service_types
+          %w(network)
         end
       end
     end

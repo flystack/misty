@@ -140,7 +140,7 @@ describe Misty::Config do
             :interface       => 'internal',
             :region_id       => 'region_global',
             :ssl_verify_mode => false,
-              :networking => {
+              :network => {
                 :content_type    => :hash,
                 :headers         => {'Local Key' => 'Local Value'},
                 :interface       => 'admin',
@@ -152,7 +152,7 @@ describe Misty::Config do
             @globals
           end
 
-          service_config = config.get_service(:networking)
+          service_config = config.get_service(:network)
           service_config[:config][:content_type].must_equal :hash
           service_config[:config][:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Global Key' => 'Global Value', 'Local Key' => 'Local Value')
           service_config[:config][:interface].must_equal 'admin'

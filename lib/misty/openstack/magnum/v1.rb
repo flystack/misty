@@ -14,8 +14,8 @@ module Misty
           '1.4'
         end
 
-        def service_names
-          %w{container-infrastructure-management container-infrastructure}
+        def service_types
+          %w(container-infrastructure-management container-infrastructure)
         end
       end
     end

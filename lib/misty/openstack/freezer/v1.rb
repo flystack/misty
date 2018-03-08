@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::FreezerV1
         include Misty::ClientPack
 
-        def service_names
-          %w{backup}
+        def service_types
+          %w(backup)
         end
       end
     end

@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::OctaviaV2_0
         include Misty::ClientPack
 
-        def service_names
-          %w{load-balancer}
+        def service_types
+          %w(load-balancer)
         end
       end
     end

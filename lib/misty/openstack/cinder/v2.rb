@@ -13,8 +13,8 @@ module Misty
           '/v2/{project_id}'
         end
 
-        def service_names
-          %w{block-storage, block-store, volume}
+        def service_types
+          %w(volumev2)
         end
       end
     end

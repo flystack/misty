@@ -196,7 +196,7 @@ describe Misty::Auth do
         to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {'x-subject-token'=>'token_data'})
 
         auth = Misty::AuthV3.new(authv3_creds)
-        auth.get_url(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
+        auth.get_url(%w(identity), 'regionOne', 'public').must_equal 'http://localhost'
       end
     end
   end
@@ -308,7 +308,7 @@ describe Misty::Auth do
           to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
         auth = Misty::AuthV2.new(authv2_creds)
-        auth.get_url(%w{identity}, 'regionOne', 'public').must_equal 'http://localhost'
+        auth.get_url(%w(identity), 'regionOne', 'public').must_equal 'http://localhost'
       end
     end
   end

@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::DesignateV2
         include Misty::ClientPack
 
-        def service_names
-          %w{dns}
+        def service_types
+          %w(dns)
         end
       end
     end

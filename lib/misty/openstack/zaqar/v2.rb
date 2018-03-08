@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::ZaqarV2
         include Misty::ClientPack
 
-        def service_names
-          %w{messaging}
+        def service_types
+          %w(message messaging)
         end
       end
     end

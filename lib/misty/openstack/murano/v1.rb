@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::MuranoV1
         include Misty::ClientPack
 
-        def service_names
-          %w{application-catalog}
+        def service_types
+          %w(application-catalog)
         end
       end
     end

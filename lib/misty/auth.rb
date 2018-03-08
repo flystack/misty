@@ -60,15 +60,25 @@ module Misty
       Time.parse(@expires) < Time.now.utc
     end
 
-    def get_url(service_names, region_id, interface)
-      find_url(get_service(service_names), region_id, interface)
+    def catalog_consumption
+      service-type
+      be-strict
+      region-name
+      interface
+      service-name
+      service-id
+      endpoint-override
     end
 
-    def get_service(service_names)
+    def get_url(service_types, region_id, interface)
+      find_url(get_service(service_types), region_id, interface)
+    end
+
+    def get_service(service_types)
       @catalog.each do |service|
-        return service if service_names.include?(service['type'])
+        return service if service_types.include?(service['type'])
       end
-      raise CatalogError, "No service '#{service_names}' found."
+      raise CatalogError, "No service '#{service_types}' found."
     end
 
     def get_token

@@ -16,7 +16,7 @@ module Misty
     end
 
     def microversion_header(version)
-      {'X-Openstack-API-Version' => "#{service_names[0]} #{version}" }
+      {'X-Openstack-API-Version' => "#{service_types[0]} #{version}" }
     end
 
     private

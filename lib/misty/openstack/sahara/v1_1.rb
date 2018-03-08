@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::SaharaV1_1
         include Misty::ClientPack
 
-        def service_names
-          %w{data-processing}
+        def service_types
+          %w(data-processing)
         end
       end
     end

@@ -93,7 +93,7 @@ describe 'Misty::Cloud' do
   it '#blockStorage' do
     stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(auth_response_v3('volume', 'cinder')), :headers => token_header)
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3('volumev3', 'cinder')), :headers => token_header)
 
     stub_request(:get, 'http://localhost/').
       with(:headers => auth_headers).
@@ -172,12 +172,12 @@ describe 'Misty::Cloud' do
     cloud.load_balancer.must_be_kind_of Misty::Openstack::Octavia::V2_0
   end
 
-  it '#networking' do
+  it '#network' do
     stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(auth_response_v3('networking', 'neutron')), :headers => token_header)
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => token_header)
 
-    cloud.networking.must_be_kind_of Misty::Openstack::Neutron::V2_0
+    cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
   end
 
   it '#nfv_orchestration' do
@@ -230,7 +230,7 @@ describe 'Misty::Cloud' do
   it '#sharedFileSystems' do
     stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
-      to_return(:status => 200, :body => JSON.dump(auth_response_v3('shared-file-systems', 'manila')), :headers => token_header)
+      to_return(:status => 200, :body => JSON.dump(auth_response_v3('shared-file-system', 'manila')), :headers => token_header)
 
     stub_request(:get, 'http://localhost/').
       with(:headers => auth_headers).
@@ -240,10 +240,10 @@ describe 'Misty::Cloud' do
   end
 
   describe 'prefixed service name' do
-    it '#network match networking' do
+    it '#network match network' do
       stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
         with(:body => JSON.dump(auth_body), :headers => auth_headers).
-        to_return(:status => 200, :body => JSON.dump(auth_response_v3('networking', 'neutron')), :headers => token_header)
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => token_header)
 
       cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
     end
@@ -251,7 +251,7 @@ describe 'Misty::Cloud' do
     it '#data is ambiguous' do
       stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
         with(:body => JSON.dump(auth_body), :headers => auth_headers).
-        to_return(:status => 200, :body => JSON.dump(auth_response_v3('Identity', 'keystone')), :headers => token_header)
+        to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => token_header)
 
       proc do
         cloud.data

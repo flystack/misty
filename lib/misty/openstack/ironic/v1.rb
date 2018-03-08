@@ -18,8 +18,8 @@ module Misty
           {'X-Openstack-Ironic-API-Version' => "#{version}"}
         end
 
-        def service_names
-          %w{baremetal}
+        def service_types
+          %w(baremetal)
         end
       end
     end

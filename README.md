@@ -51,9 +51,9 @@ cloud = Misty::Cloud.new(
 
 ```
   servers = cloud.compute.list_servers.body
-  networks = cloud.networking.list_networks
+  networks = cloud.network.list_networks
   first_network_id = networks.body['networks'][0]['id']
-  first_network = cloud.networking.show_network_details(first_network_id)
+  first_network = cloud.network.show_network_details(first_network_id)
   network = Misty.to_json(:network => {:name => 'misty-example'})
   cloud.network.create_network(network)
   v1 = cloud.baremetal.show_v1_api
@@ -264,7 +264,7 @@ image: glance, versions: ["v2", "v1"]
 load_balancer: octavia, versions: ["v2.0"]
 messaging: zaqar, versions: ["v2"]
 metering: ceilometer, versions: ["v2"]
-networking: neutron, versions: ["v2.0"]
+network: neutron, versions: ["v2.0"]
 nfv_orchestration: tacker, versions: ["v1.0"]
 object_storage: swift, versions: ["v1"]
 orchestration: heat, versions: ["v1"]
@@ -274,7 +274,7 @@ shared_file_systems: manila, versions: ["v2"], microversion: v2
 
 ### Service Prefix
 A shorter name can be used to call a service only if it's unique among all services.
-For instance `net` or `network` can be used instead of `networking` because it's not ambiguous.
+For instance `net` or `network` can be used instead of `network` because it's not ambiguous.
 Meanwhile `data` doesn't work because it's ambiguous between `data_processing` and `data_protection_orchestration`
 
 ### Aliases  

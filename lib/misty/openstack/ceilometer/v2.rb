@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::CeilometerV2
         include Misty::ClientPack
 
-        def service_names
-          %w{metering}
+        def service_types
+          %w(meter metering telemetry)
         end
       end
     end

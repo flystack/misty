@@ -12,8 +12,8 @@ module Misty
           '/v1/{admin_tenant_id}/'
         end
 
-        def service_names
-          %w{block-storage, block-store, volume}
+        def service_types
+          %w(volume)
         end
       end
     end

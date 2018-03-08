@@ -131,10 +131,10 @@ module Misty
       @metering
     end
 
-    def networking(arg = {})
-      @networking ||= build_service(__method__)
-      @networking.request_config(arg)
-      @networking
+    def network(arg = {})
+      @network ||= build_service(__method__)
+      @network.request_config(arg)
+      @network
     end
 
     def nfv_orchestration(arg = {})

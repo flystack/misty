@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::SearchlightV1
         include Misty::ClientPack
 
-        def service_names
-          %w{search}
+        def service_types
+          %w(search)
         end
       end
     end

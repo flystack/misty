@@ -62,11 +62,11 @@ describe Misty::Microversion do
       it 'set microversion when number within min/max range' do
         fetch_request
 
-        def service.service_names
-          %w{service_name1}
+        def service.service_types
+          %w(service_type1)
         end
 
-        service.microversion_header('2.60').must_equal({"X-Openstack-API-Version" => "service_name1 2.60"})
+        service.microversion_header('2.60').must_equal({"X-Openstack-API-Version" => "service_type1 2.60"})
       end
 
       it 'fails when asked version is not within min-max range' do
@@ -79,10 +79,10 @@ describe Misty::Microversion do
     end
 
     it "set microversion to 'latest'" do
-      def service.service_names
-        %w{service_name2}
+      def service.service_types
+        %w(service_type2)
       end
-      service.microversion_header('latest').must_equal({"X-Openstack-API-Version" => "service_name2 latest"})
+      service.microversion_header('latest').must_equal({"X-Openstack-API-Version" => "service_type2 latest"})
     end
 
     it 'fails when version is a wrong word' do

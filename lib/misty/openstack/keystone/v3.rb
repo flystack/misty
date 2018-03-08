@@ -12,8 +12,8 @@ module Misty
         include Misty::ClientPack
         include Misty::Openstack::Extension
 
-        def service_names
-          %w{identity}
+        def service_types
+          %w(identity)
         end
       end
     end

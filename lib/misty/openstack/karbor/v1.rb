@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::KarborV1
         include Misty::ClientPack
 
-        def service_names
-          %w{data-protection data-protection-orchestration}
+        def service_types
+          %w(data-protection data-protection-orchestration)
         end
       end
     end

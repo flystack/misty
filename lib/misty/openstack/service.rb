@@ -16,7 +16,7 @@ module Misty
         @headers = Misty::HTTP::Header.new(@config[:headers].get.clone)
         @ssl_verify_mode = @config[:ssl_verify_mode]
 
-        @uri = URI.parse(@auth.get_url(service_names, @config[:region_id], @config[:interface]))
+        @uri = URI.parse(@auth.get_url(service_types, @config[:region_id], @config[:interface]))
 
         @base_path = @config[:base_path] ? @config[:base_path] : @uri.path
         @base_path = @base_path.chomp('/')

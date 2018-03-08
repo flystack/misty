@@ -8,8 +8,8 @@ module Misty
         include Misty::Openstack::GlanceV1
         include Misty::ClientPack
 
-        def service_names
-          %w{image}
+        def service_types
+          %w(image)
         end
       end
     end
