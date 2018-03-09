@@ -15,10 +15,8 @@ describe Misty::Openstack::Service do
     end
 
     it "returns String when defined in API's module" do
-      class << service
-        def prefix_path_to_ignore
-          '/v3/{tenant_id}'
-        end
+      def service.prefix_path_to_ignore
+        '/v3/{tenant_id}'
       end
 
       service.prefix_path_to_ignore.must_equal '/v3/{tenant_id}'
@@ -30,12 +28,6 @@ describe Misty::Openstack::Service do
       list = service.requests
       list.must_be_kind_of Array
       list.must_include :list_service_profiles
-    end
-  end
-
-  describe '#baseclass' do
-    it 'returns base class name' do
-      service.send(:baseclass).must_equal 'V2_0'
     end
   end
 

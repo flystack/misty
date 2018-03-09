@@ -1,5 +1,5 @@
 require 'misty/openstack/ironic/ironic_v1'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 require 'misty/microversion'
 
 module Misty
@@ -7,7 +7,7 @@ module Misty
     module Ironic
       class V1
         include Misty::Openstack::IronicV1
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
         include Misty::Microversion
 
         def microversion

@@ -3,15 +3,14 @@ require 'misty/http/method_builder'
 
 describe Misty::HTTP::MethodBuilder do
   let(:service) do
-    class Service
-      include Misty::HTTP::MethodBuilder
+    service = Object.new
+    service.extend(Misty::HTTP::MethodBuilder)
 
-      def base_path=(val)
-        @base_path = val
-      end
+    def service.base_path=(val)
+      @base_path = val
     end
 
-    Service.new
+    service
   end
 
   describe '#base_filter' do
@@ -37,8 +36,8 @@ describe Misty::HTTP::MethodBuilder do
   end
 
   describe '#get_method' do
-    class Service
-      def api
+    before do
+      def service.api
         {
           '/' => { GET: [:list_api_versions] },
           '/v2.0/' => { GET: [:show_api_v2_details] },
@@ -78,10 +77,8 @@ describe Misty::HTTP::MethodBuilder do
 
   describe '#prefixed_path' do
     it 'returns true and same path with empty prefix' do
-      class Service
-        def prefix_path_to_ignore
-          ''
-        end
+      def service.prefix_path_to_ignore
+        ''
       end
 
       path = '/v3/resources/type'
@@ -91,10 +88,8 @@ describe Misty::HTTP::MethodBuilder do
     end
 
     it 'returns false and same path when unmatched prefix' do
-      class Service
-        def prefix_path_to_ignore
-          '/v3/{project_id}'
-        end
+      def service.prefix_path_to_ignore
+        '/v3/{project_id}'
       end
 
       path = '/v2/schemas/tasks'
@@ -104,10 +99,8 @@ describe Misty::HTTP::MethodBuilder do
     end
 
     it 'returns true and filtered path when matched prefix' do
-      class Service
-        def prefix_path_to_ignore
-          '/v3/{project_id}'
-        end
+      def service.prefix_path_to_ignore
+        '/v3/{project_id}'
       end
 
       path = '/v3/{project_id}/backups/detail'
@@ -128,12 +121,9 @@ describe Misty::HTTP::MethodBuilder do
 
     it 'returns a query string when passing in a Hash' do
       service.send(:query_param, {}).must_equal ''
-
       service.send(:query_param, {:foo  => 'bar'}).must_equal '?foo=bar'
       service.send(:query_param, {'foo' => 'bar'}).must_equal '?foo=bar'
-
       service.send(:query_param, {:foo => ['bar', 'baz'], :value => 42, :flag => nil }).must_equal '?foo=bar&foo=baz&value=42&flag'
-
       service.send(:query_param, {'===' => 'Ëncøding is hárd!'}).must_equal '?%3D%3D%3D=%C3%8Bnc%C3%B8ding+is+h%C3%A1rd%21'
     end
 

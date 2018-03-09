@@ -1,12 +1,12 @@
 require 'misty/openstack/glance/glance_v2'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 
 module Misty
   module Openstack
     module Glance
       class V2
         include Misty::Openstack::GlanceV2
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
 
         def service_types
           %w(image)

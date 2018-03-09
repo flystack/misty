@@ -38,22 +38,22 @@ describe Misty::Openstack::Extension do
     v1
   end
 
-  describe "Succesful" do
-    it "Adds methods to existing Verb" do
+  describe "succesful" do
+    it "adds methods to existing Verb" do
       v1.api["/v1/resource1"][:POST].must_include :method11
     end
 
-    it "Adds Verb" do
+    it "adds Verb" do
       v1.api["/v1/resource1"].must_include :PUT
     end
 
-    it "Adds Resource" do
+    it "adds Resource" do
       v1.api.must_include "/v1/resource3"
     end
   end
 
-  describe "Fails" do
-    it "Raise RuntimeError when a resource already exist" do
+  describe "fails" do
+    it "raise error when a resource already exists" do
       class << v1
         def api_ext
           { "/v1/resource1" => { :POST => [:method1] } }

@@ -1,5 +1,5 @@
 require 'misty/openstack/manila/manila_v2'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 require 'misty/microversion'
 
 module Misty
@@ -7,7 +7,7 @@ module Misty
     module Manila
       class V2
         include Misty::Openstack::ManilaV2
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
         include Misty::Microversion
 
         def microversion

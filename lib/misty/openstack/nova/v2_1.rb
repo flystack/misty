@@ -1,5 +1,5 @@
 require 'misty/openstack/nova/nova_v2_1'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 require 'misty/microversion'
 
 module Misty
@@ -7,7 +7,7 @@ module Misty
     module Nova
       class V2_1
         include Misty::Openstack::NovaV2_1
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
         include Misty::Microversion
 
         # TODO: Verify

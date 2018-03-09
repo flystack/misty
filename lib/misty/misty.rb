@@ -1,5 +1,4 @@
 require 'misty/services'
-require 'logger'
 
 # Misty is a HTTP client for OpenStack APIs, aiming to be fast, flexible and exhaustive.
 # Misty acts as a conduit to OpenStack APIs by handling requests as transparently as possible.

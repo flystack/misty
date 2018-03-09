@@ -1,4 +1,4 @@
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 require 'auth_helper'
 
 def request_header
@@ -24,11 +24,6 @@ def service(param_content_type = :hash, params = {})
     to_return(:status => 200, :body =>  JSON.dump(auth_response_v3('network', 'neutron')), :headers => {'x-subject-token'=>'token_data'})
 
   config = Misty::Config.new(arg)
-
-# TODO: remove
-#  stub_request(:post, 'http://localhost:5000/v3/auth/tokens').
-#    with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}},\"scope\":{\"project\":{\"id\":\"project_id\"}}}}").
-#    to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
   Misty::Openstack::Neutron::V2_0.new(config.get_service(:network))
 end
