@@ -3,12 +3,8 @@ module Misty
     module Service
       attr_reader :headers, :microversion
 
-      # ==== Attributes
-      #
-      # * +arg+ - +Misty::Config+ instance
-      #
       def initialize(arg)
-        @auth = arg[:auth]
+        @token = arg[:token]
         @log = arg[:log]
         @config = arg[:config]
 
@@ -16,11 +12,15 @@ module Misty
         @headers = Misty::HTTP::Header.new(@config[:headers].get.clone)
         @ssl_verify_mode = @config[:ssl_verify_mode]
 
-        @uri = URI.parse(@auth.get_url(service_names, @config[:region_id], @config[:interface]))
+        @endpoint = if @config[:endpoint]
+                      URI.parse(@config[:endpoint])
+                    else
+                      names = service_types
+                      names << @config[:service_name] if @config[:service_name]
+                      URI.parse(@token.catalog.get_endpoint_url(names, @config[:region], @config[:interface]))
+                    end
 
-        @base_path = @config[:base_path] ? @config[:base_path] : @uri.path
-        @base_path = @base_path.chomp('/')
-        @base_url  = @config[:base_url]  ? @config[:base_url] : nil
+        @base_path = @config[:base_path] ? @config[:base_path] : @endpoint.path.chomp('/')
 
         if microversion
           asked_version = @config[:version] ? @config[:version] : ''
@@ -46,7 +46,8 @@ module Misty
         requests_api + requests_custom
       end
 
-      # Each option is recreated to bear new value or the one propagated from defaults, globals or service levels
+      # Each option is recreated for a request brief life duration to account for a new value if provided or use value
+      # propagated from defaults, globals or service levels
       def request_config(arg = {})
         @request_content_type = arg[:content_type] ? arg[:content_type] : @content_type
         @request_headers = Misty::HTTP::Header.new(@headers.get.clone)
@@ -59,11 +60,6 @@ module Misty
                              end
           @request_headers.add(microversion_header(request_version)) if request_version
         end
-      end
-
-      # TODO: remove
-      def baseclass
-        self.class.to_s.split('::')[-1]
       end
 
       private

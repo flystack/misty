@@ -88,7 +88,7 @@ describe Misty::Cloud do
 
         proc do
           Misty::Cloud.new(:auth => authv3_data)
-        end.must_raise Misty::Auth::URLError
+        end.must_raise Misty::Auth::Token::URLError
       end
 
       it 'with empty url' do
@@ -101,7 +101,7 @@ describe Misty::Cloud do
 
         proc do
           Misty::Cloud.new(:auth => authv3_data)
-        end.must_raise Misty::Auth::URLError
+        end.must_raise Misty::Auth::Token::URLError
       end
     end
 
@@ -116,10 +116,10 @@ describe Misty::Cloud do
           }
         end
 
-        it 'uses AuthV2' do
+        it 'uses Misty::Auth::Token::V3' do
           authv2 = Minitest::Mock.new
 
-          Misty::AuthV2.stub :new, authv2 do
+            Misty::Auth::Token::V2.stub :new, authv2 do
             cloud = Misty::Cloud.new(:auth => authv2_data)
             assert_mock authv2
           end
@@ -136,10 +136,10 @@ describe Misty::Cloud do
           }
         end
 
-        it 'uses AuthV3' do
+        it 'uses Misty::Auth::Token::V3' do
           authv3 = Minitest::Mock.new
 
-          Misty::AuthV3.stub :new, authv3 do
+          Misty::Auth::Token::V3.stub :new, authv3 do
             cloud = Misty::Cloud.new(:auth => authv3_data)
             assert_mock authv3
           end

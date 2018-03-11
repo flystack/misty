@@ -1,5 +1,5 @@
 require 'misty/openstack/cinder/cinder_v3'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 require 'misty/microversion'
 
 module Misty
@@ -7,7 +7,7 @@ module Misty
     module Cinder
       class V3
         include Misty::Openstack::CinderV3
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
         include Misty::Microversion
 
         def microversion
@@ -22,8 +22,8 @@ module Misty
           '/v3/{tenant_id}'
         end
 
-        def service_names
-          %w{block-storage, block-store, volume}
+        def service_types
+          %w(volumev3 block-storage block-store)
         end
       end
     end

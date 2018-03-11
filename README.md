@@ -51,9 +51,9 @@ cloud = Misty::Cloud.new(
 
 ```
   servers = cloud.compute.list_servers.body
-  networks = cloud.networking.list_networks
+  networks = cloud.network.list_networks
   first_network_id = networks.body['networks'][0]['id']
-  first_network = cloud.networking.show_network_details(first_network_id)
+  first_network = cloud.network.show_network_details(first_network_id)
   network = Misty.to_json(:network => {:name => 'misty-example'})
   cloud.network.create_network(network)
   v1 = cloud.baremetal.show_v1_api
@@ -93,7 +93,10 @@ cloud.compute.list_servers
 ```
 
 ### Authentication
-Openstack Identity service Keystone version 3 is the default, version 2.0, although deprecated, is available.
+Openstack Identity service Keystone version 3 is the default, version 2.0, although deprecated, is also available.
+Keystone v3 can handle v2.0 and v3 for authentications and services.
+V3 relies on the concept of domains and projects while V2 credentials use tenant. Authentication are assumed against v3
+unless a tenant is used in the credentials.
 
 #### Parameters
 The following parameters can be used:
@@ -117,11 +120,6 @@ To authenticate with credentials details:
 * `:user_domain` - User domain name
 
 ##### Keystone v3
-Version 3 relies on the concept of domain name or id to authenticates
-
-`Misty::AuthV3` is used by default unless authentication credentials contains a tenant name or id in wich case it
-will use on `Misty::AuthV2`.
-
 The credentials are a combination of "id" and "name" used to uniquely identify projects, users and their domains.
 When using only the name, a domain must be specified to guarantee a unique record from the Identity service.
 
@@ -183,51 +181,60 @@ cloud.identity(:api_version => 'v2.0')
 
 ### Global configuration options
 The configuration parameters used to initialize `Misty::Cloud` are global. They are optionals and Misty::Config
-defaults are applied if needed.
+defaults are applied if not specified.
 
 * `:auth` - Authentication credentials hash containing 'auth_url' and user context. See `Misty::Auth`.
-* `:content_type` - HTTP responses body format. :json or :hash structures. Default is `Misty::Config::CONTENT_TYPE`.
+* `:content_type` - HTTP responses body format. :json or :hash structures. Default is `Misty::Config::CONTENT_TYPE` (`:hash`).
 * `:headers` - Hash of extra HTTP headers to be applied to all services
 * `:interface` - Endpoint interface, allowed values are: "public", "internal", "admin".
 * `:log_file` - Log destination, Value is either file path (./misty.log) or IO object (SDOUT). Default is '/dev/null'
 * `:log_level` - Value is Fixnum - Default is 1 (Logger::INFO) - See Logger from Ruby standard Library
-* `:region_id` - Alternative Region identifier. Default is `Misty::Config::REGION_ID`
-   Default is `Misty::Config::INTERFACE`
-* `:ssl_verify_mode` - Boolean flag for SSL client verification. SSL is defined when URI scheme => "https://".
-   Default is `Misty::Config::SSL_VERIFY_MODE`
+* `:region` - Alternative Region name. Default is `Misty::Config::REGION` (`'regionOne'`)
+   Default is `Misty::Config::INTERFACE` (`'public'`)
+* `:ssl_verify_mode` - Boolean flag for SSL client verification. Applies when URI scheme is SSL ("https://").
+   Default is `Misty::Config::SSL_VERIFY_MODE` (`true`)
    See `Misty::Config` for more details
 
+### Service and Request levels configuration parameters
+The following parameters which are global defined can also be changed at the service level.
+* `:content_type` - Overridden
+* `:headers` - Cumulative
+* `:interface` - Overridden
+* `:region` - Overridden
+
+The following parameters are specific to the service level:
+* `:api_version` - String for specifying Openstack API service version to use. Default is latest supported version.
+* `:base_path` - Allows to force the base path for every URL requests. Default is endpoint's path.
+* `:endpoint` - Overrides service endpoint discovery by providing url.
+* `:service_name` - Provides alternative service name for endpoint discovery.
+  Allowed values: `'latest'`, or a version number such as '2.10'
+
+The following parameters can be changed at a service's request level.
+* `:content_type` - Overridden
+* `:headers` - Cumulative
+* `:version` - Version to be used when microversion is supported by the service. Default: none
+
 ### Headers
-Headers are cumulative, applied from Cloud top level, then at Service level and finally at request level.
+Headers are cumulative when applied at any level, Cloud level, Service level and/or finally at service's request
+level.
 
 HTTP headers can effectively be optionally added to any request.
 An Header object must be created and passed as the last parameter of a request.
 
-For example for an already initialized cloud:
 ```ruby
-header = Misty::HTTP::Header.new(
+container_header = {
   'x-container-meta-web-listings' => false,
   'x-container-meta-quota-count'  => "",
   'x-container-meta-quota-bytes'  => nil,
   'x-versions-location'           => "",
   'x-container-meta-web-index'    => ""
-)
-openstack.object_storage.create_update_or_delete_container_metadata(container_name, header)
+}
+
+cloud = Misty::Cloud.new{:auth { ... }}
+cloud.object_storage.create_update_or_delete_container_metadata(container_name, container_header)
 ```
 
-### Service and Request levels configuration parameters
-The same parameters used at the global configuration variables can be applied at Service level or at a Request level.
- The global values passed from `Misty::Cloud` level are then overridden at the Service level.
-
-The following parameters can be also used:
-* `:api_version` - String for specifying Openstack API service version to use. Default is latest supported version.
-  Applies only at service level as it's needed for service creation.
-* `:base_path` - Allows to force the base path for every URL requests Default nil.
-* `:base_url` - Allows to force the base URL for every requests. Default nil.
-* `:version` - Version to be used when microversion is supported by the service. Default: `nil`
-  Allowed values: `'latest'`, or a version number such as '2.10'
-
-#### Examples
+### Examples
 Initialize cloud
 ```ruby
 cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
@@ -264,7 +271,7 @@ image: glance, versions: ["v2", "v1"]
 load_balancer: octavia, versions: ["v2.0"]
 messaging: zaqar, versions: ["v2"]
 metering: ceilometer, versions: ["v2"]
-networking: neutron, versions: ["v2.0"]
+network: neutron, versions: ["v2.0"]
 nfv_orchestration: tacker, versions: ["v1.0"]
 object_storage: swift, versions: ["v1"]
 orchestration: heat, versions: ["v1"]
@@ -274,7 +281,7 @@ shared_file_systems: manila, versions: ["v2"], microversion: v2
 
 ### Service Prefix
 A shorter name can be used to call a service only if it's unique among all services.
-For instance `net` or `network` can be used instead of `networking` because it's not ambiguous.
+For instance `net` or `network` can be used instead of `network` because it's not ambiguous.
 Meanwhile `data` doesn't work because it's ambiguous between `data_processing` and `data_protection_orchestration`
 
 ### Aliases  

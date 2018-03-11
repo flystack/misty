@@ -87,7 +87,7 @@ describe Misty::Cloud do
         with(:headers => {'Content-Type'=>'application/json'}).
         to_return(:status => 201, :body => "", :headers => {})
 
-      cloud.networking.create_network(['network', {'name' => 'network1'}]).response.must_be_kind_of Net::HTTPCreated
+      cloud.network.create_network(['network', {'name' => 'network1'}]).response.must_be_kind_of Net::HTTPCreated
     end
 
     it 'sucessful with Hash type data' do
@@ -99,7 +99,7 @@ describe Misty::Cloud do
         with(:headers => {'Content-Type'=>'application/json'}).
         to_return(:status => 201, :body => "", :headers => {})
 
-      cloud.networking.create_network({'network' => {'name' => 'network1'}}).response.must_be_kind_of Net::HTTPCreated
+      cloud.network.create_network({'network' => {'name' => 'network1'}}).response.must_be_kind_of Net::HTTPCreated
     end
 
     it 'sucessful with JSON String data' do
@@ -111,7 +111,7 @@ describe Misty::Cloud do
         with(:headers => {'Content-Type'=>'application/json'}).
         to_return(:status => 201, :body => "", :headers => {})
 
-      cloud.networking.create_network("{\"network\":{\"name\":\"network1\"}}").response.must_be_kind_of Net::HTTPCreated
+      cloud.network.create_network("{\"network\":{\"name\":\"network1\"}}").response.must_be_kind_of Net::HTTPCreated
     end
 
     it 'fails when not enough arguments' do
@@ -156,7 +156,7 @@ describe Misty::Cloud do
         with(:headers => {'Content-Type'=>'application/json'}).
         to_return(:status => 200, :body => "", :headers => {})
 
-      cloud.networking.update_network('network_id', ['network', {'name' => 'network2'}]).response.must_be_kind_of Net::HTTPOK
+      cloud.network.update_network('network_id', ['network', {'name' => 'network2'}]).response.must_be_kind_of Net::HTTPOK
     end
 
     it 'sucessful with Hash type data' do
@@ -168,7 +168,7 @@ describe Misty::Cloud do
         with(:headers => {'Content-Type'=>'application/json'}).
         to_return(:status => 200, :body => "", :headers => {})
 
-      cloud.networking.update_network('network_id', {'network' => {'name' => 'network2'}}).response.must_be_kind_of Net::HTTPOK
+      cloud.network.update_network('network_id', {'network' => {'name' => 'network2'}}).response.must_be_kind_of Net::HTTPOK
     end
 
     it 'sucessful with JSON String data' do
@@ -180,7 +180,7 @@ describe Misty::Cloud do
         with(:headers => {'Content-Type'=>'application/json'}).
         to_return(:status => 200, :body => "", :headers => {})
 
-      cloud.networking.update_network('network_id', "{\"network\":{\"name\":\"network2\"}}").response.must_be_kind_of Net::HTTPOK
+      cloud.network.update_network('network_id', "{\"network\":{\"name\":\"network2\"}}").response.must_be_kind_of Net::HTTPOK
     end
   end
 end

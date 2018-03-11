@@ -1,6 +1,6 @@
 require 'misty/openstack/keystone/keystone_v2_0'
 require 'misty/openstack/keystone/keystone_v2_0_ext'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 require 'misty/openstack/extension'
 
 module Misty
@@ -9,11 +9,11 @@ module Misty
       class V2_0
         include Misty::Openstack::KeystoneV2_0
         include Misty::Openstack::KeystoneV2_0_ext
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
         include Misty::Openstack::Extension
 
-        def service_names
-          %w{identity}
+        def service_types
+          %w(identity)
         end
       end
     end

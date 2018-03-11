@@ -1,7 +1,5 @@
 require 'logger'
-require 'misty/auth/auth_v2'
-require 'misty/auth/auth_v3'
-require 'misty/http/header'
+require 'misty/auth/token'
 
 module Misty
   class Config
@@ -15,7 +13,7 @@ module Misty
     INTERFACE = 'public'
 
     # Valid endpoint interfaces
-    INTERFACES = %w{admin public internal}
+    INTERFACES = %w(admin public internal)
 
     # Default Log file
     LOG_FILE  = '/dev/null'
@@ -24,34 +22,25 @@ module Misty
     LOG_LEVEL = Logger::INFO
 
     # Default Region
-    REGION_ID = 'regionOne'
+    REGION = 'regionOne'
 
     # Default when uri.scheme is https
     SSL_VERIFY_MODE = true
 
-    # ==== Attributes
-    #
-    # * +arg+ - +Hash+ of configuration options
-
-    attr_reader :auth, :log, :services
+    attr_reader :catalog, :token, :log, :services
 
     def initialize(arg)
       raise CredentialsError if arg.nil? || arg.empty? || arg[:auth].nil? || arg[:auth].empty?
-      @auth = Misty::Auth.build(arg[:auth]) # TODO: pass @log
       @log = set_log(arg[:log_file], arg[:log_level])
       @globals = set_config(arg)
-      @services = {}
-      # TODO: Adjust Services to use enumerable
-      arg.each do |e, k|
-        Misty::SERVICES.each do |serv|
-          @services[e] = k if serv[:name] == e
-        end
-      end
+      @services = set_services(arg)
+      arg[:log] = @log
+      @token = Misty::Auth::Token.build(arg[:auth])
     end
 
     def get_service(method)
       set = {}
-      set[:auth] = @auth
+      set[:token] = @token
       set[:log] = @log
       service_config = @services.key?(method) ? @services[method] : {}
       if service_config
@@ -65,35 +54,25 @@ module Misty
 
     def set_service(arg)
       set = {}
-      set[:base_path] = arg[:base_path] ? arg[:base_path] : nil
-      set[:base_url] = arg[:base_url] ? arg[:base_url] : nil
-      set[:version] = arg[:version] ? arg[:version] : nil
       set[:api_version] = arg[:api_version] ? arg[:api_version] : nil
+      set[:base_path] = arg[:base_path] ? arg[:base_path].chomp('/') : nil
+      set[:endpoint] = arg[:endpoint] ? arg[:endpoint] : nil
+      set[:service_name] = arg[:service_name] ? arg[:service_name] : nil
+      set[:version] = arg[:version] ? arg[:version] : nil
       set
     end
 
     private
-
-    def get_defaults
-      set = {}
-      set[:content_type] = CONTENT_TYPE
-      set[:headers] = HTTP::Header.new('Accept' => 'application/json; q=1.0')
-      set[:interface] = INTERFACE
-      set[:region_id] = REGION_ID
-      set[:ssl_verify_mode] = SSL_VERIFY_MODE
-      set
-    end
 
     def set_config(arg = {}, defaults = get_defaults)
       set = {}
       set[:content_type] = set_content_type(arg[:content_type], defaults[:content_type])
       set[:headers] = set_headers(arg[:headers], defaults[:headers])
       set[:interface] = set_interface(arg[:interface], defaults[:interface])
-      set[:region_id] = set_region_id(arg[:region_id], defaults[:region_id])
+      set[:region] = set_region(arg[:region], defaults[:region])
       set[:ssl_verify_mode] = set_ssl_verify_mode(arg[:ssl_verify_mode], defaults[:ssl_verify_mode])
       set
     end
-
 
     def set_content_type(val, default)
       res = val.nil? ? default : val
@@ -101,18 +80,25 @@ module Misty
       res
     end
 
+    def get_defaults
+      set = {}
+      set[:content_type] = CONTENT_TYPE
+      set[:headers] = HTTP::Header.new('Accept' => 'application/json; q=1.0')
+      set[:interface] = INTERFACE
+      set[:region] = REGION
+      set[:ssl_verify_mode] = SSL_VERIFY_MODE
+      set
+    end
+
     def set_headers(val, default)
-      res = if val && !val.empty?
-              default.add(val)
-              default
-            else default
-              default
-            end
+      res = HTTP::Header.new
+      res.add(default.get)
+      res.add(val) if !val.nil? && !val.empty?
       res
     end
 
     def set_interface(val, default)
-        res = val.nil? ? default : val
+      res = val.nil? ? default : val
       raise InvalidDataError, "Config ':interface' must be one of #{INTERFACES}" unless INTERFACES.include?(res)
       res
     end
@@ -123,10 +109,21 @@ module Misty
       log
     end
 
-    def set_region_id(val, default)
+    def set_region(val, default)
         res = val.nil? ? default : val
-      raise InvalidDataError, "Config ':region_id' must be a String" unless res.kind_of? String
+      raise InvalidDataError, "Config ':region' must be a String" unless res.kind_of? String
       res
+    end
+
+    def set_services(arg)
+      set = {}
+      # TODO: Use enumerable
+      arg.each do |e, k|
+        Misty::SERVICES.each do |s|
+          set[e] = k if s[:name] == e
+        end
+      end
+      set
     end
 
     def set_ssl_verify_mode(val, default)

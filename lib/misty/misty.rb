@@ -1,5 +1,4 @@
 require 'misty/services'
-require 'logger'
 
 # Misty is a HTTP client for OpenStack APIs, aiming to be fast, flexible and exhaustive.
 # Misty acts as a conduit to OpenStack APIs by handling requests as transparently as possible.
@@ -23,7 +22,7 @@ module Misty
     { name: :load_balancer,                       project: :octavia,     versions: ['v2.0']},
     { name: :messaging,                           project: :zaqar,       versions: ['v2']},
     { name: :metering,                            project: :ceilometer,  versions: ['v2']},
-    { name: :networking,                          project: :neutron,     versions: ['v2.0']},
+    { name: :network,                          project: :neutron,     versions: ['v2.0']},
     { name: :nfv_orchestration,                   project: :tacker,      versions: ['v1.0']},
     { name: :object_storage,                      project: :swift,       versions: ['v1']},
     { name: :orchestration,                       project: :heat,        versions: ['v1']},

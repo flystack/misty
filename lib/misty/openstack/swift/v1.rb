@@ -1,19 +1,19 @@
 require 'misty/openstack/swift/swift_v1'
-require 'misty/client_pack'
+require 'misty/openstack/service_pack'
 
 module Misty
   module Openstack
     module Swift
       class V1
         include  Misty::Openstack::SwiftV1
-        include Misty::ClientPack
+        include Misty::Openstack::ServicePack
 
         def prefix_path_to_ignore
           '/v1/{account}'
         end
 
-        def service_names
-          %w{object-storage object-store}
+        def service_types
+          %w(object-store)
         end
 
         # Custom requests

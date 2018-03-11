@@ -1,6 +1,4 @@
 require 'misty/config'
-require 'misty/auth/auth_v2'
-require 'misty/auth/auth_v3'
 require 'misty/http/header'
 
 module Misty
@@ -24,8 +22,8 @@ module Misty
     def build_service(method)
       service = Misty.services.find {|service| service.name == method}
       service_config = @config.get_service(method)
-      version = self.class.dot_to_underscore(service.default_version(service_config[:config][:api_version]))
-      klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{version.capitalize}")
+      api_version = self.class.dot_to_underscore(service.default_version(service_config[:config][:api_version]))
+      klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{api_version.capitalize}")
       klass.new(service_config)
     end
 
@@ -131,10 +129,10 @@ module Misty
       @metering
     end
 
-    def networking(arg = {})
-      @networking ||= build_service(__method__)
-      @networking.request_config(arg)
-      @networking
+    def network(arg = {})
+      @network ||= build_service(__method__)
+      @network.request_config(arg)
+      @network
     end
 
     def nfv_orchestration(arg = {})
@@ -172,14 +170,14 @@ module Misty
 
     private
 
-    def method_missing(method_name) # TODO, *args)
+    # TODO, *args)
+    def method_missing(method_name)
       services_avail = []
       Misty.services.names.each do |service_name|
         services_avail << service_name if /#{method_name}/.match(service_name)
       end
 
       if services_avail.size == 1
-        # TODO: Add args
         self.send(services_avail[0])
         return self.instance_variable_get("@#{services_avail[0]}")
       elsif services_avail.size > 1

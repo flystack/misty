@@ -23,10 +23,10 @@ module Misty
       end
 
       def http(request)
-        request['X-Auth-Token'] = @auth.get_token
+        request['X-Auth-Token'] = @token.get
 
         Misty::HTTP::NetHTTP.http_request(
-          @uri, ssl_verify_mode: @ssl_verify_mode, log: @log
+          @endpoint, ssl_verify_mode: @ssl_verify_mode, log: @log
         ) do |connection|
           response = connection.request(request)
           response.body = JSON.parse(response.body) if decode?(response)
@@ -86,7 +86,7 @@ module Misty
       end
 
       def http_to_s(verb, path, headers, data = nil)
-        log = "HTTP #{verb} base_url='#{@uri.host}:#{@uri.port}', path='#{path}', header=#{headers}"
+        log = "HTTP #{verb} '#{@endpoint.host}:#{@endpoint.port}/#{path}', header=#{headers}"
         log << ", data='#{data}'" if data
         log
       end

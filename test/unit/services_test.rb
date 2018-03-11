@@ -14,7 +14,7 @@ describe 'Services' do
       service.versions.must_include 'v1'
       service.microversion.must_equal 'v3'
       service.default_version.must_equal 'v3'
-      services.to_s.must_equal %Q{service_name: project_name, versions: ["v1", "v2.0"], microversion: v3\n}
+      services.to_s.must_equal %Q(service_name: project_name, versions: ["v1", "v2.0"], microversion: v3\n)
     end
   end
 end

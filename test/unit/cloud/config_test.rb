@@ -43,10 +43,10 @@ describe Misty::Config do
         end.must_raise Misty::Config::InvalidDataError
       end
 
-      it 'with region_id wrong type' do
+      it 'with region wrong type' do
         auth_request
         proc do
-          Misty::Config.new(:auth => auth, :region_id => true)
+          Misty::Config.new(:auth => auth, :region => true)
         end.must_raise Misty::Config::InvalidDataError
       end
 
@@ -67,12 +67,12 @@ describe Misty::Config do
         end
 
         config.log.must_be_kind_of Logger
-        config.auth.must_be_kind_of Misty::AuthV3
+        config.token.must_be_kind_of Misty::Auth::Token::V3
         config.globals[:content_type].must_equal Misty::Config::CONTENT_TYPE
         config.globals[:headers].must_be_kind_of Misty::HTTP::Header
         config.globals[:headers].get.must_equal("Accept"=>"application/json; q=1.0")
         config.globals[:interface].must_equal Misty::Config::INTERFACE
-        config.globals[:region_id].must_equal Misty::Config::REGION_ID
+        config.globals[:region].must_equal Misty::Config::REGION
         config.globals[:ssl_verify_mode].must_equal Misty::Config::SSL_VERIFY_MODE
       end
 
@@ -85,10 +85,11 @@ describe Misty::Config do
           :content_type    => :json,
           :headers         => {'var' => 'value'},
           :interface       => 'admin',
-          :region_id       => 'regionTest',
+          :region          => 'regionTest',
           :ssl_verify_mode => false,
           :log_file        => LOG_FILE_NAME
         )
+
         def config.globals
           @globals
         end
@@ -96,14 +97,14 @@ describe Misty::Config do
         config.globals[:content_type].must_equal :json
         config.globals[:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'var' => 'value')
         config.globals[:interface].must_equal 'admin'
-        config.globals[:region_id].must_equal 'regionTest'
+        config.globals[:region].must_equal 'regionTest'
         config.globals[:ssl_verify_mode].must_equal false
         File.exist?(LOG_FILE_NAME).must_equal true
         File.delete(LOG_FILE_NAME) if File.exist?(LOG_FILE_NAME)
       end
 
-      describe 'service level configurations' do
-        it 'with globals defaults' do
+      describe 'with no global Cloud defined parameters'  do
+        it 'set Service defined parameters' do
           auth_request
           config = Misty::Config.new(
             :auth       => auth,
@@ -111,53 +112,90 @@ describe Misty::Config do
               :content_type    => :json,
               :headers         => {'Service Key' => 'Service Value'},
               :interface       => 'internal',
-              :region_id       => 'region local',
+              :region          => 'region local',
               :ssl_verify_mode => false,
 
               :base_path       => 'base_path_test',
-              :base_url        => '/base.url.com',
+              :endpoint        => 'https://service.example.com:8080',
+              :service_name    => 'service1',
               :version         => 'vtest'
             }
           )
 
-          service_config = config.get_service(:compute)
-          service_config[:config][:content_type].must_equal :json
-          service_config[:config][:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Service Key' => 'Service Value')
-          service_config[:config][:interface].must_equal 'internal'
-          service_config[:config][:region_id].must_equal 'region local'
-          service_config[:config][:ssl_verify_mode].must_equal false
-          service_config[:config][:base_path].must_equal 'base_path_test'
-          service_config[:config][:base_url].must_equal '/base.url.com'
-          service_config[:config][:version].must_equal 'vtest'
+          service = config.get_service(:compute)
+          service[:config][:content_type].must_equal :json
+          service[:config][:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Service Key' => 'Service Value')
+          service[:config][:interface].must_equal 'internal'
+          service[:config][:region].must_equal 'region local'
+          service[:config][:ssl_verify_mode].must_equal false
+
+          service[:config][:base_path].must_equal 'base_path_test'
+          service[:config][:endpoint].must_equal 'https://service.example.com:8080'
+          service[:config][:service_name].must_equal 'service1'
+          service[:config][:version].must_equal 'vtest'
+        end
+      end
+
+      describe 'with global Cloud defined parameters' do
+        let(:config) do
+          auth_request
+          Misty::Config.new(
+           :auth            => auth,
+           :content_type    => :json,
+           :headers         => {'Global Key' => 'Global Value'},
+           :interface       => 'internal',
+           :region          => 'region_global',
+           :ssl_verify_mode => false,
+           :network => {
+             :content_type    => :hash,
+             :headers         => {'Local Key' => 'Local Value'},
+             :interface       => 'admin',
+             :region          => 'region_local',
+             :ssl_verify_mode => true,
+
+             :base_path       => 'base_path_test',
+             :endpoint        => 'https://service1.example.com:8888',
+             :service_name    => 'service1',
+             :version         => '2.10'
+           })
         end
 
-        it 'with Cloud level parameters' do
-          auth_request
-          config = Misty::Config.new(
-            :auth            => auth,
-            :content_type    => :json,
-            :headers         => {'Global Key' => 'Global Value'},
-            :interface       => 'internal',
-            :region_id       => 'region_global',
-            :ssl_verify_mode => false,
-              :networking => {
-                :content_type    => :hash,
-                :headers         => {'Local Key' => 'Local Value'},
-                :interface       => 'admin',
-                :region_id       => 'region_local',
-                :ssl_verify_mode => true
-              }
-          )
+        it 'set globals' do
           def config.globals
             @globals
           end
 
-          service_config = config.get_service(:networking)
-          service_config[:config][:content_type].must_equal :hash
-          service_config[:config][:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Global Key' => 'Global Value', 'Local Key' => 'Local Value')
-          service_config[:config][:interface].must_equal 'admin'
-          service_config[:config][:region_id].must_equal 'region_local'
-          service_config[:config][:ssl_verify_mode].must_equal true
+          config.globals[:content_type].must_equal :json
+          config.globals[:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Global Key' => 'Global Value')
+          config.globals[:interface].must_equal "internal"
+          config.globals[:region].must_equal "region_global"
+          config.globals[:ssl_verify_mode].must_equal false
+        end
+
+        it 'set Service defined parameters' do
+          network = config.get_service(:network)
+          network[:config][:content_type].must_equal :hash
+          network[:config][:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Global Key' => 'Global Value', 'Local Key' => 'Local Value')
+          network[:config][:interface].must_equal 'admin'
+          network[:config][:region].must_equal 'region_local'
+          network[:config][:ssl_verify_mode].must_equal true
+
+          network[:config][:endpoint].must_equal 'https://service1.example.com:8888'
+          network[:config][:service_name].must_equal 'service1'
+          network[:config][:version].must_equal '2.10'
+        end
+
+        it 'set no Service defined parameters' do
+          compute = config.get_service(:compute)
+          compute[:config][:content_type].must_equal :json
+          compute[:config][:headers].get.must_equal('Accept' => 'application/json; q=1.0', 'Global Key' => 'Global Value')
+          compute[:config][:interface].must_equal 'internal'
+          compute[:config][:region].must_equal 'region_global'
+          compute[:config][:ssl_verify_mode].must_equal false
+
+          compute[:config][:endpoint].must_equal nil
+          compute[:config][:service_name].must_equal nil
+          compute[:config][:version].must_equal nil
         end
       end
     end

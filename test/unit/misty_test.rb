@@ -104,8 +104,8 @@ describe Misty do
       validate_versions(service)
     end
 
-    it 'has networking service' do
-      service = Misty::services.find { |s| s.name == :networking}
+    it 'has network service' do
+      service = Misty::services.find { |s| s.name == :network}
       validate_service(service)
       validate_versions(service)
     end
