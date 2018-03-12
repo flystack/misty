@@ -13,19 +13,6 @@ Misty handles OpenStack APIs requests as transparently as possible by:
 * Custom HTTP Methods for special needs
 * And also: Lazy service loading, Low gem dependency (use only Net/HTTP and JSON), Persistent HTTP connections (default since HTTP 1.1 anyway)
 
-### Current Microversion support
-* Cinder
-  v3.44
-* Ironic
-  v1.32
-* Magnum
-  v1.4
-* Manilla
-  v2.40
-* Nova
-  v2.60
-
-
 # How To
 Fetch and install
 ``` ruby
@@ -54,7 +41,7 @@ cloud = Misty::Cloud.new(
   networks = cloud.network.list_networks
   first_network_id = networks.body['networks'][0]['id']
   first_network = cloud.network.show_network_details(first_network_id)
-  network = Misty.to_json(:network => {:name => 'misty-example'})
+  network = Misty::Helper.to_json(:network => {:name => 'misty-example'})
   cloud.network.create_network(network)
   v1 = cloud.baremetal.show_v1_api
 ```
@@ -361,7 +348,7 @@ heat_template = {
 require 'misty'
 require 'pp'
 cloud = Misty::Cloud.new(:auth => { ... })
-data_heat_template = Misty.to_json(heat_template)
+data_heat_template = Misty::Helper.to_json(heat_template)
 response = cloud.orchestration.create_stack(data_heat_template)
 id = response.body['stack']['id']
 stack = cloud.orchestration.show_stack_details('test_stack', id)
@@ -388,7 +375,7 @@ pp cloud.compute.versions
 
 ```ruby
 cloud.compute(:version => '2.25')
-data_keypair = Misty.to_json('keypair': {'name': 'admin-keypair'})
+data_keypair = Misty::Helper.to_json('keypair': {'name': 'admin-keypair'})
 admin_keypair = cloud.compute.create_or_import_keypair(data_keypair)
 user_id = admin_keypair.body['keypair']['user_id']
 keypairs = cloud.compute.list_keypairs

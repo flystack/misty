@@ -20,10 +20,10 @@ module Misty
     end
 
     def build_service(method)
-      service = Misty.services.find {|service| service.name == method}
+      service = Misty.services.find {|service| service.type == method}
       service_config = @config.get_service(method)
       api_version = self.class.dot_to_underscore(service.default_version(service_config[:config][:api_version]))
-      klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{api_version.capitalize}")
+      klass = Object.const_get("Misty::Openstack::API::#{service.project.capitalize}::#{api_version.capitalize}")
       klass.new(service_config)
     end
 
@@ -173,7 +173,7 @@ module Misty
     # TODO, *args)
     def method_missing(method_name)
       services_avail = []
-      Misty.services.names.each do |service_name|
+      Misty.services.types.each do |service_name|
         services_avail << service_name if /#{method_name}/.match(service_name)
       end
 

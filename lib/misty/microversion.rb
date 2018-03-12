@@ -21,6 +21,17 @@ module Misty
 
     private
 
+    def get_microversion
+      project = self.class.to_s.split('::')[-2].downcase.to_sym
+      s = Misty.services.find {|service| service.project == project}
+      raise RuntimeError, 'No microversion found!' unless s&.microversion
+      s.microversion
+    end
+
+    def microversion
+      @microversion ||= get_microversion
+    end
+
     def versions
       @versions ||= versions_fetch
     end

@@ -79,6 +79,13 @@ module Misty
       def requests_custom
         []
       end
+
+      def service_types_soon
+        project = self.class.to_s.split('::')[-2].downcase.to_sym
+        s = Misty.services.find {|service| service.project == project}
+        raise RuntimeError, 'No service types found' unless s&.name
+        s.microversion
+      end
     end
   end
 end

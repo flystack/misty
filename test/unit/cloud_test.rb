@@ -32,28 +32,28 @@ describe Misty::Cloud do
     it 'uses default version' do
       auth_request
       cloud = Misty::Cloud.new(arg)
-      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
+      cloud.identity.must_be_kind_of Misty::Openstack::API::Keystone::V3
     end
 
     it 'uses default version when provided version is out of range' do
       auth_request
       arg.merge!(:identity => {:api_version => 'v1'})
       cloud = Misty::Cloud.new(arg)
-      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
+      cloud.identity.must_be_kind_of Misty::Openstack::API::Keystone::V3
     end
 
     it 'uses provided version' do
       auth_request
       arg.merge!(:identity => {:api_version => 'v2.0'})
       cloud = Misty::Cloud.new(arg)
-      cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V2_0
+      cloud.identity.must_be_kind_of Misty::Openstack::API::Keystone::V2_0
     end
   end
 
   describe 'Each service' do
     it 'has a method defined' do
       Misty::services.each do |service|
-        method =  Misty::Cloud.method_defined?(service.name)
+        method =  Misty::Cloud.method_defined?(service.type)
         method.must_equal true
       end
     end

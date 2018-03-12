@@ -75,7 +75,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('backup', 'freezer')), :headers => token_header)
 
-    cloud.backup.must_be_kind_of Misty::Openstack::Freezer::V1
+    cloud.backup.must_be_kind_of Misty::Openstack::API::Freezer::V1
   end
 
   it '#baremetal' do
@@ -87,7 +87,7 @@ describe 'Misty::Cloud' do
       with(:headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
 
-    cloud.baremetal.must_be_kind_of Misty::Openstack::Ironic::V1
+    cloud.baremetal.must_be_kind_of Misty::Openstack::API::Ironic::V1
   end
 
   it '#blockStorage' do
@@ -99,7 +99,7 @@ describe 'Misty::Cloud' do
       with(:headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
 
-    cloud.block_storage.must_be_kind_of Misty::Openstack::Cinder::V3
+    cloud.block_storage.must_be_kind_of Misty::Openstack::API::Cinder::V3
   end
 
   describe '#compute' do
@@ -112,7 +112,7 @@ describe 'Misty::Cloud' do
         with(:headers => auth_headers).
         to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
 
-      cloud.compute.must_be_kind_of Misty::Openstack::Nova::V2_1
+      cloud.compute.must_be_kind_of Misty::Openstack::API::Nova::V2_1
     end
 
     it 'with microversion provided' do
@@ -126,7 +126,7 @@ describe 'Misty::Cloud' do
 
       compute_cloud = Misty::Cloud.new(:auth => auth, :compute => {:version => '2.17'})
 
-      compute_cloud.compute.must_be_kind_of Misty::Openstack::Nova::V2_1
+      compute_cloud.compute.must_be_kind_of Misty::Openstack::API::Nova::V2_1
 
       stub_request(:get, "http://localhost/servers").
         with(:headers => {'Accept'=>'application/json; q=1.0', 'X-Auth-Token'=>'token_data', 'X-Openstack-Nova-Api-Version'=>'2.17'})
@@ -145,7 +145,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('data-processing', 'sahara')), :headers => token_header)
 
-    cloud.data_processing.must_be_kind_of Misty::Openstack::Sahara::V1_1
+    cloud.data_processing.must_be_kind_of Misty::Openstack::API::Sahara::V1_1
   end
 
   it '#identity' do
@@ -153,7 +153,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => token_header)
 
-    cloud.identity.must_be_kind_of Misty::Openstack::Keystone::V3
+    cloud.identity.must_be_kind_of Misty::Openstack::API::Keystone::V3
   end
 
   it '#image' do
@@ -161,7 +161,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('image', 'glance')), :headers => token_header)
 
-    cloud.image.must_be_kind_of Misty::Openstack::Glance::V2
+    cloud.image.must_be_kind_of Misty::Openstack::API::Glance::V2
   end
 
   it '#load_balancer' do
@@ -169,7 +169,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('load-balancer', 'octavia')), :headers => token_header)
 
-    cloud.load_balancer.must_be_kind_of Misty::Openstack::Octavia::V2_0
+    cloud.load_balancer.must_be_kind_of Misty::Openstack::API::Octavia::V2_0
   end
 
   it '#network' do
@@ -177,7 +177,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => token_header)
 
-    cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
+    cloud.network.must_be_kind_of Misty::Openstack::API::Neutron::V2_0
   end
 
   it '#nfv_orchestration' do
@@ -185,7 +185,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('nfv-orchestration', 'tacker')), :headers => token_header)
 
-    cloud.nfv_orchestration.must_be_kind_of Misty::Openstack::Tacker::V1_0
+    cloud.nfv_orchestration.must_be_kind_of Misty::Openstack::API::Tacker::V1_0
   end
 
   describe '#objectStorage' do
@@ -194,7 +194,7 @@ describe 'Misty::Cloud' do
         with(:body => JSON.dump(auth_body), :headers => auth_headers).
         to_return(:status => 200, :body => JSON.dump(auth_response_v3('object-store', 'swift')), :headers => token_header)
 
-      cloud.object_storage.must_be_kind_of Misty::Openstack::Swift::V1
+      cloud.object_storage.must_be_kind_of Misty::Openstack::API::Swift::V1
     end
 
     it 'execute bulk_delete' do
@@ -216,7 +216,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('orchestration', 'heat')), :headers => token_header)
 
-    cloud.orchestration.must_be_kind_of Misty::Openstack::Heat::V1
+    cloud.orchestration.must_be_kind_of Misty::Openstack::API::Heat::V1
   end
 
   it '#search' do
@@ -224,7 +224,7 @@ describe 'Misty::Cloud' do
       with(:body => JSON.dump(auth_body), :headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(auth_response_v3('search', 'searchlight')), :headers => token_header)
 
-    cloud.search.must_be_kind_of Misty::Openstack::Searchlight::V1
+    cloud.search.must_be_kind_of Misty::Openstack::API::Searchlight::V1
   end
 
   it '#sharedFileSystems' do
@@ -236,7 +236,7 @@ describe 'Misty::Cloud' do
       with(:headers => auth_headers).
       to_return(:status => 200, :body => JSON.dump(versions), :headers => {})
 
-    cloud.shared_file_systems.must_be_kind_of Misty::Openstack::Manila::V2
+    cloud.shared_file_systems.must_be_kind_of Misty::Openstack::API::Manila::V2
   end
 
   describe 'prefixed service name' do
@@ -245,7 +245,7 @@ describe 'Misty::Cloud' do
         with(:body => JSON.dump(auth_body), :headers => auth_headers).
         to_return(:status => 200, :body => JSON.dump(auth_response_v3('network', 'neutron')), :headers => token_header)
 
-      cloud.network.must_be_kind_of Misty::Openstack::Neutron::V2_0
+      cloud.network.must_be_kind_of Misty::Openstack::API::Neutron::V2_0
     end
 
     it '#data is ambiguous' do

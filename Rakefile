@@ -70,7 +70,7 @@ namespace :build do
       Dir.mkdir("build/APIs/#{name}") unless Dir.exist?("build/APIs/#{name}")
       puts "Generating build/APIs/#{name}/#{name}_#{version}.rb"
       File.open("build/APIs/#{name}/#{name}_#{version}.rb", 'w') do |f|
-        f << "module Misty::Openstack::#{name.capitalize}#{version.capitalize}\n"
+        f << "module Misty::Openstack::API::#{name.capitalize}#{version.capitalize}\n"
 
         f << "  def tag\n"
         f << "    '#{payload[:tag]}'\n"

@@ -1,3 +1,4 @@
+require 'yaml'
 require 'misty/service'
 
 module Misty
@@ -5,6 +6,15 @@ module Misty
     include Enumerable
 
     attr_reader :services
+
+    def self.build(file)
+      services_list = Misty::Services.new
+      openstack_services = YAML::load_file(file)
+      openstack_services.each do |s|
+        services_list.add(s)
+      end
+      services_list
+    end
 
     def initialize
       @services = []
@@ -15,29 +25,29 @@ module Misty
     end
 
     def each
-      @services.each do |service|
-        yield service
+      @services.each do |s|
+        yield s
       end
     end
 
     def get(name)
-      @services.each do |service|
-        return service if service.name == name
+      each do |s|
+        return s if s.name == name
       end
       nil
     end
 
-    def names
-      service_names = []
-      @services.each do |service|
-        service_names << service.name
+    def types
+      list = []
+      each do |s|
+        list << s.name
       end
-      service_names
+      list
     end
 
     def to_s
       list = ''
-      @services.each do |service|
+      each do |service|
         list << service.to_s + "\n"
       end
       list
