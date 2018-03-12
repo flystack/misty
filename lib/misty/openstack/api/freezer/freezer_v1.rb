@@ -1,6 +1,6 @@
 module Misty::Openstack::API::FreezerV1
   def tag
-    'Backup and Disaster Recovery Service API Reference 5.0.1'
+    'Backup and Disaster Recovery Service API Reference 6.0.1'
   end
 
   def api

@@ -1,6 +1,6 @@
 module Misty::Openstack::API::MagnumV1
   def tag
-    'Container Infrastructure Management API Reference 5.0.1'
+    'Container Infrastructure Management API Reference 6.0.2'
   end
 
   def api

@@ -5,7 +5,7 @@ module Misty::Openstack::API::ManilaV2
 
   def api
 {"/"=>{:GET=>[:list_all_major_versions]},
- "/{api_version}"=>{:GET=>[:show_details_of_specific_api_version]},
+ "/{api_version}/"=>{:GET=>[:show_details_of_specific_api_version]},
  "/v2/{tenant_id}/extensions"=>{:GET=>[:list_extensions]},
  "/v2/{tenant_id}/limits"=>{:GET=>[:list_share_limits]},
  "/v2/{tenant_id}/shares"=>{:GET=>[:list_shares], :POST=>[:create_share]},
@@ -98,6 +98,8 @@ module Misty::Openstack::API::ManilaV2
  "/v2/{tenant_id}/types"=>
   {:GET=>[:list_share_types], :POST=>[:create_share_type]},
  "/v2/{tenant_id}/types/default"=>{:GET=>[:list_default_share_types]},
+ "/v2/{tenant_id}/types/{share_type_id}"=>
+  {:GET=>[:show_share_type_detail], :DELETE=>[:delete_share_type]},
  "/v2/{tenant_id}/types/{share_type_id}/extra_specs"=>
   {:GET=>[:list_extra_specs], :POST=>[:set_extra_spec_for_share_type]},
  "/v2/{tenant_id}/types/{share_type_id}/share_type_access"=>
@@ -106,7 +108,6 @@ module Misty::Openstack::API::ManilaV2
   {:DELETE=>[:unset_an_extra_spec]},
  "/v2/{tenant_id}/types/{share_type_id}/action"=>
   {:POST=>[:add_share_type_access, :remove_share_type_access]},
- "/v2/{tenant_id}/types/{share_type_id}"=>{:DELETE=>[:delete_share_type]},
  "/v2/{tenant_id}/scheduler-stats/pools?pool={pool_name}&host={host_name}&backend={backend_name}&capabilities={capabilities}&share_type={share_type}"=>
   {:GET=>[:list_back_end_storage_pools]},
  "/v2/{tenant_id}/scheduler-stats/pools/detail?pool={pool_name}&host={host_name}&backend={backend_name}&capabilities={capabilities}&share_type={share_type}"=>
@@ -126,6 +127,9 @@ module Misty::Openstack::API::ManilaV2
    :DELETE=>[:delete_quota_set]},
  "/v2/{tenant_id}/quota-sets/{tenant_id}/detail?user_id={user_id}"=>
   {:GET=>[:show_quota_set_in_detail]},
+ "/v2/{tenant_id}/quota-class-sets/{quota_class_name}"=>
+  {:GET=>[:show_quota_classes_for_a_project],
+   :PUT=>[:update_quota_classes_for_a_project]},
  "/v2/{tenant_id}/messages"=>{:GET=>[:list_user_messages]},
  "/v2/{tenant_id}/messages/{message_id}"=>
   {:GET=>[:show_user_message_details], :DELETE=>[:delete_message]},

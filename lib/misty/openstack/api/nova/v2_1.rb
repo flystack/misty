@@ -11,18 +11,11 @@ module Misty
           include Misty::Openstack::ServicePack
           include Misty::Microversion
 
-          # TODO: Verify
-          # Overrides API because the definitions don't specify prefix
-          def self.list_all_major_versions
-            http_get('/', headers)
-          end
-
           def self.show_details_of_specific_api_version(version)
             http_get("/#{version}", headers)
           end
 
           def microversion_header(version)
-            # Use default 'OpenStack-API-Version' or older 'X-Openstack-Nova-API-Version'
             if @version >= '2.27'
               super
             else

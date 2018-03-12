@@ -1,6 +1,6 @@
 module Misty::Openstack::API::SenlinV1
   def tag
-    'Clustering API Reference 4.0.1'
+    'Clustering API Reference 5.0.1'
   end
 
   def api

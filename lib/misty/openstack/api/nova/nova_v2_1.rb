@@ -152,7 +152,6 @@ module Misty::Openstack::API::NovaV2_1
  "/os-instance_usage_audit_log"=>{:GET=>[:list_server_usage_audits]},
  "/os-instance_usage_audit_log/{before_timestamp}"=>
   {:GET=>[:list_usage_audits_before_specified_time]},
- "/os-migrations"=>{:GET=>[:old_list_migrations]},
  "/servers/{server_id}/migrations"=>{:GET=>[:list_migrations]},
  "/servers/{server_id}/migrations/{migration_id}"=>
   {:GET=>[:show_migration_details], :DELETE=>[:delete_abort_migration]},

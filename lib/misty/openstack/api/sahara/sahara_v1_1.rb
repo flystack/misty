@@ -1,6 +1,6 @@
 module Misty::Openstack::API::SaharaV1_1
   def tag
-    'Data Processing API Reference 8.0.0'
+    'Data Processing API Reference 8.0.1'
   end
 
   def api

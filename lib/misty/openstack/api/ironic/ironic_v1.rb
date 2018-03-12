@@ -1,6 +1,6 @@
 module Misty::Openstack::API::IronicV1
   def tag
-    'Ironic API Reference 9.2.1'
+    'Ironic API Reference 10.2.0'
   end
 
   def api
@@ -31,6 +31,12 @@ module Misty::Openstack::API::IronicV1
  "/v1/nodes/{node_ident}/vendor_passthru/methods"=>{:GET=>[:list_methods]},
  "/v1/nodes/{node_ident}/vendor_passthru?method={method_name}"=>
   {:GET=>[:call_a_method]},
+ "/v1/nodes/{node_ident}/traits"=>
+  {:GET=>[:list_traits_of_a_node],
+   :PUT=>[:set_all_traits_of_a_node],
+   :DELETE=>[:remove_all_traits_from_a_node]},
+ "/v1/nodes/{node_ident}/traits/{trait}"=>
+  {:PUT=>[:add_a_trait_to_a_node], :DELETE=>[:remove_a_trait_from_a_node]},
  "/v1/nodes/{node_ident}/vifs"=>
   {:GET=>[:list_attached_vifs_of_a_node], :POST=>[:attach_a_vif_to_a_node]},
  "/v1/nodes/{node_ident}/vifs/{node_vif_ident}"=>

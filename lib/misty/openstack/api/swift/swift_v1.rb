@@ -1,6 +1,6 @@
 module Misty::Openstack::API::SwiftV1
   def tag
-    'Object Storage API Reference 2.16.1'
+    'Object Storage API Reference 2.17.1'
   end
 
   def api

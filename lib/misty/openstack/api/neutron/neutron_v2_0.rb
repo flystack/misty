@@ -1,6 +1,6 @@
 module Misty::Openstack::API::NeutronV2_0
   def tag
-    'Networking API Reference 1.10.1'
+    'Networking API Reference 1.13.1'
   end
 
   def api
@@ -12,17 +12,8 @@ module Misty::Openstack::API::NeutronV2_0
   {:GET=>[:show_network_details],
    :PUT=>[:update_network],
    :DELETE=>[:delete_network]},
- "/v2.0/networks/{network_id}/dhcp-agents"=>
-  {:GET=>[:list_network_dhcp_agents]},
  "/v2.0/networks"=>
   {:GET=>[:list_networks], :POST=>[:create_network, :bulk_create_networks]},
- "/v2.0/agents"=>{:GET=>[:list_agents]},
- "/v2.0/agents/{agent_id}"=>{:GET=>[:show_agent]},
- "/v2.0/agents/{agent_id}/dhcp-networks"=>
-  {:GET=>[:list_agent_dhcp_networks],
-   :POST=>[:create_agent_dhcp_network]},
- "/v2.0/agents/{agent_id}/dhcp-networks/{network_id}"=>
-  {:DELETE=>[:delete_agent_dhcp_network]},
  "/v2.0/ports/{port_id}"=>
   {:GET=>[:show_port_details, :show_trunk_details],
    :PUT=>[:update_port],
@@ -272,6 +263,14 @@ module Misty::Openstack::API::NeutronV2_0
  "/v2.0/log/logs"=>{:GET=>[:list_logs], :POST=>[:create_log]},
  "/v2.0/log/logs/{log_id}"=>
   {:GET=>[:show_log], :PUT=>[:update_log], :DELETE=>[:delete_log]},
- "/v2.0/log/loggable-resources"=>{:GET=>[:list_loggable_resources]}}
+ "/v2.0/log/loggable-resources"=>{:GET=>[:list_loggable_resources]},
+ "/v2.0/agents"=>{:GET=>[:list_all_agents]},
+ "/v2.0/agents/{agent_id}"=>
+  {:GET=>[:show_agent_details],
+   :PUT=>[:update_agent],
+   :DELETE=>[:delete_agent]},
+ "/v2.0/auto-allocated-topology/{project_id}"=>
+  {:GET=>[:show_auto_allocated_topology_details],
+   :DELETE=>[:delete_the_auto_allocated_topology]}}
   end
 end
