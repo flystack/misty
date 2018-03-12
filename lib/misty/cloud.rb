@@ -23,7 +23,7 @@ module Misty
       service = Misty.services.find {|service| service.name == method}
       service_config = @config.get_service(method)
       api_version = self.class.dot_to_underscore(service.default_version(service_config[:config][:api_version]))
-      klass = Object.const_get("Misty::Openstack::#{service.project.capitalize}::#{api_version.capitalize}")
+      klass = Object.const_get("Misty::Openstack::API::#{service.project.capitalize}::#{api_version.capitalize}")
       klass.new(service_config)
     end
 

@@ -21,8 +21,8 @@ end
 
 def api_validate(project, version)
   it "#{project} #{version} loads a valid api structure" do
-    require "misty/openstack/#{project}/#{project}_#{Misty::Cloud.dot_to_underscore(version)}"
-    klass = Object.const_get("Misty::Openstack::#{project.capitalize}#{Misty::Cloud.dot_to_underscore(version).capitalize}")
+    require "misty/openstack/api/#{project}/#{project}_#{Misty::Cloud.dot_to_underscore(version)}"
+    klass = Object.const_get("Misty::Openstack::API::#{project.capitalize}#{Misty::Cloud.dot_to_underscore(version).capitalize}")
     client = Object.new
     client.extend(klass)
     client.tag.must_match /API/

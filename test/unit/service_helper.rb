@@ -25,5 +25,5 @@ def service(param_content_type = :hash, params = {})
 
   config = Misty::Config.new(arg)
 
-  Misty::Openstack::Neutron::V2_0.new(config.get_service(:network))
+  Misty::Openstack::API::Neutron::V2_0.new(config.get_service(:network))
 end
