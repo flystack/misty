@@ -11,10 +11,6 @@ module Misty
           include Misty::Openstack::ServicePack
           include Misty::Microversion
 
-          def microversion
-            '3.44'
-          end
-
           def microversion_header(version)
             {'X-Openstack-Cinder-API-Version' => "#{version}"}
           end

@@ -11,10 +11,6 @@ module Misty
           include Misty::Openstack::ServicePack
           include Misty::Microversion
 
-          def microversion
-            '1.32'
-          end
-
           def microversion_header(version)
             {'X-Openstack-Ironic-API-Version' => "#{version}"}
           end

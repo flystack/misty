@@ -5,15 +5,11 @@ require 'misty/microversion'
 module Misty
   module Openstack
     module API
-        module Manila
+      module Manila
         class V2
           include Misty::Openstack::API::ManilaV2
           include Misty::Openstack::ServicePack
           include Misty::Microversion
-
-          def microversion
-            '2.40'
-          end
 
           def microversion_header(version)
             {'X-Openstack-Manila-API-Version' => "#{version}"}

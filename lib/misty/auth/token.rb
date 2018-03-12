@@ -1,11 +1,12 @@
 require 'misty/http/net_http'
-
 module Misty
   module Auth
     module Token
       include Misty::HTTP::NetHTTP
-
       attr_reader :catalog, :token
+
+      # Default Domain ID
+      DOMAIN_ID = 'default'
 
       def self.build(auth)
         if auth[:tenant_id] || auth[:tenant]

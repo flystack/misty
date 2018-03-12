@@ -11,8 +11,22 @@ module Misty
 
       private
 
+      def json_encode?(data)
+        return true if data.is_a?(Array) || data.is_a?(Hash)
+        if data.is_a?(String)
+          begin
+            JSON.parse(data)
+          rescue JSON::ParserError
+            return false
+          else
+            return true
+          end
+        end
+        return false
+      end
+
       def process_data(header, args)
-        if args.size == 1 && Misty.json_encode?(args[0])
+        if args.size == 1 && json_encode?(args[0])
           header.add('Content-Type' => 'application/json')
           return Misty.to_json(args[0])
         elsif args.size == 1

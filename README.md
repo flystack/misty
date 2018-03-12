@@ -13,19 +13,6 @@ Misty handles OpenStack APIs requests as transparently as possible by:
 * Custom HTTP Methods for special needs
 * And also: Lazy service loading, Low gem dependency (use only Net/HTTP and JSON), Persistent HTTP connections (default since HTTP 1.1 anyway)
 
-### Current Microversion support
-* Cinder
-  v3.44
-* Ironic
-  v1.32
-* Magnum
-  v1.4
-* Manilla
-  v2.40
-* Nova
-  v2.60
-
-
 # How To
 Fetch and install
 ``` ruby

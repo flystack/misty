@@ -17,10 +17,8 @@ module Misty
     end
 
     def default_version(api_version = nil)
-      res = if api_version && (@versions&.include?(api_version) || api_version == @microversion)
+      res = if api_version && (@versions&.include?(api_version))
               api_version
-            elsif @microversion
-              @microversion
             else
               self.versions.sort[-1]
             end

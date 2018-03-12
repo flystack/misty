@@ -11,10 +11,6 @@ module Misty
           include Misty::Openstack::ServicePack
           include Misty::HTTP::Microversion
 
-          def microversion
-            '1.4'
-          end
-
           def service_types
             %w(container-infrastructure-management container-infrastructure)
           end

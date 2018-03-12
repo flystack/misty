@@ -117,11 +117,8 @@ module Misty
 
     def set_services(arg)
       set = {}
-      # TODO: Use enumerable
       arg.each do |e, k|
-        Misty::SERVICES.each do |s|
-          set[e] = k if s[:name] == e
-        end
+        set[e] = k if Misty::SERVICES.find {|s| s[:name] == e}
       end
       set
     end

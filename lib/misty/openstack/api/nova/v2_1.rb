@@ -21,10 +21,6 @@ module Misty
             http_get("/#{version}", headers)
           end
 
-          def microversion
-            '2.60'
-          end
-
           def microversion_header(version)
             # Use default 'OpenStack-API-Version' or older 'X-Openstack-Nova-API-Version'
             if @version >= '2.27'
