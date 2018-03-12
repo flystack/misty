@@ -1,4 +1,45 @@
 ---
+- :type: :container_service
+  :project: :zun
+  :versions:
+  - v1
+- :type: :instance_ha
+  :project: :masakari
+  :versions:
+  - v1.0
+- :type: :reservation
+  :project: :blazar
+  :versions:
+  - v1
+- :type: :placement
+  :project: :nova
+  :versions:
+  - v1
+  :microversion: '2.60'
+- :type: :resource_optimization
+  :project: :watcher
+  :versions:
+  - v1
+- :type: :workflow
+  :project: :mistral
+  :versions:
+  - v2.0
+- :type: :event
+  :project: :panko
+  :versions:
+  - v2
+- :type: :gnocchi
+  :project: :metric
+  :versions:
+  - v1
+- :type: :monitoring
+  :project: :monasca
+  :versions:
+  - v2.0
+- :type: :key_manager
+  :project: :barbican
+  :versions:
+  - v1
 - :type: :application_catalog
   :project: :murano
   :versions:
