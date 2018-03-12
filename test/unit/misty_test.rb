@@ -142,41 +142,43 @@ describe Misty do
     end
   end
 
-  describe '#json_encode?' do
-    it 'true with a Array type' do
-      Misty.json_encode?([]).must_equal true
+  describe 'Misty::Helper' do
+    describe '#json_encode?' do
+      it 'true with a Array type' do
+        Misty::Helper.json_encode?([]).must_equal true
+      end
+
+      it 'true with a Hash type' do
+        Misty::Helper.json_encode?({}).must_equal true
+      end
+
+      it 'true with a JSON String type' do
+        Misty::Helper.json_encode?('{"JSON_Key": "JSON_Value"}').must_equal true
+      end
+
+      it 'false with a non JSON String type' do
+        Misty::Helper.json_encode?("Just a string").must_equal false
+      end
     end
 
-    it 'true with a Hash type' do
-      Misty.json_encode?({}).must_equal true
-    end
+    describe '#to_json' do
+      it 'returns a JSON string when using a Ruby hash' do
+        Misty::Helper.to_json({'key' => 'val'}).must_be_kind_of String
+      end
 
-    it 'true with a JSON String type' do
-      Misty.json_encode?('{"JSON_Key": "JSON_Value"}').must_equal true
-    end
+      it 'returns same string when using a string' do
+        data = "{\"key\": \"val\"}"
+        response = Misty::Helper.to_json(data)
+        response.must_be_kind_of String
+        response.must_equal data
+      end
 
-    it 'false with a non JSON String type' do
-      Misty.json_encode?("Just a string").must_equal false
-    end
-  end
-
-  describe '#to_json' do
-    it 'returns a JSON string when using a Ruby hash' do
-      Misty.to_json({'key' => 'val'}).must_be_kind_of String
-    end
-
-    it 'returns same string when using a string' do
-      data = "{\"key\": \"val\"}"
-      response = Misty.to_json(data)
-      response.must_be_kind_of String
-      response.must_equal data
-    end
-
-    it 'fails when using a string with non JSON data' do
-      data = 'key;val'
-      proc do
-        response = Misty.to_json(data)
-      end.must_raise JSON::ParserError
+      it 'fails when using a string with non JSON data' do
+        data = 'key;val'
+        proc do
+          response = Misty::Helper.to_json(data)
+        end.must_raise JSON::ParserError
+      end
     end
   end
 end
