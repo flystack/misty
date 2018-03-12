@@ -30,15 +30,11 @@ def api_validate(project, version)
   end
 end
 
-# Assert each version of OpenStack project loads a valid api structure
+#  Assert each version of OpenStack project loads a valid api structure
 describe 'Openstack API' do
   Misty.services.each do |service|
-    if service.versions
-      service.versions.each do |version|
-        api_validate(service.project, version)
-      end
-    elsif service.microversion && !service.microversion.empty?
-      api_validate(service.project, service.microversion)
+    service.versions.each do |version|
+      api_validate(service.project, version)
     end
   end
 end

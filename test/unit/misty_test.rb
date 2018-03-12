@@ -2,7 +2,7 @@ require 'test_helper'
 
 def validate_service(service)
   service.must_be_kind_of Misty::Service
-  service.name.must_be_kind_of Symbol
+  service.type.must_be_kind_of Symbol
   service.project.must_be_kind_of Symbol
 end
 
@@ -20,116 +20,116 @@ end
 describe Misty do
   describe '#set_services' do
     it 'has alarming service' do
-      service = Misty::services.find { |s| s.name == :alarming}
+      service = Misty::services.find { |s| s.type == :alarming}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has baremetal service' do
-      service = Misty::services.find { |s| s.name == :baremetal}
+      service = Misty::services.find { |s| s.type == :baremetal}
       validate_service(service)
       validate_microversion(service)
     end
 
     it 'has block_storage service' do
-      service = Misty::services.find { |s| s.name == :block_storage}
+      service = Misty::services.find { |s| s.type == :block_storage}
       validate_service(service)
       validate_versions(service)
       validate_microversion(service)
     end
 
     it 'has clustering service' do
-      service = Misty::services.find { |s| s.name == :clustering}
+      service = Misty::services.find { |s| s.type == :clustering}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has compute service' do
-      service = Misty::services.find { |s| s.name == :compute}
+      service = Misty::services.find { |s| s.type == :compute}
       validate_service(service)
       validate_microversion(service)
     end
 
     it 'has container_infrastructure_management service' do
-      service = Misty::services.find { |s| s.name == :container_infrastructure_management}
+      service = Misty::services.find { |s| s.type == :container_infrastructure_management}
       validate_service(service)
       validate_microversion(service)
     end
 
     it 'has data_processing service' do
-      service = Misty::services.find { |s| s.name == :data_processing}
+      service = Misty::services.find { |s| s.type == :data_processing}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has data_protection service' do
-      service = Misty::services.find { |s| s.name == :data_protection_orchestration}
+      service = Misty::services.find { |s| s.type == :data_protection_orchestration}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has database service' do
-      service = Misty::services.find { |s| s.name == :database}
+      service = Misty::services.find { |s| s.type == :database}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has dns service' do
-      service = Misty::services.find { |s| s.name == :dns}
+      service = Misty::services.find { |s| s.type == :dns}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has identity service' do
-      service = Misty::services.find { |s| s.name == :identity}
+      service = Misty::services.find { |s| s.type == :identity}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has image service' do
-      service = Misty::services.find { |s| s.name == :image}
+      service = Misty::services.find { |s| s.type == :image}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has messaging service' do
-      service = Misty::services.find { |s| s.name == :messaging}
+      service = Misty::services.find { |s| s.type == :messaging}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has metering service' do
-      service = Misty::services.find { |s| s.name == :metering}
+      service = Misty::services.find { |s| s.type == :metering}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has network service' do
-      service = Misty::services.find { |s| s.name == :network}
+      service = Misty::services.find { |s| s.type == :network}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has object_storage service' do
-      service = Misty::services.find { |s| s.name == :object_storage}
+      service = Misty::services.find { |s| s.type == :object_storage}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has orchestration service' do
-      service = Misty::services.find { |s| s.name == :orchestration}
+      service = Misty::services.find { |s| s.type == :orchestration}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has search service' do
-      service = Misty::services.find { |s| s.name == :search}
+      service = Misty::services.find { |s| s.type == :search}
       validate_service(service)
       validate_versions(service)
     end
 
     it 'has shared_file_systems service' do
-      service = Misty::services.find { |s| s.name == :shared_file_systems}
+      service = Misty::services.find { |s| s.type == :shared_file_systems}
       validate_service(service)
       validate_microversion(service)
     end

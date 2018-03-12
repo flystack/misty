@@ -1,102 +1,102 @@
 ---
-- :name: :application_catalog
+- :type: :application_catalog
   :project: :murano
   :versions:
   - v1
-- :name: :alarming
+- :type: :alarming
   :project: :aodh
   :versions:
   - v2
-- :name: :backup
+- :type: :backup
   :project: :freezer
   :versions:
   - v1
-- :name: :baremetal
+- :type: :baremetal
   :project: :ironic
   :versions:
   - v1
-  :microversion: v1.32
-- :name: :block_storage
+  :microversion: '1.32'
+- :type: :block_storage
   :project: :cinder
   :versions:
   - v3
   - v2
   - v1
-  :microversion: v3.44
-- :name: :clustering
+  :microversion: '3.44'
+- :type: :clustering
   :project: :senlin
   :versions:
   - v1
-- :name: :compute
+- :type: :compute
   :project: :nova
   :versions:
   - v2.1
-  :microversion: v2.60
-- :name: :container_infrastructure_management
+  :microversion: '2.60'
+- :type: :container_infrastructure_management
   :project: :magnum
   :versions:
   - v1
-  :microversion: v1.4
-- :name: :data_processing
+  :microversion: '1.4'
+- :type: :data_processing
   :project: :sahara
   :versions:
   - v1.1
-- :name: :data_protection_orchestration
+- :type: :data_protection_orchestration
   :project: :karbor
   :versions:
   - v1
-- :name: :database
+- :type: :database
   :project: :trove
   :versions:
   - v1.0
-- :name: :dns
+- :type: :dns
   :project: :designate
   :versions:
   - v2
-- :name: :identity
+- :type: :identity
   :project: :keystone
   :versions:
   - v3
   - v2.0
-- :name: :image
+- :type: :image
   :project: :glance
   :versions:
   - v2
   - v1
-- :name: :load_balancer
+- :type: :load_balancer
   :project: :octavia
   :versions:
   - v2.0
-- :name: :messaging
+- :type: :messaging
   :project: :zaqar
   :versions:
   - v2
-- :name: :metering
+- :type: :metering
   :project: :ceilometer
   :versions:
   - v2
-- :name: :network
+- :type: :network
   :project: :neutron
   :versions:
   - v2.0
-- :name: :nfv_orchestration
+- :type: :nfv_orchestration
   :project: :tacker
   :versions:
   - v1.0
-- :name: :object_storage
+- :type: :object_storage
   :project: :swift
   :versions:
   - v1
-- :name: :orchestration
+- :type: :orchestration
   :project: :heat
   :versions:
   - v1
-- :name: :search
+- :type: :search
   :project: :searchlight
   :versions:
   - v1
-- :name: :shared_file_systems
+- :type: :shared_file_systems
   :project: :manila
   :versions:
   - v2
-  :microversion: v2.40
+  :microversion: '2.40'

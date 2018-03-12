@@ -118,7 +118,7 @@ module Misty
     def set_services(arg)
       set = {}
       arg.each do |e, k|
-        set[e] = k if Misty.services.find {|s| s.name == e}
+        set[e] = k if Misty.services.find {|s| s.type == e}
       end
       set
     end

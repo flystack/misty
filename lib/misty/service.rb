@@ -1,16 +1,16 @@
 module Misty
   class Service
-    attr_reader :name, :microversion, :project, :versions
+    attr_reader :type, :microversion, :project, :versions
 
     def initialize(params)
-      @name = params[:name]
+      @type = params[:type]
       @project = params[:project]
       @versions = params[:versions]
       @microversion = params[:microversion]
     end
 
     def to_s
-      str = "#{name}: #{project}"
+      str = "#{type}: #{project}"
       str << ", versions: #{@versions}" if @versions
       str << ", microversion: #{@microversion}" if @microversion
       str

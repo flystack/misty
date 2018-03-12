@@ -53,7 +53,7 @@ describe Misty::Cloud do
   describe 'Each service' do
     it 'has a method defined' do
       Misty::services.each do |service|
-        method =  Misty::Cloud.method_defined?(service.name)
+        method =  Misty::Cloud.method_defined?(service.type)
         method.must_equal true
       end
     end

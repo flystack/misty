@@ -37,7 +37,7 @@ module Misty
       nil
     end
 
-    def names
+    def types
       list = []
       each do |s|
         list << s.name
