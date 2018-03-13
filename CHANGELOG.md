@@ -1,3 +1,30 @@
+# 1.4.0 - 13 March 2018
+
+# Authentication
+Catalog and Token classes added
+
+# Services
+Using official service types from https://service-types.openstack.org/service-types.json
+Dedicated API directory.
+Microversion revisited, with Misty.services microversion holding the latest supported.
+Misty.services
+
+Latest from Openstack-APIs which include new services which have been added:
+- barbican
+- blazar
+- gnocchi
+- masakari
+- mistral
+- monasca
+- panko
+- placement
+- watcher
+- zun
+
+All other services updated
+
+The
+
 # 1.3.4 - 07 March 2018
 ## CI
 Added OpenLab app
