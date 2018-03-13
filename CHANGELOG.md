@@ -1,5 +1,13 @@
-# 1.4.0 - 13 March 2018
+# 1.5.1 - 13 March 2018
 
+## Misty#services
+Replace openstack_services.yaml with Misty::Openstack::SERVICES
+
+## Readme
+Updated service list
+Adjusted Services examples
+
+# 1.5.0 - 13 March 2018
 # Authentication
 Catalog and Token classes added
 
@@ -22,6 +30,9 @@ Latest from Openstack-APIs which include new services which have been added:
 - zun
 
 All other services updated
+
+# 1.4.0 - 08 March 2018
+Pre-release
 
 # 1.3.4 - 07 March 2018
 ## CI
