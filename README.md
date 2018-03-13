@@ -270,9 +270,12 @@ Then use different options, for example, the identify service, therefore overrid
 specified values
 ```ruby
  cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
+ ```
+ 
 Provide service specific option
+ ```ruby
  cloud.compute  => {:version => '2.27'})
-```
+ ```
 
 ### Service Prefix
 A shorter name can be used to call a service only if it's unique among all services.
