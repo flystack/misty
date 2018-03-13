@@ -7,15 +7,6 @@ module Misty
 
     attr_reader :services
 
-    def self.build(file)
-      services_list = Misty::Services.new
-      openstack_services = YAML::load_file(file)
-      openstack_services.each do |s|
-        services_list.add(s)
-      end
-      services_list
-    end
-
     def initialize
       @services = []
     end

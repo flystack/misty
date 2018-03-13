@@ -1,10 +1,15 @@
 require 'misty/services'
 require 'misty/helper'
+require 'misty/openstack'
 
 module Misty
-  OPENSTACK_SERVICES = './lib/misty/openstack_services.yaml'
+  def self.build(list)
+    services_list = Misty::Services.new
+    list.each  |s| { services_list.add(s) }
+    services_list
+  end
 
   def self.services
-    @services ||= Misty::Services.build(OPENSTACK_SERVICES)
+    @services ||= build(Misty::Openstack::SERVICES)
   end
 end
