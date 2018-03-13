@@ -5,7 +5,7 @@ require 'misty/openstack'
 module Misty
   def self.build(list)
     services_list = Misty::Services.new
-    list.each  |s| { services_list.add(s) }
+    list.each  {|s| services_list.add(s)}
     services_list
   end
 
