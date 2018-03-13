@@ -13,6 +13,44 @@ Misty handles OpenStack APIs requests as transparently as possible by:
 * Custom HTTP Methods for special needs
 * And also: Lazy service loading, Low gem dependency (use only Net/HTTP and JSON), Persistent HTTP connections (default since HTTP 1.1 anyway)
 
+## OpenStack Services
+
+The current list of Openstack services supported, can be obtained from `Misty.services` is:  
+
+application_catalog: murano, versions: ["v1"]
+alarming: aodh, versions: ["v2"]
+backup: freezer, versions: ["v1"]
+baremetal: ironic, versions: ["v1"], microversion: 1.32
+block_storage: cinder, versions: ["v3", "v2", "v1"], microversion: 3.44
+clustering: senlin, versions: ["v1"]
+compute: nova, versions: ["v2.1"], microversion: 2.60
+container_infrastructure_management: magnum, versions: ["v1"], microversion: 1.4
+container_service: zun, versions: ["v1"]
+data_processing: sahara, versions: ["v1.1"]
+data_protection_orchestration: karbor, versions: ["v1"]
+database: trove, versions: ["v1.0"]
+dns: designate, versions: ["v2"]
+event: panko, versions: ["v2"]
+identity: keystone, versions: ["v3", "v2.0"]
+image: glance, versions: ["v2", "v1"]
+instance_ha: masakari, versions: ["v1.0"]
+key_manager: barbican, versions: ["v1"]
+load_balancer: octavia, versions: ["v2.0"]
+metric: gnocchi, versions: ["v1"]
+messaging: zaqar, versions: ["v2"]
+metering: ceilometer, versions: ["v2"]
+monitoring: monasca, versions: ["v2.0"]
+network: neutron, versions: ["v2.0"]
+nfv_orchestration: tacker, versions: ["v1.0"]
+object_storage: swift, versions: ["v1"]
+orchestration: heat, versions: ["v1"]
+placement: placement, versions: ["v2.1"], microversion: 2.60
+reservation: blazar, versions: ["v1"]
+resource_optimization: watcher, versions: ["v1"]
+search: searchlight, versions: ["v1"]
+shared_file_systems: manila, versions: ["v2"], microversion: 2.40
+workflow: mistral, versions: ["v2"]
+
 # How To
 Fetch and install
 ``` ruby
@@ -233,37 +271,6 @@ specified values
  cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
 Provide service specific option
  cloud.compute  => {:version => '2.27'})
-```
-
-## Services
-The latest list of supported service can be obtain from `Misty.services`:
-```
-require 'misty'
-puts Misty.services
-=>
-application_catalog: murano, versions: ["v1"]
-alarming: aodh, versions: ["v2"]
-backup: freezer, versions: ["v1"]
-baremetal: ironic, versions: ["v1"], microversion: v1
-block_storage: cinder, versions: ["v3", "v2", "v1"], microversion: v3
-clustering: senlin, versions: ["v1"]
-compute: nova, versions: ["v2.1"], microversion: v2.1
-container_infrastructure_management: magnum, versions: ["v1"], microversion: v1
-data_processing: sahara, versions: ["v1.1"]
-data_protection_orchestration: karbor, versions: ["v1"]
-database: trove, versions: ["v1.0"]
-dns: designate, versions: ["v2"]
-identity: keystone, versions: ["v3", "v2.0"]
-image: glance, versions: ["v2", "v1"]
-load_balancer: octavia, versions: ["v2.0"]
-messaging: zaqar, versions: ["v2"]
-metering: ceilometer, versions: ["v2"]
-network: neutron, versions: ["v2.0"]
-nfv_orchestration: tacker, versions: ["v1.0"]
-object_storage: swift, versions: ["v1"]
-orchestration: heat, versions: ["v1"]
-search: searchlight, versions: ["v1"]
-shared_file_systems: manila, versions: ["v2"], microversion: v2
 ```
 
 ### Service Prefix
