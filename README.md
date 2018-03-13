@@ -261,20 +261,14 @@ cloud.object_storage.create_update_or_delete_container_metadata(container_name, 
 ```
 
 ### Examples
-Initialize cloud
+Initialize cloud with different options, and for the identify service, override respective global values
 ```ruby
-cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0)
+cloud = Misty::Cloud.new(:auth => { ... }, region_id => 'regionOne', :log_level => 0, {identity => {region_id => 'regionTwo', :interface => 'admin'})
 ```
-
-Then use different options, for example, the identify service, therefore overriding respective global defaults or
-specified values
-```ruby
- cloud.identity => {:region_id => 'regionTwo', :interface => 'admin'}
- ```
  
-Provide service specific option
+At Request level, provide specific options like the microversion
  ```ruby
- cloud.compute  => {:version => '2.27'})
+ cloud.compute(:version => '2.27', :content_type => :json).list_servers
  ```
 
 ### Service Prefix
