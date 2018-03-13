@@ -40,7 +40,7 @@ module Misty
     def types
       list = []
       each do |s|
-        list << s.name
+        list << s.type
       end
       list
     end

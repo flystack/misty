@@ -1,6 +1,6 @@
 module Misty::Openstack::API::ZaqarV2
   def tag
-    'Messaging Service API Reference 6.0.0'
+    'Messaging Service API Reference 6.0.1'
   end
 
   def api

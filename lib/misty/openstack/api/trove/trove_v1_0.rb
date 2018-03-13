@@ -1,18 +1,19 @@
 module Misty::Openstack::API::TroveV1_0
   def tag
-    'Database API Reference 9.0.0'
+    'Database API Reference 9.0.1'
   end
 
   def api
 {"/"=>{:GET=>[:list_versions]},
  "/v1.0"=>{:GET=>[:show_version_details]},
- "/v1.0/{accountId}/instances/{instanceId}"=>
-  {:DELETE=>[:delete_database_instance],
-   :GET=>[:show_database_instance_details],
-   :PUT=>[:attach_configuration_group, :detach_configuration_group],
-   :PATCH=>[:detach_replica]},
  "/v1.0/{accountId}/instances"=>
-  {:POST=>[:create_database_instance], :GET=>[:list_database_instances]},
+  {:GET=>[:list_database_instances], :POST=>[:create_database_instance]},
+ "/v1.0/{accountId}/instances/{instanceId}"=>
+  {:GET=>[:show_database_instance_details],
+   :PUT=>[:attach_configuration_group, :detach_configuration_group],
+   :PATCH=>
+    [:detach_replica, :update_instance_name, :upgrade_datastore_version],
+   :DELETE=>[:delete_database_instance]},
  "/v1.0/{accountId}/instances/{instanceId}/configuration"=>
   {:GET=>[:list_configuration_defaults]},
  "/v1.0/{accountId}/instances/{instanceId}/action"=>
@@ -22,6 +23,14 @@ module Misty::Openstack::API::TroveV1_0
      :resize_instance_volume,
      :promote_instance_to_replica_source,
      :delete_replication_base_instance]},
+ "/v1.0/{accountId}/instances/{instanceId}/log"=>
+  {:GET=>[:list_instance_logs],
+   :POST=>
+    [:show_instance_log_details,
+     :enable_instance_log,
+     :disable_instance_log,
+     :publish_instance_log,
+     :discard_instance_log]},
  "/v1.0/{accountId}/instances/{instanceId}/databases/{databaseName}"=>
   {:DELETE=>[:delete_database]},
  "/v1.0/{accountId}/instances/{instanceId}/databases"=>
@@ -50,6 +59,12 @@ module Misty::Openstack::API::TroveV1_0
   {:DELETE=>[:delete_configuration_group],
    :PATCH=>[:patch_configuration_group],
    :GET=>[:show_configuration_group_details],
-   :PUT=>[:update_configuration_group]}}
+   :PUT=>[:update_configuration_group]},
+ "/v1.0/{accountId}/backups"=>
+  {:GET=>[:list_database_backups], :POST=>[:create_database_backup]},
+ "/v1.0/{accountId}/instances/{instanceId}/backups"=>
+  {:GET=>[:list_database_backups_for_an_instance]},
+ "/v1.0/{accountId}/backups/{backupId}"=>
+  {:GET=>[:show_database_backup_details], :DELETE=>[:delete_database_backup]}}
   end
 end

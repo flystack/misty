@@ -5,7 +5,7 @@ module Misty::Openstack::API::CinderV3
 
   def api
 {"/"=>{:GET=>[:list_all_api_versions]},
- "/v3"=>{:GET=>[:show_api_v3_details]},
+ "/v3/"=>{:GET=>[:show_api_v3_details]},
  "/v3/{project_id}/extensions"=>{:GET=>[:list_known_api_extensions]},
  "/v3/{project_id}/types/{volume_type_id}"=>
   {:PUT=>[:update_a_volume_type],
@@ -18,6 +18,7 @@ module Misty::Openstack::API::CinderV3
   {:GET=>[:show_extra_specification_for_volume_type],
    :PUT=>[:update_extra_specification_for_volume_type],
    :DELETE=>[:delete_extra_specification_for_volume_type]},
+ "/v3/{project_id}/types/default"=>{:GET=>[:show_default_volume_type]},
  "/v3/{project_id}/types"=>
   {:GET=>[:list_all_volume_types], :POST=>[:create_a_volume_type]},
  "/v3/{project_id}/types/{volume_type_id}/encryption"=>
@@ -25,7 +26,7 @@ module Misty::Openstack::API::CinderV3
  "/v3/{project_id}/types/{volume_type_id}/encryption/{key}"=>
   {:GET=>[:show_encryption_specs_item]},
  "/v3/{project_id}/types/{volume_type_id}/encryption/{encryption_id}"=>
-  {:GET=>[:delete_an_encryption_type], :POST=>[:update_an_encryption_type]},
+  {:DELETE=>[:delete_an_encryption_type], :PUT=>[:update_an_encryption_type]},
  "/v3/{project_id}/types/{volume_type}/action"=>
   {:POST=>
     [:add_private_volume_type_access_to_project,
@@ -190,10 +191,12 @@ module Misty::Openstack::API::CinderV3
   {:PUT=>[:update_group_type],
    :GET=>[:show_group_type_details],
    :DELETE=>[:delete_group_type]},
+ "/v3/{project_id}/group_types/default"=>
+  {:GET=>[:show_default_group_type_details]},
  "/v3/{project_id}/group_types"=>
   {:GET=>[:list_group_types], :POST=>[:create_group_type]},
  "/v3/{project_id}/group_types/{group_type_id}/group_specs"=>
-  {:POST=>[:create_group_specs_for_a_group_type],
+  {:POST=>[:create_or_update_group_specs_for_a_group_type],
    :GET=>[:list_group_specs_for_a_group_type]},
  "/v3/{project_id}/group_types/{group_type_id}/group_specs/{spec_id}"=>
   {:GET=>[:show_one_specific_group_spec_for_a_group_type],

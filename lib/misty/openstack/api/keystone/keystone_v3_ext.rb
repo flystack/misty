@@ -1,6 +1,6 @@
 module Misty::Openstack::API::KeystoneV3_ext
   def tag
-    'Identity API Reference v3.8'
+    'Identity API Reference v3.10'
   end
 
   def api_ext
@@ -88,14 +88,12 @@ module Misty::Openstack::API::KeystoneV3_ext
    :PATCH=>[:update_identity_provider]},
  "/v3/OS-FEDERATION/identity_providers"=>{:GET=>[:list_identity_providers]},
  "/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}"=>
-  {:PUT=>[:add_a_protocol_and_attribute_mapping_to_an_identity_provider],
-   :GET=>[:get_a_protocol_and_attribute_mapping_for_an_identity_provider],
-   :PATCH=>
-    [:update_the_attribute_mapping_for_an_identity_provider_and_protocol],
-   :DELETE=>
-    [:delete_a_protocol_and_attribute_mapping_from_an_identity_provider]},
+  {:PUT=>[:add_protocol_to_identity_provider],
+   :GET=>[:get_protocol_for_identity_provider],
+   :PATCH=>[:update_attribute_mapping_for_identity_provider],
+   :DELETE=>[:delete_a_protocol_from_identity_provider]},
  "/v3/OS-FEDERATION/identity_providers/{id}/protocols"=>
-  {:GET=>[:list_all_protocol_and_attribute_mappings_of_an_identity_provider]},
+  {:GET=>[:list_protocols_of_identity_provider]},
  "/v3/OS-FEDERATION/mappings/{id}"=>
   {:PUT=>[:create_a_mapping],
    :GET=>[:get_a_mapping],

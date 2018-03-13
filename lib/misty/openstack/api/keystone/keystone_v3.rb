@@ -1,6 +1,6 @@
 module Misty::Openstack::API::KeystoneV3
   def tag
-    'Identity API Reference v3.8'
+    'Identity API Reference v3.10'
   end
 
   def api
@@ -11,13 +11,21 @@ module Misty::Openstack::API::KeystoneV3
      :password_authentication_with_explicit_unscoped_authorization,
      :token_authentication_with_unscoped_authorization,
      :token_authentication_with_scoped_authorization,
-     :token_authentication_with_explicit_unscoped_authorization],
+     :token_authentication_with_explicit_unscoped_authorization,
+     :authenticating_with_an_application_credential],
    :GET=>[:validate_and_show_information_for_token],
    :HEAD=>[:check_token],
    :DELETE=>[:revoke_token]},
  "/v3/auth/catalog"=>{:GET=>[:get_service_catalog]},
  "/v3/auth/projects"=>{:GET=>[:get_available_project_scopes]},
  "/v3/auth/domains"=>{:GET=>[:get_available_domain_scopes]},
+ "/v3/auth/system"=>{:GET=>[:get_available_system_scopes]},
+ "/v3/users/{user_id}/application_credentials"=>
+  {:POST=>[:create_application_credential],
+   :GET=>[:list_application_credentials]},
+ "/v3/users/{user_id}/application_credentials/{application_credential_id}"=>
+  {:GET=>[:show_application_credential_details],
+   :DELETE=>[:delete_application_credential]},
  "/v3/credentials"=>{:POST=>[:create_credential], :GET=>[:list_credentials]},
  "/v3/credentials/{credential_id}"=>
   {:GET=>[:show_credential_details],
@@ -138,6 +146,20 @@ module Misty::Openstack::API::KeystoneV3
    :HEAD=>[:confirm_role_inference_rule],
    :DELETE=>[:delete_role_inference_rule]},
  "/v3/role_inferences"=>{:GET=>[:list_all_role_inference_rules]},
+ "/v3/system/users/{user_id}/roles"=>
+  {:GET=>[:list_system_role_assignments_for_a_user]},
+ "/v3/system/users/{user_id}/roles/{role_id}"=>
+  {:PUT=>[:assign_a_system_role_to_a_user],
+   :HEAD=>[:check_user_for_a_system_role_assignment],
+   :GET=>[:get_system_role_assignment_for_a_user],
+   :DELETE=>[:delete_a_system_role_assignment_from_a_user]},
+ "/v3/system/groups/{group_id}/roles"=>
+  {:GET=>[:list_system_role_assignments_for_a_group]},
+ "/v3/system/groups/{group_id}/roles/{role_id}"=>
+  {:PUT=>[:assign_a_system_role_to_a_group],
+   :HEAD=>[:check_group_for_a_system_role_assignment],
+   :GET=>[:get_system_role_assignment_for_a_group],
+   :DELETE=>[:delete_a_system_role_assignment_from_a_group]},
  "/v3/services"=>{:GET=>[:list_services], :POST=>[:create_service]},
  "/v3/services/{service_id}"=>
   {:GET=>[:show_service_details],
@@ -148,6 +170,16 @@ module Misty::Openstack::API::KeystoneV3
   {:GET=>[:show_endpoint_details],
    :PATCH=>[:update_endpoint],
    :DELETE=>[:delete_endpoint]},
+ "/v3/registered_limits"=>
+  {:GET=>[:list_registered_limits],
+   :POST=>[:create_registered_limits],
+   :PUT=>[:update_registered_limits]},
+ "/v3/registered_limits/{registered_limit_id}"=>
+  {:GET=>[:show_registered_limit_details],
+   :DELETE=>[:delete_registered_limit]},
+ "/v3/limits"=>
+  {:GET=>[:list_limits], :POST=>[:create_limits], :PUT=>[:update_limits]},
+ "/v3/limits/{limit_id}"=>{:GET=>[:show_limit_details], :DELETE=>[:delete_limit]},
  "/v3/users"=>{:GET=>[:list_users], :POST=>[:create_user]},
  "/v3/users/{user_id}"=>
   {:GET=>[:show_user_details],

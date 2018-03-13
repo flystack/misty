@@ -1,6 +1,6 @@
 module Misty::Openstack::API::DesignateV2
   def tag
-    'Designate API Reference 6.0.0'
+    'Designate API Reference 6.0.1'
   end
 
   def api

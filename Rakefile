@@ -90,7 +90,7 @@ namespace :build do
       path = entry.split('/')
       name = path[-2]
       file = path[-1]
-     `diff lib/misty/openstack/#{name}/#{file} build/APIs/#{name}/#{file}`
+     `diff lib/misty/openstack/api/#{name}/#{file} build/APIs/#{name}/#{file}`
      puts "Not the same: #{name}/#{file}" unless $? == 0
     end
   end

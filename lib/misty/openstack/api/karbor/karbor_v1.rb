@@ -1,6 +1,6 @@
 module Misty::Openstack::API::KarborV1
   def tag
-    'Data Protection API Reference 0.5.1'
+    'Data Protection API Reference 1.0.1'
   end
 
   def api

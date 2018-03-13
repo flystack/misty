@@ -75,6 +75,12 @@ module Misty
       @container_infrastructure_management
     end
 
+    def container_service(arg = {})
+      @container_service ||= build_service(__method__)
+      @container_service.request_config(args)
+      @container_service
+    end
+
     def data_processing(arg = {})
       @data_processing ||= build_service(__method__)
       @data_processing.request_config(arg)
@@ -99,6 +105,12 @@ module Misty
       @dns
     end
 
+    def event(arg = {})
+      @event ||= build_service(__method__)
+      @event.request_config(args)
+      @event
+    end
+
     def identity(arg = {})
       @identity ||= build_service(__method__)
       @identity.request_config(arg)
@@ -109,6 +121,18 @@ module Misty
       @image ||= build_service(__method__)
       @image.request_config(arg)
       @image
+    end
+
+    def instance_ha(arg = {})
+      @instance_ha ||= build_service(__method__)
+      @instance_ha.request_config(args)
+      @instance_ha
+    end
+
+    def key_manager(arg = {})
+      @key_manager ||= build_service(__method__)
+      @key_manager.request_config(args)
+      @key_manager
     end
 
     def load_balancer(arg = {})
@@ -127,6 +151,18 @@ module Misty
       @metering ||= build_service(__method__)
       @metering.request_config(arg)
       @metering
+    end
+
+    def metric(arg = {})
+      @metric ||= build_service(__method__)
+      @metric.request_config(args)
+      @metric
+    end
+
+    def monitoring(arg = {})
+      @monitoring ||= build_service(__method__)
+      @monitoring.request_config(args)
+      @monitoring
     end
 
     def network(arg = {})
@@ -153,6 +189,24 @@ module Misty
       @orchestration
     end
 
+    def placement(arg = {})
+      @placement ||= build_service(__method__)
+      @placement.request_config(args)
+      @placement
+    end
+
+    def reservation(arg = {})
+      @reservation ||= build_service(__method__)
+      @reservation.request_config(args)
+      @reservation
+    end
+
+    def resource_optimization(arg = {})
+      @resource_optimization ||= build_service(__method__)
+      @resource_optimization.request_config(args)
+      @resource_optimization
+    end
+
     def search(arg = {})
       @search ||= build_service(__method__)
       @search.request_config(arg)
@@ -165,26 +219,33 @@ module Misty
       @shared_file_systems
     end
 
+    def workflow(arg = {})
+      @workflow ||= build_service(__method__)
+      @workflow.request_config(args)
+      @workflow
+    end
+
     alias domain_name_server dns
     alias volume block_storage
 
     private
 
-    # TODO, *args)
-    def method_missing(method_name)
+    def method_missing(method_name, arg = {})
       services_avail = []
-      Misty.services.types.each do |service_name|
-        services_avail << service_name if /#{method_name}/.match(service_name)
+      Misty.services.types.each do |serv|
+        services_avail << serv if /^#{method_name}/.match(serv)
       end
 
       if services_avail.size == 1
-        self.send(services_avail[0])
-        return self.instance_variable_get("@#{services_avail[0]}")
+        type = services_avail[0]
+        raise NoMethodError, "No such Cloud Service: #{method_name}" unless self.class.method_defined?(type)
       elsif services_avail.size > 1
         raise NoMethodError, "Ambiguous Cloud Service: #{method_name}"
       else
         raise NoMethodError, "No such Cloud Service: #{method_name}"
       end
+
+      send(type, arg)
     end
   end
 end

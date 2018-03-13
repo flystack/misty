@@ -1,6 +1,6 @@
 module Misty::Openstack::API::SearchlightV1
   def tag
-    'Search Service API Reference 3.0.1'
+    'Search Service API Reference 4.0.0'
   end
 
   def api

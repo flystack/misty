@@ -102,8 +102,8 @@ module Misty::Openstack::API::CinderV2
    :POST=>[:create_an_encryption_type_for_v2]},
  "/v2/{project_id}/types/{volume_type_id}/encryption/{encryption_id}"=>
   {:GET=>[:delete_an_encryption_type_for_v2],
-   :POST=>[:update_an_encryption_type_for_v2]},
- "/v2"=>{:GET=>[:show_api_v2_details]},
+   :PUT=>[:update_an_encryption_type_for_v2]},
+ "/v2/"=>{:GET=>[:show_api_v2_details]},
  "/v2/{project_id}/volumes/{volume_id}/action"=>
   {:POST=>
     [:extend_volume_size,

@@ -59,8 +59,9 @@ module Misty::Openstack::API::OctaviaV2_0
  "/v2.0/lbaas/quotas/{project_id}"=>
   {:GET=>[:show_project_quota],
    :PUT=>[:update_a_quota],
-   :DELETE=>[:remove_a_quota]},
+   :DELETE=>[:reset_a_quota]},
  "/v2.0/octavia/amphorae"=>{:GET=>[:list_amphora]},
- "/v2.0/octavia/amphorae/{amphora_id}"=>{:GET=>[:show_amphora_details]}}
+ "/v2.0/octavia/amphorae/{amphora_id}"=>{:GET=>[:show_amphora_details]},
+ "/v2.0/octavia/amphorae/{amphora_id}/failover"=>{:PUT=>[:failover_amphora]}}
   end
 end

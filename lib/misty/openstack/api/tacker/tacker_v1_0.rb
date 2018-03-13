@@ -1,6 +1,6 @@
 module Misty::Openstack::API::TackerV1_0
   def tag
-    'NFV Orchestration API Reference 0.8.1'
+    'NFV Orchestration API Reference 0.9.1'
   end
 
   def api
