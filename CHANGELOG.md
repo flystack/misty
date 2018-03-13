@@ -23,8 +23,6 @@ Latest from Openstack-APIs which include new services which have been added:
 
 All other services updated
 
-The
-
 # 1.3.4 - 07 March 2018
 ## CI
 Added OpenLab app
