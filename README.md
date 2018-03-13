@@ -16,7 +16,7 @@ Misty handles OpenStack APIs requests as transparently as possible by:
 ## OpenStack Services
 
 The current list of Openstack services supported, can be obtained from `Misty.services` is:  
-
+```ruby
 application_catalog: murano, versions: ["v1"]
 alarming: aodh, versions: ["v2"]
 backup: freezer, versions: ["v1"]
@@ -50,6 +50,7 @@ resource_optimization: watcher, versions: ["v1"]
 search: searchlight, versions: ["v1"]
 shared_file_systems: manila, versions: ["v2"], microversion: 2.40
 workflow: mistral, versions: ["v2"]
+```
 
 # How To
 Fetch and install
