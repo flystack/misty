@@ -14,7 +14,7 @@ module Misty
           include Misty::Openstack::Extension
 
           def service_types
-            %w(identity)
+            %w(identity identityv3)
           end
         end
       end
