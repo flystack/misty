@@ -1,5 +1,8 @@
-# 1.5.1 - 13 March 2018
+# 1.5.1 - 15 March 2018
+## Authentication
+Fix case when provided domain name is overridden by default domain id
 
+# 1.5.2 - 13 March 2018
 ## Misty#services
 Replace openstack_services.yaml with Misty::Openstack::SERVICES
 
