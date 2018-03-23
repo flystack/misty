@@ -6,6 +6,7 @@ module Misty
     module Token
       class V2
         include Misty::Auth::Token
+        attr_reader :tenant
 
         def credentials
           if @token

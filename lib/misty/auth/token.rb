@@ -3,10 +3,7 @@ module Misty
   module Auth
     module Token
       include Misty::HTTP::NetHTTP
-      attr_reader :catalog, :token
-
-      # Default Domain ID
-      DOMAIN_ID = 'default'
+      attr_reader :catalog, :expires, :token, :user
 
       def self.build(auth)
         if auth[:tenant_id] || auth[:tenant]
