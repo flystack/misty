@@ -1,6 +1,6 @@
-*.gem
 .bundle/
 .byebug_history
 build/
 Gemfile.lock
 vendor
+pkg/
