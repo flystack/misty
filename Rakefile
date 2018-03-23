@@ -27,18 +27,18 @@ task :integration do
 end
 
 desc 'Build APIs'
-task :build => 'build:all'
+task :API => 'API:all'
 
-namespace :build do
+namespace :API do
   task :all => [:setup, :run]
 
-  desc 'Clean Build'
+  desc 'Cleans APIs build'
   task :clean do
     require 'fileutils'
     FileUtils.rm_r('build') if Dir.exist?('build')
   end
 
-  desc 'Prepare Build APIs'
+  desc 'Prepare APIs Build'
   task :setup do
     Dir.mkdir('build') unless Dir.exist?('build')
     Dir.mkdir('build/APIs') unless Dir.exist?('build/APIs')
