@@ -3,7 +3,7 @@ module Misty
   module Auth
     module Token
       include Misty::HTTP::NetHTTP
-      attr_reader :catalog, :expires, :token, :user
+      attr_reader :catalog, :expires, :token, :user, :data
 
       def self.build(auth)
         if auth[:tenant_id] || auth[:tenant]
