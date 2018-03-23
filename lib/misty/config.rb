@@ -27,7 +27,7 @@ module Misty
     # Default when uri.scheme is https
     SSL_VERIFY_MODE = true
 
-    attr_reader :catalog, :token, :log, :services
+    attr_reader :log, :services, :token
 
     def initialize(arg)
       raise CredentialsError if arg.nil? || arg.empty? || arg[:auth].nil? || arg[:auth].empty?
