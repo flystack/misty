@@ -1,8 +1,23 @@
-# 1.5.1 - 15 March 2018
+# 1.5.3 - 23 March 2018
+## Attribute readers
+Added:
+* :config for Cloud
+* :expires, :user for Token
+* :domain, :project for Token::V3
+* :tenant for Token::V2
+
+Removed unused :catalog from Config
+
+## Rake
+Removed unused rdoc task
+Renamed build task to API
+Added build and release tasks from bundler
+
+# 1.5.2 - 15 March 2018
 ## Authentication
 Fix case when provided domain name is overridden by default domain id
 
-# 1.5.2 - 13 March 2018
+# 1.5.1 - 13 March 2018
 ## Misty#services
 Replace openstack_services.yaml with Misty::Openstack::SERVICES
 
