@@ -42,10 +42,10 @@ module Misty
         end
 
         def set(response)
-          payload = JSON.load(response.body)
+          @data = JSON.load(response.body)
           @token = response['x-subject-token']
-          @expires = payload['token']['expires_at']
-          catalog = payload['token']['catalog']
+          @expires = @data['token']['expires_at']
+          catalog = @data['token']['catalog']
           @catalog = Misty::Auth::Catalog::V3.new(catalog)
         end
 

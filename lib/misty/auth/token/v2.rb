@@ -40,10 +40,10 @@ module Misty
         end
 
         def set(response)
-          payload = JSON.load(response.body)
-          @token   = payload['access']['token']['id']
-          @expires = payload['access']['token']['expires']
-          catalog = payload['access']['serviceCatalog']
+          @data = JSON.load(response.body)
+          @token   = @data['access']['token']['id']
+          @expires = @data['access']['token']['expires']
+          catalog = @data['access']['serviceCatalog']
           @catalog = Misty::Auth::Catalog::V2.new(catalog)
         end
 
