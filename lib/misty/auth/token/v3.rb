@@ -6,6 +6,10 @@ module Misty
     module Token
       class V3
         include Misty::Auth::Token
+        attr_reader :domain, :project
+
+        # Default Domain ID
+        DOMAIN_ID = 'default'
 
         def credentials
           if @token

@@ -1,3 +1,4 @@
+require 'bundler/gem_tasks'
 require 'rake/testtask'
 
 task :default => [:test]
@@ -23,14 +24,6 @@ task :integration do
      t.test_files = FileList['test/integration/**/*_test.rb']
     t.verbose = true
   end
-end
-
-require 'rdoc/task'
-desc 'Build RDoc'
-RDoc::Task.new do |rdoc|
-  rdoc.main = "index.html"
-  rdoc.rdoc_files.include("lib")
-  rdoc.rdoc_dir = 'docs'
 end
 
 desc 'Build APIs'

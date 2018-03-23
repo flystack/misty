@@ -2,19 +2,13 @@ require 'misty/config'
 require 'misty/http/header'
 
 module Misty
-
-  # +Misty::Cloud+ is the main OpenStack cloud class.
-  # An instance holds authentication information such as token, catalog and contains all available services as methods.
-  #
   class Cloud
+    attr_reader :config
+
     def self.dot_to_underscore(val)
       val.gsub(/\./,'_')
     end
 
-    # ==== Attributes
-    #
-    # * +arg+ - Hash of configuration parameters for authentication, log, and services options.
-    #
     def initialize(arg)
       @config = Misty::Config.new(arg)
     end
