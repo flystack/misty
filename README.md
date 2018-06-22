@@ -212,11 +212,10 @@ defaults are applied if not specified.
 * `:auth` - Authentication credentials hash containing 'auth_url' and user context. See `Misty::Auth`.
 * `:content_type` - HTTP responses body format. :json or :hash structures. Default is `Misty::Config::CONTENT_TYPE` (`:hash`).
 * `:headers` - Hash of extra HTTP headers to be applied to all services
-* `:interface` - Endpoint interface, allowed values are: "public", "internal", "admin".
+* `:interface` - Endpoint interface, allowed values are: "public", "internal", "admin". Default is `Misty::Config::INTERFACE` (`'public'`).
 * `:log_file` - Log destination, Value is either file path (./misty.log) or IO object (SDOUT). Default is '/dev/null'
 * `:log_level` - Value is Fixnum - Default is 1 (Logger::INFO) - See Logger from Ruby standard Library
 * `:region` - Alternative Region name. Default is `Misty::Config::REGION` (`'regionOne'`)
-   Default is `Misty::Config::INTERFACE` (`'public'`)
 * `:ssl_verify_mode` - Boolean flag for SSL client verification. Applies when URI scheme is SSL ("https://").
    Default is `Misty::Config::SSL_VERIFY_MODE` (`true`)
    See `Misty::Config` for more details
