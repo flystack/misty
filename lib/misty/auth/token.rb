@@ -43,7 +43,8 @@ module Misty
         Misty::HTTP::NetHTTP.http_request(
           creds[:uri], ssl_verify_mode: creds[:ssl_verify_mode], log: @log
         ) do |connection|
-          response = connection.post(path, creds[:data].to_json,
+          connect_path = creds[:uri].path + path
+          response = connection.post(connect_path, creds[:data].to_json,
             { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })
           unless response.code =~ /200|201/
             raise AuthenticationError, "Response code=#{response.code}, Msg=#{response.msg}"

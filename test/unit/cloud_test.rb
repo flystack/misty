@@ -119,7 +119,7 @@ describe Misty::Cloud do
         it 'uses Misty::Auth::Token::V3' do
           authv2 = Minitest::Mock.new
 
-            Misty::Auth::Token::V2.stub :new, authv2 do
+          Misty::Auth::Token::V2.stub :new, authv2 do
             cloud = Misty::Cloud.new(:auth => authv2_data)
             assert_mock authv2
           end
