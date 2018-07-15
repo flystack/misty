@@ -12,9 +12,9 @@
     run: playbooks/misty-integration-test/run.yaml
     vars:
       rvm:
-        2.3.6
-        2.4.3
-        2.5.0
+        2.3.7
+        2.4.4
+        2.5.1
 
 - job:
     name: misty-unit-test
@@ -24,6 +24,6 @@
     run: playbooks/misty-unit-test/run.yaml
     vars:
       rvm:
-        2.3.6
-        2.4.3
-        2.5.0
+        2.3.7
+        2.4.4
+        2.5.1
