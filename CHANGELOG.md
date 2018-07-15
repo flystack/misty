@@ -1,3 +1,12 @@
+# 1.5.4 - 15 July 2018
+
+## Authentication
+URL Path is not ignored anymore
+
+## CI
+Latest Ruby versions
+
+
 # 1.5.3 - 23 March 2018
 ## Attribute readers
 Added:
@@ -117,7 +126,7 @@ JSON header automatically generated when data is Array or Hash
 :bulk_delete wrapper added
 
 ### Keystone
-API extensions for Keystone v2.0 and v3 are now fusioned into respective API.   
+API extensions for Keystone v2.0 and v3 are now fusioned into respective API.
 
 ### Schema
 The APIs schema are using https://github.com/flystack/openstack-APIs
@@ -134,7 +143,7 @@ Misty::Auth re-factored as a mixin
 
 ### Headers
 Custom Headers can be injected at request level.
-Global and Service level headers proper propagation  
+Global and Service level headers proper propagation
 
 # 1.0.0 - 10 October 2017
 ## HTTP Requests
