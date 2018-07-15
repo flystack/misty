@@ -417,9 +417,9 @@ One for Node Vendor Passthru and one for Drivers Passthru.
 They are respectively associated with the methods #call_a_vendor_method and #call_a_driver_method.
 
 # Ruby versions tested
-* Ruby MRI 2.5.0
-* Ruby MRI 2.4.2
-* Ruby MRI 2.3.4
+* Ruby MRI 2.5.1
+* Ruby MRI 2.4.4
+* Ruby MRI 2.3.7
 
 # Contributing
 Contributors are welcome and must adhere to the [Contributor covenant code of conduct](http://contributor-covenant.org/).
