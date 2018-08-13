@@ -98,9 +98,42 @@ describe Misty::Auth::Token do
             token.get.must_equal 'token_data'
           end
         end
+
+        describe 'unscoped' do
+          it 'authenticates' do
+            auth = {
+              :url      => 'http://localhost/identity',
+              :user_id  => 'user_id',
+              :password => 'secret',
+            }
+
+            stub_request(:post, 'http://localhost/identity/v3/auth/tokens').
+              with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"id\":\"user_id\",\"password\":\"secret\"}}}}}").
+              to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
+
+            token = Misty::Auth::Token.build(auth)
+            token.get.must_equal 'token_data'
+          end
+        end
       end
 
       describe 'using the token method' do
+        describe 'unscoped' do
+          it 'authenticates using a project id' do
+            auth = {
+              :url   => 'http://localhost/identity',
+              :token => 'token',
+            }
+
+            stub_request(:post, 'http://localhost/identity/v3/auth/tokens').
+              with(:body => "{\"auth\":{\"identity\":{\"methods\":[\"token\"],\"token\":{\"id\":\"token\"}}}}").
+              to_return(:status => 200, :body => JSON.dump(auth_response_v3('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
+
+            token = Misty::Auth::Token.build(auth)
+            token.get.must_equal 'token_data'
+          end
+        end
+
         describe 'with a project scope' do
           it 'authenticates using a project id' do
             auth = {
@@ -214,7 +247,7 @@ describe Misty::Auth::Token do
         to_return(:status => 200, :body => JSON.dump(auth_response_v3("identity", "keystone")), :headers => {'x-subject-token'=>'token_data'})
 
         token = Misty::Auth::Token.build(authv3_creds)
-        token.catalog.get_endpoint_url(%w(identity), 'regionOne', 'public').must_equal 'http://localhost'
+        token.catalog.get_endpoint_url(%w(identity), 'public', 'regionOne').must_equal 'http://localhost'
       end
     end
   end
@@ -341,7 +374,7 @@ describe Misty::Auth::Token do
           to_return(:status => 200, :body => JSON.dump(auth_response_v2('identity', 'keystone')), :headers => {'x-subject-token'=>'token_data'})
 
         token = Misty::Auth::Token.build(authv2_creds)
-        token.catalog.get_endpoint_url(%w(identity), 'regionOne', 'public').must_equal 'http://localhost'
+        token.catalog.get_endpoint_url(%w(identity), 'public', 'regionOne').must_equal 'http://localhost'
       end
     end
   end

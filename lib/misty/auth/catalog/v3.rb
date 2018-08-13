@@ -6,8 +6,16 @@ module Misty
       class V3
         include Misty::Auth::Catalog
 
-        def endpoint_url(endpoint, region, interface)
-          endpoint['url'] if endpoint['region'] == region && endpoint['interface'] == interface
+        def endpoint_match(endpoint, interface, region)
+          if region
+            return true if endpoint['interface'] == interface && endpoint['region'] == region
+          else
+            return true if endpoint['interface'] == interface
+          end
+        end
+
+        def endpoint_url(endpoint, _)
+          endpoint['url']
         end
       end
     end

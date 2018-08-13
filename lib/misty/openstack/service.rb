@@ -17,7 +17,7 @@ module Misty
                     else
                       names = service_types
                       names << @config[:service_name] if @config[:service_name]
-                      URI.parse(@token.catalog.get_endpoint_url(names, @config[:region], @config[:interface]))
+                      URI.parse(@token.catalog.get_endpoint_url(names, @config[:interface], @config[:region]))
                     end
 
         @base_path = @config[:base_path] ? @config[:base_path] : @endpoint.path.chomp('/')

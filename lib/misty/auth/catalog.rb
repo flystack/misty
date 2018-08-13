@@ -7,31 +7,52 @@ module Misty
         @payload = payload
       end
 
-      def get_endpoint_url(names, region, interface)
-        entry = get_service(names)
-        raise ServiceTypeError, 'Endpoint discovery: No service type match' unless entry
-        find_url(entry, region, interface)
+      def get_endpoint_url(names, interfaces, region = nil)
+        #TODO: OpenStack Service Types Authority
+        names_list = if names.is_a?(String)
+                        [names]
+                      else
+                        names
+                      end
+        entries = get_by_type(names_list)
+        raise ServiceTypeError, 'No endpoint match' if entries.empty?
+
+        interfaces_list = if interfaces.is_a?(String)
+                            [interfaces]
+                          else
+                            interfaces
+                          end
+
+        list = []
+        interfaces_list.each do |interface|
+          val = get_endpoint(entries, interface, region)
+          list << val if val
+        end
+
+        raise EndpointError, 'No endpoint found' if list.empty?
+        list[0]
       end
 
       private
 
-      def get_service(names)
-        @payload.each do |entry|
-          return entry if names.include?(entry['type'])
+      def get_by_type(names)
+        raise CatalogError, 'Empty content' unless @payload
+        @payload.select do |e|
+          names.include?(e['type'])
         end
-        nil
       end
 
-      def find_url(service, region, interface)
-        if service['endpoints']
-          service['endpoints'].each do |endpoint|
-            if (url = endpoint_url(endpoint, region, interface))
-              return url
+      def get_endpoint(entries, interface, region)
+        list = []
+        entries.each do |type|
+          if type['endpoints']
+            type['endpoints'].each do |endpoint|
+              list << endpoint_url(endpoint, interface) if endpoint_match(endpoint, interface, region)
             end
           end
         end
-        raise EndpointError, "No endpoint found: service '#{service['type']}', region '#{region}',
-          interface '#{interface}'"
+        raise EndpointError, 'Multiple endpoints found' if list.size > 1
+        list[0]
       end
     end
   end

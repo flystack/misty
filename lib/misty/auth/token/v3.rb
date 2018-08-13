@@ -23,12 +23,16 @@ module Misty
               'password': @user.identity
             }
           end
-          {
-            'auth': {
-              'identity': identity,
-              'scope': scope
+          if scope
+            {
+              'auth': {
+                'identity': identity,
+                'scope': scope
+              }
             }
-          }
+          else
+            { 'auth': { 'identity': identity } }
+          end
         end
 
         def path
@@ -38,7 +42,6 @@ module Misty
         def scope
           return @project.identity if @project
           return @domain.identity if @domain
-          raise DomainScopeError, "#{self.class}: No scope available"
         end
 
         def set(response)
@@ -46,11 +49,14 @@ module Misty
           @token = response['x-subject-token']
           @expires = @data['token']['expires_at']
           catalog = @data['token']['catalog']
-          @catalog = Misty::Auth::Catalog::V3.new(catalog)
+          if catalog
+            @catalog = Misty::Auth::Catalog::V3.new(catalog)
+          end
         end
 
         def set_credentials(auth)
           if auth[:project_id] || auth[:project]
+            # project scoped
             @project = Misty::Auth::ProjectScope.new(auth[:project_id], auth[:project])
 
             if auth[:project_domain_id] || auth[:project_domain]
@@ -62,14 +68,9 @@ module Misty
                 @project.domain = Misty::Auth::Name.new(DOMAIN_ID, nil)
               end
             end
-          else
-            # scope: domain
-            if auth[:domain_id] || auth[:domain]
+          elsif auth[:domain_id] || auth[:domain]
+              # domain scoped
               @domain = Misty::Auth::DomainScope.new(auth[:domain_id], auth[:domain])
-            else
-              # Use default Domain
-              @domain = Misty::Auth::DomainScope.new(DOMAIN_ID, nil)
-            end
           end
 
           if auth[:token]
